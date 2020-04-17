@@ -1,142 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ona-b3-j2U">
-    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Starting View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="DZx-wR-tNN">
             <objects>
-                <viewController id="Ona-b3-j2U" customClass="StartingViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FlF-RZ-ITN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="iKR-F4-sgT">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="showSidebar:" destination="Ona-b3-j2U" id="gbT-Dq-BGT"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="Q87-3O-eLO">
+                    <connections>
+                        <action selector="HideSidebar:" destination="Ona-b3-j2U" id="fkB-y7-Mhk"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <viewController id="Ona-b3-j2U" customClass="MainViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mae-o0-IAk">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ms0-SP-3de" userLabel="Left">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="1024"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNs-7h-rFl">
                                         <rect key="frame" x="55" y="136" width="41" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Home"/>
+                                        <connections>
+                                            <action selector="onHomeClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="tys-C4-6h3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eq-uq-ta0">
                                         <rect key="frame" x="55" y="195" width="39" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Event"/>
+                                        <connections>
+                                            <action selector="onEventClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="v5f-cN-3NY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWp-AA-mNo">
                                         <rect key="frame" x="58" y="249" width="32" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Task"/>
+                                        <connections>
+                                            <action selector="onTaskClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="Krv-0B-cZ6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCG-dn-6f1">
                                         <rect key="frame" x="60" y="305" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Bin"/>
+                                        <connections>
+                                            <action selector="onBinClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="VpV-93-5yP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Iu2-yz-ecG"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Q87-3O-eLO" appends="YES" id="31c-5V-Txc"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fk3-OW-Ee6" userLabel="Right">
-                                <rect key="frame" x="150" y="0.0" width="874" height="768"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xXo-HN-iVb">
-                                        <rect key="frame" x="0.0" y="0.0" width="874" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="hZL-Lk-tzk"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68x-gZ-T5L">
-                                        <rect key="frame" x="0.0" y="51" width="874" height="100"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vta-r4-hrz">
-                                                <rect key="frame" x="52" y="42" width="30" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Day"/>
-                                                <connections>
-                                                    <action selector="onDayClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="wnt-SV-8ae"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbC-ko-Ec8">
-                                                <rect key="frame" x="113" y="42" width="39" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Week"/>
-                                                <connections>
-                                                    <action selector="onWeekClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="XOr-Wb-f6c"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adI-mj-C2Z">
-                                                <rect key="frame" x="33" y="8" width="53" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Sidebar"/>
-                                                <connections>
-                                                    <action selector="sidebarButtonClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="PYn-NE-N6U"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzR-mX-YOp">
-                                                <rect key="frame" x="187" y="42" width="44" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Month"/>
-                                                <connections>
-                                                    <action selector="onMonthClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="vdd-WY-6co"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="XXI-pc-nKB"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUG-ft-ggo">
-                                        <rect key="frame" x="0.0" y="151" width="874" height="617"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
+                                <rect key="frame" x="150" y="0.0" width="1216" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="xXo-HN-iVb" firstAttribute="top" secondItem="fk3-OW-Ee6" secondAttribute="top" id="PwP-wM-W6p"/>
-                                    <constraint firstItem="jUG-ft-ggo" firstAttribute="top" secondItem="68x-gZ-T5L" secondAttribute="bottom" id="TFa-eu-GGE"/>
-                                    <constraint firstItem="68x-gZ-T5L" firstAttribute="top" secondItem="xXo-HN-iVb" secondAttribute="bottom" constant="1" id="YWg-TY-xXb"/>
-                                    <constraint firstItem="jUG-ft-ggo" firstAttribute="leading" secondItem="fk3-OW-Ee6" secondAttribute="leading" id="buc-Qh-hgC"/>
-                                    <constraint firstItem="xXo-HN-iVb" firstAttribute="width" secondItem="fk3-OW-Ee6" secondAttribute="width" id="dUT-dM-pEW"/>
-                                    <constraint firstItem="xXo-HN-iVb" firstAttribute="centerX" secondItem="fk3-OW-Ee6" secondAttribute="centerX" id="jfQ-9c-ZHe"/>
-                                    <constraint firstAttribute="bottom" secondItem="jUG-ft-ggo" secondAttribute="bottom" id="pRU-7G-K9i"/>
-                                    <constraint firstItem="68x-gZ-T5L" firstAttribute="centerX" secondItem="fk3-OW-Ee6" secondAttribute="centerX" id="pa8-uv-wem"/>
-                                    <constraint firstItem="68x-gZ-T5L" firstAttribute="width" secondItem="fk3-OW-Ee6" secondAttribute="width" id="vRV-Pk-q3b"/>
-                                    <constraint firstAttribute="trailing" secondItem="jUG-ft-ggo" secondAttribute="trailing" id="x8t-B0-LZa"/>
-                                </constraints>
+                                <gestureRecognizers/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="fk3-OW-Ee6" secondAttribute="trailing" id="1KF-3v-XFL"/>
                             <constraint firstItem="fk3-OW-Ee6" firstAttribute="leading" secondItem="ms0-SP-3de" secondAttribute="trailing" id="E7d-mK-YYj"/>
-                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="bottom" secondItem="ms0-SP-3de" secondAttribute="bottom" id="Hik-9p-M1h"/>
+                            <constraint firstAttribute="bottom" secondItem="ms0-SP-3de" secondAttribute="bottom" id="Hik-9p-M1h"/>
                             <constraint firstItem="fk3-OW-Ee6" firstAttribute="top" secondItem="Ea8-xp-8xr" secondAttribute="top" id="a8F-vz-1xn"/>
-                            <constraint firstItem="ms0-SP-3de" firstAttribute="top" secondItem="Ea8-xp-8xr" secondAttribute="top" id="gFY-kP-89q"/>
-                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="bottom" secondItem="fk3-OW-Ee6" secondAttribute="bottom" id="qst-DI-ZNw"/>
+                            <constraint firstItem="ms0-SP-3de" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" id="gFY-kP-89q"/>
+                            <constraint firstAttribute="bottom" secondItem="fk3-OW-Ee6" secondAttribute="bottom" id="qst-DI-ZNw"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="leading" secondItem="Ea8-xp-8xr" secondAttribute="leading" id="vmn-jr-Ux4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ea8-xp-8xr"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="iKR-F4-sgT" appends="YES" id="G3h-OU-VE9"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="dynamicView" destination="jUG-ft-ggo" id="qBV-0n-7af"/>
-                        <outlet property="headerView" destination="68x-gZ-T5L" id="4vw-Bl-1jq"/>
+                        <outlet property="leftView" destination="ms0-SP-3de" id="tD8-jT-nZ2"/>
                         <outlet property="rightView" destination="fk3-OW-Ee6" id="jiW-mt-anh"/>
                         <outlet property="sidebarWidthConstraint" destination="Iu2-yz-ecG" id="B3c-wn-Kkg"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FlF-RZ-ITN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-633.3984375" y="883.59375"/>
+            <point key="canvasLocation" x="-633.82137628111263" y="883.59375"/>
         </scene>
     </scenes>
 </document>

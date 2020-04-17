@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HomeView.swift
 //  Calendars
 //
 //  Created by Rafin Rahman on 16/04/2020.
@@ -14,9 +14,8 @@ class HomeView: UIView {
     @IBOutlet weak var headerView: UIView!
     
     
-    func ViewWillAppear(){
-        onDayCick(nil)
-    }
+    
+    
     
     @IBAction func onDayCick(_ sender: Any?) {
         if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
@@ -25,7 +24,25 @@ class HomeView: UIView {
         }
     }
     
+    @IBAction func onWeekClick(_ sender: UIButton) {
+        if let dayView = UINib(nibName: "WeekView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+                   WeekView{
+                   setDayView(dayView : dayView)
+               }
+    }
     
+    @IBAction func onMonthClick(_ sender: UIButton) {
+        if let dayView = UINib(nibName: "MonthView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+            MonthView{
+            setDayView(dayView : dayView)
+        }
+    }
+    @IBAction func onYearClick(_ sender: UIButton) {
+        if let dayView = UINib(nibName: "YearView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+            YearView{
+            setDayView(dayView : dayView)
+        }
+    }
     func setDayView(dayView: UIView){
         dynamicView.removeFromSuperview()
         dynamicView = dayView

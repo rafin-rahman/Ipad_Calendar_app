@@ -13,10 +13,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdV-9T-wlN" userLabel="Search bar View">
-                    <rect key="frame" x="0.0" y="0.0" width="1216" height="99.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1216" height="100.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpH-bu-oZM">
-                            <rect key="frame" x="98" y="40" width="90" height="20.5"/>
+                            <rect key="frame" x="100" y="40" width="90" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -24,16 +24,16 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="jpH-bu-oZM" firstAttribute="leading" secondItem="GdV-9T-wlN" secondAttribute="leading" constant="98" id="Abf-9h-8ow"/>
-                        <constraint firstAttribute="bottom" secondItem="jpH-bu-oZM" secondAttribute="bottom" constant="39" id="UCf-SR-qmW"/>
+                        <constraint firstItem="jpH-bu-oZM" firstAttribute="leading" secondItem="GdV-9T-wlN" secondAttribute="leading" constant="100" id="Abf-9h-8ow"/>
+                        <constraint firstAttribute="bottom" secondItem="jpH-bu-oZM" secondAttribute="bottom" constant="40" id="UCf-SR-qmW"/>
                         <constraint firstItem="jpH-bu-oZM" firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="top" constant="40" id="l8N-Tf-C1G"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1D-5m-dLP" userLabel="Header View">
-                    <rect key="frame" x="0.0" y="99.5" width="1216" height="110"/>
+                    <rect key="frame" x="0.0" y="100.5" width="1216" height="110"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tueday, March 23rd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-Wt-9cV">
-                            <rect key="frame" x="70" y="30" width="287" height="41"/>
+                            <rect key="frame" x="70" y="30" width="287" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="34"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -54,6 +54,9 @@
                             <state key="normal" title="Week">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
+                            <connections>
+                                <action selector="onWeekClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="025-EY-fsm"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-rI-n4P">
                             <rect key="frame" x="1049" y="66" width="48" height="42"/>
@@ -61,6 +64,9 @@
                             <state key="normal" title="Year">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
+                            <connections>
+                                <action selector="onYearClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="6MS-gP-5yH"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-SE-N57">
                             <rect key="frame" x="956" y="66" width="70" height="42"/>
@@ -68,9 +74,12 @@
                             <state key="normal" title="Month">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
+                            <connections>
+                                <action selector="onMonthClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="uTB-u0-zkT"/>
+                            </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="8f6-Wt-9cV" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="30" id="3qA-1j-yeg"/>
                         <constraint firstAttribute="bottom" secondItem="hR8-rI-n4P" secondAttribute="bottom" constant="2" id="EAS-GE-xex"/>
@@ -80,7 +89,7 @@
                         <constraint firstAttribute="bottom" secondItem="ZUj-Pr-sQw" secondAttribute="bottom" constant="2" id="Ruj-t6-dFk"/>
                         <constraint firstItem="OxW-T5-bgu" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="TXl-8S-1RV"/>
                         <constraint firstItem="ZUj-Pr-sQw" firstAttribute="leading" secondItem="OxW-T5-bgu" secondAttribute="trailing" constant="32" id="TlC-Z4-BFM"/>
-                        <constraint firstAttribute="bottom" secondItem="8f6-Wt-9cV" secondAttribute="bottom" constant="39" id="Wsw-7U-DXy"/>
+                        <constraint firstAttribute="bottom" secondItem="8f6-Wt-9cV" secondAttribute="bottom" constant="40" id="Wsw-7U-DXy"/>
                         <constraint firstItem="hR8-rI-n4P" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="YKB-Kr-MfS"/>
                         <constraint firstItem="p0L-SE-N57" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="ZAV-P4-x75"/>
                         <constraint firstAttribute="height" constant="110" id="c66-hG-b0A"/>
@@ -91,8 +100,10 @@
                         <constraint firstItem="8f6-Wt-9cV" firstAttribute="leading" secondItem="D1D-5m-dLP" secondAttribute="leading" constant="70" id="zZW-yj-Jz3"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raf-P0-8Gi" userLabel="Temporary View">
-                    <rect key="frame" x="0.0" y="209" width="1216" height="795"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raf-P0-8Gi" userLabel="Dynamic View" customClass="HomeView" customModule="Calendars" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="210.5" width="1216" height="793.5"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <gestureRecognizers/>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
