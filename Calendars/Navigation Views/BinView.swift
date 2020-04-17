@@ -1,14 +1,14 @@
 //
-//  EventViewController.swift
+//  BinView.swift
 //  Calendars
 //
-//  Created by Rafin Rahman on 16/04/2020.
+//  Created by Rafin Rahman on 17/04/2020.
 //  Copyright © 2020 Rafin Rahman. All rights reserved.
 //
 
 import UIKit
 
-class EventViewController: UIView {
+class BinView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
