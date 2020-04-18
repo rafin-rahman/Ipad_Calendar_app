@@ -53,6 +53,7 @@ class MainViewController: UIViewController {
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
         HomeView {
         setRightViewDetails(newRightView: newRightView)
+            newRightView.onLoad()
         }
     }
     

@@ -10,18 +10,6 @@
         <!--Main View Controller-->
         <scene sceneID="DZx-wR-tNN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FlF-RZ-ITN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="iKR-F4-sgT">
-                    <rectEdge key="edges" left="YES"/>
-                    <connections>
-                        <action selector="showSidebar:" destination="Ona-b3-j2U" id="gbT-Dq-BGT"/>
-                    </connections>
-                </screenEdgePanGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="Q87-3O-eLO">
-                    <connections>
-                        <action selector="HideSidebar:" destination="Ona-b3-j2U" id="fkB-y7-Mhk"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <viewController id="Ona-b3-j2U" customClass="MainViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mae-o0-IAk">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
@@ -30,40 +18,48 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ms0-SP-3de" userLabel="Left">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="1024"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNs-7h-rFl">
-                                        <rect key="frame" x="55" y="136" width="41" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNs-7h-rFl">
+                                        <rect key="frame" x="54" y="159" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Home"/>
+                                        <state key="normal" image="Home">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="onHomeClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="tys-C4-6h3"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eq-uq-ta0">
-                                        <rect key="frame" x="55" y="195" width="39" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eq-uq-ta0">
+                                        <rect key="frame" x="54" y="252" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Event"/>
+                                        <state key="normal" image="Event">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="onEventClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="v5f-cN-3NY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWp-AA-mNo">
-                                        <rect key="frame" x="58" y="249" width="32" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWp-AA-mNo">
+                                        <rect key="frame" x="54" y="363" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Task"/>
+                                        <state key="normal" image="Task">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="onTaskClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="Krv-0B-cZ6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCG-dn-6f1">
-                                        <rect key="frame" x="60" y="305" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCG-dn-6f1">
+                                        <rect key="frame" x="55" y="483" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Bin"/>
+                                        <state key="normal" image="Bin">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="onBinClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="VpV-93-5yP"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.15294117647058825" green="0.23529411764705882" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Iu2-yz-ecG"/>
@@ -100,8 +96,26 @@
                         <outlet property="sidebarWidthConstraint" destination="Iu2-yz-ecG" id="B3c-wn-Kkg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FlF-RZ-ITN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="iKR-F4-sgT">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="showSidebar:" destination="Ona-b3-j2U" id="gbT-Dq-BGT"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="Q87-3O-eLO">
+                    <connections>
+                        <action selector="HideSidebar:" destination="Ona-b3-j2U" id="fkB-y7-Mhk"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-633.82137628111263" y="883.59375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Bin" width="30" height="30"/>
+        <image name="Event" width="32" height="32"/>
+        <image name="Home" width="32" height="32"/>
+        <image name="Task" width="32" height="32"/>
+    </resources>
 </document>

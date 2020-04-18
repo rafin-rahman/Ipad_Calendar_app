@@ -13,14 +13,27 @@ class HomeView: UIView {
     @IBOutlet weak var dynamicView: UIView!
     @IBOutlet weak var headerView: UIView!
     
+//    override init(frame:CGRect){
+//        super.init(frame: frame)
+//        onDayCick(nil)
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder){
+//        super.init(coder: aDecoder)
+//        onDayCick(nil)
+//    }
     
-    
-    
-    
+    func onLoad() {
+        onDayCick(nil)
+    }
+
     @IBAction func onDayCick(_ sender: Any?) {
         if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             DayView{
             setDayView(dayView : dayView)
+            dayView.rightScroll.delegate = dayView
+            dayView.leftScroll.delegate = dayView
+            dayView.populateStackView()
         }
     }
     
@@ -43,6 +56,7 @@ class HomeView: UIView {
             setDayView(dayView : dayView)
         }
     }
+    
     func setDayView(dayView: UIView){
         dynamicView.removeFromSuperview()
         dynamicView = dayView
