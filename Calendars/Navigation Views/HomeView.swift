@@ -12,25 +12,15 @@ class HomeView: UIView {
 
     @IBOutlet weak var dynamicView: UIView!
     @IBOutlet weak var headerView: UIView!
-    
-//    override init(frame:CGRect){
-//        super.init(frame: frame)
-//        onDayCick(nil)
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder){
-//        super.init(coder: aDecoder)
-//        onDayCick(nil)
-//    }
-    
+        
     func onLoad() {
-        onDayCick(nil)
+        onDayClick(nil)
     }
 
-    @IBAction func onDayCick(_ sender: Any?) {
+    @IBAction func onDayClick(_ sender: Any?) {
         if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             DayView{
-            setDayView(dayView : dayView)
+            setDayView(newView : dayView)
             dayView.rightScroll.delegate = dayView
             dayView.leftScroll.delegate = dayView
             dayView.populateStackView()
@@ -40,33 +30,34 @@ class HomeView: UIView {
     @IBAction func onWeekClick(_ sender: UIButton) {
         if let dayView = UINib(nibName: "WeekView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
                    WeekView{
-                   setDayView(dayView : dayView)
+                   setDayView(newView : dayView)
+            
                }
     }
     
     @IBAction func onMonthClick(_ sender: UIButton) {
         if let dayView = UINib(nibName: "MonthView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             MonthView{
-            setDayView(dayView : dayView)
+            setDayView(newView : dayView)
         }
     }
     @IBAction func onYearClick(_ sender: UIButton) {
         if let dayView = UINib(nibName: "YearView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             YearView{
-            setDayView(dayView : dayView)
+            setDayView(newView : dayView)
         }
     }
     
-    func setDayView(dayView: UIView){
+    func setDayView(newView: UIView){
         dynamicView.removeFromSuperview()
-        dynamicView = dayView
+        dynamicView = newView
         dynamicView.translatesAutoresizingMaskIntoConstraints = false
         dynamicView.frame = CGRect(x: 0, y: 0, width: dynamicView.frame.width, height: dynamicView.frame.height)
         self.addSubview(dynamicView)
         dynamicView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-        dynamicView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        dynamicView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        dynamicView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        dynamicView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        dynamicView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        dynamicView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 
 }

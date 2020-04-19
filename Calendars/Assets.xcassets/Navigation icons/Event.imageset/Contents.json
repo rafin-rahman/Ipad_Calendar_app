@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Event.png",
       "idiom" : "ipad",
       "scale" : "1x"
     },
     {
-      "filename" : "event.png",
       "idiom" : "ipad",
       "scale" : "2x"
     }

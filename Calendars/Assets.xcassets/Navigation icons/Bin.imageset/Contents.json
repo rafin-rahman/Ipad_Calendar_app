@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Bin.png",
       "idiom" : "ipad",
       "scale" : "1x"
     },
     {
-      "filename" : "bin.png",
       "idiom" : "ipad",
       "scale" : "2x"
     }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D189C07424264A1E00FF7723 /* Calendars.xcdatamodeld */; };
 		D189C07824264A1F00FF7723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D189C07724264A1F00FF7723 /* Assets.xcassets */; };
 		D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */; };
+		D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Event.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
@@ -61,6 +62,7 @@
 		D189C07724264A1F00FF7723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D189C07A24264A1F00FF7723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D189C07C24264A1F00FF7723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1A0CFF3244B9B0D008C4D7C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -137,6 +139,7 @@
 		D189C06A24264A1E00FF7723 /* Calendars */ = {
 			isa = PBXGroup;
 			children = (
+				D1A0CFF2244B9AC6008C4D7C /* Models */,
 				D1C57E902449F74900C939D8 /* GoogleService-Info.plist */,
 				D16403092443DDB10078E059 /* Navigation Views */,
 				D16403082443DD730078E059 /* Calendar Views */,
@@ -152,13 +155,20 @@
 			path = Calendars;
 			sourceTree = "<group>";
 		};
+		D1A0CFF2244B9AC6008C4D7C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1A0CFF3244B9B0D008C4D7C /* Event.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F6469DFD54D8C47757D33626 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				3CAD2A87597709C627535437 /* Pods-Calendars.debug.xcconfig */,
 				852D2DA748B60219B8E7E527 /* Pods-Calendars.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -298,6 +308,7 @@
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
 				D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */,
+				D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

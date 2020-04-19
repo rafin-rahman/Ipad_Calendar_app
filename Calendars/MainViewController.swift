@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainViewController: UIViewController {
 
@@ -17,13 +18,12 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+                        
         onHomeClick(nil)
     }
     
-    @IBAction func HideSidebar(_ sender: UISwipeGestureRecognizer) {
-        
+    
+    @IBAction func hideSidebar(_ sender: UISwipeGestureRecognizer) {
         if sidebarWidthConstraint.constant == 0 {
             sidebarWidthConstraint.constant = 150
         } else {
@@ -34,7 +34,9 @@ class MainViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
-   // TO FIX
+    
+   
+  
     @IBAction func showSidebar(_ sender: UIScreenEdgePanGestureRecognizer) {
         
         if sidebarWidthConstraint.constant == 0 {
