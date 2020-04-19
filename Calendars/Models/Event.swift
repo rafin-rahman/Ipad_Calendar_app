@@ -13,4 +13,6 @@ class Event{
     var eventName = ""
     var startDate = Date()
     var endDate = Date()
+    var numberOfCollision = 0
+    var first = true
 }

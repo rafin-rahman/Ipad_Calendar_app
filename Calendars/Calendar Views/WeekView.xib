@@ -2590,6 +2590,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="leftScroll" destination="EzU-4R-KWy" id="lzC-pD-sHK"/>
+                <outlet property="rightScroll" destination="PWf-yq-HbE" id="V58-QR-ZKE"/>
+                <outlet property="topScroll" destination="0iy-41-kja" id="oRx-oH-Ecv"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="152.34375"/>
         </view>
     </objects>
