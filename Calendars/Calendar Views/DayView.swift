@@ -30,8 +30,6 @@ class DayView: UIView, UIScrollViewDelegate {
     let startTime3 = CGFloat(2)
     let endTime3 = CGFloat(3)
     
-    
-    
     @IBOutlet weak var leftScroll: UIScrollView!
     @IBOutlet weak var rightScroll: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
@@ -54,7 +52,6 @@ class DayView: UIView, UIScrollViewDelegate {
                let date = format.date(from: dayZero.text!)!
                getDates(date: Calendar.current.date(byAdding: .day, value: 7, to: date)!)
     }
-    
     
     func getDailyView() {
         self.getDates(date: Date())
@@ -172,7 +169,6 @@ class DayView: UIView, UIScrollViewDelegate {
         }
     }
     
-    
     func displayEvents(){
         for todaysEvent in self.finalEventList{
             let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -250,7 +246,6 @@ class DayView: UIView, UIScrollViewDelegate {
         }
     }
     
-    
     // Syncronize scroll views position
     func synchronizeScrollView(_ scrollViewToScroll: UIScrollView, toScrollView scrolledView: UIScrollView) {
         var offset = scrollViewToScroll.contentOffset
@@ -267,9 +262,5 @@ class DayView: UIView, UIScrollViewDelegate {
             self.synchronizeScrollView(rightScroll, toScrollView: leftScroll)
         }
     }
-    
-    
-    
-    
     
 }

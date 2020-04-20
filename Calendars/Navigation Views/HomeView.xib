@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -112,9 +112,43 @@
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <gestureRecognizers/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6z-GQ-aLM" userLabel="Event Button">
+                    <rect key="frame" x="1136" y="924" width="0.0" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="Okh-p9-cA4"/>
+                        <constraint firstAttribute="width" id="hcS-9R-pZm"/>
+                    </constraints>
+                    <state key="normal" image="Event Button"/>
+                    <connections>
+                        <action selector="addButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="qRg-b0-LTd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7K-sp-lTT" userLabel="Task Button">
+                    <rect key="frame" x="1136" y="924" width="0.0" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="7XQ-Dr-3YV"/>
+                        <constraint firstAttribute="height" id="vwV-wc-wSe"/>
+                    </constraints>
+                    <state key="normal" image="Task Button"/>
+                    <connections>
+                        <action selector="addButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="8t1-Pj-7aR"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHS-3i-eKB">
+                    <rect key="frame" x="1106" y="894" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="41i-aU-99r"/>
+                        <constraint firstAttribute="height" constant="60" id="UgA-Fq-beq"/>
+                    </constraints>
+                    <state key="normal" image="Add Button"/>
+                    <connections>
+                        <action selector="addButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="kOa-4e-v7t"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="d7K-sp-lTT" firstAttribute="top" secondItem="T6z-GQ-aLM" secondAttribute="bottom" id="3Je-li-tLF"/>
                 <constraint firstItem="D1D-5m-dLP" firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="bottom" id="5Pa-iY-6WV"/>
                 <constraint firstAttribute="trailing" secondItem="GdV-9T-wlN" secondAttribute="trailing" id="SK1-NF-bdG"/>
                 <constraint firstItem="raf-P0-8Gi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TV9-OX-4ij"/>
@@ -123,16 +157,37 @@
                 <constraint firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="top" id="Wm9-jy-mHK"/>
                 <constraint firstItem="raf-P0-8Gi" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="bottom" id="d7T-xc-ok6"/>
                 <constraint firstItem="GdV-9T-wlN" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="dKA-Cj-UmJ"/>
+                <constraint firstAttribute="trailing" secondItem="d7K-sp-lTT" secondAttribute="trailing" constant="80" id="es1-lE-LkW"/>
+                <constraint firstAttribute="trailing" secondItem="T6z-GQ-aLM" secondAttribute="trailing" constant="80" id="gVK-8K-553"/>
+                <constraint firstAttribute="bottom" secondItem="WHS-3i-eKB" secondAttribute="bottom" constant="50" id="hK0-d9-nMT"/>
+                <constraint firstItem="WHS-3i-eKB" firstAttribute="top" secondItem="d7K-sp-lTT" secondAttribute="bottom" constant="-30" id="lBR-nx-G8d"/>
                 <constraint firstItem="D1D-5m-dLP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pJD-xa-adO"/>
+                <constraint firstAttribute="trailing" secondItem="WHS-3i-eKB" secondAttribute="trailing" constant="50" id="pwe-7O-uzT"/>
                 <constraint firstAttribute="bottom" secondItem="raf-P0-8Gi" secondAttribute="bottom" id="zFN-uW-k3u"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addButton" destination="WHS-3i-eKB" id="pSF-E4-kJu"/>
                 <outlet property="currentDate" destination="8f6-Wt-9cV" id="1W8-FJ-bcY"/>
                 <outlet property="dynamicView" destination="raf-P0-8Gi" id="tcg-ux-SxR"/>
+                <outlet property="eventButton" destination="T6z-GQ-aLM" id="Rd9-OO-T1L"/>
+                <outlet property="eventButtonBottom" destination="3Je-li-tLF" id="eXF-F8-dNU"/>
+                <outlet property="eventButtonHeight" destination="Okh-p9-cA4" id="ny3-re-m0z"/>
+                <outlet property="eventButtonTrailing" destination="gVK-8K-553" id="ycH-9H-EQD"/>
+                <outlet property="eventButtonWidth" destination="hcS-9R-pZm" id="9Kd-qh-hwk"/>
                 <outlet property="headerView" destination="D1D-5m-dLP" id="U4w-Gl-8Hq"/>
+                <outlet property="taskButton" destination="d7K-sp-lTT" id="eSt-v3-DuD"/>
+                <outlet property="taskButtonBottom" destination="lBR-nx-G8d" id="hBV-6F-ZUI"/>
+                <outlet property="taskButtonHeight" destination="vwV-wc-wSe" id="6oh-SF-Qld"/>
+                <outlet property="taskButtonTrailing" destination="es1-lE-LkW" id="b9F-ha-qWd"/>
+                <outlet property="taskButtonWidth" destination="7XQ-Dr-3YV" id="kg9-98-iDR"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="Add Button" width="167" height="167"/>
+        <image name="Event Button" width="167" height="167"/>
+        <image name="Task Button" width="167" height="167"/>
+    </resources>
 </document>

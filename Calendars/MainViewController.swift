@@ -11,6 +11,7 @@ import Firebase
 
 class MainViewController: UIViewController {
 
+    
     @IBOutlet weak var rightView: UIView!
     @IBOutlet weak var leftView: UIView!
     
@@ -74,8 +75,8 @@ class MainViewController: UIViewController {
         TaskView {
         setRightViewDetails(newRightView: newRightView)
         }
-
     }
+    
     @IBAction func onBinClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "BinView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
         BinView {
@@ -95,6 +96,7 @@ class MainViewController: UIViewController {
         rightView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
     }
+    
 
 }
 

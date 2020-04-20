@@ -32,6 +32,7 @@
 		D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Event.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
+		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		D1A0CFF3244B9B0D008C4D7C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
+		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 				D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */,
 				D189C07C24264A1F00FF7723 /* Info.plist */,
 				D189C07424264A1E00FF7723 /* Calendars.xcdatamodeld */,
+				D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */,
 			);
 			path = Calendars;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				D179B6502448BFE9002C00B9 /* YearView.swift in Sources */,
 				D179B6542448C75B002C00B9 /* HomeView.swift in Sources */,
 				D189C06C24264A1E00FF7723 /* AppDelegate.swift in Sources */,
+				D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */,
 				D1B79167244888C900B4A350 /* EventView.swift in Sources */,
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
