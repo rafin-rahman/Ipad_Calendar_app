@@ -26,7 +26,6 @@
                                         </state>
                                         <connections>
                                             <action selector="onHomeClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="tys-C4-6h3"/>
-                                            <segue destination="P9j-t3-Ljo" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="cnc-0C-sn9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eq-uq-ta0">
@@ -103,15 +102,52 @@
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9D-Xz-mJN" userLabel="Event Button">
+                                <rect key="frame" x="1286" y="944" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="eZ4-LB-JYe"/>
+                                    <constraint firstAttribute="width" id="joa-5J-7vd"/>
+                                </constraints>
+                                <state key="normal" image="Event Button"/>
+                                <connections>
+                                    <action selector="addEventClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="5VH-Ft-I2h"/>
+                                    <segue destination="P9j-t3-Ljo" kind="presentation" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="Bm7-fP-SWq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vo2-ca-e6L" userLabel="Task Button">
+                                <rect key="frame" x="1286" y="944" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="74L-kL-dQ7"/>
+                                    <constraint firstAttribute="width" id="dj3-eD-I75"/>
+                                </constraints>
+                                <state key="normal" image="Task Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQc-5C-N0a" userLabel="Add Button">
+                                <rect key="frame" x="1256" y="914" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="4ps-I1-sVO"/>
+                                    <constraint firstAttribute="width" constant="60" id="x1B-2s-QPP"/>
+                                </constraints>
+                                <state key="normal" image="Add Button"/>
+                                <connections>
+                                    <action selector="addButtonClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="qsP-NR-GOu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="fk3-OW-Ee6" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" id="3Vc-LS-X8x"/>
                             <constraint firstItem="fk3-OW-Ee6" firstAttribute="leading" secondItem="ms0-SP-3de" secondAttribute="trailing" id="7XY-tc-5xm"/>
+                            <constraint firstItem="G9D-Xz-mJN" firstAttribute="top" secondItem="vo2-ca-e6L" secondAttribute="bottom" id="7Y6-D7-4YP"/>
                             <constraint firstItem="fk3-OW-Ee6" firstAttribute="bottom" secondItem="Mae-o0-IAk" secondAttribute="bottom" id="8ZI-Ud-x6D"/>
+                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="vo2-ca-e6L" secondAttribute="trailing" constant="80" id="C2e-17-xkl"/>
+                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="G9D-Xz-mJN" secondAttribute="trailing" constant="80" id="Cbu-pc-qjO"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="leading" secondItem="Ea8-xp-8xr" secondAttribute="leading" id="IVN-SX-y7N"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" id="SYE-k5-YZG"/>
+                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="bottom" secondItem="oQc-5C-N0a" secondAttribute="bottom" constant="30" id="enl-qX-A0Q"/>
+                            <constraint firstItem="vo2-ca-e6L" firstAttribute="top" secondItem="oQc-5C-N0a" secondAttribute="bottom" constant="-30" id="fba-Ic-36b"/>
+                            <constraint firstAttribute="trailing" secondItem="oQc-5C-N0a" secondAttribute="trailing" constant="50" id="jRD-Xj-IAZ"/>
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="fk3-OW-Ee6" secondAttribute="trailing" id="qSL-QR-Gtx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ea8-xp-8xr"/>
@@ -120,9 +156,20 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="oQc-5C-N0a" id="evQ-7G-ui4"/>
+                        <outlet property="eventButton" destination="G9D-Xz-mJN" id="Czc-Ro-4tC"/>
+                        <outlet property="eventButtonBottom" destination="7Y6-D7-4YP" id="nou-pd-Gpq"/>
+                        <outlet property="eventButtonHeight" destination="eZ4-LB-JYe" id="fD7-cE-gK4"/>
+                        <outlet property="eventButtonTrailing" destination="Cbu-pc-qjO" id="EZz-72-Uw8"/>
+                        <outlet property="eventButtonWidth" destination="joa-5J-7vd" id="vfe-Ko-vBt"/>
                         <outlet property="leftView" destination="ms0-SP-3de" id="tD8-jT-nZ2"/>
                         <outlet property="rightView" destination="fk3-OW-Ee6" id="jiW-mt-anh"/>
                         <outlet property="sidebarWidthConstraint" destination="OEd-G0-FU2" id="aps-uU-iKD"/>
+                        <outlet property="taskButton" destination="vo2-ca-e6L" id="Ipu-EG-sLM"/>
+                        <outlet property="taskButtonBottom" destination="fba-Ic-36b" id="yZ7-Ci-SjP"/>
+                        <outlet property="taskButtonHeight" destination="74L-kL-dQ7" id="HKq-nt-C0s"/>
+                        <outlet property="taskButtonTrailing" destination="C2e-17-xkl" id="66t-Pp-CrI"/>
+                        <outlet property="taskButtonWidth" destination="dj3-eD-I75" id="A67-wu-qPh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FlF-RZ-ITN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -143,14 +190,14 @@
         <!--Add Edit View Controller-->
         <scene sceneID="XLE-uO-JXp">
             <objects>
-                <viewController id="P9j-t3-Ljo" customClass="AddEditViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="P9j-t3-Ljo" customClass="AddEditViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0RA-Cd-SBh">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2h5-2F-pSO">
-                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1004"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2h5-2F-pSO">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                                <color key="backgroundColor" white="0.47673672241784032" alpha="0.49152728873239437" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBM-Vp-dtJ">
                                 <rect key="frame" x="468.5" y="208.5" width="429" height="587"/>
@@ -175,15 +222,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6f-E4-RY5">
-                                        <rect key="frame" x="157" y="229" width="44" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="minutes before" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-fx-Cyy">
-                                        <rect key="frame" x="248" y="229" width="115" height="21"/>
+                                        <rect key="frame" x="247" y="228" width="115" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -371,6 +411,13 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6f-E4-RY5">
+                                        <rect key="frame" x="164" y="227" width="44" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -387,10 +434,10 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="l8g-xq-wPr" firstAttribute="trailing" secondItem="2h5-2F-pSO" secondAttribute="trailing" id="187-tq-gdv"/>
-                            <constraint firstItem="l8g-xq-wPr" firstAttribute="bottom" secondItem="2h5-2F-pSO" secondAttribute="bottom" id="6jr-CJ-4AU"/>
+                            <constraint firstAttribute="bottom" secondItem="2h5-2F-pSO" secondAttribute="bottom" id="6jr-CJ-4AU"/>
                             <constraint firstItem="2h5-2F-pSO" firstAttribute="leading" secondItem="l8g-xq-wPr" secondAttribute="leading" id="DX9-Bv-puM"/>
                             <constraint firstItem="DBM-Vp-dtJ" firstAttribute="centerX" secondItem="l8g-xq-wPr" secondAttribute="centerX" id="QJA-9L-ROZ"/>
-                            <constraint firstItem="2h5-2F-pSO" firstAttribute="top" secondItem="l8g-xq-wPr" secondAttribute="top" id="TIw-Kk-HuD"/>
+                            <constraint firstItem="2h5-2F-pSO" firstAttribute="top" secondItem="0RA-Cd-SBh" secondAttribute="top" id="TIw-Kk-HuD"/>
                             <constraint firstItem="DBM-Vp-dtJ" firstAttribute="centerY" secondItem="l8g-xq-wPr" secondAttribute="centerY" id="sNM-4q-taA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l8g-xq-wPr"/>
@@ -405,9 +452,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add Button" width="167" height="167"/>
         <image name="Bin" width="167" height="167"/>
         <image name="Event" width="167" height="167"/>
+        <image name="Event Button" width="167" height="167"/>
         <image name="Home" width="167" height="167"/>
         <image name="Task" width="167" height="167"/>
+        <image name="Task Button" width="167" height="167"/>
     </resources>
 </document>
