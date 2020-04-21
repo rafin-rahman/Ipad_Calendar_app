@@ -22,6 +22,7 @@
 		D179B6522448BFF5002C00B9 /* YearView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D179B6512448BFF5002C00B9 /* YearView.xib */; };
 		D179B6542448C75B002C00B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D179B6532448C75B002C00B9 /* HomeView.swift */; };
 		D179B6562448C76B002C00B9 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D179B6552448C76B002C00B9 /* HomeView.xib */; };
+		D1870E50244E424600DC56B8 /* TextfieldAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1870E4F244E424600DC56B8 /* TextfieldAnimation.swift */; };
 		D189C06C24264A1E00FF7723 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D189C06B24264A1E00FF7723 /* AppDelegate.swift */; };
 		D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D189C06D24264A1E00FF7723 /* SceneDelegate.swift */; };
 		D189C07024264A1E00FF7723 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D189C06F24264A1E00FF7723 /* MainViewController.swift */; };
@@ -54,6 +55,7 @@
 		D179B6512448BFF5002C00B9 /* YearView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YearView.xib; sourceTree = "<group>"; };
 		D179B6532448C75B002C00B9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D179B6552448C76B002C00B9 /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
+		D1870E4F244E424600DC56B8 /* TextfieldAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldAnimation.swift; sourceTree = "<group>"; };
 		D189C06824264A1E00FF7723 /* Calendars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calendars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D189C06B24264A1E00FF7723 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D189C06D24264A1E00FF7723 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,14 @@
 			path = "Navigation Views";
 			sourceTree = "<group>";
 		};
+		D1870E4E244E422400DC56B8 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D1870E4F244E424600DC56B8 /* TextfieldAnimation.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		D189C05F24264A1E00FF7723 = {
 			isa = PBXGroup;
 			children = (
@@ -141,19 +151,20 @@
 		D189C06A24264A1E00FF7723 /* Calendars */ = {
 			isa = PBXGroup;
 			children = (
+				D1870E4E244E422400DC56B8 /* Utility */,
 				D1A0CFF2244B9AC6008C4D7C /* Models */,
 				D1C57E902449F74900C939D8 /* GoogleService-Info.plist */,
 				D16403092443DDB10078E059 /* Navigation Views */,
 				D16403082443DD730078E059 /* Calendar Views */,
 				D189C06B24264A1E00FF7723 /* AppDelegate.swift */,
 				D189C06D24264A1E00FF7723 /* SceneDelegate.swift */,
+				D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */,
 				D189C06F24264A1E00FF7723 /* MainViewController.swift */,
 				D189C07124264A1E00FF7723 /* Main.storyboard */,
 				D189C07724264A1F00FF7723 /* Assets.xcassets */,
 				D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */,
 				D189C07C24264A1F00FF7723 /* Info.plist */,
 				D189C07424264A1E00FF7723 /* Calendars.xcdatamodeld */,
-				D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */,
 			);
 			path = Calendars;
 			sourceTree = "<group>";
@@ -309,6 +320,7 @@
 				D189C06C24264A1E00FF7723 /* AppDelegate.swift in Sources */,
 				D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */,
 				D1B79167244888C900B4A350 /* EventView.swift in Sources */,
+				D1870E50244E424600DC56B8 /* TextfieldAnimation.swift in Sources */,
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
 				D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */,

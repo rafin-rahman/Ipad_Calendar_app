@@ -10,12 +10,24 @@ import UIKit
 import Firebase
 
 class MainViewController: UIViewController {
-
+    
+    
+    
+    // nagivation buttons
+    @IBOutlet weak var homeNavButton: UIButton!
+    @IBOutlet weak var eventNavButton: UIButton!
+    @IBOutlet weak var taskNavButton: UIButton!
+    @IBOutlet weak var binNavButton: UIButton!
+    // nagivation labels
+    @IBOutlet weak var homeLabel: UILabel!
+    @IBOutlet weak var eventLabel: UILabel!
+    @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var binLabel: UILabel!
+    
     
     // add, edit, task button constraint
     @IBOutlet weak var addButton: UIButton!
     
-       
     @IBOutlet weak var eventButton: UIButton!
     @IBOutlet weak var eventButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var eventButtonHeight: NSLayoutConstraint!
@@ -37,9 +49,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        
         onHomeClick(nil)
         addButtonStyle()
+        navigationStyle()
     }
     
     
@@ -55,52 +68,107 @@ class MainViewController: UIViewController {
         })
     }
     
-   
-  
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddEditSegueEvent" {
+            if let destinationVC = segue.destination as? AddEditViewController {
+                destinationVC.isTask = false
+                
+                
+            }
+        } else if segue.identifier == "AddEditSegueTask" {
+            if let destinationVC = segue.destination as? AddEditViewController {
+                destinationVC.isTask = true
+            }
+        }
+    }
+    
+    
     @IBAction func showSidebar(_ sender: UIScreenEdgePanGestureRecognizer) {
         
         if sidebarWidthConstraint.constant == 0 {
-                  sidebarWidthConstraint.constant = 150
-              } else {
-                  sidebarWidthConstraint.constant = 0
-              }
-              
-              UIView.animate(withDuration: 0.2, animations: {
-                  self.view.layoutIfNeeded()
-              })
+            sidebarWidthConstraint.constant = 150
+        } else {
+            sidebarWidthConstraint.constant = 0
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     
     @IBAction func onHomeClick(_ sender: Any?) {
+        
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-        HomeView {
-        setRightViewDetails(newRightView: newRightView)
+            HomeView {
+            setRightViewDetails(newRightView: newRightView)
             newRightView.onLoad()
         }
+        
+        homeNavButton.alpha = 1
+        eventNavButton.alpha = 0.4
+        taskNavButton.alpha = 0.4
+        binNavButton.alpha = 0.4
+        
+        homeLabel.alpha = 1
+        eventLabel.alpha = 0.4
+        taskLabel.alpha = 0.4
+        binLabel.alpha = 0.4
+        
+        
     }
     
     
     @IBAction func onEventClick(_ sender: UIButton) {
         
         if let newRightView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-        EventView {
-        setRightViewDetails(newRightView: newRightView)
+            EventView {
+            setRightViewDetails(newRightView: newRightView)
         }
+        homeNavButton.alpha = 0.4
+        eventNavButton.alpha = 1
+        taskNavButton.alpha = 0.4
+        binNavButton.alpha = 0.4
+        
+        homeLabel.alpha = 0.4
+        eventLabel.alpha = 1
+        taskLabel.alpha = 0.4
+        binLabel.alpha = 0.4
+        
     }
     
-
+    
     @IBAction func onTaskClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "TaskView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-        TaskView {
-        setRightViewDetails(newRightView: newRightView)
+            TaskView {
+            setRightViewDetails(newRightView: newRightView)
         }
+        homeNavButton.alpha = 0.4
+        eventNavButton.alpha = 0.4
+        taskNavButton.alpha = 1
+        binNavButton.alpha = 0.4
+        
+        homeLabel.alpha = 0.4
+        eventLabel.alpha = 0.4
+        taskLabel.alpha = 1
+        binLabel.alpha = 0.4
     }
     
     @IBAction func onBinClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "BinView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-        BinView {
-        setRightViewDetails(newRightView: newRightView)
+            BinView {
+            setRightViewDetails(newRightView: newRightView)
         }
+        homeNavButton.alpha = 0.4
+        eventNavButton.alpha = 0.4
+        taskNavButton.alpha = 0.4
+        binNavButton.alpha = 1
+        
+        homeLabel.alpha = 0.4
+        eventLabel.alpha = 0.4
+        taskLabel.alpha = 0.4
+        binLabel.alpha = 1
     }
     
     func setRightViewDetails(newRightView: UIView){
@@ -158,33 +226,51 @@ class MainViewController: UIViewController {
         }
         else {
             
-            eventButtonWidth.constant = 1
-            eventButtonHeight.constant = 1
-            eventButtonTrailing.constant = 80
-            eventButtonBottom .constant = 0
-            
-            taskButtonWidth.constant = 1
-            taskButtonHeight.constant = 1
-            taskButtonTrailing.constant = 80
-            taskButtonBottom.constant = -30
-            
-            UIView.animate(withDuration: 0.5, animations:  {
-                self.addButton.transform = .identity
-                self.view.layoutIfNeeded()
-            }, completion: { _ in
-                self.eventButton.isHidden = true
-                self.taskButton.isHidden = true
-            })
-            
-            addButtonStatus = false
+            addButtonClosingAnimation()
         }
     }
     
+    func addButtonClosingAnimation(){
+        eventButtonWidth.constant = 1
+        eventButtonHeight.constant = 1
+        eventButtonTrailing.constant = 80
+        eventButtonBottom .constant = 0
+        
+        taskButtonWidth.constant = 1
+        taskButtonHeight.constant = 1
+        taskButtonTrailing.constant = 80
+        taskButtonBottom.constant = -30
+        
+        UIView.animate(withDuration: 0.5, animations:  {
+            self.addButton.transform = .identity
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.eventButton.isHidden = true
+            self.taskButton.isHidden = true
+        })
+        
+        addButtonStatus = false
+    }
+    
     @IBAction func addEventClick(_ sender: UIButton) {
+        if(addButtonStatus == true){
+            addButtonClosingAnimation()
+            
+        }
+    }
+    
+    @IBAction func addTaskClick(_ sender: UIButton) {
+        
+        if(addButtonStatus == true){
+            addButtonClosingAnimation()
+            
+        }
         
     }
     
+    func navigationStyle(){
+        
+    }
     
-
 }
 
