@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var eventNavButton: UIButton!
     @IBOutlet weak var taskNavButton: UIButton!
     @IBOutlet weak var binNavButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     // nagivation labels
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var eventLabel: UILabel!
@@ -52,7 +53,7 @@ class MainViewController: UIViewController {
         
         onHomeClick(nil)
         addButtonStyle()
-        navigationStyle()
+        
     }
     
     
@@ -102,8 +103,8 @@ class MainViewController: UIViewController {
         
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             HomeView {
-            setRightViewDetails(newRightView: newRightView)
             newRightView.onLoad()
+            setRightViewDetails(newRightView: newRightView)
         }
         
         homeNavButton.alpha = 1
@@ -184,6 +185,7 @@ class MainViewController: UIViewController {
         self.view.bringSubviewToFront(eventButton)
         self.view.bringSubviewToFront(taskButton)
         self.view.bringSubviewToFront(addButton)
+        self.view.bringSubviewToFront(menuButton)
     }
     
     @IBAction func addButtonClick(_ sender: Any?) {
@@ -268,9 +270,10 @@ class MainViewController: UIViewController {
         
     }
     
-    func navigationStyle(){
+   
+    
+    @IBAction func menuButtonClick(_ sender: UIButton) {
         
     }
-    
 }
 

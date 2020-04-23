@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class Event{
     var id = ""
     var eventName = ""
@@ -17,6 +18,8 @@ class Event{
     var reminder = Date()
     var priority = ""
     var profile = ""
+    var profileColour = ""
+    var allDay = false
     
     var numberOfCollision = 0
     var first = true

@@ -81,3 +81,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+
+
+
+extension String{
+    func toDate(dateFormat:String) -> Date! {
+        let dateAndTimeFormat = DateFormatter()
+        dateAndTimeFormat.dateFormat = dateFormat
+        return dateAndTimeFormat.date(from: self)
+    }
+}

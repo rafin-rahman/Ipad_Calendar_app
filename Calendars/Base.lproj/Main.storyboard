@@ -168,6 +168,17 @@
                                     <action selector="addButtonClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="qsP-NR-GOu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-Dh-N8z" userLabel="Menu">
+                                <rect key="frame" x="170" y="38" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="eLf-Ex-Rjh"/>
+                                    <constraint firstAttribute="height" constant="30" id="fwD-1V-fJN"/>
+                                </constraints>
+                                <state key="normal" image="Menu"/>
+                                <connections>
+                                    <action selector="menuButtonClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="iFt-rt-8Mr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -179,7 +190,9 @@
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="vo2-ca-e6L" secondAttribute="trailing" constant="80" id="C2e-17-xkl"/>
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="G9D-Xz-mJN" secondAttribute="trailing" constant="80" id="Cbu-pc-qjO"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="leading" secondItem="Ea8-xp-8xr" secondAttribute="leading" id="IVN-SX-y7N"/>
+                            <constraint firstItem="KNd-Dh-N8z" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" constant="38" id="OkG-d5-abv"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" id="SYE-k5-YZG"/>
+                            <constraint firstItem="KNd-Dh-N8z" firstAttribute="leading" secondItem="ms0-SP-3de" secondAttribute="trailing" constant="20" id="eTG-7N-JS3"/>
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="bottom" secondItem="oQc-5C-N0a" secondAttribute="bottom" constant="30" id="enl-qX-A0Q"/>
                             <constraint firstItem="vo2-ca-e6L" firstAttribute="top" secondItem="oQc-5C-N0a" secondAttribute="bottom" constant="-30" id="fba-Ic-36b"/>
                             <constraint firstAttribute="trailing" secondItem="oQc-5C-N0a" secondAttribute="trailing" constant="50" id="jRD-Xj-IAZ"/>
@@ -205,6 +218,7 @@
                         <outlet property="homeLabel" destination="jdf-iV-KRb" id="BPj-Hh-5qw"/>
                         <outlet property="homeNavButton" destination="lNs-7h-rFl" id="Fsi-za-ADN"/>
                         <outlet property="leftView" destination="ms0-SP-3de" id="tD8-jT-nZ2"/>
+                        <outlet property="menuButton" destination="KNd-Dh-N8z" id="tY4-SK-Ruk"/>
                         <outlet property="rightView" destination="fk3-OW-Ee6" id="jiW-mt-anh"/>
                         <outlet property="sidebarWidthConstraint" destination="OEd-G0-FU2" id="aps-uU-iKD"/>
                         <outlet property="taskButton" destination="vo2-ca-e6L" id="fWQ-8U-gp1"/>
@@ -244,7 +258,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.42253521126760563" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2h5-2F-pSO" userLabel="Box View">
-                                <rect key="frame" x="616" y="154" width="400" height="700"/>
+                                <rect key="frame" x="483" y="152" width="400" height="700"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpk-FP-Qyh">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
@@ -477,15 +491,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </pickerView>
-                                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="5" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x05-3Q-YNc">
-                                                <rect key="frame" x="102" y="483" width="214" height="47"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                        <color key="value" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="before" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-fx-Cyy">
                                                 <rect key="frame" x="287" y="498" width="51" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -552,7 +557,7 @@
                                                 <color key="textColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="highlightedColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DII-mg-iNs">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DII-mg-iNs">
                                                 <rect key="frame" x="322" y="278" width="49" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="onTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -578,6 +583,15 @@
                                                 <color key="textColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="highlightedColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </label>
+                                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="10" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x05-3Q-YNc">
+                                                <rect key="frame" x="105" y="483" width="214" height="47"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                        <color key="value" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </datePicker>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -607,17 +621,13 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="GUe-66-gfw" secondAttribute="bottom" id="3cf-W2-Nrc"/>
                             <constraint firstItem="GUe-66-gfw" firstAttribute="centerY" secondItem="l8g-xq-wPr" secondAttribute="centerY" id="5aW-VZ-CAv"/>
-                            <constraint firstItem="l8g-xq-wPr" firstAttribute="trailing" secondItem="2h5-2F-pSO" secondAttribute="trailing" constant="400" id="5eZ-qt-aLP">
-                                <variation key="heightClass=regular-widthClass=regular" constant="350"/>
-                            </constraint>
                             <constraint firstItem="GUe-66-gfw" firstAttribute="leading" secondItem="l8g-xq-wPr" secondAttribute="leading" id="7xz-F3-hsW"/>
+                            <constraint firstItem="2h5-2F-pSO" firstAttribute="centerY" secondItem="l8g-xq-wPr" secondAttribute="centerY" id="AVf-Yk-zqr"/>
                             <constraint firstItem="GUe-66-gfw" firstAttribute="leading" secondItem="0RA-Cd-SBh" secondAttribute="leading" id="MRd-qZ-ixM"/>
-                            <constraint firstItem="l8g-xq-wPr" firstAttribute="bottom" secondItem="2h5-2F-pSO" secondAttribute="bottom" constant="103" id="Pak-Lw-sFE">
-                                <variation key="heightClass=regular-widthClass=regular" constant="150"/>
-                            </constraint>
                             <constraint firstItem="GUe-66-gfw" firstAttribute="bottom" secondItem="l8g-xq-wPr" secondAttribute="bottom" constant="35" id="bLa-5k-0EQ"/>
                             <constraint firstItem="GUe-66-gfw" firstAttribute="top" secondItem="0RA-Cd-SBh" secondAttribute="top" id="jMr-XP-a0S"/>
-                            <constraint firstItem="GUe-66-gfw" firstAttribute="top" secondItem="l8g-xq-wPr" secondAttribute="top" id="sd4-lG-b1B"/>
+                            <constraint firstItem="2h5-2F-pSO" firstAttribute="centerX" secondItem="l8g-xq-wPr" secondAttribute="centerX" id="o52-ee-T3h"/>
+                            <constraint firstItem="GUe-66-gfw" firstAttribute="top" secondItem="0RA-Cd-SBh" secondAttribute="top" id="sd4-lG-b1B"/>
                             <constraint firstItem="l8g-xq-wPr" firstAttribute="trailing" secondItem="GUe-66-gfw" secondAttribute="trailing" id="ts6-7c-FyI"/>
                             <constraint firstAttribute="trailing" secondItem="GUe-66-gfw" secondAttribute="trailing" constant="-342" id="yVF-f6-HkL"/>
                         </constraints>
@@ -645,7 +655,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="allDaySwitch" destination="DII-mg-iNs" id="CBd-Cp-cPn"/>
+                        <outlet property="allDaySwitch" destination="DII-mg-iNs" id="DSq-LW-XDp"/>
                         <outlet property="backgroundView" destination="GUe-66-gfw" id="qDT-9M-Cke"/>
                         <outlet property="boxView" destination="2h5-2F-pSO" id="l9f-4N-wpy"/>
                         <outlet property="eventButton" destination="bpk-FP-Qyh" id="A59-NG-oI5"/>
@@ -686,6 +696,7 @@
         <image name="Event" width="167" height="167"/>
         <image name="Event Button" width="167" height="167"/>
         <image name="Home" width="167" height="167"/>
+        <image name="Menu" width="100" height="100"/>
         <image name="Task" width="167" height="167"/>
         <image name="Task Button" width="167" height="167"/>
     </resources>

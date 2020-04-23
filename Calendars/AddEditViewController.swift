@@ -49,7 +49,10 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     var isTask = false
     
-    var pickerData: [String] = []
+    var profileNames: [String] = []
+    var profileColours: [String] = []
+    var selectedProfile : String = ""
+    var selectedColor : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +62,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         self.reminderTimePicker.isEnabled = false
         self.recurrentSegment.isEnabled = false
-
+        
         self.taskReminderPicker.isEnabled = false
         
         if self.isTask {
@@ -73,13 +76,15 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.taskButton.alpha = 0.8
             self.eventButton.alpha = 1
         }
-
+        
         formStyle()
         getProfileList()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25){
             self.eventProfilePicker.delegate = self
             self.eventProfilePicker.dataSource = self
+            self.selectedProfile = self.profileNames[0]
+            self.selectedColor = self.profileColours[0]
             
             self.taskProfilePicker.delegate = self
             self.taskProfilePicker.dataSource = self
@@ -91,7 +96,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         boxView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         boxView.layer.shadowOffset = CGSize(width: 3.0, height: 5.0)
         boxView.layer.shadowOpacity = 1
-        boxView.layer.shadowRadius = 3
+        boxView.layer.shadowRadius = 3	
         
         allDaySwitch.onTintColor = .lightGray
         
@@ -115,11 +120,16 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        return profileNames.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        return profileNames[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedProfile = profileNames[row]
+        selectedColor = profileColours[row]
     }
     
     func getProfileList(){
@@ -133,7 +143,10 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             else {
                 for profile in querySnapshot!.documents {
                     let profileName = profile["Name"]
-                    self.pickerData.append(profileName as! String)
+                    let profileColour = profile["Colour"]
+                    
+                    self.profileNames.append(profileName as! String)
+                    self.profileColours.append(profileColour as! String)
                 }
             }
         }
@@ -186,15 +199,49 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if eventName == "" {
             TextfieldAnimation.errorAnimation(textField: eventNameText)
         }
-        //        let dbConnection = Firestore.firestore()
-        //        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
-        //
-        //        let newEvent = eventReference.document()
-        //        newEvent.setData([
-        //            "Name" : eventNameText.text,
-        //            "Location" : eventLocationText.text
-        //        ])
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yy"
+        let selectedDate = dateFormatter.string(from: eventDatePicker.date)
+        
+        if(eventStartTimePicker.date > eventEndTimePicker.date)
+        {
+            //TO:DO A message to show start time should not be grater than end time
+            return
+        }
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        let startTime = timeFormatter.string(from: eventStartTimePicker.date)
+        let endTime = timeFormatter.string(from: eventEndTimePicker.date)
+        
+        let startDate = (selectedDate + " " + startTime).toDate(dateFormat: "dd-MM-yy HH:mm")
+        let endDate = (selectedDate+" "+endTime).toDate(dateFormat: "dd-MM-yy HH:mm")
+        
+        let reminderTime = startDate!.timeIntervalSince1970 - reminderTimePicker.countDownDuration
+        let reminderDate = Date(timeIntervalSince1970: reminderTime)
+        
+        let priority = prioritySegment.titleForSegment(at: prioritySegment.selectedSegmentIndex)
+        
+        let allDayStatus = allDaySwitch.isOn
+        
+            
+        let eventDict: [String: Any] = [
+            "Name" : eventNameText.text!,
+            "Location" : eventLocationText.text!,
+            "StartTime" : startDate!,
+            "EndTime" : endDate!,
+            "All-Day": allDayStatus,
+            "ReminderTime" : reminderDate,
+            "Priority" : priority!,
+            "Profile" : selectedProfile,
+            "ProfileColour" : selectedColor
+        ]
+        
+        EventDAO().addNewEvent(eventDict: eventDict)
     }
+    
+    
     @IBAction func reminderButtonClick(_ sender: UIButton) {
         if(reminderTimePicker.isEnabled == false){
             reminderTimePicker.isEnabled = true
