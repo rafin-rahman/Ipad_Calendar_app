@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
         addButtonStyle()
         
     }
-    
+       
     
     @IBAction func hideSidebar(_ sender: UISwipeGestureRecognizer) {
         if sidebarWidthConstraint.constant == 0 {

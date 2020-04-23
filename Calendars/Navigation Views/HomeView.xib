@@ -159,7 +159,7 @@
                 <outlet property="barXCenter" destination="ngL-X6-B8a" id="Gcp-9H-9pD"/>
                 <outlet property="currentDate" destination="8f6-Wt-9cV" id="1W8-FJ-bcY"/>
                 <outlet property="dayButton" destination="OxW-T5-bgu" id="oBN-V7-a9a"/>
-                <outlet property="dynamicView" destination="raf-P0-8Gi" id="tcg-ux-SxR"/>
+                <outlet property="dynamicView" destination="raf-P0-8Gi" id="CIf-ZL-rOS"/>
                 <outlet property="headerView" destination="D1D-5m-dLP" id="U4w-Gl-8Hq"/>
             </connections>
             <point key="canvasLocation" x="131.8359375" y="153.29428989751096"/>

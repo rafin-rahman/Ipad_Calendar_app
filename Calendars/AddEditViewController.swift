@@ -157,6 +157,11 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func allDaySwitchClick(_ sender: UISwitch) {
+        self.eventStartTimePicker.isEnabled = !self.eventStartTimePicker.isEnabled
+        self.eventEndTimePicker.isEnabled = !self.eventEndTimePicker.isEnabled
+    }
+    
     @IBAction func priorityValueChanged(_ sender: UISegmentedControl) {
         var newColor = UIColor.black
         switch sender.selectedSegmentIndex {
@@ -239,6 +244,9 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         ]
         
         EventDAO().addNewEvent(eventDict: eventDict)
+        
+        
+        dismiss(animated: true, completion: nil)
     }
     
     

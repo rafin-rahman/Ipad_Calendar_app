@@ -21,7 +21,7 @@ class EventDAO{
         dbConnection = Firestore.firestore()
     }
     
-    func getEvents(eventDate:Date){
+    func getEvents(eventDate:Date, allDayStatus:Bool){
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: eventDate)
         let start = calendar.date(from: components)!
@@ -29,7 +29,7 @@ class EventDAO{
         
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         
-        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("All-Day", isEqualTo: false)
+        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("All-Day", isEqualTo: allDayStatus)
         eventStartingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -65,7 +65,7 @@ class EventDAO{
             }
         }
         
-        let eventEndingToday = eventReference.whereField("EndTime", isLessThan: end).whereField("All-Day", isEqualTo: false)
+        let eventEndingToday = eventReference.whereField("EndTime", isLessThan: end).whereField("All-Day", isEqualTo: allDayStatus)
         eventEndingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
