@@ -302,7 +302,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wty-bE-kGN" userLabel="All Day bar">
                     <rect key="frame" x="100" y="40" width="1116" height="60"/>
-                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="9Zs-Zl-nHV"/>
                     </constraints>
@@ -950,6 +950,7 @@
                 <outlet property="dayThreeButton" destination="x3m-qh-3yS" id="r52-xU-il5"/>
                 <outlet property="dayTwoButton" destination="uvi-np-f1m" id="J9z-L4-hju"/>
                 <outlet property="dayZero" destination="JDu-nP-nfl" id="VGr-4n-1eq"/>
+                <outlet property="eventAllDayView" destination="Wty-bE-kGN" id="HKS-uC-A73"/>
                 <outlet property="leftScroll" destination="fLF-xN-MjL" id="fsq-hL-nEo"/>
                 <outlet property="rightScroll" destination="6qt-nu-pWF" id="E0D-T7-eGy"/>
                 <outlet property="stackView" destination="p8a-PH-0vX" id="ha7-yu-gtq"/>

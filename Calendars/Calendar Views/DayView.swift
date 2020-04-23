@@ -24,6 +24,7 @@ class DayView: UIView, UIScrollViewDelegate {
     @IBOutlet weak var leftScroll: UIScrollView!
     @IBOutlet weak var rightScroll: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var eventAllDayView: UIView!
     
     var finalEventList : Array<Event> = Array()
     
@@ -123,7 +124,7 @@ class DayView: UIView, UIScrollViewDelegate {
         for todaysEvent in self.finalEventList{
             let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
-            let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:90, height: 60))
+            let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
             
             eventName.text = todaysEvent.eventName
             eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
@@ -166,20 +167,34 @@ class DayView: UIView, UIScrollViewDelegate {
             }
            
             event.addSubview(eventPriority)
-             event.addSubview(eventName)
+            event.addSubview(eventName)
             
             eventPriority.topAnchor.constraint(equalTo: event.topAnchor, constant: 0).isActive = true
-            eventPriority.bottomAnchor.constraint(equalTo: event.bottomAnchor, constant: 0).isActive = true
             eventPriority.leadingAnchor.constraint(equalTo: event.leadingAnchor, constant: 0).isActive = true
-            
-            eventPriority.heightAnchor.constraint(equalTo: event.heightAnchor, constant: 60).isActive = true
-            eventPriority.backgroundColor = UIColor.black
-            
-            eventName.topAnchor.constraint(equalTo: event.topAnchor, constant: -15).isActive = true
+            eventPriority.heightAnchor.constraint(equalTo: event.heightAnchor, multiplier: 1).isActive = true
+            eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
+            var newColor = UIColor.black
+            switch todaysEvent.priority {
+                case "High":
+                    newColor = .red
+                case "Medium":
+                    newColor = .yellow
+                case "Low":
+                    newColor = .gray
+                //UIColor(red: 0.50, green: 0.55, blue: 0.55, alpha: 1.00)
+                //UIColor(red: 0.74, green: 0.76, blue: 0.78, alpha: 1.00)
+                // UIColor(red: 0.91, green: 0.30, blue: 0.24, alpha: 1.00)
+                default:
+                    print("Something went wrong in priorityValueChanged")
+            }
+            eventPriority.backgroundColor = newColor
+        
+            eventName.topAnchor.constraint(equalTo: event.topAnchor, constant: 10).isActive = true
             eventName.leadingAnchor.constraint(equalTo: eventPriority.trailingAnchor, constant: 10).isActive = true
-            eventName.widthAnchor.constraint(equalTo: event.widthAnchor, constant: 100).isActive = true
-            eventName.heightAnchor.constraint(equalTo: event.heightAnchor, constant: 50).isActive = true
-            eventName.numberOfLines = 2
+            eventName.trailingAnchor.constraint(equalTo: event.trailingAnchor, constant: -10).isActive = true
+            eventName.bottomAnchor.constraint(equalTo: event.bottomAnchor, constant: -10).isActive = true
+            eventName.numberOfLines = 0
+            eventName.sizeToFit()
             
         }
     }
