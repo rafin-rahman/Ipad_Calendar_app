@@ -45,7 +45,8 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var taskCancelButton: UIButton!
     @IBOutlet weak var taskReminderButton: UIButton!
     
-    
+    var onDismiss : (() -> Void)?
+    var activeDate: Date = Date()
     
     var isTask = false
     
@@ -76,6 +77,8 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.taskButton.alpha = 0.8
             self.eventButton.alpha = 1
         }
+        
+        eventDatePicker.date = activeDate
         
         formStyle()
         getProfileList()
@@ -245,7 +248,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         EventDAO().addNewEvent(eventDict: eventDict)
         
-        
+        onDismiss!()
         dismiss(animated: true, completion: nil)
     }
     

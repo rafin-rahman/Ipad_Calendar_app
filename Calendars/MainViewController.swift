@@ -74,13 +74,47 @@ class MainViewController: UIViewController {
         if segue.identifier == "AddEditSegueEvent" {
             if let destinationVC = segue.destination as? AddEditViewController {
                 destinationVC.isTask = false
-                
-                
+                destinationVC.onDismiss = onSegDismiss
+                if let home = self.rightView as? HomeView {
+                if let day = home.dynamicView as? DayView {
+                    destinationVC.activeDate = day.activeDate
+                    }
+                }
             }
         } else if segue.identifier == "AddEditSegueTask" {
             if let destinationVC = segue.destination as? AddEditViewController {
                 destinationVC.isTask = true
+                destinationVC.onDismiss = onSegDismiss
             }
+        }
+    }
+    
+    func onSegDismiss() {
+        if let home = self.rightView as? HomeView {
+            if let day = home.dynamicView as? DayView {
+                day.getDailyViewForDate(eventDate: day.activeDate)
+            }
+            
+            if let week = home.dynamicView as? WeekView {
+            }
+            
+            if let month = home.dynamicView as? MonthView {
+            }
+            
+            if let year = home.dynamicView as? YearView {
+            }
+        }
+        
+        if let event = self.rightView as? EventView {
+            
+        }
+        
+        if let task = self.rightView as? TaskView {
+            
+        }
+        
+        if let bin = self.rightView as? BinView {
+            
         }
     }
     

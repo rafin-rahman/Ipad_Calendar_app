@@ -26,6 +26,8 @@ class DayView: UIView, UIScrollViewDelegate {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var eventAllDayView: UIView!
     
+    var activeDate: Date = Date()
+    
     var finalEventList : Array<Event> = Array()
     var finalAllDayEventList: Array<Event> = Array()
     
@@ -50,6 +52,9 @@ class DayView: UIView, UIScrollViewDelegate {
     func getDailyView(eventDate:Date) {
         let eventDAO = EventDAO()
         let eventDAOForAllDay = EventDAO()
+        
+        self.clearAllDayEvent()
+        self.clearView()
         
         dayOneButton.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
         dayOneButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -80,7 +85,10 @@ class DayView: UIView, UIScrollViewDelegate {
     func getDailyViewForDate(eventDate:Date){
         let eventDAOForAllDay = EventDAO()
         let eventDAO = EventDAO()
-              
+
+        self.clearAllDayEvent()
+        self.clearView()
+        
         eventDAOForAllDay.getEvents(eventDate: eventDate, allDayStatus: true)
         eventDAO.getEvents(eventDate: eventDate, allDayStatus: false)
         
@@ -345,9 +353,7 @@ class DayView: UIView, UIScrollViewDelegate {
 
         let date = newFormat.date(from: dayZero.text!)
         let selectedDate = newFormat.string(from: Calendar.current.date(byAdding: .day, value: sender.tag, to: date!)!)
-
-        self.clearAllDayEvent()
-        self.clearView()
+        activeDate = newFormat.date(from: selectedDate)!
         
         self.getDailyViewForDate(eventDate:newFormat.date(from: selectedDate)!)
         
