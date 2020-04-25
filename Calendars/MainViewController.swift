@@ -76,6 +76,11 @@ class MainViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
+    @IBAction func hideSearchBar(_ sender: UISwipeGestureRecognizer) {
+        if searchViewTrailingConstraint.constant == 0 {
+                   closeSearchView()
+               }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

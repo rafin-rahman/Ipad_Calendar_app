@@ -183,6 +183,7 @@ class DayView: UIView, UIScrollViewDelegate {
             eventPriority.leadingAnchor.constraint(equalTo: self.eventAllDayView.leadingAnchor, constant: 0).isActive = true
             eventPriority.heightAnchor.constraint(equalTo: self.eventAllDayView.heightAnchor, multiplier: 1).isActive = true
             eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
+            
             var newColor = UIColor.black
             switch allDayEvent.priority {
             case "High":
