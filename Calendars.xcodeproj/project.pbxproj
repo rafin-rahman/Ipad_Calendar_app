@@ -44,6 +44,7 @@
 		D1F228EE245459090008DD92 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228ED245459090008DD92 /* profileView.swift */; };
 		D1F228F124545ADF0008DD92 /* NavigationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228F024545ADF0008DD92 /* NavigationProtocol.swift */; };
 		D1F228F324545CEE0008DD92 /* CalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228F224545CEE0008DD92 /* CalendarProtocol.swift */; };
+		D1F228F5245464450008DD92 /* ProfileDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228F4245464450008DD92 /* ProfileDAO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		D1F228ED245459090008DD92 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
 		D1F228F024545ADF0008DD92 /* NavigationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocol.swift; sourceTree = "<group>"; };
 		D1F228F224545CEE0008DD92 /* CalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProtocol.swift; sourceTree = "<group>"; };
+		D1F228F4245464450008DD92 /* ProfileDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				D10DAFE62451C4DE00FC253E /* EventDAO.swift */,
+				D1F228F4245464450008DD92 /* ProfileDAO.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				D14AED852443B0BA0012469F /* WeekView.swift in Sources */,
 				D179B6502448BFE9002C00B9 /* YearView.swift in Sources */,
 				D10DAFED2451F45D00FC253E /* HexToUIColor.swift in Sources */,
+				D1F228F5245464450008DD92 /* ProfileDAO.swift in Sources */,
 				D179B6542448C75B002C00B9 /* HomeView.swift in Sources */,
 				D10DAFEB2451E94F00FC253E /* Profile.swift in Sources */,
 				D189C06C24264A1E00FF7723 /* AppDelegate.swift in Sources */,

@@ -99,15 +99,4 @@ class HomeView: UIView, NavigationProtocol {
         dynamicView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
     }
-    
-  
-    @IBAction func searchTextEdited(_ sender: UITextField) {
-        if let vc = self.getOwningViewController() as? MainViewController {
-          
-        }
-    }
-    
-  
-    
-    
 }

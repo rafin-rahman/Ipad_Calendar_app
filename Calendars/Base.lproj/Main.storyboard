@@ -284,8 +284,8 @@
                         <outlet property="homeLabel" destination="jdf-iV-KRb" id="BPj-Hh-5qw"/>
                         <outlet property="homeNavButton" destination="lNs-7h-rFl" id="Fsi-za-ADN"/>
                         <outlet property="leftView" destination="ms0-SP-3de" id="tD8-jT-nZ2"/>
-                        <outlet property="profileButton" destination="I1m-Xp-gKU" id="6GD-LP-StC"/>
                         <outlet property="profileLabel" destination="LUk-pI-dpg" id="G9f-Lm-NjG"/>
+                        <outlet property="profileNavButton" destination="I1m-Xp-gKU" id="6GD-LP-StC"/>
                         <outlet property="rightViewTrailingToSafeArea" destination="r5s-Og-cGS" id="oXh-BX-gag"/>
                         <outlet property="searchViewTop" destination="Dfp-1M-7xS" id="LU2-0Y-vdi"/>
                         <outlet property="sidebarWidthConstraint" destination="OEd-G0-FU2" id="aps-uU-iKD"/>

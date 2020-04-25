@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var eventNavButton: UIButton!
     @IBOutlet weak var taskNavButton: UIButton!
     @IBOutlet weak var binNavButton: UIButton!
-    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var profileNavButton: UIButton!
     
     
     // nagivation labels
@@ -46,7 +46,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var searchViewTop: UIView!
     
-    
     @IBOutlet weak var sidebarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightViewTrailingToSafeArea: NSLayoutConstraint!
     
@@ -54,13 +53,24 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         onHomeClick(nil)
         addButtonStyle()
         
     }
-       
     
+    @IBAction func showSidebar(_ sender: UIScreenEdgePanGestureRecognizer) {
+        
+        if sidebarWidthConstraint.constant == 0 {
+            sidebarWidthConstraint.constant = 150
+        } else {
+            sidebarWidthConstraint.constant = 0
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+       
     @IBAction func hideSidebar(_ sender: UISwipeGestureRecognizer) {
         if sidebarWidthConstraint.constant == 0 {
             sidebarWidthConstraint.constant = 150
@@ -73,8 +83,15 @@ class MainViewController: UIViewController {
         })
     }
     
+    func onSegDismiss() {
+        if let home = self.rightView as? HomeView {
+            home.dynamicView.loadData()
+        }
+        
+        //Add for OtherViews
+    }
     
-    
+    //Add Or Edit View
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddEditSegueEvent" {
             if let destinationVC = segue.destination as? AddEditViewController {
@@ -94,27 +111,25 @@ class MainViewController: UIViewController {
         }
     }
     
-    func onSegDismiss() {
-        if let home = self.rightView as? HomeView {
-            home.dynamicView.loadData()
-        }
+    
+    func selectedButtonEffect(selectedButton : UIButton, selectedLabel : UILabel){
+        homeNavButton.alpha = 0.4
+        eventNavButton.alpha = 0.4
+        taskNavButton.alpha = 0.4
+        binNavButton.alpha = 0.4
+        profileNavButton.alpha = 0.4
         
-        //Add for OtherViews
+        homeLabel.alpha = 0.4
+        eventLabel.alpha = 0.4
+        taskLabel.alpha = 0.4
+        binLabel.alpha = 0.4
+        profileLabel.alpha = 0.4
+        
+        selectedButton.alpha = 1
+        selectedLabel.alpha = 1
     }
     
     
-    @IBAction func showSidebar(_ sender: UIScreenEdgePanGestureRecognizer) {
-        
-        if sidebarWidthConstraint.constant == 0 {
-            sidebarWidthConstraint.constant = 150
-        } else {
-            sidebarWidthConstraint.constant = 0
-        }
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
     
     
     @IBAction func onHomeClick(_ sender: Any?) {
@@ -124,20 +139,7 @@ class MainViewController: UIViewController {
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
-        
-        homeNavButton.alpha = 1
-        eventNavButton.alpha = 0.4
-        taskNavButton.alpha = 0.4
-        binNavButton.alpha = 0.4
-        profileButton.alpha = 0.4
-        
-        homeLabel.alpha = 1
-        eventLabel.alpha = 0.4
-        taskLabel.alpha = 0.4
-        binLabel.alpha = 0.4
-        profileLabel.alpha = 0.4
-        
-        
+        selectedButtonEffect(selectedButton: homeNavButton, selectedLabel: homeLabel)
     }
     
     
@@ -148,18 +150,7 @@ class MainViewController: UIViewController {
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
-        homeNavButton.alpha = 0.4
-        eventNavButton.alpha = 1
-        taskNavButton.alpha = 0.4
-        binNavButton.alpha = 0.4
-        profileButton.alpha = 0.4
-        
-        homeLabel.alpha = 0.4
-        eventLabel.alpha = 1
-        taskLabel.alpha = 0.4
-        binLabel.alpha = 0.4
-        profileLabel.alpha = 0.4
-       
+        selectedButtonEffect(selectedButton: eventNavButton, selectedLabel: eventLabel)
     }
     
     
@@ -168,17 +159,7 @@ class MainViewController: UIViewController {
             TaskView {
             setRightViewDetails(newRightView: newRightView)
         }
-        homeNavButton.alpha = 0.4
-        eventNavButton.alpha = 0.4
-        taskNavButton.alpha = 1
-        binNavButton.alpha = 0.4
-        profileButton.alpha = 0.4
-        
-        homeLabel.alpha = 0.4
-        eventLabel.alpha = 0.4
-        taskLabel.alpha = 1
-        binLabel.alpha = 0.4
-        profileLabel.alpha = 0.4
+        selectedButtonEffect(selectedButton: taskNavButton, selectedLabel: taskLabel)
     }
     
     @IBAction func onBinClick(_ sender: UIButton) {
@@ -186,34 +167,11 @@ class MainViewController: UIViewController {
             BinView {
             setRightViewDetails(newRightView: newRightView)
         }
-        homeNavButton.alpha = 0.4
-        eventNavButton.alpha = 0.4
-        taskNavButton.alpha = 0.4
-        binNavButton.alpha = 1
-        profileButton.alpha = 0.4
-        
-        homeLabel.alpha = 0.4
-        eventLabel.alpha = 0.4
-        taskLabel.alpha = 0.4
-        binLabel.alpha = 1
-        profileLabel.alpha = 0.4
+        selectedButtonEffect(selectedButton: binNavButton, selectedLabel: binLabel)
     }
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
-        
-        homeNavButton.alpha = 0.4
-        eventNavButton.alpha = 0.4
-        taskNavButton.alpha = 0.4
-        binNavButton.alpha = 0.4
-        profileButton.alpha = 1
-        
-        homeLabel.alpha = 0.4
-        eventLabel.alpha = 0.4
-        taskLabel.alpha = 0.4
-        binLabel.alpha = 0.4
-        profileLabel.alpha = 1
-        
-        
+        selectedButtonEffect(selectedButton: profileNavButton, selectedLabel: profileLabel)
     }
     
     
@@ -234,13 +192,10 @@ class MainViewController: UIViewController {
         self.view.bringSubviewToFront(taskButton)
         self.view.bringSubviewToFront(addButton)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(closeSearch(_:)))
-        rightView.addGestureRecognizer(tap)
     }
     
     @IBAction func addButtonClick(_ sender: Any?) {
         addButtonAnimation()
-        
     }
     
     func addButtonStyle(){
@@ -250,12 +205,10 @@ class MainViewController: UIViewController {
         addButton.layer.shadowOffset = CGSize(width: 3.0, height: 5.0)
         addButton.layer.shadowOpacity = 1
         addButton.layer.shadowRadius = 3
-        //addButton.layer.masksToBounds = false
     }
     
     func addButtonAnimation(){
         if(addButtonStatus == false){
-            
             taskButton.isHidden = false
             eventButton.isHidden = false
             
@@ -273,7 +226,6 @@ class MainViewController: UIViewController {
                 self.view.layoutIfNeeded()
                 self.addButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
             }
-            
             addButtonStatus = true
         }
         else {
@@ -312,44 +264,10 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func addTaskClick(_ sender: UIButton) {
-        
         if(addButtonStatus == true){
             addButtonClosingAnimation()
-            
         }
-        
     }
-    
-   
-   
-    
-    @IBAction func searchBarTextClick(_ sender: Any) {
-     
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.layoutIfNeeded()
-        })
-        
-    }
-    
-    func openSearchView() {
-    
-           
-       UIView.animate(withDuration: 0.2, animations: {
-           self.view.layoutIfNeeded()
-       })
-    }
-    
-    func closeSearchView() {
        
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    @objc func closeSearch(_ sender: UIGestureRecognizer) {
-    
-    }
-    
 }
 

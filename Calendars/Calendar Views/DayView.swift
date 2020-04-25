@@ -81,6 +81,10 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             }
         }
     }
+        
+    func loadData() {
+        getDailyViewForDate(eventDate: activeDate)
+    }
     
     func getDailyViewForDate(eventDate:Date){
         let eventDAOForAllDay = EventDAO()
@@ -161,7 +165,12 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             
         }
         else{
-            let allDayEvent = self.finalAllDayEventList[0]
+            onlyOneAllDayEvent()
+        }
+    }
+    
+    func onlyOneAllDayEvent(){
+        let allDayEvent = self.finalAllDayEventList[0]
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
             
@@ -194,7 +203,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
                 newColor = .gray
                 //UIColor(red: 0.50, green: 0.55, blue: 0.55, alpha: 1.00)
                 //UIColor(red: 0.74, green: 0.76, blue: 0.78, alpha: 1.00)
-            // UIColor(red: 0.91, green: 0.30, blue: 0.24, alpha: 1.00)
+                // UIColor(red: 0.91, green: 0.30, blue: 0.24, alpha: 1.00)
             default:
                 print("Something went wrong in priorityValueChanged")
             }
@@ -206,7 +215,6 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventName.bottomAnchor.constraint(equalTo: self.eventAllDayView.bottomAnchor, constant: -10).isActive = true
             eventName.numberOfLines = 0
             eventName.sizeToFit()
-        }
     }
     
     //for all day events if there are no events
@@ -360,9 +368,5 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
         
     }
     
-    func loadData() {
-        getDailyViewForDate(eventDate: activeDate)
-        print("Check ")
-    }
     
 }

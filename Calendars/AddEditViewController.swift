@@ -58,6 +58,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        eventDatePicker.date = activeDate
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
         self.backgroundView.addGestureRecognizer(tap)
         
@@ -67,22 +68,13 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.taskReminderPicker.isEnabled = false
         
         if self.isTask {
-            self.taskView.isHidden = false
-            self.eventView.isHidden = true
-            self.taskButton.alpha = 1
-            self.eventButton.alpha = 0.8
+            selectedTab(selectedView: taskView, selectedButton: taskButton)
         } else {
-            self.taskView.isHidden = true
-            self.eventView.isHidden = false
-            self.taskButton.alpha = 0.8
-            self.eventButton.alpha = 1
+            selectedTab(selectedView: eventView, selectedButton: eventButton)
         }
-        
-        eventDatePicker.date = activeDate
-        
+                
         formStyle()
         getProfileList()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25){
             self.eventProfilePicker.delegate = self
             self.eventProfilePicker.dataSource = self
@@ -179,28 +171,21 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             print("Something went wrong in priorityValueChanged")
         }
         prioritySegment.selectedSegmentTintColor = newColor
-        
     }
     
     @IBAction func taskButtonClick(_ sender: UIButton) {
-        eventView.isHidden = true
-        taskView.isHidden = false
-        taskButton.alpha = 1
-        eventButton.alpha = 0.8
-        
+        selectedTab(selectedView: taskView, selectedButton: taskButton)
     }
+    
     @IBAction func eventButtonClick(_ sender: UIButton) {
-        taskView.isHidden = true
-        eventView.isHidden = false
-        taskButton.alpha = 0.8
-        eventButton.alpha = 1
+        selectedTab(selectedView: eventView, selectedButton: eventButton)
     }
+    
     @IBAction func eventCancelClick(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func eventSaveClick(_ sender: UIButton) {
-        
         TextfieldAnimation.convertToNormal(textField: eventNameText)
         let eventName = eventNameText.text
         // text validation
@@ -256,14 +241,12 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBAction func reminderButtonClick(_ sender: UIButton) {
         if(reminderTimePicker.isEnabled == false){
             reminderTimePicker.isEnabled = true
-            reminderButton.backgroundColor = UIColor(red: 0.62, green: 0.74, blue: 1.00, alpha: 1.00)
-            reminderButton.setTitleColor(UIColor.white, for: .normal)
+            enableButton(enabledButton: reminderButton)
             
         }
         else{
             self.reminderTimePicker.isEnabled = false
-            reminderButton.backgroundColor = UIColor(red: 0.53, green: 0.55, blue: 0.63, alpha: 1.00)
-            reminderButton.setTitleColor(UIColor(red: 0.71, green: 0.73, blue: 0.79, alpha: 1.00), for: .normal)
+            disabledButon(disabledButton: reminderButton)
         }
         
     }
@@ -271,33 +254,44 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBAction func recurringButtonClick(_ sender: UIButton) {
         if recurrentSegment.isEnabled == false{
             recurrentSegment.isEnabled = true
-            recurringButton.backgroundColor = UIColor(red: 0.62, green: 0.74, blue: 1.00, alpha: 1.00)
-            recurringButton.setTitleColor(UIColor.white, for: .normal)
+            enableButton(enabledButton: recurringButton)
         }
         else{
             recurrentSegment.isEnabled = false
-            recurringButton.backgroundColor = UIColor(red: 0.53, green: 0.55, blue: 0.63, alpha: 1.00)
-            recurringButton.setTitleColor(UIColor(red: 0.71, green: 0.73, blue: 0.79, alpha: 1.00), for: .normal)
+            disabledButon(disabledButton: recurringButton)
         }
     }
     
     @IBAction func taskReminderButtonClick(_ sender: UIButton) {
         if(taskReminderPicker.isEnabled == false){
             taskReminderPicker.isEnabled = true
-            taskReminderButton.backgroundColor = UIColor(red: 0.62, green: 0.74, blue: 1.00, alpha: 1.00)
-            taskReminderButton.setTitleColor(UIColor.white, for: .normal)
+            enableButton(enabledButton: taskReminderButton)
             
         }
-            
         else{
             self.taskReminderPicker.isEnabled = false
-            taskReminderButton.backgroundColor = UIColor(red: 0.53, green: 0.55, blue: 0.63, alpha: 1.00)
-            taskReminderButton.setTitleColor(UIColor(red: 0.71, green: 0.73, blue: 0.79, alpha: 1.00), for: .normal)
+            disabledButon(disabledButton: taskReminderButton)
         }
     }
     
+    func selectedTab(selectedView: UIView, selectedButton:UIButton)
+    {
+        self.taskView.isHidden = true
+        self.eventView.isHidden = true
+        self.taskButton.alpha = 0.8
+        self.eventButton.alpha = 0.8
+        
+        selectedView.isHidden = false
+        selectedButton.alpha = 1.0
+    }
     
+    func enableButton(enabledButton:UIButton){
+        enabledButton.backgroundColor = UIColor(red: 0.62, green: 0.74, blue: 1.00, alpha: 1.00)
+        enabledButton.setTitleColor(UIColor.white, for: .normal)
+    }
     
-    
-    
+    func disabledButon(disabledButton:UIButton){
+        disabledButton.backgroundColor = UIColor(red: 0.53, green: 0.55, blue: 0.63, alpha: 1.00)
+        disabledButton.setTitleColor(UIColor(red: 0.71, green: 0.73, blue: 0.79, alpha: 1.00), for: .normal)
+    }
 }
