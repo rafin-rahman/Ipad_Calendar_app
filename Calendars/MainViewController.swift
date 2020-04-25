@@ -11,23 +11,20 @@ import Firebase
 
 class MainViewController: UIViewController {
     
-    
-    
-    
     // nagivation buttons
     @IBOutlet weak var homeNavButton: UIButton!
     @IBOutlet weak var eventNavButton: UIButton!
     @IBOutlet weak var taskNavButton: UIButton!
     @IBOutlet weak var binNavButton: UIButton!
-    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
     
-    // To delete test button
-    @IBOutlet weak var testButton: UIButton!
+    
     // nagivation labels
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var eventLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
+    @IBOutlet weak var profileLabel: UILabel!
     
     
     // add, edit, task button constraint
@@ -45,14 +42,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var taskButtonTrailing: NSLayoutConstraint!
     @IBOutlet weak var taskButtonBottom: NSLayoutConstraint!
     
-    @IBOutlet weak var rightView: UIView!
+    var rightView: NavigationProtocol!
     @IBOutlet weak var leftView: UIView!
-    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchViewTop: UIView!
     
     
     @IBOutlet weak var sidebarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightViewTrailingToSafeArea: NSLayoutConstraint!
-    @IBOutlet weak var searchViewTrailingConstraint: NSLayoutConstraint!
     
     var addButtonStatus = false;
     
@@ -76,11 +72,7 @@ class MainViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
-    @IBAction func hideSearchBar(_ sender: UISwipeGestureRecognizer) {
-        if searchViewTrailingConstraint.constant == 0 {
-                   closeSearchView()
-               }
-    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -89,8 +81,8 @@ class MainViewController: UIViewController {
                 destinationVC.isTask = false
                 destinationVC.onDismiss = onSegDismiss
                 if let home = self.rightView as? HomeView {
-                if let day = home.dynamicView as? DayView {
-                    destinationVC.activeDate = day.activeDate
+                    if let day = home.dynamicView as? DayView {
+                        destinationVC.activeDate = day.activeDate
                     }
                 }
             }
@@ -104,31 +96,10 @@ class MainViewController: UIViewController {
     
     func onSegDismiss() {
         if let home = self.rightView as? HomeView {
-            if let day = home.dynamicView as? DayView {
-                day.getDailyViewForDate(eventDate: day.activeDate)
-            }
-            
-            if let week = home.dynamicView as? WeekView {
-            }
-            
-            if let month = home.dynamicView as? MonthView {
-            }
-            
-            if let year = home.dynamicView as? YearView {
-            }
+            home.dynamicView.loadData()
         }
         
-        if let event = self.rightView as? EventView {
-            
-        }
-        
-        if let task = self.rightView as? TaskView {
-            
-        }
-        
-        if let bin = self.rightView as? BinView {
-            
-        }
+        //Add for OtherViews
     }
     
     
@@ -158,11 +129,13 @@ class MainViewController: UIViewController {
         eventNavButton.alpha = 0.4
         taskNavButton.alpha = 0.4
         binNavButton.alpha = 0.4
+        profileButton.alpha = 0.4
         
         homeLabel.alpha = 1
         eventLabel.alpha = 0.4
         taskLabel.alpha = 0.4
         binLabel.alpha = 0.4
+        profileLabel.alpha = 0.4
         
         
     }
@@ -172,19 +145,20 @@ class MainViewController: UIViewController {
         
         if let newRightView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             EventView {
-            newRightView.loadData()
+            newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
         homeNavButton.alpha = 0.4
         eventNavButton.alpha = 1
         taskNavButton.alpha = 0.4
         binNavButton.alpha = 0.4
+        profileButton.alpha = 0.4
         
         homeLabel.alpha = 0.4
         eventLabel.alpha = 1
         taskLabel.alpha = 0.4
         binLabel.alpha = 0.4
-        
+        profileLabel.alpha = 0.4
        
     }
     
@@ -198,11 +172,13 @@ class MainViewController: UIViewController {
         eventNavButton.alpha = 0.4
         taskNavButton.alpha = 1
         binNavButton.alpha = 0.4
+        profileButton.alpha = 0.4
         
         homeLabel.alpha = 0.4
         eventLabel.alpha = 0.4
         taskLabel.alpha = 1
         binLabel.alpha = 0.4
+        profileLabel.alpha = 0.4
     }
     
     @IBAction func onBinClick(_ sender: UIButton) {
@@ -214,30 +190,49 @@ class MainViewController: UIViewController {
         eventNavButton.alpha = 0.4
         taskNavButton.alpha = 0.4
         binNavButton.alpha = 1
+        profileButton.alpha = 0.4
         
         homeLabel.alpha = 0.4
         eventLabel.alpha = 0.4
         taskLabel.alpha = 0.4
         binLabel.alpha = 1
+        profileLabel.alpha = 0.4
     }
     
-    func setRightViewDetails(newRightView: UIView){
-        rightView.removeFromSuperview()
+    @IBAction func profileButtonClick(_ sender: UIButton) {
+        
+        homeNavButton.alpha = 0.4
+        eventNavButton.alpha = 0.4
+        taskNavButton.alpha = 0.4
+        binNavButton.alpha = 0.4
+        profileButton.alpha = 1
+        
+        homeLabel.alpha = 0.4
+        eventLabel.alpha = 0.4
+        taskLabel.alpha = 0.4
+        binLabel.alpha = 0.4
+        profileLabel.alpha = 1
+        
+        
+    }
+    
+    
+    func setRightViewDetails(newRightView: NavigationProtocol){
+        if rightView != nil {
+            rightView.removeFromSuperview()
+        }
         rightView = newRightView
         rightView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(newRightView)
         rightView.frame = CGRect(x: 0, y: 0, width: rightView.frame.width, height: 1004)
-        rightView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        rightView.topAnchor.constraint(equalTo: searchViewTop.bottomAnchor).isActive = true
         rightView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         rightView.leadingAnchor.constraint(equalTo: leftView.trailingAnchor).isActive = true
         rightViewTrailingToSafeArea = rightView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         rightViewTrailingToSafeArea.isActive = true
-        searchView.leadingAnchor.constraint(equalTo: rightView.trailingAnchor).isActive = true
         self.view.bringSubviewToFront(eventButton)
         self.view.bringSubviewToFront(taskButton)
         self.view.bringSubviewToFront(addButton)
-        self.view.bringSubviewToFront(menuButton)
-        self.view.bringSubviewToFront(testButton)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(closeSearch(_:)))
         rightView.addGestureRecognizer(tap)
@@ -326,18 +321,10 @@ class MainViewController: UIViewController {
     }
     
    
-    // Show & Hide left nagivation bar
-    @IBAction func menuButtonClick(_ sender: UIButton) {
-        
-    }
+   
     
     @IBAction func searchBarTextClick(_ sender: Any) {
-        if(rightViewTrailingToSafeArea.constant == 0){
-            openSearchView()
-        }else{
-            closeSearchView()
-        }
-        
+     
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
         })
@@ -345,9 +332,7 @@ class MainViewController: UIViewController {
     }
     
     func openSearchView() {
-        rightViewTrailingToSafeArea.constant = -250
-           searchViewTrailingConstraint.constant = 0
-           sidebarWidthConstraint.constant = 0
+    
            
        UIView.animate(withDuration: 0.2, animations: {
            self.view.layoutIfNeeded()
@@ -355,9 +340,7 @@ class MainViewController: UIViewController {
     }
     
     func closeSearchView() {
-        rightViewTrailingToSafeArea.constant = 0
-        sidebarWidthConstraint.constant = 150
-        searchViewTrailingConstraint.constant = -250
+       
         
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
@@ -365,9 +348,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func closeSearch(_ sender: UIGestureRecognizer) {
-        if searchViewTrailingConstraint.constant == 0 {
-            closeSearchView()
-        }
+    
     }
     
 }

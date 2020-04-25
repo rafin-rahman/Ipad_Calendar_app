@@ -9,43 +9,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeView" customModule="Calendars" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="1216" height="1004"/>
+            <rect key="frame" x="0.0" y="0.0" width="1216" height="924"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdV-9T-wlN" userLabel="Search bar View">
-                    <rect key="frame" x="0.0" y="0.0" width="1216" height="100"/>
-                    <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zkh-fk-iMh">
-                            <rect key="frame" x="117" y="33" width="600" height="25.5"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="600" id="0JL-IH-o8s"/>
-                                <constraint firstAttribute="height" constant="25.5" id="dsU-rS-5Ea"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <action selector="searchTextEdited:" destination="iN0-l3-epB" eventType="editingChanged" id="0fB-Ib-LfB"/>
-                            </connections>
-                        </textField>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search Icon" translatesAutoresizingMaskIntoConstraints="NO" id="GCG-b2-kCi">
-                            <rect key="frame" x="60" y="33" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="F8U-Gt-A1K"/>
-                                <constraint firstAttribute="width" constant="30" id="cVh-Bd-D3e"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="Zkh-fk-iMh" firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="top" constant="33" id="2Dz-Bi-h09"/>
-                        <constraint firstAttribute="height" constant="100" id="LMW-9A-mNZ"/>
-                        <constraint firstItem="GCG-b2-kCi" firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="top" constant="33" id="Lcc-e1-5sc"/>
-                        <constraint firstItem="Zkh-fk-iMh" firstAttribute="leading" secondItem="GCG-b2-kCi" secondAttribute="trailing" constant="27" id="deO-3h-Zim"/>
-                        <constraint firstItem="GCG-b2-kCi" firstAttribute="leading" secondItem="GdV-9T-wlN" secondAttribute="leading" constant="60" id="dnW-Ct-i1b"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1D-5m-dLP" userLabel="Header View">
-                    <rect key="frame" x="0.0" y="100" width="1216" height="110"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1216" height="110"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tueday, March 23rd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-Wt-9cV">
                             <rect key="frame" x="70" y="30" width="287" height="40"/>
@@ -136,21 +104,18 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raf-P0-8Gi" userLabel="Dynamic View" customClass="HomeView" customModule="Calendars" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="210" width="1216" height="794"/>
+                    <rect key="frame" x="0.0" y="110" width="1216" height="814"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <gestureRecognizers/>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="D1D-5m-dLP" firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="bottom" id="5Pa-iY-6WV"/>
-                <constraint firstAttribute="trailing" secondItem="GdV-9T-wlN" secondAttribute="trailing" id="SK1-NF-bdG"/>
                 <constraint firstItem="raf-P0-8Gi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TV9-OX-4ij"/>
                 <constraint firstAttribute="trailing" secondItem="D1D-5m-dLP" secondAttribute="trailing" id="UG6-VG-ebr"/>
+                <constraint firstItem="D1D-5m-dLP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VaR-vH-3oA"/>
                 <constraint firstAttribute="trailing" secondItem="raf-P0-8Gi" secondAttribute="trailing" id="Vi1-6l-lzP"/>
-                <constraint firstAttribute="top" secondItem="GdV-9T-wlN" secondAttribute="top" id="Wm9-jy-mHK"/>
                 <constraint firstItem="raf-P0-8Gi" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="bottom" id="d7T-xc-ok6"/>
-                <constraint firstItem="GdV-9T-wlN" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="dKA-Cj-UmJ"/>
                 <constraint firstItem="D1D-5m-dLP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pJD-xa-adO"/>
                 <constraint firstAttribute="bottom" secondItem="raf-P0-8Gi" secondAttribute="bottom" id="zFN-uW-k3u"/>
             </constraints>
@@ -162,13 +127,9 @@
                 <outlet property="barXCenter" destination="ngL-X6-B8a" id="Gcp-9H-9pD"/>
                 <outlet property="currentDate" destination="8f6-Wt-9cV" id="1W8-FJ-bcY"/>
                 <outlet property="dayButton" destination="OxW-T5-bgu" id="oBN-V7-a9a"/>
-                <outlet property="dynamicView" destination="raf-P0-8Gi" id="CIf-ZL-rOS"/>
                 <outlet property="headerView" destination="D1D-5m-dLP" id="U4w-Gl-8Hq"/>
             </connections>
             <point key="canvasLocation" x="131.8359375" y="153.29428989751096"/>
         </view>
     </objects>
-    <resources>
-        <image name="Search Icon" width="100" height="100"/>
-    </resources>
 </document>

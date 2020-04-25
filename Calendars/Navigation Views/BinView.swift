@@ -8,7 +8,14 @@
 
 import UIKit
 
-class BinView: UIView {
+class BinView: UIView, NavigationProtocol {
+
+    var dynamicView: CalendarProtocol!
+    
+    func onLoad() {
+        
+    }
+    
 
     /*
     // Only override draw() if you perform custom drawing.

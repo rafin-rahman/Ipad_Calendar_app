@@ -8,9 +8,11 @@
 
 import UIKit
 
-class EventView: UIView {
+class EventView: UIView, NavigationProtocol {
 
-    func loadData(){
+    var dynamicView: CalendarProtocol!
+    
+    func onLoad(){
         let eventDAO = EventDAO()
         eventDAO.getAllEvents()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

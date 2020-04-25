@@ -8,7 +8,11 @@
 
 import UIKit
 
-class MonthView: UIView {
+class MonthView: UIView, CalendarProtocol {
+    func loadData() {
+        
+    }
+    
 
     /*
     // Only override draw() if you perform custom drawing.

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class HomeView: UIView {
+class HomeView: UIView, NavigationProtocol {
     
     @IBOutlet weak var currentDate: UILabel!
-    @IBOutlet weak var dynamicView: UIView!
+    var dynamicView: CalendarProtocol!
     @IBOutlet weak var headerView: UIView!
     
     @IBOutlet weak var dayButton: UIButton!
@@ -85,8 +85,10 @@ class HomeView: UIView {
         })
     }
     
-    func setDayView(newView: UIView){
-        dynamicView.removeFromSuperview()
+    func setDayView(newView: CalendarProtocol){
+        if dynamicView != nil {
+            dynamicView.removeFromSuperview()
+        }
         dynamicView = newView
         dynamicView.translatesAutoresizingMaskIntoConstraints = false
         dynamicView.frame = CGRect(x: 0, y: 0, width: dynamicView.frame.width, height: dynamicView.frame.height)
@@ -101,7 +103,7 @@ class HomeView: UIView {
   
     @IBAction func searchTextEdited(_ sender: UITextField) {
         if let vc = self.getOwningViewController() as? MainViewController {
-            vc.openSearchView()
+          
         }
     }
     

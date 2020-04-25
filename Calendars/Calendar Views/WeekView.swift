@@ -10,7 +10,11 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class WeekView: UIView, UIScrollViewDelegate {
+class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
+    
+    func loadData() {
+        
+    }
 
     @IBOutlet weak var topScroll: UIScrollView!
     @IBOutlet weak var rightScroll: UIScrollView!

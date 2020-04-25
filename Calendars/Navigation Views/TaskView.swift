@@ -8,8 +8,16 @@
 
 import UIKit
 
-class TaskView: UIView {
+class TaskView: UIView, NavigationProtocol {
 
+    var dynamicView: CalendarProtocol!
+    
+    func onLoad() {
+        
+    }
+    
+
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

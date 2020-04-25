@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class DayView: UIView, UIScrollViewDelegate {
+class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
     
     @IBOutlet weak var dayZero: UILabel!
     @IBOutlet weak var dayOneButton: UIButton!
@@ -358,6 +358,11 @@ class DayView: UIView, UIScrollViewDelegate {
         
         self.getDailyViewForDate(eventDate:newFormat.date(from: selectedDate)!)
         
+    }
+    
+    func loadData() {
+        getDailyViewForDate(eventDate: activeDate)
+        print("Check ")
     }
     
 }
