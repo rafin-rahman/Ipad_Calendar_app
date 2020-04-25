@@ -99,6 +99,11 @@ class HomeView: UIView {
     }
     
   
+    @IBAction func searchTextEdited(_ sender: UITextField) {
+        if let vc = self.getOwningViewController() as? MainViewController {
+            vc.openSearchView()
+        }
+    }
     
   
     

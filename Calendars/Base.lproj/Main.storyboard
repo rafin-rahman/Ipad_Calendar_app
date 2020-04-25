@@ -129,7 +129,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fk3-OW-Ee6" userLabel="Right">
-                                <rect key="frame" x="150" y="0.0" width="1216" height="1024"/>
+                                <rect key="frame" x="150" y="0.0" width="966" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                             </view>
@@ -179,6 +179,24 @@
                                     <action selector="menuButtonClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="iFt-rt-8Mr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ra-Ua-jPe" userLabel="test menu">
+                                <rect key="frame" x="160" y="78" width="50" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.9009022887" blue="0.32903279050000001" alpha="0.93791263199999997" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BCE-2I-UOe"/>
+                                </constraints>
+                                <state key="normal" title="test"/>
+                                <connections>
+                                    <action selector="searchBarTextClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="UmI-hD-HTk"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHw-YP-q9d" userLabel="Search bar ">
+                                <rect key="frame" x="1116" y="0.0" width="250" height="1024"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="zNw-q8-yzc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -190,14 +208,20 @@
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="vo2-ca-e6L" secondAttribute="trailing" constant="80" id="C2e-17-xkl"/>
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="G9D-Xz-mJN" secondAttribute="trailing" constant="80" id="Cbu-pc-qjO"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="leading" secondItem="Ea8-xp-8xr" secondAttribute="leading" id="IVN-SX-y7N"/>
+                            <constraint firstItem="MHw-YP-q9d" firstAttribute="bottom" secondItem="Mae-o0-IAk" secondAttribute="bottom" id="JQj-rE-xse"/>
                             <constraint firstItem="KNd-Dh-N8z" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" constant="38" id="OkG-d5-abv"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" id="SYE-k5-YZG"/>
+                            <constraint firstItem="MHw-YP-q9d" firstAttribute="top" secondItem="Mae-o0-IAk" secondAttribute="top" id="ZWd-Nw-Jgr"/>
                             <constraint firstItem="KNd-Dh-N8z" firstAttribute="leading" secondItem="ms0-SP-3de" secondAttribute="trailing" constant="20" id="eTG-7N-JS3"/>
                             <constraint firstItem="Ea8-xp-8xr" firstAttribute="bottom" secondItem="oQc-5C-N0a" secondAttribute="bottom" constant="30" id="enl-qX-A0Q"/>
                             <constraint firstItem="vo2-ca-e6L" firstAttribute="top" secondItem="oQc-5C-N0a" secondAttribute="bottom" constant="-30" id="fba-Ic-36b"/>
+                            <constraint firstItem="5Ra-Ua-jPe" firstAttribute="leading" secondItem="ms0-SP-3de" secondAttribute="leading" constant="160" id="gaT-eq-3fb"/>
+                            <constraint firstItem="5Ra-Ua-jPe" firstAttribute="top" secondItem="KNd-Dh-N8z" secondAttribute="bottom" constant="10" id="i9b-kf-pL1"/>
                             <constraint firstAttribute="trailing" secondItem="oQc-5C-N0a" secondAttribute="trailing" constant="50" id="jRD-Xj-IAZ"/>
                             <constraint firstItem="ms0-SP-3de" firstAttribute="bottom" secondItem="Mae-o0-IAk" secondAttribute="bottom" id="kEn-G2-myb"/>
-                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="fk3-OW-Ee6" secondAttribute="trailing" id="qSL-QR-Gtx"/>
+                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="MHw-YP-q9d" secondAttribute="trailing" id="ooH-iq-yC8"/>
+                            <constraint firstItem="Ea8-xp-8xr" firstAttribute="trailing" secondItem="fk3-OW-Ee6" secondAttribute="trailing" constant="250" id="r5s-Og-cGS"/>
+                            <constraint firstItem="MHw-YP-q9d" firstAttribute="leading" secondItem="fk3-OW-Ee6" secondAttribute="trailing" id="yZC-iG-OOl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ea8-xp-8xr"/>
                         <connections>
@@ -220,6 +244,9 @@
                         <outlet property="leftView" destination="ms0-SP-3de" id="tD8-jT-nZ2"/>
                         <outlet property="menuButton" destination="KNd-Dh-N8z" id="tY4-SK-Ruk"/>
                         <outlet property="rightView" destination="fk3-OW-Ee6" id="jiW-mt-anh"/>
+                        <outlet property="rightViewTrailingToSafeArea" destination="r5s-Og-cGS" id="oXh-BX-gag"/>
+                        <outlet property="searchView" destination="MHw-YP-q9d" id="DJ4-xg-wUi"/>
+                        <outlet property="searchViewTrailingConstraint" destination="ooH-iq-yC8" id="Qds-tq-sYF"/>
                         <outlet property="sidebarWidthConstraint" destination="OEd-G0-FU2" id="aps-uU-iKD"/>
                         <outlet property="taskButton" destination="vo2-ca-e6L" id="fWQ-8U-gp1"/>
                         <outlet property="taskButtonBottom" destination="fba-Ic-36b" id="yZ7-Ci-SjP"/>
@@ -228,6 +255,7 @@
                         <outlet property="taskButtonWidth" destination="dj3-eD-I75" id="A67-wu-qPh"/>
                         <outlet property="taskLabel" destination="ck6-Z1-ycy" id="KK3-5M-9T3"/>
                         <outlet property="taskNavButton" destination="cWp-AA-mNo" id="Ok6-Cy-cEZ"/>
+                        <outlet property="testButton" destination="5Ra-Ua-jPe" id="lDa-tz-FMu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FlF-RZ-ITN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

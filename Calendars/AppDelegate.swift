@@ -81,14 +81,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-
-
-
-
 extension String{
     func toDate(dateFormat:String) -> Date! {
         let dateAndTimeFormat = DateFormatter()
         dateAndTimeFormat.dateFormat = dateFormat
         return dateAndTimeFormat.date(from: self)
     }
+}
+
+extension UIResponder {
+  
+  func getOwningViewController() -> UIViewController? {
+    var nextResponser = self
+    while let next = nextResponser.next {
+      nextResponser = next
+      if let viewController = nextResponser as? UIViewController {
+        return viewController
+      }
+    }
+    return nil
+  }
 }

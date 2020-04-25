@@ -13,12 +13,16 @@ class MainViewController: UIViewController {
     
     
     
+    
     // nagivation buttons
     @IBOutlet weak var homeNavButton: UIButton!
     @IBOutlet weak var eventNavButton: UIButton!
     @IBOutlet weak var taskNavButton: UIButton!
     @IBOutlet weak var binNavButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
+    
+    // To delete test button
+    @IBOutlet weak var testButton: UIButton!
     // nagivation labels
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var eventLabel: UILabel!
@@ -43,8 +47,12 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var rightView: UIView!
     @IBOutlet weak var leftView: UIView!
+    @IBOutlet weak var searchView: UIView!
+    
     
     @IBOutlet weak var sidebarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightViewTrailingToSafeArea: NSLayoutConstraint!
+    @IBOutlet weak var searchViewTrailingConstraint: NSLayoutConstraint!
     
     var addButtonStatus = false;
     
@@ -159,6 +167,7 @@ class MainViewController: UIViewController {
         
         if let newRightView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             EventView {
+            newRightView.loadData()
             setRightViewDetails(newRightView: newRightView)
         }
         homeNavButton.alpha = 0.4
@@ -171,6 +180,7 @@ class MainViewController: UIViewController {
         taskLabel.alpha = 0.4
         binLabel.alpha = 0.4
         
+       
     }
     
     
@@ -215,11 +225,17 @@ class MainViewController: UIViewController {
         rightView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         rightView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         rightView.leadingAnchor.constraint(equalTo: leftView.trailingAnchor).isActive = true
-        rightView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        rightViewTrailingToSafeArea = rightView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        rightViewTrailingToSafeArea.isActive = true
+        searchView.leadingAnchor.constraint(equalTo: rightView.trailingAnchor).isActive = true
         self.view.bringSubviewToFront(eventButton)
         self.view.bringSubviewToFront(taskButton)
         self.view.bringSubviewToFront(addButton)
         self.view.bringSubviewToFront(menuButton)
+        self.view.bringSubviewToFront(testButton)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(closeSearch(_:)))
+        rightView.addGestureRecognizer(tap)
     }
     
     @IBAction func addButtonClick(_ sender: Any?) {
@@ -305,9 +321,49 @@ class MainViewController: UIViewController {
     }
     
    
-    
+    // Show & Hide left nagivation bar
     @IBAction func menuButtonClick(_ sender: UIButton) {
         
     }
+    
+    @IBAction func searchBarTextClick(_ sender: Any) {
+        if(rightViewTrailingToSafeArea.constant == 0){
+            openSearchView()
+        }else{
+            closeSearchView()
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+    }
+    
+    func openSearchView() {
+        rightViewTrailingToSafeArea.constant = -250
+           searchViewTrailingConstraint.constant = 0
+           sidebarWidthConstraint.constant = 0
+           
+       UIView.animate(withDuration: 0.2, animations: {
+           self.view.layoutIfNeeded()
+       })
+    }
+    
+    func closeSearchView() {
+        rightViewTrailingToSafeArea.constant = 0
+        sidebarWidthConstraint.constant = 150
+        searchViewTrailingConstraint.constant = -250
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc func closeSearch(_ sender: UIGestureRecognizer) {
+        if searchViewTrailingConstraint.constant == 0 {
+            closeSearchView()
+        }
+    }
+    
 }
 
