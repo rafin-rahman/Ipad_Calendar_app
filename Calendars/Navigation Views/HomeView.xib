@@ -13,19 +13,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1D-5m-dLP" userLabel="Header View">
-                    <rect key="frame" x="0.0" y="0.0" width="1216" height="110"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1216" height="85"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tueday, March 23rd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-Wt-9cV">
-                            <rect key="frame" x="70" y="30" width="287" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="287" id="gT8-1i-zql"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tueday, April 23rd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-Wt-9cV">
+                            <rect key="frame" x="70" y="30" width="287" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="34"/>
                             <color key="textColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxW-T5-bgu">
-                            <rect key="frame" x="833" y="66" width="35" height="42"/>
+                            <rect key="frame" x="872" y="40" width="35" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Day">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -35,7 +33,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUj-Pr-sQw">
-                            <rect key="frame" x="900" y="66" width="50" height="42"/>
+                            <rect key="frame" x="939" y="40" width="50" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Week">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -45,7 +43,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-rI-n4P">
-                            <rect key="frame" x="1058" y="66" width="39" height="42"/>
+                            <rect key="frame" x="1097" y="40" width="39" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Year">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -55,7 +53,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-SE-N57">
-                            <rect key="frame" x="978" y="66" width="57" height="42"/>
+                            <rect key="frame" x="1017" y="40" width="57" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Month">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,7 +70,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYA-jp-RAe">
-                            <rect key="frame" x="833" y="103" width="35" height="7"/>
+                            <rect key="frame" x="872" y="78" width="35" height="7"/>
                             <color key="backgroundColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="7" id="qRt-Wy-7xU"/>
@@ -81,18 +79,15 @@
                     </subviews>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.94901960784313721" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="8f6-Wt-9cV" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="30" id="3qA-1j-yeg"/>
                         <constraint firstAttribute="bottom" secondItem="hR8-rI-n4P" secondAttribute="bottom" constant="2" id="EAS-GE-xex"/>
-                        <constraint firstAttribute="trailing" secondItem="8f6-Wt-9cV" secondAttribute="trailing" constant="859" id="FDw-ct-kZM"/>
-                        <constraint firstAttribute="trailing" secondItem="hR8-rI-n4P" secondAttribute="trailing" constant="119" id="LCK-bu-oiA"/>
-                        <constraint firstItem="ZUj-Pr-sQw" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="RXa-yu-Ruv"/>
+                        <constraint firstAttribute="trailing" secondItem="hR8-rI-n4P" secondAttribute="trailing" constant="80" id="LCK-bu-oiA"/>
+                        <constraint firstItem="ZUj-Pr-sQw" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="RXa-yu-Ruv"/>
                         <constraint firstAttribute="bottom" secondItem="ZUj-Pr-sQw" secondAttribute="bottom" constant="2" id="Ruj-t6-dFk"/>
-                        <constraint firstItem="OxW-T5-bgu" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="TXl-8S-1RV"/>
+                        <constraint firstItem="OxW-T5-bgu" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="TXl-8S-1RV"/>
                         <constraint firstItem="ZUj-Pr-sQw" firstAttribute="leading" secondItem="OxW-T5-bgu" secondAttribute="trailing" constant="32" id="TlC-Z4-BFM"/>
-                        <constraint firstAttribute="bottom" secondItem="8f6-Wt-9cV" secondAttribute="bottom" constant="40" id="Wsw-7U-DXy"/>
-                        <constraint firstItem="hR8-rI-n4P" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="YKB-Kr-MfS"/>
-                        <constraint firstItem="p0L-SE-N57" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="66" id="ZAV-P4-x75"/>
-                        <constraint firstAttribute="height" constant="110" id="c66-hG-b0A"/>
+                        <constraint firstItem="hR8-rI-n4P" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="YKB-Kr-MfS"/>
+                        <constraint firstItem="p0L-SE-N57" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="ZAV-P4-x75"/>
+                        <constraint firstAttribute="height" constant="85" id="c66-hG-b0A"/>
                         <constraint firstItem="zYA-jp-RAe" firstAttribute="width" secondItem="OxW-T5-bgu" secondAttribute="width" id="cn1-fm-pFl"/>
                         <constraint firstItem="p0L-SE-N57" firstAttribute="leading" secondItem="ZUj-Pr-sQw" secondAttribute="trailing" constant="28" id="ggz-6L-dd7"/>
                         <constraint firstItem="zYA-jp-RAe" firstAttribute="centerX" secondItem="OxW-T5-bgu" secondAttribute="centerX" id="ngL-X6-B8a"/>
@@ -100,11 +95,10 @@
                         <constraint firstItem="hR8-rI-n4P" firstAttribute="leading" secondItem="p0L-SE-N57" secondAttribute="trailing" constant="23" id="s3p-p6-8d9"/>
                         <constraint firstAttribute="bottom" secondItem="zYA-jp-RAe" secondAttribute="bottom" id="sLG-q0-L5W"/>
                         <constraint firstAttribute="bottom" secondItem="OxW-T5-bgu" secondAttribute="bottom" constant="2" id="yrj-9u-5uv"/>
-                        <constraint firstItem="8f6-Wt-9cV" firstAttribute="leading" secondItem="D1D-5m-dLP" secondAttribute="leading" constant="70" id="zZW-yj-Jz3"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raf-P0-8Gi" userLabel="Dynamic View" customClass="HomeView" customModule="Calendars" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="110" width="1216" height="814"/>
+                    <rect key="frame" x="0.0" y="85" width="1216" height="839"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <gestureRecognizers/>
                 </view>

@@ -35,13 +35,14 @@
 		D189C07824264A1F00FF7723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D189C07724264A1F00FF7723 /* Assets.xcassets */; };
 		D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */; };
 		D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Event.swift */; };
+		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
 		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
 		D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228E5245452330008DD92 /* SearchPanelViewController.swift */; };
-		D1F228E8245458990008DD92 /* profileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F228E7245458990008DD92 /* profileView.xib */; };
-		D1F228EE245459090008DD92 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228ED245459090008DD92 /* profileView.swift */; };
+		D1F228E8245458990008DD92 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F228E7245458990008DD92 /* ProfileView.xib */; };
+		D1F228EE245459090008DD92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228ED245459090008DD92 /* ProfileView.swift */; };
 		D1F228F124545ADF0008DD92 /* NavigationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228F024545ADF0008DD92 /* NavigationProtocol.swift */; };
 		D1F228F324545CEE0008DD92 /* CalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228F224545CEE0008DD92 /* CalendarProtocol.swift */; };
 		D1F228F5245464450008DD92 /* ProfileDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228F4245464450008DD92 /* ProfileDAO.swift */; };
@@ -80,13 +81,14 @@
 		D189C07A24264A1F00FF7723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D189C07C24264A1F00FF7723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1A0CFF3244B9B0D008C4D7C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D1F228E5245452330008DD92 /* SearchPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelViewController.swift; sourceTree = "<group>"; };
-		D1F228E7245458990008DD92 /* profileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileView.xib; sourceTree = "<group>"; };
-		D1F228ED245459090008DD92 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
+		D1F228E7245458990008DD92 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		D1F228ED245459090008DD92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D1F228F024545ADF0008DD92 /* NavigationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocol.swift; sourceTree = "<group>"; };
 		D1F228F224545CEE0008DD92 /* CalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProtocol.swift; sourceTree = "<group>"; };
 		D1F228F4245464450008DD92 /* ProfileDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDAO.swift; sourceTree = "<group>"; };
@@ -147,8 +149,8 @@
 				D1784747244970BE00D3472F /* TaskView.xib */,
 				D178474A2449713000D3472F /* BinView.swift */,
 				D178474C2449713900D3472F /* BinView.xib */,
-				D1F228ED245459090008DD92 /* profileView.swift */,
-				D1F228E7245458990008DD92 /* profileView.xib */,
+				D1F228ED245459090008DD92 /* ProfileView.swift */,
+				D1F228E7245458990008DD92 /* ProfileView.xib */,
 			);
 			path = "Navigation Views";
 			sourceTree = "<group>";
@@ -159,6 +161,7 @@
 				D1870E4F244E424600DC56B8 /* TextfieldAnimation.swift */,
 				D10DAFE82451CD8200FC253E /* EventCollision.swift */,
 				D10DAFEC2451F45D00FC253E /* HexToUIColor.swift */,
+				D1AC723624548364001FAE87 /* ButtonDesign.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -297,7 +300,7 @@
 				D179B6522448BFF5002C00B9 /* YearView.xib in Resources */,
 				D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */,
 				D14AED832443AC990012469F /* DayView.xib in Resources */,
-				D1F228E8245458990008DD92 /* profileView.xib in Resources */,
+				D1F228E8245458990008DD92 /* ProfileView.xib in Resources */,
 				D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */,
 				D178474D2449713900D3472F /* BinView.xib in Resources */,
 				D189C07824264A1F00FF7723 /* Assets.xcassets in Resources */,
@@ -373,7 +376,7 @@
 				D10DAFE92451CD8200FC253E /* EventCollision.swift in Sources */,
 				D1B79167244888C900B4A350 /* EventView.swift in Sources */,
 				D1870E50244E424600DC56B8 /* TextfieldAnimation.swift in Sources */,
-				D1F228EE245459090008DD92 /* profileView.swift in Sources */,
+				D1F228EE245459090008DD92 /* ProfileView.swift in Sources */,
 				D1F228F124545ADF0008DD92 /* NavigationProtocol.swift in Sources */,
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
@@ -381,6 +384,7 @@
 				D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */,
 				D10DAFE72451C4DE00FC253E /* EventDAO.swift in Sources */,
 				D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */,
+				D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

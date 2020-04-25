@@ -78,8 +78,12 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25){
             self.eventProfilePicker.delegate = self
             self.eventProfilePicker.dataSource = self
-            self.selectedProfile = self.profileNames[0]
-            self.selectedColor = self.profileColours[0]
+            
+            if(self.profileNames.count > 0)
+            {
+                self.selectedProfile = self.profileNames[0]
+                self.selectedColor = self.profileColours[0]
+            }
             
             self.taskProfilePicker.delegate = self
             self.taskProfilePicker.dataSource = self
@@ -101,13 +105,14 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         allDaySwitch.backgroundColor = .darkGray
         
         
-        reminderButton.layer.cornerRadius = 7
-        recurringButton.layer.cornerRadius = 7
-        eventSaveButton.layer.cornerRadius = 7
-        eventCancelButton.layer.cornerRadius = 7
+        ButtonDesign.roundedCorner(button: reminderButton)
+        ButtonDesign.roundedCorner(button: recurringButton)
+        ButtonDesign.roundedCorner(button: eventSaveButton)
+        ButtonDesign.roundedCorner(button: eventCancelButton)
         
-        taskSaveButton.layer.cornerRadius = 7
-        taskCancelButton.layer.cornerRadius = 7
+        ButtonDesign.roundedCorner(button: taskReminderButton)
+        ButtonDesign.roundedCorner(button: taskSaveButton)
+        ButtonDesign.roundedCorner(button: taskCancelButton)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

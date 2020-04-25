@@ -136,6 +136,7 @@ class MainViewController: UIViewController {
         
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             HomeView {
+            addButton.isHidden = false
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
@@ -147,6 +148,7 @@ class MainViewController: UIViewController {
         
         if let newRightView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             EventView {
+            addButton.isHidden = false
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
@@ -157,6 +159,7 @@ class MainViewController: UIViewController {
     @IBAction func onTaskClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "TaskView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             TaskView {
+            addButton.isHidden = false
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: taskNavButton, selectedLabel: taskLabel)
@@ -165,12 +168,19 @@ class MainViewController: UIViewController {
     @IBAction func onBinClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "BinView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             BinView {
+            addButton.isHidden = false
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: binNavButton, selectedLabel: binLabel)
     }
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
+        if let newRightView = UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+            ProfileView {
+            addButton.isHidden = true
+            newRightView.onLoad()
+            setRightViewDetails(newRightView: newRightView)
+        }
         selectedButtonEffect(selectedButton: profileNavButton, selectedLabel: profileLabel)
     }
     

@@ -74,7 +74,7 @@ class HomeView: UIView, NavigationProtocol {
     }
     
     func setBarStyle(sender: UIButton) {
-        barHeight.constant = 5
+        barHeight.constant = 3
         barXCenter.isActive = false
         barXCenter = barView.centerXAnchor.constraint(equalTo: sender.centerXAnchor)
         barXCenter.isActive = true
