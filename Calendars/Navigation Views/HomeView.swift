@@ -49,7 +49,6 @@ class HomeView: UIView, NavigationProtocol {
         if let weekView = UINib(nibName: "WeekView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             WeekView{
             setDayView(newView : weekView)
-            weekView.topScroll.delegate = weekView
             weekView.rightScroll.delegate = weekView
             weekView.leftScroll.delegate = weekView
         }

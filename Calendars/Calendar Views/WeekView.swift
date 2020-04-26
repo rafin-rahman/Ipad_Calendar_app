@@ -15,8 +15,6 @@ class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
     func loadData() {
         
     }
-
-    @IBOutlet weak var topScroll: UIScrollView!
     @IBOutlet weak var rightScroll: UIScrollView!
     @IBOutlet weak var leftScroll: UIScrollView!
     
