@@ -34,6 +34,7 @@
 		D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D189C07424264A1E00FF7723 /* Calendars.xcdatamodeld */; };
 		D189C07824264A1F00FF7723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D189C07724264A1F00FF7723 /* Assets.xcassets */; };
 		D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */; };
+		D192628D2454E78300C11E17 /* SelectColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192628C2454E78300C11E17 /* SelectColour.swift */; };
 		D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Event.swift */; };
 		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
@@ -80,6 +81,7 @@
 		D189C07724264A1F00FF7723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D189C07A24264A1F00FF7723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D189C07C24264A1F00FF7723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D192628C2454E78300C11E17 /* SelectColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColour.swift; sourceTree = "<group>"; };
 		D1A0CFF3244B9B0D008C4D7C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				D10DAFE82451CD8200FC253E /* EventCollision.swift */,
 				D10DAFEC2451F45D00FC253E /* HexToUIColor.swift */,
 				D1AC723624548364001FAE87 /* ButtonDesign.swift */,
+				D192628C2454E78300C11E17 /* SelectColour.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				D1F228EE245459090008DD92 /* ProfileView.swift in Sources */,
 				D1F228F124545ADF0008DD92 /* NavigationProtocol.swift in Sources */,
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
+				D192628D2454E78300C11E17 /* SelectColour.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
 				D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */,
 				D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */,

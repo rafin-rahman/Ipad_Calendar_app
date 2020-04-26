@@ -341,10 +341,10 @@
                         <constraints>
                             <constraint firstItem="ygm-hT-Fcy" firstAttribute="leading" secondItem="6eJ-YC-Upk" secondAttribute="leading" id="8s7-Ha-cpG"/>
                             <constraint firstItem="6eJ-YC-Upk" firstAttribute="trailing" secondItem="8rq-EY-fd3" secondAttribute="trailing" id="9VM-Hf-mzG"/>
-                            <constraint firstItem="8rq-EY-fd3" firstAttribute="leading" secondItem="ygm-hT-Fcy" secondAttribute="trailing" id="Cgw-sb-W91"/>
                             <constraint firstAttribute="bottom" secondItem="8rq-EY-fd3" secondAttribute="bottom" id="JGp-kK-OYz"/>
                             <constraint firstItem="ygm-hT-Fcy" firstAttribute="height" secondItem="kJe-gm-ENq" secondAttribute="height" id="Qd8-au-mIL"/>
                             <constraint firstItem="ygm-hT-Fcy" firstAttribute="top" secondItem="kJe-gm-ENq" secondAttribute="top" id="gyG-bP-EdJ"/>
+                            <constraint firstItem="8rq-EY-fd3" firstAttribute="leading" secondItem="ygm-hT-Fcy" secondAttribute="trailing" id="hdy-XB-uwL"/>
                             <constraint firstItem="8rq-EY-fd3" firstAttribute="top" secondItem="kJe-gm-ENq" secondAttribute="top" id="p3M-pc-LyJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6eJ-YC-Upk"/>
@@ -352,6 +352,7 @@
                     <navigationItem key="navigationItem" id="kxi-rJ-abX"/>
                     <connections>
                         <outlet property="backgroundView" destination="ygm-hT-Fcy" id="hr3-9c-MBL"/>
+                        <outlet property="searchBarTrailing" destination="9VM-Hf-mzG" id="6uz-Yq-X4y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4k0-OC-dTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

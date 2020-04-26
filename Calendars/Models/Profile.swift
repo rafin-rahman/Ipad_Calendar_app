@@ -9,6 +9,7 @@
 import Foundation
 
 class Profile{
+    var id = ""
     var profileName = ""
     var profileColor = ""
 }

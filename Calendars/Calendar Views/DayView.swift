@@ -178,7 +178,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
             eventName.font = UIFont(name: "System", size: 17)
             
-            self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: allDayEvent.profileColour)
+        self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: allDayEvent.profileColour, alpha: 1.0)
             self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
             eventName.translatesAutoresizingMaskIntoConstraints = false
             eventPriority.translatesAutoresizingMaskIntoConstraints = false
@@ -225,7 +225,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
         message.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
         message.font = UIFont(name: "System", size: 17)
         
-        self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#EFF2F5")
+        self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#EFF2F5", alpha: 1.0)
         self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
         message.translatesAutoresizingMaskIntoConstraints = false
         
@@ -251,7 +251,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
             eventName.font = UIFont(name: "System", size: 17)
                         
-            event.backgroundColor = HexToUIColor.hexStringToUIColor(hex: todaysEvent.profileColour)
+            event.backgroundColor = HexToUIColor.hexStringToUIColor(hex: todaysEvent.profileColour, alpha: 1.0)
             event.translatesAutoresizingMaskIntoConstraints = false
             eventName.translatesAutoresizingMaskIntoConstraints = false
             eventPriority.translatesAutoresizingMaskIntoConstraints = false
