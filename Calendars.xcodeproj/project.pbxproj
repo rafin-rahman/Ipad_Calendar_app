@@ -39,8 +39,10 @@
 		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
+		D1B85DA52456FD410042CBB6 /* DeleteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B85DA42456FD410042CBB6 /* DeleteView.xib */; };
 		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
+		D1EEB05E24560A4B00BCF187 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EEB05D24560A4B00BCF187 /* DeleteView.swift */; };
 		D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228E5245452330008DD92 /* SearchPanelViewController.swift */; };
 		D1F228E8245458990008DD92 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F228E7245458990008DD92 /* ProfileView.xib */; };
 		D1F228EE245459090008DD92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228ED245459090008DD92 /* ProfileView.swift */; };
@@ -86,8 +88,10 @@
 		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
+		D1B85DA42456FD410042CBB6 /* DeleteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteView.xib; sourceTree = "<group>"; };
 		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D1EEB05D24560A4B00BCF187 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
 		D1F228E5245452330008DD92 /* SearchPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelViewController.swift; sourceTree = "<group>"; };
 		D1F228E7245458990008DD92 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		D1F228ED245459090008DD92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 		D189C06A24264A1E00FF7723 /* Calendars */ = {
 			isa = PBXGroup;
 			children = (
+				D1EEB054245609A900BCF187 /* Delete pop up */,
 				D1F228EF24545AC20008DD92 /* Protocols */,
 				D10DAFE52451C48300FC253E /* DAO */,
 				D1870E4E244E422400DC56B8 /* Utility */,
@@ -218,6 +223,15 @@
 				D10DAFEA2451E94F00FC253E /* Profile.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D1EEB054245609A900BCF187 /* Delete pop up */ = {
+			isa = PBXGroup;
+			children = (
+				D1EEB05D24560A4B00BCF187 /* DeleteView.swift */,
+				D1B85DA42456FD410042CBB6 /* DeleteView.xib */,
+			);
+			path = "Delete pop up";
 			sourceTree = "<group>";
 		};
 		D1F228EF24545AC20008DD92 /* Protocols */ = {
@@ -302,6 +316,7 @@
 				D1784748244970BE00D3472F /* TaskView.xib in Resources */,
 				D179B6522448BFF5002C00B9 /* YearView.xib in Resources */,
 				D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */,
+				D1B85DA52456FD410042CBB6 /* DeleteView.xib in Resources */,
 				D14AED832443AC990012469F /* DayView.xib in Resources */,
 				D1F228E8245458990008DD92 /* ProfileView.xib in Resources */,
 				D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */,
@@ -381,6 +396,7 @@
 				D1870E50244E424600DC56B8 /* TextfieldAnimation.swift in Sources */,
 				D1F228EE245459090008DD92 /* ProfileView.swift in Sources */,
 				D1F228F124545ADF0008DD92 /* NavigationProtocol.swift in Sources */,
+				D1EEB05E24560A4B00BCF187 /* DeleteView.swift in Sources */,
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
 				D192628D2454E78300C11E17 /* SelectColour.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
