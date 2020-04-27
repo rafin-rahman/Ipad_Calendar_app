@@ -12,6 +12,18 @@ import FirebaseFirestore
 
 class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
     
+    @IBOutlet weak var dayZero: UILabel!
+    @IBOutlet weak var dayOneButton: UIButton!
+    @IBOutlet weak var dayTwoButton: UIButton!
+    @IBOutlet weak var dayThreeButton: UIButton!
+    @IBOutlet weak var dayFourButton: UIButton!
+    @IBOutlet weak var dayFiveButton: UIButton!
+    @IBOutlet weak var daySixButton: UIButton!
+    @IBOutlet weak var daySevenButton: UIButton!
+    
+    
+    
+    
     func loadData() {
         
     }
