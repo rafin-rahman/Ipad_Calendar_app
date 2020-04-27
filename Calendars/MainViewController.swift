@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var taskNavButton: UIButton!
     @IBOutlet weak var binNavButton: UIButton!
     @IBOutlet weak var profileNavButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     
     
     // nagivation labels
@@ -129,9 +130,6 @@ class MainViewController: UIViewController {
         selectedLabel.alpha = 1
     }
     
-    
-    
-    
     @IBAction func onHomeClick(_ sender: Any?) {
         
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
@@ -141,6 +139,19 @@ class MainViewController: UIViewController {
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: homeNavButton, selectedLabel: homeLabel)
+        
+        self.homeNavButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                         self.homeNavButton.transform = CGAffineTransform.identity
+        },
+                       completion: nil
+        )
     }
     
     
@@ -153,8 +164,20 @@ class MainViewController: UIViewController {
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: eventNavButton, selectedLabel: eventLabel)
+        
+        sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                         sender.transform = CGAffineTransform.identity
+        },
+                       completion: nil
+        )
     }
-    
     
     @IBAction func onTaskClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "TaskView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
@@ -163,6 +186,19 @@ class MainViewController: UIViewController {
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: taskNavButton, selectedLabel: taskLabel)
+        
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                         sender.transform = CGAffineTransform.identity
+        },
+                       completion: nil
+        )
     }
     
     @IBAction func onBinClick(_ sender: UIButton) {
@@ -172,6 +208,19 @@ class MainViewController: UIViewController {
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: binNavButton, selectedLabel: binLabel)
+        
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                         sender.transform = CGAffineTransform.identity
+        },
+                       completion: nil
+        )
     }
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
@@ -182,8 +231,20 @@ class MainViewController: UIViewController {
             setRightViewDetails(newRightView: newRightView)
         }
         selectedButtonEffect(selectedButton: profileNavButton, selectedLabel: profileLabel)
+        
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                         sender.transform = CGAffineTransform.identity
+        },
+                       completion: nil
+        )
     }
-    
     
     func setRightViewDetails(newRightView: NavigationProtocol){
         if rightView != nil {
@@ -215,6 +276,8 @@ class MainViewController: UIViewController {
         addButton.layer.shadowOffset = CGSize(width: 3.0, height: 5.0)
         addButton.layer.shadowOpacity = 1
         addButton.layer.shadowRadius = 3
+        
+        
     }
     
     func addButtonAnimation(){
@@ -278,6 +341,22 @@ class MainViewController: UIViewController {
             addButtonClosingAnimation()
         }
     }
-       
+    
+    
+    @IBAction func menuClick(_ sender: UIButton) {
+        if sidebarWidthConstraint.constant == 0 {
+            sidebarWidthConstraint.constant = 150
+            menuButton.alpha = 0.1
+        } else {
+            sidebarWidthConstraint.constant = 0
+            menuButton.alpha = 1
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            
+            self.view.layoutIfNeeded()
+        })
+    }
+    
 }
 

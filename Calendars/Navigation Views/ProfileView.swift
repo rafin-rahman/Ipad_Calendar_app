@@ -1,7 +1,7 @@
 import UIKit
 
 class ProfileView: UIView, NavigationProtocol {
-
+    
     var dynamicView: CalendarProtocol!
     @IBOutlet weak var addProfileView: UIView!
     @IBOutlet weak var profileStackView: UIStackView!
@@ -34,7 +34,7 @@ class ProfileView: UIView, NavigationProtocol {
         addProfileView.backgroundColor = SelectColor.getColor(color: "Red")
         ButtonDesign.roundedCorner(button: addProfileButton)
         highlightSelectedBorder(selectedButton: redButton)
-    
+        
         let profileDAO = ProfileDAO()
         profileDAO.getProfileList()
         
@@ -49,7 +49,7 @@ class ProfileView: UIView, NavigationProtocol {
             addProfileHeight.constant = 0
         }
         else {
-          addProfileHeight.constant = 165
+            addProfileHeight.constant = 165
         }
         
         UIView.animate(withDuration: 0.2, animations: {
@@ -80,7 +80,7 @@ class ProfileView: UIView, NavigationProtocol {
         default:
             print("Tag had some issues")
         }
-         addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
+        addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
     }
     
     
@@ -139,9 +139,9 @@ class ProfileView: UIView, NavigationProtocol {
         let sortedProfileList = profileList.sorted(by: { $0.profileName < $1.profileName })
         firstStackView.removeFromSuperview()
         for profileDetail in sortedProfileList{
-
+            
             let profileView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
-              
+            
             profileStackView.addArrangedSubview(profileView)
             
             let profileNameLabel = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
@@ -157,12 +157,12 @@ class ProfileView: UIView, NavigationProtocol {
             let binIcon = UIImage(named: "Bin button") as UIImage?
             let binIconSelected = UIImage(named: "Bin icon selected") as UIImage?
             binButton.translatesAutoresizingMaskIntoConstraints = false
-//            binButton.setTitle("Delete", for: .normal)
+            //            binButton.setTitle("Delete", for: .normal)
             
             binButton.setImage(binIconSelected, for: .highlighted)
             binButton.setImage(binIcon, for: .normal)
             
-            	
+            
             binButton.addTarget(self, action: #selector(deleteButtonClick), for: .touchUpInside)
             
             profileView.addSubview(profileNameLabel)
@@ -175,7 +175,7 @@ class ProfileView: UIView, NavigationProtocol {
             binButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -30).isActive = true
             binButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
             binButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-                        
+            
             profileView.translatesAutoresizingMaskIntoConstraints = false
             profileView.backgroundColor = SelectColor.getColor(color: profileDetail.profileColor)
             profileView.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -185,24 +185,24 @@ class ProfileView: UIView, NavigationProtocol {
     
     
     @objc func deleteButtonClick(_ sender: UIButton) {
-           deleteDynamicView.isHidden = false
+        deleteDynamicView.isHidden = false
         sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-
+        
         UIView.animate(withDuration: 2.0,
-                                   delay: 0,
-                                   usingSpringWithDamping: CGFloat(0.20),
-                                   initialSpringVelocity: CGFloat(6.0),
-                                   options: UIView.AnimationOptions.allowUserInteraction,
-                                   animations: {
-                                        sender.transform = CGAffineTransform.identity
-                                    },
-                                   completion: nil
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                         sender.transform = CGAffineTransform.identity
+        },
+                       completion: nil
         )
         if let deleteView = UINib(nibName: "DeleteView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             DeleteView {
-                setDeleteView(newView: deleteView)
+            setDeleteView(newView: deleteView)
         }
-       
+        
     }
     
     func setDeleteView(newView: UIView){
@@ -218,10 +218,10 @@ class ProfileView: UIView, NavigationProtocol {
         deleteDynamicView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
         deleteDynamicView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         
-//        deleteDynamicView.topAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//        deleteDynamicView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-//        deleteDynamicView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-//        deleteDynamicView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        //        deleteDynamicView.topAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        //        deleteDynamicView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        //        deleteDynamicView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        //        deleteDynamicView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
     }
     

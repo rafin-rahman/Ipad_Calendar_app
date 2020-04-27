@@ -188,13 +188,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dfp-1M-7xS" userLabel="Search bar top">
                                 <rect key="frame" x="150" y="0.0" width="1216" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-Wo-P45">
-                                        <rect key="frame" x="23" y="25" width="35" height="35"/>
+                                    <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-Wo-P45">
+                                        <rect key="frame" x="23" y="30" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="R3k-Lu-9YV"/>
                                             <constraint firstAttribute="width" constant="35" id="ejm-yd-M8t"/>
                                         </constraints>
                                         <state key="normal" image="Menu"/>
+                                        <connections>
+                                            <action selector="menuClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="11Q-Yk-8VM"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IdB-7i-fhA">
                                         <rect key="frame" x="118" y="25" width="983" height="30"/>
@@ -231,7 +234,7 @@
                                     <constraint firstItem="IdB-7i-fhA" firstAttribute="leading" secondItem="b7s-Wo-P45" secondAttribute="trailing" constant="60" id="9Yk-aZ-GxA"/>
                                     <constraint firstItem="hsy-i5-pC7" firstAttribute="top" secondItem="Dfp-1M-7xS" secondAttribute="top" constant="30" id="Fnk-PA-Ewm"/>
                                     <constraint firstItem="hsy-i5-pC7" firstAttribute="leading" secondItem="IdB-7i-fhA" secondAttribute="trailing" constant="35" id="V5G-a9-lfY"/>
-                                    <constraint firstItem="b7s-Wo-P45" firstAttribute="top" secondItem="Dfp-1M-7xS" secondAttribute="top" constant="25" id="Wbp-Mf-TDU"/>
+                                    <constraint firstItem="b7s-Wo-P45" firstAttribute="top" secondItem="Dfp-1M-7xS" secondAttribute="top" constant="30" id="Wbp-Mf-TDU"/>
                                     <constraint firstAttribute="height" constant="80" id="hAV-hk-BBY"/>
                                     <constraint firstItem="IdB-7i-fhA" firstAttribute="centerY" secondItem="Dfp-1M-7xS" secondAttribute="centerY" id="jr2-QM-kpe"/>
                                     <constraint firstItem="Vh8-Ai-ep4" firstAttribute="top" secondItem="IdB-7i-fhA" secondAttribute="bottom" constant="8" id="oZ0-LI-Fk8"/>
@@ -284,6 +287,7 @@
                         <outlet property="homeLabel" destination="jdf-iV-KRb" id="BPj-Hh-5qw"/>
                         <outlet property="homeNavButton" destination="lNs-7h-rFl" id="Fsi-za-ADN"/>
                         <outlet property="leftView" destination="ms0-SP-3de" id="tD8-jT-nZ2"/>
+                        <outlet property="menuButton" destination="b7s-Wo-P45" id="PLx-ad-px9"/>
                         <outlet property="profileLabel" destination="LUk-pI-dpg" id="G9f-Lm-NjG"/>
                         <outlet property="profileNavButton" destination="I1m-Xp-gKU" id="6GD-LP-StC"/>
                         <outlet property="rightViewTrailingToSafeArea" destination="r5s-Og-cGS" id="oXh-BX-gag"/>
