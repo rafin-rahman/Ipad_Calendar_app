@@ -41,4 +41,16 @@ class ProfileDAO{
         let newProfile = profileReference.document()
         newProfile.setData(profileDic);
     }
+    
+    func deleteProfile(profileId:String){
+        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
+        
+        profileReference.document(profileId).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
 }

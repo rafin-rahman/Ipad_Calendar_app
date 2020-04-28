@@ -6,11 +6,9 @@ class ProfileView: UIView, NavigationProtocol {
     @IBOutlet weak var addProfileView: UIView!
     @IBOutlet weak var profileStackView: UIStackView!
     @IBOutlet weak var firstStackView: UIView!
-    @IBOutlet weak var deleteDynamicView: UIView!
     
-    
-    
-    @IBOutlet weak var addProfileButton: UIButton!
+    @IBOutlet weak var addEditProfileButton: UIButton!
+    @IBOutlet weak var showAddViewButton: UIButton!
     
     @IBOutlet weak var redButton: UIButton!
     @IBOutlet weak var orangeButton: UIButton!
@@ -20,20 +18,24 @@ class ProfileView: UIView, NavigationProtocol {
     @IBOutlet weak var blueButton: UIButton!
     
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var titleText: UILabel!
     
     @IBOutlet weak var profileNameText: UITextField!
     @IBOutlet weak var addProfileHeight: NSLayoutConstraint!
     
     var listOfProfile : Array<Profile> = Array()
     var selectedProfileColor : String = ""
+    var closeFormStatus = false
+    var addStatus = true
+    var editStatus = false
     
     func onLoad() {
-        deleteDynamicView.isHidden = true
         addProfileHeight.constant = 0
         errorLabel.isHidden = true
         addProfileView.backgroundColor = SelectColor.getColor(color: "Red")
-        ButtonDesign.roundedCorner(button: addProfileButton)
+        ButtonDesign.roundedCorner(button: addEditProfileButton)
         highlightSelectedBorder(selectedButton: redButton)
+        selectedProfileColor = "Red"
         
         let profileDAO = ProfileDAO()
         profileDAO.getProfileList()
@@ -44,8 +46,10 @@ class ProfileView: UIView, NavigationProtocol {
         }
     }
     
-    @IBAction func showAddProfileClick(_ sender: UIButton) {
+    func displayForm(){
         if addProfileHeight.constant == 165 {
+            addStatus = true
+            editStatus = false
             addProfileHeight.constant = 0
         }
         else {
@@ -55,6 +59,12 @@ class ProfileView: UIView, NavigationProtocol {
         UIView.animate(withDuration: 0.2, animations: {
             self.layoutIfNeeded()
         })
+        
+        addProfileAnimation()
+    }
+    
+    @IBAction func showAddProfileClick(_ sender: UIButton) {
+        displayForm()
     }
     
     @IBAction func colourSelected(_ sender: UIButton) {
@@ -82,7 +92,6 @@ class ProfileView: UIView, NavigationProtocol {
         }
         addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
     }
-    
     
     @IBAction func addProfileClick(_ sender: UIButton) {
         errorLabel.isHidden = true
@@ -114,12 +123,45 @@ class ProfileView: UIView, NavigationProtocol {
         
         ProfileDAO().addProfile(profileDic: profileDic)
         clearAddForm()
+        onLoad()
+        
+    }
+    
+    func addAnimation(){
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+            self.showAddViewButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+        }
+        closeFormStatus = true
+    }
+    
+    func closeAnimation(){
+        UIView.animate(withDuration: 0.5, animations:  {
+            self.showAddViewButton.transform = .identity
+            self.layoutIfNeeded()
+        }, completion: { _ in
+            self.clearAddForm()
+        })
+        closeFormStatus = false
+    }
+    
+    func addProfileAnimation (){
+        if(closeFormStatus == false){
+            addAnimation()
+        }
+        else {
+            closeAnimation()
+        }
     }
     
     func clearAddForm(){
-        profileNameText.text = ""
-        selectedProfileColor = "Red"
-        addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
+        if !editStatus{
+            profileNameText.text = ""
+            selectedProfileColor = "Red"
+            titleText.text = "ADD NEW PROFILE"
+            addEditProfileButton.titleLabel?.text = "Add"
+            addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
+        }
     }
     
     func highlightSelectedBorder(selectedButton:UIButton){
@@ -137,7 +179,11 @@ class ProfileView: UIView, NavigationProtocol {
     
     func displayDetailsOfProfile(profileList:Array<Profile>){
         let sortedProfileList = profileList.sorted(by: { $0.profileName < $1.profileName })
-        firstStackView.removeFromSuperview()
+        
+        for subview in profileStackView.arrangedSubviews {
+            subview.removeFromSuperview()
+        }
+        
         for profileDetail in sortedProfileList{
             
             let profileView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
@@ -152,27 +198,37 @@ class ProfileView: UIView, NavigationProtocol {
             profileNameLabel.numberOfLines = 0
             profileNameLabel.sizeToFit()
             
-            let binButton:UIButton = UIButton(type: .custom)
+            let editButton: InfoButton = InfoButton(type: .custom)
+            editButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+            let editIcon = UIImage(named: "Edit icon") as UIImage?
+            editButton.translatesAutoresizingMaskIntoConstraints = false
+            editButton.setImage(editIcon, for: .normal)
+            editButton.profile = profileDetail
+            editButton.addTarget(self, action: #selector(editButtonClick(_:)), for: .touchUpInside)
+            
+            let binButton:InfoButton = InfoButton(type: .custom)
             binButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
             let binIcon = UIImage(named: "Bin button") as UIImage?
-            let binIconSelected = UIImage(named: "Bin icon selected") as UIImage?
             binButton.translatesAutoresizingMaskIntoConstraints = false
-            //            binButton.setTitle("Delete", for: .normal)
-            
-            binButton.setImage(binIconSelected, for: .highlighted)
             binButton.setImage(binIcon, for: .normal)
-            
-            
-            binButton.addTarget(self, action: #selector(deleteButtonClick), for: .touchUpInside)
+            binButton.profile = profileDetail
+            binButton.addTarget(self, action: #selector(deleteButtonClick(_:)), for: .touchUpInside)
             
             profileView.addSubview(profileNameLabel)
+            profileView.addSubview(editButton)
             profileView.addSubview(binButton)
             
             profileNameLabel.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 10).isActive = true
             profileNameLabel.leadingAnchor.constraint(equalTo: profileView.leadingAnchor, constant: 60).isActive = true
             
+            editButton.leadingAnchor.constraint(equalTo: binButton.leadingAnchor, constant: -40).isActive = true
+            editButton.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
+            editButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            editButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            
             binButton.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
-            binButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -30).isActive = true
+            binButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -55).isActive = true
             binButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
             binButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
             
@@ -183,9 +239,14 @@ class ProfileView: UIView, NavigationProtocol {
         }
     }
     
-    
-    @objc func deleteButtonClick(_ sender: UIButton) {
-        deleteDynamicView.isHidden = false
+    @objc func editButtonClick(_ sender:InfoButton){
+        editStatus = true
+        addStatus = false
+        titleText.text = "EDIT PROFILE"
+        addEditProfileButton.titleLabel?.text = "Edit"
+    }
+        
+    @objc func deleteButtonClick(_ sender: InfoButton) {
         sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         
         UIView.animate(withDuration: 2.0,
@@ -194,35 +255,24 @@ class ProfileView: UIView, NavigationProtocol {
                        initialSpringVelocity: CGFloat(6.0),
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
-                         sender.transform = CGAffineTransform.identity
+                        sender.transform = CGAffineTransform.identity
         },
                        completion: nil
         )
-        if let deleteView = UINib(nibName: "DeleteView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-            DeleteView {
-            setDeleteView(newView: deleteView)
+        
+        if let viewController = self.getOwningViewController() as? MainViewController {
+            let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this profile?", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                ProfileDAO().deleteProfile(profileId: sender.profile!.id)
+                self.onLoad()
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            }))
+            
+            viewController.present(refreshAlert, animated: true, completion: nil)
         }
         
     }
-    
-    func setDeleteView(newView: UIView){
-        if deleteDynamicView != nil {
-            deleteDynamicView.removeFromSuperview()
-        }
-        deleteDynamicView = newView
-        deleteDynamicView.translatesAutoresizingMaskIntoConstraints = false
-        deleteDynamicView.frame = CGRect(x: 0, y: 0, width: deleteDynamicView.frame.width, height: deleteDynamicView.frame.height)
-        self.addSubview(deleteDynamicView)
-        deleteDynamicView.widthAnchor.constraint(equalToConstant: 500).isActive = true
-        deleteDynamicView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        deleteDynamicView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
-        deleteDynamicView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        
-        //        deleteDynamicView.topAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        //        deleteDynamicView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        //        deleteDynamicView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        //        deleteDynamicView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-    }
-    
 }
