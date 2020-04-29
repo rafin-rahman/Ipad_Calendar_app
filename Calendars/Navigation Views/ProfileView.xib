@@ -26,13 +26,13 @@
                             <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daf-NR-3fj">
+                        <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daf-NR-3fj">
                             <rect key="frame" x="1146" y="40" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="7mh-Ze-Rmx"/>
                                 <constraint firstAttribute="width" constant="20" id="qXC-i8-Tmn"/>
                             </constraints>
-                            <state key="normal" image="Show profile"/>
+                            <state key="normal" image="Show profile green"/>
                             <connections>
                                 <action selector="showAddProfileClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="5Qq-8I-OXT"/>
                             </connections>
@@ -139,7 +139,7 @@
                                 <constraint firstAttribute="width" constant="111" id="pV2-BU-Dip"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Add">
+                            <state key="normal" title="Confirm">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -262,7 +262,7 @@
         <image name="Green" width="100" height="100"/>
         <image name="Orange" width="100" height="100"/>
         <image name="Red" width="100" height="100"/>
-        <image name="Show profile" width="167" height="167"/>
+        <image name="Show profile green" width="167" height="167"/>
         <image name="Yellow" width="100" height="100"/>
     </resources>
 </document>

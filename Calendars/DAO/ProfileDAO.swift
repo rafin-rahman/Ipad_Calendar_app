@@ -42,6 +42,22 @@ class ProfileDAO{
         newProfile.setData(profileDic);
     }
     
+    func editProfile(profile:Profile){
+        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile").document(profile.id)
+        profileReference.updateData([
+            "Name" : profile.profileName,
+            "Color" : profile.profileColor
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+        
+        
+    }
+    
     func deleteProfile(profileId:String){
         let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
         

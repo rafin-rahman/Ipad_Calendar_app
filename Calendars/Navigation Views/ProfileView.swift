@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileView: UIView, NavigationProtocol {
+class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     
     var dynamicView: CalendarProtocol!
     @IBOutlet weak var addProfileView: UIView!
@@ -24,9 +24,10 @@ class ProfileView: UIView, NavigationProtocol {
     @IBOutlet weak var addProfileHeight: NSLayoutConstraint!
     
     var listOfProfile : Array<Profile> = Array()
+    var updateProfile : Profile!
+    
     var selectedProfileColor : String = ""
     var closeFormStatus = false
-    var addStatus = true
     var editStatus = false
     
     func onLoad() {
@@ -36,6 +37,7 @@ class ProfileView: UIView, NavigationProtocol {
         ButtonDesign.roundedCorner(button: addEditProfileButton)
         highlightSelectedBorder(selectedButton: redButton)
         selectedProfileColor = "Red"
+        profileNameText.delegate = self
         
         let profileDAO = ProfileDAO()
         profileDAO.getProfileList()
@@ -46,10 +48,15 @@ class ProfileView: UIView, NavigationProtocol {
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 16
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+    }
+    
     func displayForm(){
         if addProfileHeight.constant == 165 {
-            addStatus = true
-            editStatus = false
             addProfileHeight.constant = 0
         }
         else {
@@ -104,49 +111,67 @@ class ProfileView: UIView, NavigationProtocol {
             return
         }
         
-        print(profileName!)
         
-        for profile in listOfProfile{
-            print("Name", profile.profileName)
-            if profileName! == profile.profileName{
-                TextfieldAnimation.errorAnimation(textField: profileNameText)
-                errorLabel.text = "Profile with this name Already Created"
-                errorLabel.isHidden = false
-                return
+        
+        if !editStatus || updateProfile.profileName != profileName
+        {
+            for profile in listOfProfile{
+                print("Name", profile.profileName)
+                if profileName! == profile.profileName{
+                    TextfieldAnimation.errorAnimation(textField: profileNameText)
+                    errorLabel.text = "Profile with this name Already Created"
+                    errorLabel.isHidden = false
+                    return
+                }
             }
         }
         
-        let profileDic: [String: Any] = [
-            "Name" : profileName!,
-            "Color" : selectedProfileColor
-        ]
+               
+        if !editStatus{
+            let profileDic: [String: Any] = [
+                "Name" : profileName!,
+                "Color" : selectedProfileColor
+            ]
+            ProfileDAO().addProfile(profileDic: profileDic)
+        }
+        else{
+            updateProfile.profileName = profileName!
+            updateProfile.profileColor = selectedProfileColor
+            ProfileDAO().editProfile(profile: updateProfile)
+        }
         
-        ProfileDAO().addProfile(profileDic: profileDic)
         clearAddForm()
+        closeAnimation()
         onLoad()
         
     }
     
     func addAnimation(){
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.5, animations:  {
             self.layoutIfNeeded()
+            self.showAddViewButton.setImage(UIImage(named: "Show profile red"), for: .normal)
             self.showAddViewButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
-        }
+        }, completion: { _ in
+            
+        })
         closeFormStatus = true
     }
     
     func closeAnimation(){
         UIView.animate(withDuration: 0.5, animations:  {
+            self.showAddViewButton.setImage(UIImage(named: "Show profile green"), for: .normal)
             self.showAddViewButton.transform = .identity
             self.layoutIfNeeded()
         }, completion: { _ in
+            self.editStatus = false
             self.clearAddForm()
+            
         })
         closeFormStatus = false
     }
     
     func addProfileAnimation (){
-        if(closeFormStatus == false){
+        if !closeFormStatus {
             addAnimation()
         }
         else {
@@ -159,7 +184,6 @@ class ProfileView: UIView, NavigationProtocol {
             profileNameText.text = ""
             selectedProfileColor = "Red"
             titleText.text = "ADD NEW PROFILE"
-            addEditProfileButton.titleLabel?.text = "Add"
             addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
         }
     }
@@ -218,7 +242,7 @@ class ProfileView: UIView, NavigationProtocol {
             profileView.addSubview(editButton)
             profileView.addSubview(binButton)
             
-            profileNameLabel.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 10).isActive = true
+            profileNameLabel.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
             profileNameLabel.leadingAnchor.constraint(equalTo: profileView.leadingAnchor, constant: 60).isActive = true
             
             editButton.leadingAnchor.constraint(equalTo: binButton.leadingAnchor, constant: -40).isActive = true
@@ -240,25 +264,46 @@ class ProfileView: UIView, NavigationProtocol {
     }
     
     @objc func editButtonClick(_ sender:InfoButton){
+       popAnimation(sender)
+        
+        if !closeFormStatus {
+            displayForm()
+        }
         editStatus = true
-        addStatus = false
         titleText.text = "EDIT PROFILE"
-        addEditProfileButton.titleLabel?.text = "Edit"
+        updateProfile = sender.profile
+        profileNameText.text = sender.profile?.profileName
+        highlightSelectedColorBox(color: (sender.profile?.profileColor)!)
+    }
+    
+    func highlightSelectedColorBox(color:String){
+        switch color {
+        case "Red":
+            selectedProfileColor = "Red"
+            highlightSelectedBorder(selectedButton: redButton)
+        case "Orange":
+            selectedProfileColor = "Orange"
+            highlightSelectedBorder(selectedButton: orangeButton)
+        case "Yellow":
+            selectedProfileColor = "Yellow"
+            highlightSelectedBorder(selectedButton: yellowButton)
+        case "Green":
+            selectedProfileColor = "Green"
+            highlightSelectedBorder(selectedButton: greenButton)
+        case "Aqua":
+            selectedProfileColor = "Aqua"
+            highlightSelectedBorder(selectedButton: acquaButton)
+        case "Blue":
+            selectedProfileColor = "Blue"
+            highlightSelectedBorder(selectedButton: blueButton)
+        default:
+            print("Tag had some issues")
+        }
+        addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
     }
         
     @objc func deleteButtonClick(_ sender: InfoButton) {
-        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        
-        UIView.animate(withDuration: 2.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.20),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIView.AnimationOptions.allowUserInteraction,
-                       animations: {
-                        sender.transform = CGAffineTransform.identity
-        },
-                       completion: nil
-        )
+        popAnimation(sender)
         
         if let viewController = self.getOwningViewController() as? MainViewController {
             let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this profile?", preferredStyle: UIAlertController.Style.alert)
@@ -274,5 +319,20 @@ class ProfileView: UIView, NavigationProtocol {
             viewController.present(refreshAlert, animated: true, completion: nil)
         }
         
+    }
+    
+    func popAnimation (_ sender: UIButton){
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+               
+               UIView.animate(withDuration: 2.0,
+                              delay: 0,
+                              usingSpringWithDamping: CGFloat(0.20),
+                              initialSpringVelocity: CGFloat(6.0),
+                              options: UIView.AnimationOptions.allowUserInteraction,
+                              animations: {
+                               sender.transform = CGAffineTransform.identity
+               },
+                              completion: nil
+               )
     }
 }
