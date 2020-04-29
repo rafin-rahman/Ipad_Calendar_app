@@ -29,7 +29,7 @@ class EventDAO{
         
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         
-        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start)
+        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("DeleteStatus", isEqualTo: false)
         eventStartingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -74,7 +74,7 @@ class EventDAO{
         
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         
-        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("All-Day", isEqualTo: allDayStatus)
+        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("All-Day", isEqualTo: allDayStatus).whereField("DeleteStatus", isEqualTo: false)
         eventStartingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -110,7 +110,7 @@ class EventDAO{
             }
         }
         
-        let eventEndingToday = eventReference.whereField("EndTime", isLessThan: end).whereField("All-Day", isEqualTo: allDayStatus)
+        let eventEndingToday = eventReference.whereField("EndTime", isLessThan: end).whereField("All-Day", isEqualTo: allDayStatus).whereField("DeleteStatus", isEqualTo: false)
         eventEndingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -119,7 +119,7 @@ class EventDAO{
             else {
                 for event in querySnapshot!.documents {
                     let newEvent = Event()
-                    
+                    	
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String

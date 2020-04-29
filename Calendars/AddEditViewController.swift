@@ -143,7 +143,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             else {
                 for profile in querySnapshot!.documents {
                     let profileName = profile["Name"]
-                    let profileColour = profile["Colour"]
+                    let profileColour = profile["Color"]
                     
                     self.profileNames.append(profileName as! String)
                     self.profileColours.append(profileColour as! String)
@@ -233,7 +233,8 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             "ReminderTime" : reminderDate,
             "Priority" : priority!,
             "Profile" : selectedProfile,
-            "ProfileColour" : selectedColor
+            "ProfileColour" : selectedColor,
+            "DeleteStatus" : false
         ]
         
         EventDAO().addNewEvent(eventDict: eventDict)

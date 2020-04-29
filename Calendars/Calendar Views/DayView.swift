@@ -243,6 +243,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
     func displayEvents(){
         eventView.removeAll()
         for todaysEvent in self.finalEventList{
+            print("Check")
             let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
@@ -251,7 +252,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
             eventName.font = UIFont(name: "System", size: 17)
                         
-            event.backgroundColor = HexToUIColor.hexStringToUIColor(hex: todaysEvent.profileColour, alpha: 1.0)
+            event.backgroundColor = SelectColor.getColor(color: todaysEvent.profileColour)
             event.translatesAutoresizingMaskIntoConstraints = false
             eventName.translatesAutoresizingMaskIntoConstraints = false
             eventPriority.translatesAutoresizingMaskIntoConstraints = false
