@@ -60,6 +60,7 @@ class HomeView: UIView, NavigationProtocol {
         if let monthView = UINib(nibName: "MonthView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             MonthView{
             setDayView(newView : monthView)
+            monthView.loadData()
         }
     }
     

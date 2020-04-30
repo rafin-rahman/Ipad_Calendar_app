@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
     
@@ -133,6 +134,9 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func getProfileList(){
+        self.profileNames.append("Default")
+        self.profileColours.append("Grey")
+        
         let dbConnection = Firestore.firestore()
         let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
         profileReference.getDocuments() {

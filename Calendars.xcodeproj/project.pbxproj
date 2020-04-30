@@ -43,6 +43,7 @@
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
 		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
+		D1C349C8245B99F800C6A9C7 /* TempConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */; };
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
 		D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228E5245452330008DD92 /* SearchPanelViewController.swift */; };
 		D1F228E8245458990008DD92 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F228E7245458990008DD92 /* ProfileView.xib */; };
@@ -94,6 +95,7 @@
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
+		D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempConstraintView.swift; sourceTree = "<group>"; };
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D1F228E5245452330008DD92 /* SearchPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelViewController.swift; sourceTree = "<group>"; };
 		D1F228E7245458990008DD92 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				D192628C2454E78300C11E17 /* SelectColour.swift */,
 				D1F4C3082458D47C008946A0 /* InfoButton.swift */,
 				D13AD93F245A663D00C1637A /* PriorityColorSelector.swift */,
+				D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				D192628D2454E78300C11E17 /* SelectColour.swift in Sources */,
 				D13AD940245A663D00C1637A /* PriorityColorSelector.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
+				D1C349C8245B99F800C6A9C7 /* TempConstraintView.swift in Sources */,
 				D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */,
 				D13AD93E245A1CCA00C1637A /* MonthCellView.swift in Sources */,
 				D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */,

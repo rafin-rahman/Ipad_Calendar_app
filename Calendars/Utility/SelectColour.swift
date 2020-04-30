@@ -27,7 +27,7 @@ public class SelectColor{
         case "Blue":
             newColor = HexToUIColor.hexStringToUIColor(hex: "2980b9", alpha: 1)
         default:
-            print("Color doesnt match")
+            newColor = HexToUIColor.hexStringToUIColor(hex: "636e72", alpha: 1)
         }
         
         return newColor

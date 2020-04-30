@@ -193,7 +193,7 @@
                         <constraint firstItem="5xn-rf-6gD" firstAttribute="top" secondItem="sFm-Fb-ZuP" secondAttribute="bottom" constant="27" id="yzc-8y-ano"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgl-x6-NFy">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgl-x6-NFy">
                     <rect key="frame" x="0.0" y="250" width="1216" height="780"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="KxP-wO-0Fa">

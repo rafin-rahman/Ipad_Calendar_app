@@ -48,7 +48,7 @@
                         <constraint firstItem="LDJ-lk-k3l" firstAttribute="leading" secondItem="1Aq-1X-9ZD" secondAttribute="trailing" constant="12" id="dtr-y3-bRB"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4q-7t-cfp">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4q-7t-cfp">
                     <rect key="frame" x="0.0" y="178" width="1216" height="746"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="fmL-w6-Gms" userLabel="Global Stack">
