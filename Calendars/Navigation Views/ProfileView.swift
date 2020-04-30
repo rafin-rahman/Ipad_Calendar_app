@@ -247,14 +247,14 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             
             editButton.leadingAnchor.constraint(equalTo: binButton.leadingAnchor, constant: -40).isActive = true
             editButton.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
-            editButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            editButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            editButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            editButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
             
             
             binButton.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
             binButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -55).isActive = true
-            binButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            binButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            binButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            binButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
             
             profileView.translatesAutoresizingMaskIntoConstraints = false
             profileView.backgroundColor = SelectColor.getColor(color: profileDetail.profileColor)
