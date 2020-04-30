@@ -102,3 +102,24 @@ extension UIResponder {
     return nil
   }
 }
+
+extension Date {
+    func toString(dateFormat:String) -> String! {
+        let dateAndTimeFormat = DateFormatter()
+        dateAndTimeFormat.dateFormat = dateFormat
+        return dateAndTimeFormat.string(from: self)
+    }
+    
+    func stripTime() -> Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        let date = Calendar.current.date(from: components)
+        return date!
+    }
+    
+    func stripDate() -> Date {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: self)
+        let date = Calendar.current.date(from: components)
+        return date!
+    }
+
+}

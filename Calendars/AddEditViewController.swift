@@ -198,9 +198,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             TextfieldAnimation.errorAnimation(textField: eventNameText)
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yy"
-        let selectedDate = dateFormatter.string(from: eventDatePicker.date)
+        let selectedDate = eventDatePicker.date.toString(dateFormat: "dd-MM-yy")!
         
         if(eventStartTimePicker.date > eventEndTimePicker.date)
         {

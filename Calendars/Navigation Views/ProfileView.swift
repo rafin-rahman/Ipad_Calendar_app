@@ -197,7 +197,7 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
         blueButton.layer.borderWidth = 0
         
         selectedButton.layer.borderWidth = 3
-        selectedButton.layer.borderColor = UIColor.darkGray.cgColor
+        selectedButton.layer.borderColor = UIColor.white.cgColor
         selectedButton.clipsToBounds = true
     }
     
@@ -217,7 +217,7 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             let profileNameLabel = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
             profileNameLabel.text = profileDetail.profileName
-            profileNameLabel.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
+            profileNameLabel.textColor = .white //UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
             profileNameLabel.font = UIFont.systemFont(ofSize: 20)
             profileNameLabel.numberOfLines = 0
             profileNameLabel.sizeToFit()

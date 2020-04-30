@@ -15,17 +15,17 @@ public class SelectColor{
         
         switch color {
         case "Red":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "FF020E", alpha: 0.15)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "c0392b", alpha: 1)
         case "Orange":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "FF8E01", alpha: 0.35)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "f39c12", alpha: 1)
         case "Yellow":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "FFF500", alpha: 0.24)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "fed330", alpha: 1)
         case "Green":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "54FF00", alpha: 0.13)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "20bf6b", alpha: 1)
         case "Aqua":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "00FFCE", alpha: 0.13)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "0fb9b1", alpha: 1)
         case "Blue":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "0065FF", alpha: 0.21)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "2980b9", alpha: 1)
         default:
             print("Color doesnt match")
         }

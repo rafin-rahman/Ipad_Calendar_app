@@ -35,17 +35,13 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
     var allDayListView : Array<UIView> = Array()
     
     @IBAction func prevWeek(_ sender: Any) {
-        let format = DateFormatter()
-        format.dateFormat = "dd-MM-yy"
-        let date = format.date(from: dayZero.text!)!
+        let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: -7, to: date)!)
         
     }
     
     @IBAction func nextWeek(_ sender: Any) {
-        let format = DateFormatter()
-        format.dateFormat = "dd-MM-yy"
-        let date = format.date(from: dayZero.text!)!
+        let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: 7, to: date)!)
     }
     
@@ -122,7 +118,6 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
         let format = DateFormatter()
         format.dateFormat = "d E"
         
-        
         dayZero.text = newFormat.string(from: Calendar.current.date(byAdding: .day, value: 0, to: date)!)
         dayOneButton.setTitle(format.string(from: Calendar.current.date(byAdding: .day, value: 0, to: date)!), for: .normal)
         dayOneButton.tag = 0
@@ -178,7 +173,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
             eventName.font = UIFont(name: "System", size: 17)
             
-        self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: allDayEvent.profileColour, alpha: 1.0)
+            self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: allDayEvent.profileColour, alpha: 1.0)
             self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
             eventName.translatesAutoresizingMaskIntoConstraints = false
             eventPriority.translatesAutoresizingMaskIntoConstraints = false
@@ -193,21 +188,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventPriority.heightAnchor.constraint(equalTo: self.eventAllDayView.heightAnchor, multiplier: 1).isActive = true
             eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
             
-            var newColor = UIColor.black
-            switch allDayEvent.priority {
-            case "High":
-                newColor = .red
-            case "Medium":
-                newColor = .yellow
-            case "Low":
-                newColor = .gray
-                //UIColor(red: 0.50, green: 0.55, blue: 0.55, alpha: 1.00)
-                //UIColor(red: 0.74, green: 0.76, blue: 0.78, alpha: 1.00)
-                // UIColor(red: 0.91, green: 0.30, blue: 0.24, alpha: 1.00)
-            default:
-                print("Something went wrong in priorityValueChanged")
-            }
-            eventPriority.backgroundColor = newColor
+            eventPriority.backgroundColor = PriorityColorSelector.getColor(priority: allDayEvent.priority)
             
             eventName.topAnchor.constraint(equalTo: self.eventAllDayView.topAnchor, constant: 10).isActive = true
             eventName.leadingAnchor.constraint(equalTo: eventPriority.trailingAnchor, constant: 10).isActive = true
@@ -243,13 +224,13 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
     func displayEvents(){
         eventView.removeAll()
         for todaysEvent in self.finalEventList{
-            print("Check")
+            
             let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
             
             eventName.text = todaysEvent.eventName
-            eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
+            eventName.textColor = .white
             eventName.font = UIFont(name: "System", size: 17)
                         
             event.backgroundColor = SelectColor.getColor(color: todaysEvent.profileColour)
@@ -295,21 +276,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
             eventPriority.leadingAnchor.constraint(equalTo: event.leadingAnchor, constant: 0).isActive = true
             eventPriority.heightAnchor.constraint(equalTo: event.heightAnchor, multiplier: 1).isActive = true
             eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
-            var newColor = UIColor.black
-            switch todaysEvent.priority {
-                case "High":
-                    newColor = .red
-                case "Medium":
-                    newColor = .yellow
-                case "Low":
-                    newColor = .gray
-                //UIColor(red: 0.50, green: 0.55, blue: 0.55, alpha: 1.00)
-                //UIColor(red: 0.74, green: 0.76, blue: 0.78, alpha: 1.00)
-                // UIColor(red: 0.91, green: 0.30, blue: 0.24, alpha: 1.00)
-                default:
-                    print("Something went wrong in priorityValueChanged")
-            }
-            eventPriority.backgroundColor = newColor
+            eventPriority.backgroundColor = PriorityColorSelector.getColor(priority: todaysEvent.priority)
         
             eventName.topAnchor.constraint(equalTo: event.topAnchor, constant: 10).isActive = true
             eventName.leadingAnchor.constraint(equalTo: eventPriority.trailingAnchor, constant: 10).isActive = true
@@ -360,7 +327,6 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
 
         let newFormat = DateFormatter()
         newFormat.dateFormat = "dd-MM-yy"
-
         let date = newFormat.date(from: dayZero.text!)
         let selectedDate = newFormat.string(from: Calendar.current.date(byAdding: .day, value: sender.tag, to: date!)!)
         activeDate = newFormat.date(from: selectedDate)!
@@ -368,6 +334,4 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
         self.getDailyViewForDate(eventDate:newFormat.date(from: selectedDate)!)
         
     }
-    
-    
 }

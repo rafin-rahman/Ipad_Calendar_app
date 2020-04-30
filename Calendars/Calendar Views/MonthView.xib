@@ -560,6 +560,10 @@
                     <exclude reference="99t-Or-0VY"/>
                 </mask>
             </variation>
+            <connections>
+                <outlet property="cellOneView" destination="Kbx-kX-6B7" id="G8e-Uu-XQX"/>
+                <outlet property="weekOneStack" destination="gxI-xX-Hyg" id="952-YC-Ndv"/>
+            </connections>
             <point key="canvasLocation" x="132.65007320644216" y="153.80859375"/>
         </view>
     </objects>

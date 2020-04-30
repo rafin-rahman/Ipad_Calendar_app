@@ -9,17 +9,21 @@
 import UIKit
 
 class MonthView: UIView, CalendarProtocol {
+    
+    @IBOutlet weak var weekOneStack: UIStackView!
+    @IBOutlet weak var cellOneView: UIView!
+    
+    
+    
     func loadData() {
         
     }
-    
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+  
+    func showMonthCell(){
+//        for cellOneView in weekOneStack {
+//            
+//        }
+        
     }
-    */
 
 }
