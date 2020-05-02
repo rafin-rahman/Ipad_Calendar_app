@@ -38,14 +38,23 @@
                                 <action selector="groupByTimeClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="iEw-2Q-Yhs"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ir-gG-nXi">
+                            <rect key="frame" x="228" y="49" width="240" height="1"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="1vy-wt-vVQ"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="LDJ-lk-k3l" secondAttribute="trailing" constant="27" id="5Tb-bt-XDY"/>
+                        <constraint firstItem="2Ir-gG-nXi" firstAttribute="width" secondItem="xDc-2l-jK0" secondAttribute="width" id="6AQ-64-fvU"/>
                         <constraint firstItem="LDJ-lk-k3l" firstAttribute="centerY" secondItem="xDc-2l-jK0" secondAttribute="centerY" id="CRL-Mz-6Sg"/>
                         <constraint firstItem="1Aq-1X-9ZD" firstAttribute="centerY" secondItem="xDc-2l-jK0" secondAttribute="centerY" id="JkF-wA-M8O"/>
                         <constraint firstAttribute="height" constant="50" id="bQf-Fc-E2A"/>
                         <constraint firstItem="LDJ-lk-k3l" firstAttribute="leading" secondItem="1Aq-1X-9ZD" secondAttribute="trailing" constant="12" id="dtr-y3-bRB"/>
+                        <constraint firstAttribute="bottom" secondItem="2Ir-gG-nXi" secondAttribute="bottom" id="eOs-aj-wiG"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4q-7t-cfp">
