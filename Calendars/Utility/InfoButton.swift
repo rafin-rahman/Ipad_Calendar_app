@@ -9,9 +9,8 @@
 import UIKit
 
 class InfoButton: UIButton {
-
-    var listOfViews : Array<UIView>?
-    var isOpen :Bool = false
+    
+    var selectedButton : UIButton?
     
     var profile : Profile?
     var eventDetail : Events?

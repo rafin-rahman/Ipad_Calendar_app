@@ -10,19 +10,27 @@ import UIKit
 
 class BinView: UIView, NavigationProtocol {
 
+    @IBOutlet weak var leftStack: UIStackView!
     var dynamicView: CalendarProtocol!
     
+   
+    
+    
     func onLoad() {
-        
+        showDeletedEvents()
     }
     
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    func showDeletedEvents(){
+        
+        if let deletedEventView = UINib(nibName: "BinRowView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? BinRowView {
+            deletedEventView.translatesAutoresizingMaskIntoConstraints = false
+            leftStack.addArrangedSubview(deletedEventView)
+            deletedEventView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            print("Oh shit")
+        }
+        
+        
     }
-    */
 
 }

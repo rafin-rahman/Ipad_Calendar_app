@@ -87,6 +87,14 @@ extension String{
         dateAndTimeFormat.dateFormat = dateFormat
         return dateAndTimeFormat.date(from: self)
     }
+    
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
 }
 
 extension UIResponder {

@@ -206,6 +206,8 @@ class MainViewController: UIViewController {
             BinView {
             addButton.isHidden = false
             setRightViewDetails(newRightView: newRightView)
+            newRightView.onLoad()
+            
         }
         selectedButtonEffect(selectedButton: binNavButton, selectedLabel: binLabel)
         

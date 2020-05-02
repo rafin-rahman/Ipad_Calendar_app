@@ -105,10 +105,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         selectedProfile = event.profileColour
         
         eventProfilePicker.selectRow(2, inComponent: 0, animated: true)
-                
-        taskButton.tintColor = .black
-        taskButton.titleLabel?.textColor = .black
-        taskButton.isEnabled = false
+        taskButton.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -354,11 +351,11 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     {
         self.taskView.isHidden = true
         self.eventView.isHidden = true
-        self.taskButton.alpha = 0.8
-        self.eventButton.alpha = 0.8
+        self.taskButton.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "8BB5FF", alpha: 1)
+        self.eventButton.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "8BB5FF", alpha: 1)
         
         selectedView.isHidden = false
-        selectedButton.alpha = 1.0
+        selectedButton.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "273C75", alpha: 1)
     }
     
     func enableButton(enabledButton:UIButton){

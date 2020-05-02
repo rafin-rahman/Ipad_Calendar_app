@@ -383,9 +383,9 @@
                                             <action selector="eventButtonClick:" destination="P9j-t3-Ljo" eventType="touchUpInside" id="yZr-Ky-Fj4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBR-dK-3fN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBR-dK-3fN">
                                         <rect key="frame" x="200" y="0.0" width="200" height="60"/>
-                                        <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.54509803921568623" green="0.70980392156862748" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="LWG-zR-KQN"/>
                                         </constraints>
@@ -712,7 +712,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.15294117647058825" green="0.23529411764705882" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="DBM-Vp-dtJ" secondAttribute="bottom" id="24C-sw-zNO"/>
                                     <constraint firstAttribute="trailing" secondItem="DBM-Vp-dtJ" secondAttribute="trailing" id="78g-4k-7aH"/>

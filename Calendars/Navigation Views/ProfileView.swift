@@ -129,13 +129,13 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
                
         if !editStatus{
             let profileDic: [String: Any] = [
-                "Name" : profileName!,
+                "Name" : profileName!.capitalizingFirstLetter(),
                 "Color" : selectedProfileColor
             ]
             ProfileDAO().addProfile(profileDic: profileDic)
         }
         else{
-            updateProfile.profileName = profileName!
+            updateProfile.profileName = profileName!.capitalizingFirstLetter()
             updateProfile.profileColor = selectedProfileColor
             ProfileDAO().editProfile(profile: updateProfile)
         }
@@ -147,9 +147,11 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     }
     
     func addAnimation(){
+        UIView.transition(with: showAddViewButton, duration: 0.2, options: .transitionFlipFromRight, animations: {
+            self.showAddViewButton.setImage(UIImage(named: "Show profile red"), for: .normal)
+        }, completion: nil)
         UIView.animate(withDuration: 0.5, animations:  {
             self.layoutIfNeeded()
-            self.showAddViewButton.setImage(UIImage(named: "Show profile red"), for: .normal)
             self.showAddViewButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
         }, completion: { _ in
             
@@ -158,8 +160,10 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     }
     
     func closeAnimation(){
-        UIView.animate(withDuration: 0.5, animations:  {
+        UIView.transition(with: showAddViewButton, duration: 0.2, options: .transitionFlipFromLeft, animations: {
             self.showAddViewButton.setImage(UIImage(named: "Show profile green"), for: .normal)
+        }, completion: nil)
+        UIView.animate(withDuration: 0.5, animations:  {
             self.showAddViewButton.transform = .identity
             self.layoutIfNeeded()
         }, completion: { _ in

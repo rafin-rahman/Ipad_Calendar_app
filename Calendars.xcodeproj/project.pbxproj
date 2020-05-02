@@ -45,6 +45,8 @@
 		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
 		D1C349C8245B99F800C6A9C7 /* TempConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */; };
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
+		D1C7D05A245E14280065CF0F /* BinRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C7D059245E14280065CF0F /* BinRowView.xib */; };
+		D1C7D05C245E14330065CF0F /* BinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C7D05B245E14330065CF0F /* BinRowView.swift */; };
 		D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228E5245452330008DD92 /* SearchPanelViewController.swift */; };
 		D1F228E8245458990008DD92 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F228E7245458990008DD92 /* ProfileView.xib */; };
 		D1F228EE245459090008DD92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228ED245459090008DD92 /* ProfileView.swift */; };
@@ -97,6 +99,8 @@
 		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempConstraintView.swift; sourceTree = "<group>"; };
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D1C7D059245E14280065CF0F /* BinRowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BinRowView.xib; sourceTree = "<group>"; };
+		D1C7D05B245E14330065CF0F /* BinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinRowView.swift; sourceTree = "<group>"; };
 		D1F228E5245452330008DD92 /* SearchPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelViewController.swift; sourceTree = "<group>"; };
 		D1F228E7245458990008DD92 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		D1F228ED245459090008DD92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				D178474C2449713900D3472F /* BinView.xib */,
 				D1F228ED245459090008DD92 /* ProfileView.swift */,
 				D1F228E7245458990008DD92 /* ProfileView.xib */,
+				D1C7D059245E14280065CF0F /* BinRowView.xib */,
+				D1C7D05B245E14330065CF0F /* BinRowView.swift */,
 			);
 			path = "Navigation Views";
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 				D189C07324264A1E00FF7723 /* Main.storyboard in Resources */,
 				D14AED872443B0C50012469F /* WeekView.xib in Resources */,
 				D16403072443D28F0078E059 /* MonthView.xib in Resources */,
+				D1C7D05A245E14280065CF0F /* BinRowView.xib in Resources */,
 				D179B6562448C76B002C00B9 /* HomeView.xib in Resources */,
 				D13AD93C245A1CB500C1637A /* MonthCellView.xib in Resources */,
 			);
@@ -379,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C7D05C245E14330065CF0F /* BinRowView.swift in Sources */,
 				D178474B2449713000D3472F /* BinView.swift in Sources */,
 				D189C07024264A1E00FF7723 /* MainViewController.swift in Sources */,
 				D14AED812443AC840012469F /* DayView.swift in Sources */,

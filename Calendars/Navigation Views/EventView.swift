@@ -52,6 +52,7 @@ class EventView: UIView, NavigationProtocol {
             innerStackView.spacing = 2
             
             let dateView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            dateView.tag = 1
             
             let dateLabel = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             dateLabel.text = dateValue.toString(dateFormat: "dd MMM YYYY")
@@ -65,6 +66,7 @@ class EventView: UIView, NavigationProtocol {
             collapseButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
             let collapseIcon = UIImage(named: "Collapse Icon") as UIImage?
             collapseButton.setImage(collapseIcon, for: .normal)
+            collapseButton.selectedButton = collapseButton
             collapseButton.addTarget(self, action: #selector(collapsableButton(_:)), for: .touchUpInside)
             
             
@@ -83,7 +85,7 @@ class EventView: UIView, NavigationProtocol {
             dateView.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
             
             dateLabel.topAnchor.constraint(equalTo: dateView.topAnchor, constant: 20).isActive = true
-            dateLabel.leadingAnchor.constraint(equalTo: dateView.leadingAnchor, constant: 90).isActive = true
+            dateLabel.leadingAnchor.constraint(equalTo: dateView.leadingAnchor, constant: 70).isActive = true
             dateLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
             
             collapseButton.trailingAnchor.constraint(equalTo: dateView.trailingAnchor, constant: -50).isActive = true
@@ -117,6 +119,8 @@ class EventView: UIView, NavigationProtocol {
             
             let dateView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             
+            dateView.tag = 1
+            
             let dateLabel = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             dateLabel.text = profile
             dateLabel.textColor = HexToUIColor.hexStringToUIColor(hex: "444444", alpha: 1)
@@ -128,6 +132,8 @@ class EventView: UIView, NavigationProtocol {
             collapseButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
             let collapseIcon = UIImage(named: "Collapse Icon") as UIImage?
             collapseButton.setImage(collapseIcon, for: .normal)
+            collapseButton.selectedButton = collapseButton
+            collapseButton.addTarget(self, action: #selector(collapsableButton(_:)), for: .touchUpInside)
             
             
             innerStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -145,7 +151,7 @@ class EventView: UIView, NavigationProtocol {
             dateView.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
             
             dateLabel.topAnchor.constraint(equalTo: dateView.topAnchor, constant: 20).isActive = true
-            dateLabel.leadingAnchor.constraint(equalTo: dateView.leadingAnchor, constant: 90).isActive = true
+            dateLabel.leadingAnchor.constraint(equalTo: dateView.leadingAnchor, constant: 70).isActive = true
             dateLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
             
             collapseButton.trailingAnchor.constraint(equalTo: dateView.trailingAnchor, constant: -50).isActive = true
@@ -315,7 +321,40 @@ class EventView: UIView, NavigationProtocol {
     
     
     @objc func collapsableButton(_ sender:InfoButton){
-        print("check")
+        if let stackView = sender.superview?.superview as? UIStackView {
+            if stackView.tag == -1 {
+                
+                UIView.animate(withDuration: 0.5, animations:  {
+                    
+                    for subview in stackView.arrangedSubviews {
+                        if subview.tag != 1 {
+                            UIView.animate(withDuration: 0.3, animations: {
+                                subview.isHidden = false
+                            })
+                        }
+                    }
+                    stackView.tag = 1
+                    sender.selectedButton!.imageView!.transform = .identity
+                    self.layoutIfNeeded()
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.5, animations:  {
+                    for subview in stackView.arrangedSubviews {
+                        if subview.tag != 1 {
+                            UIView.animate(withDuration: 0.3, animations: {
+                                subview.isHidden = true
+                            })
+                        }
+                    }
+                    stackView.tag = -1
+                    sender.selectedButton!.imageView!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                    self.layoutIfNeeded()
+                }, completion: nil)
+            }
+            stackView.layoutIfNeeded()
+        }
+        
+        
     }
     
     
