@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Event{
+class Events{
     var id = ""
     var eventName = ""
     var startDate = Date()

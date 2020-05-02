@@ -38,7 +38,7 @@
 		D189C07824264A1F00FF7723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D189C07724264A1F00FF7723 /* Assets.xcassets */; };
 		D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */; };
 		D192628D2454E78300C11E17 /* SelectColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192628C2454E78300C11E17 /* SelectColour.swift */; };
-		D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Event.swift */; };
+		D1A0CFF4244B9B0D008C4D7C /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Events.swift */; };
 		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
@@ -90,7 +90,7 @@
 		D189C07A24264A1F00FF7723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D189C07C24264A1F00FF7723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D192628C2454E78300C11E17 /* SelectColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColour.swift; sourceTree = "<group>"; };
-		D1A0CFF3244B9B0D008C4D7C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		D1A0CFF3244B9B0D008C4D7C /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 		D1A0CFF2244B9AC6008C4D7C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D1A0CFF3244B9B0D008C4D7C /* Event.swift */,
+				D1A0CFF3244B9B0D008C4D7C /* Events.swift */,
 				D10DAFEA2451E94F00FC253E /* Profile.swift */,
 			);
 			path = Models;
@@ -405,7 +405,7 @@
 				D1C349C8245B99F800C6A9C7 /* TempConstraintView.swift in Sources */,
 				D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */,
 				D13AD93E245A1CCA00C1637A /* MonthCellView.swift in Sources */,
-				D1A0CFF4244B9B0D008C4D7C /* Event.swift in Sources */,
+				D1A0CFF4244B9B0D008C4D7C /* Events.swift in Sources */,
 				D10DAFE72451C4DE00FC253E /* EventDAO.swift in Sources */,
 				D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */,
 				D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */,

@@ -7,7 +7,7 @@ public class PriorityColorSelector{
         
         switch priority {
         case "High":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "e15f41", alpha: 1)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "b33939", alpha: 1)
         case "Medium":
             newColor = HexToUIColor.hexStringToUIColor(hex: "fbc531", alpha: 1)
         case "Low":

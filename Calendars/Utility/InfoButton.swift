@@ -11,5 +11,5 @@ import UIKit
 class InfoButton: UIButton {
 
     var profile : Profile?
-
+    var eventDetail : Events?
 }

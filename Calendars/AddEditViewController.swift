@@ -50,16 +50,71 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var activeDate: Date = Date()
     
     var isTask = false
+    var eventEdit = false
     
     var profileNames: [String] = []
     var profileColours: [String] = []
     var selectedProfile : String = ""
     var selectedColor : String = ""
     
+    var updateEvent : Events!
+    
+    
+    func eventEditDetails(event : Events) {
+        eventEdit = true
+        
+        updateEvent = event
+        
+        eventNameText.text = event.eventName
+        eventLocationText.text = event.location
+        
+        eventDatePicker.date = event.startDate
+        eventStartTimePicker.date = event.startDate
+        eventEndTimePicker.date = event.endDate
+        
+        allDaySwitch.isOn = event.allDay
+        
+        switch event.priority {
+        case "Low":
+            prioritySegment.selectedSegmentIndex = 0
+        case "Medium":
+            prioritySegment.selectedSegmentIndex = 1
+            prioritySegment.selectedSegmentTintColor = .yellow
+        case "High":
+            prioritySegment.selectedSegmentIndex = 2
+            prioritySegment.selectedSegmentTintColor = .red
+        default:
+            print("Something went wrong in priorityValueChanged")
+        }
+                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25){
+            let index = self.profileNames.firstIndex(of: event.profile)!
+            self.eventProfilePicker.selectRow(index, inComponent: 0, animated: false)
+
+            self.selectedProfile = event.profile
+            self.selectedColor = event.profileColour
+            
+        }
+        
+        reminderTimePicker.isEnabled = true
+        enableButton(enabledButton: reminderButton)
+        reminderTimePicker.isEnabled = true
+        reminderTimePicker.date.timeIntervalSince(event.reminder)
+        
+        selectedProfile = event.profile
+        selectedProfile = event.profileColour
+        
+        eventProfilePicker.selectRow(2, inComponent: 0, animated: true)
+                
+        taskButton.tintColor = .black
+        taskButton.titleLabel?.textColor = .black
+        taskButton.isEnabled = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        eventDatePicker.date = activeDate
+        //eventDatePicker.date = activeDate
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
         self.backgroundView.addGestureRecognizer(tap)
         
@@ -104,7 +159,6 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         allDaySwitch.tintColor = .darkGray
         allDaySwitch.layer.cornerRadius = allDaySwitch.frame.height / 2
         allDaySwitch.backgroundColor = .darkGray
-        
         
         ButtonDesign.roundedCorner(button: reminderButton)
         ButtonDesign.roundedCorner(button: recurringButton)
@@ -173,7 +227,6 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             newColor = .white
         case 1:
             newColor = .yellow
-            
         case 2:
             newColor = .red
         default:
@@ -200,6 +253,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // text validation
         if eventName == "" {
             TextfieldAnimation.errorAnimation(textField: eventNameText)
+            return
         }
         
         let selectedDate = eventDatePicker.date.toString(dateFormat: "dd-MM-yy")!
@@ -225,22 +279,37 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         let allDayStatus = allDaySwitch.isOn
         
-            
-        let eventDict: [String: Any] = [
-            "Name" : eventNameText.text!,
-            "Location" : eventLocationText.text!,
-            "StartTime" : startDate!,
-            "EndTime" : endDate!,
-            "All-Day": allDayStatus,
-            "ReminderTime" : reminderDate,
-            "Priority" : priority!,
-            "Profile" : selectedProfile,
-            "ProfileColour" : selectedColor,
-            "DeleteStatus" : false
-        ]
+        print(selectedProfile)
         
-        EventDAO().addNewEvent(eventDict: eventDict)
-        
+        if eventEdit{
+            updateEvent.eventName = eventName!
+            updateEvent.location = eventLocationText.text!
+            updateEvent.startDate = startDate!
+            updateEvent.endDate = endDate!
+            updateEvent.allDay = allDayStatus
+            updateEvent.reminder = reminderDate
+            updateEvent.priority = priority!
+            updateEvent.profile =  selectedProfile
+            updateEvent.profileColour = selectedColor
+            EventDAO().editEvent(updatedEvent: updateEvent)
+            eventEdit = false
+        }
+        else{
+            let eventDict: [String: Any] = [
+                "Name" : eventName!,
+                "Location" : eventLocationText.text!,
+                "StartTime" : startDate!,
+                "EndTime" : endDate!,
+                "All-Day": allDayStatus,
+                "ReminderTime" : reminderDate,
+                "Priority" : priority!,
+                "Profile" : selectedProfile,
+                "ProfileColour" : selectedColor,
+                "DeleteStatus" : false,
+                "DeleteTime" : Date()
+            ]
+            EventDAO().addNewEvent(eventDict: eventDict)
+        }
         onDismiss!()
         dismiss(animated: true, completion: nil)
     }
@@ -250,7 +319,6 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if(reminderTimePicker.isEnabled == false){
             reminderTimePicker.isEnabled = true
             enableButton(enabledButton: reminderButton)
-            
         }
         else{
             self.reminderTimePicker.isEnabled = false

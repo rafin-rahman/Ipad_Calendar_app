@@ -15,7 +15,7 @@ public class SelectColor{
         
         switch color {
         case "Red":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "c0392b", alpha: 1)
+            newColor = HexToUIColor.hexStringToUIColor(hex: "e15f41", alpha: 1)
         case "Orange":
             newColor = HexToUIColor.hexStringToUIColor(hex: "f39c12", alpha: 1)
         case "Yellow":

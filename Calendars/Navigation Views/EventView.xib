@@ -39,7 +39,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="LDJ-lk-k3l" secondAttribute="trailing" constant="27" id="5Tb-bt-XDY"/>
                         <constraint firstItem="LDJ-lk-k3l" firstAttribute="centerY" secondItem="xDc-2l-jK0" secondAttribute="centerY" id="CRL-Mz-6Sg"/>
@@ -105,6 +105,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="globalStack" destination="fmL-w6-Gms" id="QNG-GK-IFH"/>
+                <outlet property="menuEvent" destination="xDc-2l-jK0" id="OhO-Lv-UaW"/>
                 <outlet property="scrollView" destination="q4q-7t-cfp" id="mn3-e1-QgB"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>

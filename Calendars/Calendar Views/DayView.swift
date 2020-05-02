@@ -28,8 +28,8 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
     
     var activeDate: Date = Date()
     
-    var finalEventList : Array<Event> = Array()
-    var finalAllDayEventList: Array<Event> = Array()
+    var finalEventList : Array<Events> = Array()
+    var finalAllDayEventList: Array<Events> = Array()
     
     var eventView : Array<UIView> = Array()
     var allDayListView : Array<UIView> = Array()

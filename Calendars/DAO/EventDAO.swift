@@ -14,9 +14,9 @@ import FirebaseFirestore
 class EventDAO{
     let dbConnection:Firestore
     
-    var eventStartingList : Array<Event> = Array()
-    var eventEndingList : Array<Event> = Array()
-    var eventList : Array<Event> = Array()
+    var eventStartingList : Array<Events> = Array()
+    var eventEndingList : Array<Events> = Array()
+    var eventList : Array<Events> = Array()
     
     init() {
         dbConnection = Firestore.firestore()
@@ -38,7 +38,7 @@ class EventDAO{
             else {
                 for event in querySnapshot!.documents {
                     
-                    let newEvent = Event()
+                    let newEvent = Events()
                     
                     newEvent.id = (event.documentID)
                     
@@ -83,7 +83,7 @@ class EventDAO{
             else {
                 for event in querySnapshot!.documents {
                     
-                    let newEvent = Event()
+                    let newEvent = Events()
                     
                     newEvent.id = (event.documentID)
                     
@@ -118,7 +118,7 @@ class EventDAO{
             }
             else {
                 for event in querySnapshot!.documents {
-                    let newEvent = Event()
+                    let newEvent = Events()
                     	
                     newEvent.id = (event.documentID)
                     
@@ -146,8 +146,8 @@ class EventDAO{
         }
     }
     
-    func getEventFromDays() -> Array<Event>{
-        var finalEventList : Array<Event> = Array()
+    func getEventFromDays() -> Array<Events>{
+        var finalEventList : Array<Events> = Array()
         
         for startEvent in self.eventStartingList{
             for endEvent in self.eventEndingList{
@@ -165,6 +165,47 @@ class EventDAO{
         newEvent.setData(eventDict);
     }
     
+    func editDeleteStatus(id:String){
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").document(id)
+        
+        eventReference.updateData([
+            "DeleteStatus": true,
+            "DeleteTime" : Date()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    func editEvent(updatedEvent:Events){
+        print(updatedEvent.id)
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").document(updatedEvent.id)
+        eventReference.updateData([
+            "Name" : updatedEvent.eventName,
+            "Location" : updatedEvent.location,
+            "StartTime" : updatedEvent.startDate,
+            "EndTime" : updatedEvent.endDate,
+            "All-Day": updatedEvent.allDay,
+            "ReminderTime" : updatedEvent.reminder,
+            "Priority" : updatedEvent.priority,
+            "Profile" : updatedEvent.profile,
+            "ProfileColour" : updatedEvent.profileColour,
+            "DeleteStatus" : false,
+            "DeleteTime" : Date()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+        
+        
+    }
+    
     func getAllDeletedEvents(){
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         
@@ -177,7 +218,7 @@ class EventDAO{
             else {
                 for event in querySnapshot!.documents {
                     
-                    let newEvent = Event()
+                    let newEvent = Events()
                     
                     newEvent.id = (event.documentID)
                     

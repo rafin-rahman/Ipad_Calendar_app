@@ -89,25 +89,25 @@ class MainViewController: UIViewController {
             home.dynamicView.loadData()
         }
         
+        if let event = self.rightView as? EventView{
+           event.onLoad()
+        }
         //Add for OtherViews
     }
     
     //Add Or Edit View
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddEditSegueEvent" {
-            if let destinationVC = segue.destination as? AddEditViewController {
-                destinationVC.isTask = false
-                destinationVC.onDismiss = onSegDismiss
-                if let home = self.rightView as? HomeView {
-                    if let day = home.dynamicView as? DayView {
-                        destinationVC.activeDate = day.activeDate
+        if let viewController = segue.destination as? AddEditViewController {
+            viewController.onDismiss = onSegDismiss
+            if segue.identifier == "AddEditSegueEvent" {
+                    viewController.isTask = false
+                    if let home = self.rightView as? HomeView {
+                        if let day = home.dynamicView as? DayView {
+                            viewController.activeDate = day.activeDate
+                        }
                     }
-                }
-            }
-        } else if segue.identifier == "AddEditSegueTask" {
-            if let destinationVC = segue.destination as? AddEditViewController {
-                destinationVC.isTask = true
-                destinationVC.onDismiss = onSegDismiss
+            } else if segue.identifier == "AddEditSegueTask" {
+                viewController.isTask = true
             }
         }
     }

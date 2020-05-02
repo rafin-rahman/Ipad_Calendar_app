@@ -14,6 +14,7 @@ class EventView: UIView, NavigationProtocol {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var globalStack: UIStackView!
+    @IBOutlet weak var menuEvent: UIView!
     
     var dynamicView: CalendarProtocol!
     
@@ -22,6 +23,7 @@ class EventView: UIView, NavigationProtocol {
     var orderByTime = true
     
     func onLoad(){
+        globalStack.removeAllArrangedSubviews()
         let eventDAO = EventDAO()
         eventDAO.getAllEvents()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -32,7 +34,7 @@ class EventView: UIView, NavigationProtocol {
         }
     }
     
-    func showEventsAccordingToDate(eventList:Dictionary<Date, Array<Event>>){
+    func showEventsAccordingToDate(eventList:Dictionary<Date, Array<Events>>){
         let sortedDic = eventList.sorted { (firstDic, secondDic) -> Bool in
             return firstDic.key < secondDic.key
         }
@@ -49,7 +51,7 @@ class EventView: UIView, NavigationProtocol {
                 
                 let dateLabel = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
                 dateLabel.text = dateValue.toString(dateFormat: "dd MMM YYYY")
-                dateLabel.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1.00)
+                dateLabel.textColor = HexToUIColor.hexStringToUIColor(hex: "444444", alpha: 1)
                 dateLabel.font = UIFont.systemFont(ofSize: 25)
                 dateLabel.numberOfLines = 0
                 dateLabel.sizeToFit()
@@ -69,7 +71,6 @@ class EventView: UIView, NavigationProtocol {
                 dateLabel.leadingAnchor.constraint(equalTo: dateView.leadingAnchor, constant: 90).isActive = true
                 dateLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
                 
-                
                 for eventDetails in listOfEvent{
                     let eventView = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                     eventView.backgroundColor = SelectColor.getColor(color: eventDetails.profileColour)
@@ -79,22 +80,25 @@ class EventView: UIView, NavigationProtocol {
                     optionView.clipsToBounds = true
                     
                     let editView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                    editView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "d35400", alpha: 1)
+                    editView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "fd9644", alpha: 1)
                     let binView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                    binView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "c0392b", alpha: 1)
+                    binView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#c0392b", alpha: 1)
                     
                     let editButton: InfoButton = InfoButton(type: .custom)
                     editButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
                     let editIcon = UIImage(named: "Edit icon") as UIImage?
                     editButton.translatesAutoresizingMaskIntoConstraints = false
                     editButton.setImage(editIcon, for: .normal)
+                    editButton.eventDetail = eventDetails
+                    editButton.addTarget(self, action: #selector(editButtonClick(_:)), for: .touchUpInside)
                     
                     let binButton:InfoButton = InfoButton(type: .custom)
                     binButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
                     let binIcon = UIImage(named: "Bin button") as UIImage?
                     binButton.translatesAutoresizingMaskIntoConstraints = false
                     binButton.setImage(binIcon, for: .normal)
-                    
+                    binButton.eventDetail = eventDetails
+                    binButton.addTarget(self, action: #selector(deleteButtonClick(_:)), for: .touchUpInside)
                     
                     let priorityView = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
                     priorityView.backgroundColor = PriorityColorSelector.getColor(priority: eventDetails.priority)
@@ -104,9 +108,16 @@ class EventView: UIView, NavigationProtocol {
                     let clockView = UIImageView(image: clockImgName!)
                     
                     let timeLabel = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
-                    let startTime = eventDetails.startDate.stripDate().toString(dateFormat: "HH-mm")
-                    let endTime = eventDetails.endDate.stripDate().toString(dateFormat: "HH-mm")
-                    timeLabel.text = startTime! + " - " + endTime!
+                    
+                    if eventDetails.allDay{
+                        timeLabel.text = "All Day"
+                    }
+                    else{
+                        let startTime = eventDetails.startDate.stripDate().toString(dateFormat: "HH:mm")
+                        let endTime = eventDetails.endDate.stripDate().toString(dateFormat: "HH:mm")
+                        timeLabel.text = startTime! + " - " + endTime!
+                    }
+                    
                     timeLabel.textColor = .white
                     timeLabel.font = UIFont.systemFont(ofSize: 17)
                     timeLabel.numberOfLines = 0
@@ -278,16 +289,19 @@ class EventView: UIView, NavigationProtocol {
         })
     }
     
-    func getEventsGroupedbyDate(eventList : Array<Event>) -> Dictionary<Date, Array<Event>>{
-        var eventDictonary : Dictionary <Date, Array<Event>> = Dictionary()
-        for event in eventList{
+    func getEventsGroupedbyDate(eventList : Array<Events>) -> Dictionary<Date, Array<Events>>{
+        var eventDictonary : Dictionary <Date, Array<Events>> = Dictionary()
+        let sortedList = eventList.sorted {
+            $0.startDate < $1.startDate
+        }
+        for event in sortedList{
             eventDictonary[event.startDate.stripTime(), default: []].append(event)
         }
         return eventDictonary
     }
     
-    func getEventsGroupedbyProfile(eventList : Array<Event>) -> Dictionary<String, Array<Event>>{
-        var eventDictonary : Dictionary <String, Array<Event>> = Dictionary()
+    func getEventsGroupedbyProfile(eventList : Array<Events>) -> Dictionary<String, Array<Events>>{
+        var eventDictonary : Dictionary <String, Array<Events>> = Dictionary()
         for event in eventList{
             eventDictonary[event.profile, default: []].append(event)
         }
@@ -299,8 +313,40 @@ class EventView: UIView, NavigationProtocol {
         if orderByTime
         {  orderByTime = false}
     }
+    
     @IBAction func groupByTimeClick(_ sender: UIButton) {
         if !orderByTime
         {  orderByTime = true}
+    }
+    
+    @objc func editButtonClick(_ sender:InfoButton){
+        if let viewController = getOwningViewController() as? MainViewController {
+            let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
+            popoverContent.modalPresentationStyle = .overCurrentContext
+            popoverContent.modalTransitionStyle = .crossDissolve
+            viewController.present(popoverContent, animated: true, completion: nil)
+            popoverContent.eventEditDetails(event: sender.eventDetail!)
+            popoverContent.onDismiss = onSegDismiss
+        }
+    }
+    
+    func onSegDismiss() {
+        onLoad()
+    }
+    
+    @objc func deleteButtonClick(_ sender: InfoButton) {
+        if let viewController = self.getOwningViewController() as? MainViewController {
+            let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this event?", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                EventDAO().editDeleteStatus(id: sender.eventDetail!.id)
+                self.onLoad()
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            }))
+            
+            viewController.present(refreshAlert, animated: true, completion: nil)
+        }
     }
 }

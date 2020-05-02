@@ -10,7 +10,7 @@ import Foundation
 
 class EventCollision{
     
-    static func collisionDetection(eventList:Array<Event>)
+    static func collisionDetection(eventList:Array<Events>)
     {
         let length = eventList.count - 1
         
