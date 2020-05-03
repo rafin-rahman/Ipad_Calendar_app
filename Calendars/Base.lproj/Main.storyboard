@@ -171,7 +171,7 @@
                                     <constraint firstAttribute="height" constant="60" id="4ps-I1-sVO"/>
                                     <constraint firstAttribute="width" constant="60" id="x1B-2s-QPP"/>
                                 </constraints>
-                                <state key="normal" image="Add Button"/>
+                                <state key="normal" image="add Button"/>
                                 <connections>
                                     <action selector="addButtonClick:" destination="Ona-b3-j2U" eventType="touchUpInside" id="qsP-NR-GOu"/>
                                 </connections>
@@ -803,7 +803,6 @@
         <segue reference="Bm7-fP-SWq"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Add Button" width="167" height="167"/>
         <image name="Bin" width="167" height="167"/>
         <image name="Event" width="167" height="167"/>
         <image name="Event Button" width="167" height="167"/>
@@ -813,5 +812,6 @@
         <image name="Search Icon" width="100" height="100"/>
         <image name="Task" width="167" height="167"/>
         <image name="Task Button" width="167" height="167"/>
+        <image name="add Button" width="167" height="167"/>
     </resources>
 </document>
