@@ -439,7 +439,7 @@ class EventView: UIView, NavigationProtocol {
             let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this event?", preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-                EventDAO().editDeleteStatus(id: sender.eventDetail!.id)
+                EventDAO().editDeleteStatus(id: sender.eventDetail!.id, deleteStatus:true)
                 self.onLoad()
             }))
             

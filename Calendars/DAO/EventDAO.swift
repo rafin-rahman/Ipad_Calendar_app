@@ -165,11 +165,11 @@ class EventDAO{
         newEvent.setData(eventDict);
     }
     
-    func editDeleteStatus(id:String){
+    func editDeleteStatus(id:String, deleteStatus:Bool){
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event").document(id)
         
         eventReference.updateData([
-            "DeleteStatus": true,
+            "DeleteStatus": deleteStatus,
             "DeleteTime" : Date()
         ]) { err in
             if let err = err {
@@ -206,8 +206,20 @@ class EventDAO{
         
     }
     
+    func deleteEvent(eventId:String){
+        let profileReference = dbConnection.collection("User").document("Subin").collection("Event")
+        
+        profileReference.document(eventId).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
     func getAllDeletedEvents(){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").order(by: "DeleteTime", descending: true)
         
         let deletedEvents = eventReference.whereField("DeleteStatus", isEqualTo: true)
         deletedEvents.getDocuments(){

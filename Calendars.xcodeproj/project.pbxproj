@@ -150,8 +150,6 @@
 				D16403062443D28F0078E059 /* MonthView.xib */,
 				D179B64F2448BFE9002C00B9 /* YearView.swift */,
 				D179B6512448BFF5002C00B9 /* YearView.xib */,
-				D13AD93B245A1CB500C1637A /* MonthCellView.xib */,
-				D13AD93D245A1CCA00C1637A /* MonthCellView.swift */,
 			);
 			path = "Calendar Views";
 			sourceTree = "<group>";
@@ -169,10 +167,19 @@
 				D178474C2449713900D3472F /* BinView.xib */,
 				D1F228ED245459090008DD92 /* ProfileView.swift */,
 				D1F228E7245458990008DD92 /* ProfileView.xib */,
-				D1C7D059245E14280065CF0F /* BinRowView.xib */,
-				D1C7D05B245E14330065CF0F /* BinRowView.swift */,
 			);
 			path = "Navigation Views";
+			sourceTree = "<group>";
+		};
+		D1718D0F245E34CF00C467D5 /* Additional Views */ = {
+			isa = PBXGroup;
+			children = (
+				D1C7D059245E14280065CF0F /* BinRowView.xib */,
+				D1C7D05B245E14330065CF0F /* BinRowView.swift */,
+				D13AD93B245A1CB500C1637A /* MonthCellView.xib */,
+				D13AD93D245A1CCA00C1637A /* MonthCellView.swift */,
+			);
+			path = "Additional Views";
 			sourceTree = "<group>";
 		};
 		D1870E4E244E422400DC56B8 /* Utility */ = {
@@ -211,6 +218,7 @@
 		D189C06A24264A1E00FF7723 /* Calendars */ = {
 			isa = PBXGroup;
 			children = (
+				D1718D0F245E34CF00C467D5 /* Additional Views */,
 				D1F228EF24545AC20008DD92 /* Protocols */,
 				D10DAFE52451C48300FC253E /* DAO */,
 				D1870E4E244E422400DC56B8 /* Utility */,
