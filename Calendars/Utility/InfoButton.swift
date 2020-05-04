@@ -14,4 +14,5 @@ class InfoButton: UIButton {
     
     var profile : Profile?
     var eventDetail : Events?
+    var taskDetails: Task?
 }

@@ -92,6 +92,10 @@ class MainViewController: UIViewController {
         if let event = self.rightView as? EventView{
            event.onLoad()
         }
+        
+        if let task = self.rightView as? TaskView{
+           task.onLoad()
+        }
         //Add for OtherViews
     }
     
@@ -184,6 +188,7 @@ class MainViewController: UIViewController {
             TaskView {
             addButton.isHidden = false
             setRightViewDetails(newRightView: newRightView)
+            newRightView.onLoad()
         }
         selectedButtonEffect(selectedButton: taskNavButton, selectedLabel: taskLabel)
         
@@ -204,7 +209,7 @@ class MainViewController: UIViewController {
     @IBAction func onBinClick(_ sender: UIButton) {
         if let newRightView = UINib(nibName: "BinView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             BinView {
-            addButton.isHidden = false
+            addButton.isHidden = true
             setRightViewDetails(newRightView: newRightView)
             newRightView.onLoad()
             

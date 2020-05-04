@@ -43,7 +43,7 @@
                                 <constraint firstAttribute="height" constant="30" id="IBw-L3-Ei6"/>
                                 <constraint firstAttribute="width" constant="30" id="YZm-7r-fQI"/>
                             </constraints>
-                            <state key="normal" image="Profile Group View"/>
+                            <state key="normal" image="Task completed"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-PG-Ndf">
                             <rect key="frame" x="1117" y="10" width="30" height="30"/>
@@ -51,7 +51,7 @@
                                 <constraint firstAttribute="width" constant="30" id="U44-F1-mNI"/>
                                 <constraint firstAttribute="height" constant="30" id="U6J-l4-MkZ"/>
                             </constraints>
-                            <state key="normal" image="Profile List View"/>
+                            <state key="normal" image="Task to complete"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -97,11 +97,14 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="globalStack" destination="tKg-Tc-tBr" id="6Zw-n2-Up9"/>
+            </connections>
             <point key="canvasLocation" x="132" y="154"/>
         </view>
     </objects>
     <resources>
-        <image name="Profile Group View" width="60" height="60"/>
-        <image name="Profile List View" width="60" height="60"/>
+        <image name="Task completed" width="100" height="100"/>
+        <image name="Task to complete" width="60" height="60"/>
     </resources>
 </document>

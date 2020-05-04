@@ -22,7 +22,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxW-T5-bgu">
-                            <rect key="frame" x="892" y="40" width="35" height="43"/>
+                            <rect key="frame" x="922" y="40" width="35" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Day">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -32,7 +32,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUj-Pr-sQw">
-                            <rect key="frame" x="959" y="40" width="50" height="43"/>
+                            <rect key="frame" x="989" y="40" width="50" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Week">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -42,7 +42,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-rI-n4P">
-                            <rect key="frame" x="1117" y="40" width="39" height="43"/>
+                            <rect key="frame" x="1147" y="40" width="39" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Year">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -52,7 +52,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-SE-N57">
-                            <rect key="frame" x="1037" y="40" width="57" height="43"/>
+                            <rect key="frame" x="1067" y="40" width="57" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Month">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,7 +72,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYA-jp-RAe">
-                            <rect key="frame" x="892" y="78" width="35" height="7"/>
+                            <rect key="frame" x="922" y="78" width="35" height="7"/>
                             <color key="backgroundColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="7" id="qRt-Wy-7xU"/>
@@ -83,7 +83,7 @@
                     <constraints>
                         <constraint firstItem="UGJ-gx-Rkp" firstAttribute="leading" secondItem="D1D-5m-dLP" secondAttribute="leading" constant="32" id="81Z-Mz-Q25"/>
                         <constraint firstAttribute="bottom" secondItem="hR8-rI-n4P" secondAttribute="bottom" constant="2" id="EAS-GE-xex"/>
-                        <constraint firstAttribute="trailing" secondItem="hR8-rI-n4P" secondAttribute="trailing" constant="60" id="LCK-bu-oiA"/>
+                        <constraint firstAttribute="trailing" secondItem="hR8-rI-n4P" secondAttribute="trailing" constant="30" id="LCK-bu-oiA"/>
                         <constraint firstItem="ZUj-Pr-sQw" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="RXa-yu-Ruv"/>
                         <constraint firstAttribute="bottom" secondItem="ZUj-Pr-sQw" secondAttribute="bottom" constant="2" id="Ruj-t6-dFk"/>
                         <constraint firstItem="OxW-T5-bgu" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="TXl-8S-1RV"/>

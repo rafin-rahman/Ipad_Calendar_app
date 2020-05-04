@@ -207,9 +207,9 @@ class EventDAO{
     }
     
     func deleteEvent(eventId:String){
-        let profileReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         
-        profileReference.document(eventId).delete(){ err in
+        eventReference.document(eventId).delete(){ err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {

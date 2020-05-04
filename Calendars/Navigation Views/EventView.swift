@@ -319,45 +319,6 @@ class EventView: UIView, NavigationProtocol {
         }
     }
     
-    
-    @objc func collapsableButton(_ sender:InfoButton){
-        if let stackView = sender.superview?.superview as? UIStackView {
-            if stackView.tag == -1 {
-                
-                UIView.animate(withDuration: 0.5, animations:  {
-                    
-                    for subview in stackView.arrangedSubviews {
-                        if subview.tag != 1 {
-                            UIView.animate(withDuration: 0.3, animations: {
-                                subview.isHidden = false
-                            })
-                        }
-                    }
-                    stackView.tag = 1
-                    sender.selectedButton!.imageView!.transform = .identity
-                    self.layoutIfNeeded()
-                }, completion: nil)
-            } else {
-                UIView.animate(withDuration: 0.5, animations:  {
-                    for subview in stackView.arrangedSubviews {
-                        if subview.tag != 1 {
-                            UIView.animate(withDuration: 0.3, animations: {
-                                subview.isHidden = true
-                            })
-                        }
-                    }
-                    stackView.tag = -1
-                    sender.selectedButton!.imageView!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-                    self.layoutIfNeeded()
-                }, completion: nil)
-            }
-            stackView.layoutIfNeeded()
-        }
-        
-        
-    }
-    
-    
     @objc func swipeLeft(_ sender: UIGestureRecognizer) {
         if let eventView = sender.view as? TempConstraintView {
             if activeEventView != nil && activeEventView != eventView{
@@ -449,4 +410,41 @@ class EventView: UIView, NavigationProtocol {
             viewController.present(refreshAlert, animated: true, completion: nil)
         }
     }
+    
+    @objc func collapsableButton(_ sender:InfoButton){
+           if let stackView = sender.superview?.superview as? UIStackView {
+               if stackView.tag == -1 {
+                   
+                   UIView.animate(withDuration: 0.5, animations:  {
+                       
+                       for subview in stackView.arrangedSubviews {
+                           if subview.tag != 1 {
+                               UIView.animate(withDuration: 0.3, animations: {
+                                   subview.isHidden = false
+                               })
+                           }
+                       }
+                       stackView.tag = 1
+                       sender.selectedButton!.imageView!.transform = .identity
+                       self.layoutIfNeeded()
+                   }, completion: nil)
+               } else {
+                   UIView.animate(withDuration: 0.5, animations:  {
+                       for subview in stackView.arrangedSubviews {
+                           if subview.tag != 1 {
+                               UIView.animate(withDuration: 0.3, animations: {
+                                   subview.isHidden = true
+                               })
+                           }
+                       }
+                       stackView.tag = -1
+                       sender.selectedButton!.imageView!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                       self.layoutIfNeeded()
+                   }, completion: nil)
+               }
+               stackView.layoutIfNeeded()
+           }
+           
+           
+       }
 }

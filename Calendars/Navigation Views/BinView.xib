@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1216" height="1004"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGd-lJ-sj1" userLabel="Header view">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QGd-lJ-sj1" userLabel="Header view">
                     <rect key="frame" x="0.0" y="0.0" width="1216" height="128"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxV-z0-3dP">
@@ -37,26 +37,22 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQM-dh-Ewz" userLabel="Subtitle view">
                     <rect key="frame" x="0.0" y="128" width="1216" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DELETED EVENTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yri-Rh-UZJ">
-                            <rect key="frame" x="150" y="0.0" width="250" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="250" id="iRM-qf-rhk"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                            <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DELETED TASKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHs-go-Dv1">
-                            <rect key="frame" x="816" y="0.0" width="250" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="250" id="vLb-Lc-iNz"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                            <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FT3-Ch-uUP">
+                            <rect key="frame" x="0.0" y="0.0" width="608" height="50"/>
+                            <state key="normal" title="Deleted events"/>
+                            <connections>
+                                <action selector="eventButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="fbV-4N-3JD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grc-tY-Dvg">
+                            <rect key="frame" x="608" y="0.0" width="608" height="50"/>
+                            <state key="normal" title="Deleted tasks"/>
+                            <connections>
+                                <action selector="taskButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zaq-Dc-Con"/>
+                            </connections>
+                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSx-eL-XUh">
-                            <rect key="frame" x="384" y="45" width="608" height="5"/>
+                            <rect key="frame" x="0.0" y="45" width="608" height="5"/>
                             <color key="backgroundColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="5" id="1L2-AK-3Qb"/>
@@ -65,47 +61,28 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="OHs-go-Dv1" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="top" constant="10" id="59d-ca-1rx"/>
-                        <constraint firstItem="Yri-Rh-UZJ" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="top" constant="10" id="EFr-Pr-Sag"/>
                         <constraint firstItem="sSx-eL-XUh" firstAttribute="width" secondItem="sQM-dh-Ewz" secondAttribute="width" multiplier="0.5" id="GNG-9K-PzV"/>
+                        <constraint firstItem="grc-tY-Dvg" firstAttribute="width" secondItem="sQM-dh-Ewz" secondAttribute="width" multiplier="0.5" id="IGp-kX-Pr2"/>
+                        <constraint firstItem="grc-tY-Dvg" firstAttribute="centerY" secondItem="sQM-dh-Ewz" secondAttribute="centerY" id="Kxp-Ky-NTR"/>
+                        <constraint firstItem="FT3-Ch-uUP" firstAttribute="height" secondItem="sQM-dh-Ewz" secondAttribute="height" id="QnK-nH-ZOv"/>
                         <constraint firstAttribute="bottom" secondItem="sSx-eL-XUh" secondAttribute="bottom" id="Y1q-v0-GAg"/>
-                        <constraint firstItem="sSx-eL-XUh" firstAttribute="leading" secondItem="sQM-dh-Ewz" secondAttribute="leading" constant="384" id="fst-QQ-rl0"/>
+                        <constraint firstAttribute="trailing" secondItem="grc-tY-Dvg" secondAttribute="trailing" id="flp-Jh-7aJ"/>
+                        <constraint firstItem="sSx-eL-XUh" firstAttribute="leading" secondItem="sQM-dh-Ewz" secondAttribute="leading" id="fst-QQ-rl0"/>
                         <constraint firstAttribute="height" constant="50" id="gVK-mr-zKE"/>
+                        <constraint firstItem="FT3-Ch-uUP" firstAttribute="centerY" secondItem="sQM-dh-Ewz" secondAttribute="centerY" id="hbF-he-xmp"/>
+                        <constraint firstItem="FT3-Ch-uUP" firstAttribute="width" secondItem="sQM-dh-Ewz" secondAttribute="width" multiplier="0.5" id="j9V-Hc-a6H"/>
+                        <constraint firstItem="grc-tY-Dvg" firstAttribute="height" secondItem="sQM-dh-Ewz" secondAttribute="height" id="nnH-Ip-8Ie"/>
+                        <constraint firstItem="FT3-Ch-uUP" firstAttribute="leading" secondItem="sQM-dh-Ewz" secondAttribute="leading" id="yCz-YX-0Zb"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qez-39-99z" userLabel="Scroll right">
-                    <rect key="frame" x="608" y="178" width="608" height="826"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eF-Fu-11u" userLabel="Scroll event">
+                    <rect key="frame" x="0.0" y="178" width="1216" height="826"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vm7-fP-n5Z">
-                            <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F0y-Wp-20Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
-                                    <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" id="M6j-Tn-Q7x"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                        </stackView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="vm7-fP-n5Z" firstAttribute="top" secondItem="qez-39-99z" secondAttribute="top" id="hXN-v1-bCW"/>
-                        <constraint firstItem="vm7-fP-n5Z" firstAttribute="leading" secondItem="qez-39-99z" secondAttribute="leading" id="sYW-6a-aie"/>
-                        <constraint firstAttribute="trailing" secondItem="vm7-fP-n5Z" secondAttribute="trailing" id="uMY-8y-64R"/>
-                        <constraint firstAttribute="bottom" secondItem="vm7-fP-n5Z" secondAttribute="bottom" id="zYG-7Z-ons"/>
-                    </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="1Xt-xz-PFg"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="HCh-BV-SVa"/>
-                </scrollView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eF-Fu-11u" userLabel="Scroll left">
-                    <rect key="frame" x="0.0" y="178" width="608" height="826"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-yE-I00">
-                            <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
+                        <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-yE-I00">
+                            <rect key="frame" x="0.0" y="0.0" width="1216" height="0.0"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Rj-St-N0A">
-                                    <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1216" height="0.0"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" id="kKu-8u-OtT"/>
@@ -119,6 +96,7 @@
                         <constraint firstAttribute="trailing" secondItem="bZM-yE-I00" secondAttribute="trailing" id="Eus-Ri-y2o"/>
                         <constraint firstItem="bZM-yE-I00" firstAttribute="top" secondItem="0eF-Fu-11u" secondAttribute="top" id="H4a-zR-gdd"/>
                         <constraint firstItem="bZM-yE-I00" firstAttribute="leading" secondItem="0eF-Fu-11u" secondAttribute="leading" id="YXS-U9-zli"/>
+                        <constraint firstItem="bZM-yE-I00" firstAttribute="width" secondItem="0eF-Fu-11u" secondAttribute="width" id="iqW-mI-MDD"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="wrD-bB-ZID"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="h9n-s8-HeI"/>
@@ -126,30 +104,28 @@
             </subviews>
             <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="qez-39-99z" secondAttribute="bottom" id="99m-c2-faw"/>
+                <constraint firstItem="QGd-lJ-sj1" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="90i-5z-lOr"/>
                 <constraint firstItem="QGd-lJ-sj1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="IoV-Zz-2Be"/>
-                <constraint firstItem="F0y-Wp-20Y" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="Kav-lT-EZs"/>
                 <constraint firstItem="0eF-Fu-11u" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MBl-BJ-eOx"/>
-                <constraint firstItem="Yri-Rh-UZJ" firstAttribute="centerX" secondItem="1Rj-St-N0A" secondAttribute="centerX" id="PIX-Ay-L1I"/>
                 <constraint firstItem="sQM-dh-Ewz" firstAttribute="top" secondItem="QGd-lJ-sj1" secondAttribute="bottom" id="Vf3-87-s32"/>
-                <constraint firstItem="1Rj-St-N0A" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="XMR-78-dAg"/>
+                <constraint firstItem="1Rj-St-N0A" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="XMR-78-dAg"/>
                 <constraint firstItem="QGd-lJ-sj1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhX-U8-uYh"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qez-39-99z" secondAttribute="trailing" id="avU-yr-4jk"/>
+                <constraint firstItem="0eF-Fu-11u" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="bottom" id="ZNY-W5-6Kq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sQM-dh-Ewz" secondAttribute="trailing" id="bgi-V0-Xa3"/>
-                <constraint firstItem="F0y-Wp-20Y" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="bottom" id="fKD-Zl-CM5"/>
                 <constraint firstItem="sQM-dh-Ewz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="gSE-ix-uxd"/>
-                <constraint firstItem="0eF-Fu-11u" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="mNo-0Y-AcM"/>
-                <constraint firstItem="qez-39-99z" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="sSh-lf-19i"/>
+                <constraint firstItem="0eF-Fu-11u" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="mNo-0Y-AcM"/>
                 <constraint firstItem="1Rj-St-N0A" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="bottom" id="v68-dW-sdn"/>
                 <constraint firstAttribute="bottom" secondItem="0eF-Fu-11u" secondAttribute="bottom" id="x5f-Oc-Gv8"/>
-                <constraint firstItem="OHs-go-Dv1" firstAttribute="centerX" secondItem="F0y-Wp-20Y" secondAttribute="centerX" id="xfS-7P-ioB"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="leftStack" destination="bZM-yE-I00" id="6Rz-Tb-Jme"/>
+                <outlet property="deletedStack" destination="bZM-yE-I00" id="6Rz-Tb-Jme"/>
+                <outlet property="eventButton" destination="FT3-Ch-uUP" id="DVB-Uy-hU2"/>
+                <outlet property="selectedViewConstraint" destination="fst-QQ-rl0" id="ryG-Ib-Spg"/>
+                <outlet property="subtitleView" destination="sQM-dh-Ewz" id="iKY-cw-D86"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
+            <point key="canvasLocation" x="-187" y="162"/>
         </view>
     </objects>
 </document>

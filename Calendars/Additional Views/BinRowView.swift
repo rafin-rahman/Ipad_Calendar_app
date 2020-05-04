@@ -13,18 +13,16 @@ class BinRowView: UIView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     var selectedEvent: Events!
-    
-    func del() {
-        if let event = selectedEvent as? Events {
-            
-        }
-    }
-    
-    func setDetails(){
+    var selectedTask : Task!
+        
+    func setDetailsOfEvent(){
             nameLabel.text = selectedEvent.eventName
             dateLabel.text = selectedEvent.startDate.toString(dateFormat: "dd MMM YYYY")
     }
     
-
+    func setDetailsOfTask(){
+            nameLabel.text = selectedTask.taskName
+            dateLabel.text = selectedTask.taskDateAndTime.toString(dateFormat: "dd MMM YYYY")
+    }
     
 }

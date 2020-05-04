@@ -38,7 +38,7 @@
                 <outlet property="dateLabel" destination="j7p-MS-j50" id="TPH-dz-5sz"/>
                 <outlet property="nameLabel" destination="QWA-5r-XKa" id="bfq-aG-oMM"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
+            <point key="canvasLocation" x="-2261" y="-133"/>
         </view>
     </objects>
 </document>
