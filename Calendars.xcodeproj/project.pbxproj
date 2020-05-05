@@ -42,6 +42,7 @@
 		D192628D2454E78300C11E17 /* SelectColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192628C2454E78300C11E17 /* SelectColour.swift */; };
 		D1A0CFF4244B9B0D008C4D7C /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Events.swift */; };
 		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
+		D1B4112A2461D04D00C7F62C /* TapTaskGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B411292461D04D00C7F62C /* TapTaskGesture.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
 		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
@@ -98,6 +99,7 @@
 		D192628C2454E78300C11E17 /* SelectColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColour.swift; sourceTree = "<group>"; };
 		D1A0CFF3244B9B0D008C4D7C /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
+		D1B411292461D04D00C7F62C /* TapTaskGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskGesture.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				D1F4C3082458D47C008946A0 /* InfoButton.swift */,
 				D13AD93F245A663D00C1637A /* PriorityColorSelector.swift */,
 				D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */,
+				D1B411292461D04D00C7F62C /* TapTaskGesture.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				D179B6502448BFE9002C00B9 /* YearView.swift in Sources */,
 				D10DAFED2451F45D00FC253E /* HexToUIColor.swift in Sources */,
 				D1F228F5245464450008DD92 /* ProfileDAO.swift in Sources */,
+				D1B4112A2461D04D00C7F62C /* TapTaskGesture.swift in Sources */,
 				D179B6542448C75B002C00B9 /* HomeView.swift in Sources */,
 				D10DAFEB2451E94F00FC253E /* Profile.swift in Sources */,
 				D189C06C24264A1E00FF7723 /* AppDelegate.swift in Sources */,

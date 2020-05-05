@@ -22,18 +22,20 @@
                                 <constraint firstAttribute="width" constant="30" id="Lzf-Hm-uDs"/>
                                 <constraint firstAttribute="height" constant="30" id="a33-AN-VeZ"/>
                             </constraints>
-                            <state key="normal" image="Profile Group View"/>
+                            <color key="tintColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="Folder"/>
                             <connections>
                                 <action selector="groupByProfileClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="ImH-em-jBa"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Aq-1X-9ZD">
-                            <rect key="frame" x="1117" y="10" width="30" height="30"/>
+                            <rect key="frame" x="1109" y="10" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="ZIk-en-Cfb"/>
                                 <constraint firstAttribute="width" constant="30" id="u0j-E7-1zu"/>
                             </constraints>
-                            <state key="normal" image="Profile List View"/>
+                            <color key="tintColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="List"/>
                             <connections>
                                 <action selector="groupByTimeClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="iEw-2Q-Yhs"/>
                             </connections>
@@ -45,6 +47,15 @@
                                 <constraint firstAttribute="height" constant="1" id="1vy-wt-vVQ"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorted by date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tam-hd-k9L">
+                            <rect key="frame" x="939" y="13" width="160" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="160" id="GzE-jO-w9F"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                            <color key="textColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -53,8 +64,10 @@
                         <constraint firstItem="LDJ-lk-k3l" firstAttribute="centerY" secondItem="xDc-2l-jK0" secondAttribute="centerY" id="CRL-Mz-6Sg"/>
                         <constraint firstItem="1Aq-1X-9ZD" firstAttribute="centerY" secondItem="xDc-2l-jK0" secondAttribute="centerY" id="JkF-wA-M8O"/>
                         <constraint firstAttribute="height" constant="50" id="bQf-Fc-E2A"/>
-                        <constraint firstItem="LDJ-lk-k3l" firstAttribute="leading" secondItem="1Aq-1X-9ZD" secondAttribute="trailing" constant="12" id="dtr-y3-bRB"/>
+                        <constraint firstItem="LDJ-lk-k3l" firstAttribute="leading" secondItem="1Aq-1X-9ZD" secondAttribute="trailing" constant="20" id="dtr-y3-bRB"/>
                         <constraint firstAttribute="bottom" secondItem="2Ir-gG-nXi" secondAttribute="bottom" id="eOs-aj-wiG"/>
+                        <constraint firstItem="tam-hd-k9L" firstAttribute="centerY" secondItem="xDc-2l-jK0" secondAttribute="centerY" id="gSo-RT-k2V"/>
+                        <constraint firstItem="1Aq-1X-9ZD" firstAttribute="leading" secondItem="tam-hd-k9L" secondAttribute="trailing" constant="10" id="xbx-Kr-py5"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4q-7t-cfp">
@@ -113,15 +126,18 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="folderButton" destination="LDJ-lk-k3l" id="EZw-U1-9wM"/>
                 <outlet property="globalStack" destination="fmL-w6-Gms" id="QNG-GK-IFH"/>
+                <outlet property="listButton" destination="1Aq-1X-9ZD" id="OCV-WH-NqC"/>
                 <outlet property="menuEvent" destination="xDc-2l-jK0" id="OhO-Lv-UaW"/>
                 <outlet property="scrollView" destination="q4q-7t-cfp" id="mn3-e1-QgB"/>
+                <outlet property="subTitleLabel" destination="tam-hd-k9L" id="MR4-Kc-3pX"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
-        <image name="Profile Group View" width="60" height="60"/>
-        <image name="Profile List View" width="60" height="60"/>
+        <image name="Folder" width="100" height="100"/>
+        <image name="List" width="100" height="100"/>
     </resources>
 </document>

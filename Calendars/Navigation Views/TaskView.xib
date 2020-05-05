@@ -43,26 +43,56 @@
                                 <constraint firstAttribute="height" constant="30" id="IBw-L3-Ei6"/>
                                 <constraint firstAttribute="width" constant="30" id="YZm-7r-fQI"/>
                             </constraints>
+                            <color key="tintColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="Task completed"/>
+                            <connections>
+                                <action selector="completedTaskClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mFD-Z6-aCg"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-PG-Ndf">
-                            <rect key="frame" x="1117" y="10" width="30" height="30"/>
+                            <rect key="frame" x="1059" y="10" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="U44-F1-mNI"/>
                                 <constraint firstAttribute="height" constant="30" id="U6J-l4-MkZ"/>
                             </constraints>
                             <state key="normal" image="Task to complete"/>
+                            <connections>
+                                <action selector="allTaskClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Yrd-t0-xqW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZe-Iu-npN">
+                            <rect key="frame" x="1109" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="L20-HH-MLk"/>
+                                <constraint firstAttribute="height" constant="30" id="Wv5-TW-cl6"/>
+                            </constraints>
+                            <color key="tintColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="Task todo"/>
+                            <connections>
+                                <action selector="toDoTaskClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="tZe-qU-zis"/>
+                            </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="1rF-gd-aY0" firstAttribute="leading" secondItem="Nde-PG-Ndf" secondAttribute="trailing" constant="12" id="Wlb-qA-bW4"/>
+                        <constraint firstItem="1rF-gd-aY0" firstAttribute="leading" secondItem="LZe-Iu-npN" secondAttribute="trailing" constant="20" id="aI5-B4-0xi"/>
+                        <constraint firstItem="LZe-Iu-npN" firstAttribute="centerY" secondItem="nqz-We-0Bo" secondAttribute="centerY" id="gxh-3z-tob"/>
                         <constraint firstAttribute="trailing" secondItem="1rF-gd-aY0" secondAttribute="trailing" constant="27" id="k8h-Wt-Nym"/>
                         <constraint firstAttribute="height" constant="50" id="lUh-96-Adt"/>
                         <constraint firstItem="1rF-gd-aY0" firstAttribute="centerY" secondItem="nqz-We-0Bo" secondAttribute="centerY" id="vPJ-m1-eoC"/>
                         <constraint firstItem="Nde-PG-Ndf" firstAttribute="centerY" secondItem="nqz-We-0Bo" secondAttribute="centerY" id="wFd-re-N6O"/>
+                        <constraint firstItem="LZe-Iu-npN" firstAttribute="leading" secondItem="Nde-PG-Ndf" secondAttribute="trailing" constant="20" id="x3x-qM-zwn"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All task" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILQ-zH-Bbt">
+                    <rect key="frame" x="884" y="141" width="160" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="hqg-TH-P8F"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <color key="textColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2S-Nm-esR">
                     <rect key="frame" x="0.0" y="186" width="1216" height="746"/>
                     <subviews>
@@ -70,6 +100,7 @@
                             <rect key="frame" x="0.0" y="-6" width="1216" height="128"/>
                         </stackView>
                     </subviews>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="tKg-Tc-tBr" secondAttribute="bottom" id="4Vy-s6-4qI"/>
                         <constraint firstItem="tKg-Tc-tBr" firstAttribute="leading" secondItem="e2S-Nm-esR" secondAttribute="leading" id="SCW-LW-Ir3"/>
@@ -79,13 +110,17 @@
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="3Cb-Og-WsG"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="hSG-Q6-8K7"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Q6a-gJ-q26" appends="YES" id="q6F-6J-7qb"/>
+                    </connections>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.93725490196078431" green="0.94901960784313721" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="e2S-Nm-esR" firstAttribute="top" secondItem="nqz-We-0Bo" secondAttribute="bottom" id="4eb-jT-nfT"/>
                 <constraint firstItem="Se4-73-tgc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6Mo-1w-oDS"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nqz-We-0Bo" secondAttribute="trailing" id="825-bi-ztW"/>
+                <constraint firstItem="ILQ-zH-Bbt" firstAttribute="centerY" secondItem="nqz-We-0Bo" secondAttribute="centerY" id="Aul-2r-XP3"/>
                 <constraint firstItem="nqz-We-0Bo" firstAttribute="top" secondItem="Se4-73-tgc" secondAttribute="bottom" id="EgX-Xg-eZK"/>
                 <constraint firstItem="Se4-73-tgc" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="GZC-9Z-nZA"/>
                 <constraint firstItem="e2S-Nm-esR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="VPf-p8-OQW"/>
@@ -94,17 +129,24 @@
                 <constraint firstItem="nqz-We-0Bo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="m7Z-84-98c"/>
                 <constraint firstAttribute="bottom" secondItem="e2S-Nm-esR" secondAttribute="bottom" id="nyD-V3-wkA"/>
                 <constraint firstItem="Se4-73-tgc" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="pDJ-vF-Oxh"/>
+                <constraint firstItem="Nde-PG-Ndf" firstAttribute="leading" secondItem="ILQ-zH-Bbt" secondAttribute="trailing" constant="15" id="s4v-bd-1WV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="allTaskButton" destination="Nde-PG-Ndf" id="bD8-19-mMI"/>
+                <outlet property="completedTaskButton" destination="1rF-gd-aY0" id="R8e-Ei-zYG"/>
                 <outlet property="globalStack" destination="tKg-Tc-tBr" id="6Zw-n2-Up9"/>
+                <outlet property="subTitleLabel" destination="ILQ-zH-Bbt" id="4Jp-GI-aQ8"/>
+                <outlet property="toDoTaskButton" destination="LZe-Iu-npN" id="kP4-CD-fR3"/>
             </connections>
             <point key="canvasLocation" x="132" y="154"/>
         </view>
+        <tapGestureRecognizer id="Q6a-gJ-q26"/>
     </objects>
     <resources>
         <image name="Task completed" width="100" height="100"/>
         <image name="Task to complete" width="60" height="60"/>
+        <image name="Task todo" width="100" height="100"/>
     </resources>
 </document>

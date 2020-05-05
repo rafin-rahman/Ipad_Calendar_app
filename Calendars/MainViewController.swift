@@ -57,10 +57,17 @@ class MainViewController: UIViewController {
         onHomeClick(nil)
         addButtonStyle()
         
+        let singleTapSelector = #selector(self.onSingleTap)
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: singleTapSelector)
+        view.addGestureRecognizer(singleTap)
+    }
+    
+    @objc func onSingleTap(){
+        view.endEditing(true)
     }
     
     @IBAction func showSidebar(_ sender: UIScreenEdgePanGestureRecognizer) {
-        
+        view.endEditing(true)
         if sidebarWidthConstraint.constant == 0 {
             sidebarWidthConstraint.constant = 150
         } else {
@@ -73,6 +80,7 @@ class MainViewController: UIViewController {
     }
        
     @IBAction func hideSidebar(_ sender: UISwipeGestureRecognizer) {
+        view.endEditing(true)
         if sidebarWidthConstraint.constant == 0 {
             sidebarWidthConstraint.constant = 150
         } else {
@@ -135,7 +143,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func onHomeClick(_ sender: Any?) {
-        
+        view.endEditing(true)
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             HomeView {
             addButton.isHidden = false
@@ -160,7 +168,7 @@ class MainViewController: UIViewController {
     
     
     @IBAction func onEventClick(_ sender: UIButton) {
-        
+        view.endEditing(true)
         if let newRightView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             EventView {
             addButton.isHidden = false
@@ -184,6 +192,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func onTaskClick(_ sender: UIButton) {
+        view.endEditing(true)
         if let newRightView = UINib(nibName: "TaskView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             TaskView {
             addButton.isHidden = false
@@ -207,6 +216,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func onBinClick(_ sender: UIButton) {
+        view.endEditing(true)
         if let newRightView = UINib(nibName: "BinView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             BinView {
             addButton.isHidden = true
@@ -231,6 +241,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
+        view.endEditing(true)
         if let newRightView = UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             ProfileView {
             addButton.isHidden = true

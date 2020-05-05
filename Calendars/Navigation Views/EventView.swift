@@ -15,6 +15,9 @@ class EventView: UIView, NavigationProtocol {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var globalStack: UIStackView!
     @IBOutlet weak var menuEvent: UIView!
+    @IBOutlet weak var listButton: UIButton!
+    @IBOutlet weak var folderButton: UIButton!
+    @IBOutlet weak var subTitleLabel: UILabel!
     
     var dynamicView: CalendarProtocol!
     
@@ -24,6 +27,9 @@ class EventView: UIView, NavigationProtocol {
     
     func onLoad(){
         globalStack.removeAllArrangedSubviews()
+        if orderByTime{
+             self.listButton.tintColor = .systemBlue
+        }
         let eventDAO = EventDAO()
         eventDAO.getAllEvents()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -371,11 +377,17 @@ class EventView: UIView, NavigationProtocol {
     
     
     @IBAction func groupByProfileClick(_ sender: UIButton) {
+        subTitleLabel.text = "Sorted by profile"
+        self.folderButton.tintColor = .systemBlue
+        self.listButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
         orderByTime = false
         onLoad()
     }
     
     @IBAction func groupByTimeClick(_ sender: UIButton) {
+        subTitleLabel.text = "Sorted by date"
+        self.listButton.tintColor = .systemBlue
+        self.folderButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
         orderByTime = true
         onLoad()
     }

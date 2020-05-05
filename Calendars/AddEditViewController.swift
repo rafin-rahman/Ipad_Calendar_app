@@ -82,8 +82,10 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         if self.isTask {
             selectedTab(selectedView: taskView, selectedButton: taskButton)
+            taskNameText.becomeFirstResponder()
         } else {
             selectedTab(selectedView: eventView, selectedButton: eventButton)
+            eventNameText.becomeFirstResponder()
         }
         
         formStyle()
@@ -101,7 +103,15 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.taskProfilePicker.delegate = self
             self.taskProfilePicker.dataSource = self
         }
+        let singleTapSelector = #selector(self.onSingleTap)
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: singleTapSelector)
+        view.addGestureRecognizer(singleTap)
     }
+    
+    @objc func onSingleTap(){
+        view.endEditing(true)
+    }
+    
     
     func formStyle(){
         boxView.layer.cornerRadius = 10
@@ -241,7 +251,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         let allDayStatus = allDaySwitch.isOn
         
-        print(selectedProfile)
+        
         
         if eventEdit{
             updateEvent.eventName = eventName!
@@ -293,9 +303,9 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let startDate = (selectedDate + " " + taskTime).toDate(dateFormat: "dd-MM-yy HH:mm")
         
         let reminderTime = startDate!.timeIntervalSince1970 - taskReminderPicker.countDownDuration
-        print("REminder Time", reminderTime)
+        
         let reminderDate = Date(timeIntervalSince1970: reminderTime)
-        print("Check",reminderDate)
+        
         
         let priority = taskPrioritySegment.titleForSegment(at: taskPrioritySegment.selectedSegmentIndex)
         
@@ -406,7 +416,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func taskEditDetails(task : Task) {
-        print(task.reminder)
+        
         taskEdit = true
         
         updateTask = task

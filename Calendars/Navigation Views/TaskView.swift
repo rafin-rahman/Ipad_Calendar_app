@@ -8,12 +8,24 @@
 
 import UIKit
 
-class TaskView: UIView, NavigationProtocol {
+class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var globalStack: UIStackView!
     
+    @IBOutlet weak var allTaskButton: UIButton!
+    @IBOutlet weak var toDoTaskButton: UIButton!
+    @IBOutlet weak var completedTaskButton: UIButton!
+    @IBOutlet weak var subTitleLabel: UILabel!
+        
     var dynamicView: CalendarProtocol!
     var activeTaskView: TempConstraintView!
+    
+    var seeAllStatus = true
+    var seeDoneStatus = false
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true;
+    }
     
     func onLoad() {
         loadTask()
@@ -22,16 +34,25 @@ class TaskView: UIView, NavigationProtocol {
     func loadTask(){
         globalStack.removeAllArrangedSubviews()
         let taskDAO = TaskDAO()
-        taskDAO.getAllTasks()
+        if seeAllStatus{
+            taskDAO.getAllTasks()
+        }
+        else{
+            if seeDoneStatus{
+                taskDAO.getAllTasks(completedStatus: true)
+            }
+            else{
+                taskDAO.getAllTasks(completedStatus: false)
+            }
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let taskDict = self.getTasksGroupedbyDate(taskList: taskDAO.taskList)
-            print(taskDict)
             self.loadToDoTask(taskDic: taskDict)
         }
     }
     
     func getTasksGroupedbyDate(taskList : Array<Task>) -> Dictionary<Date, Array<Task>>{
-        print("Count", taskList)
         var taskDict : Dictionary <Date, Array<Task>> = Dictionary()
         let sortedList = taskList.sorted {
             $0.taskDateAndTime < $1.taskDateAndTime
@@ -43,7 +64,7 @@ class TaskView: UIView, NavigationProtocol {
     }
     
     func loadToDoTask(taskDic : Dictionary<Date, Array<Task>>){
-        print("Check", taskDic)
+        
         let blankEvent = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         blankEvent.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "EFF2F5", alpha: 1)
         blankEvent.translatesAutoresizingMaskIntoConstraints = false
@@ -112,6 +133,12 @@ class TaskView: UIView, NavigationProtocol {
             let taskView = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             taskView.backgroundColor = SelectColor.getColor(color: taskDetails.profileColour)
             
+            let tapGesture = TapTaskGesture(target: self, action: #selector(tapGesture(_:)))
+            tapGesture.task = taskDetails
+            tapGesture.delegate = self
+            taskView.addGestureRecognizer(tapGesture)
+            
+            
             let optionView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             optionView.backgroundColor = .purple
             optionView.clipsToBounds = true
@@ -153,8 +180,12 @@ class TaskView: UIView, NavigationProtocol {
             timeLabel.numberOfLines = 0
             timeLabel.sizeToFit()
             
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskDetails.taskName)
+            if taskDetails.completedStatus && seeAllStatus	{
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            }
             let taskNameText = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
-            taskNameText.text = taskDetails.taskName
+            taskNameText.attributedText = attributeString
             taskNameText.textColor = .white
             taskNameText.font = UIFont.boldSystemFont(ofSize: 22)
             taskNameText.numberOfLines = 0
@@ -330,12 +361,18 @@ class TaskView: UIView, NavigationProtocol {
         }
     }
     
+    @objc func tapGesture(_ sender:TapTaskGesture){
+        TaskDAO().editTaskCompleted(taskId: sender.task.id, completed: !sender.task.completedStatus)
+        onLoad()
+    }
+    
     @objc func swipeRight(_ sender: UIGestureRecognizer) {
         if let taskView = sender.view as? TempConstraintView {
             closeView(taskView)
             activeTaskView = nil
         }
     }
+  
     
     func openView(_ eventView: TempConstraintView) {
         eventView.optionViewConstraint.constant = 120
@@ -350,4 +387,34 @@ class TaskView: UIView, NavigationProtocol {
             eventView.layoutIfNeeded()
         })
     }
+    
+    @IBAction func allTaskClick(_ sender: UIButton) {
+        subTitleLabel.text = "All task"
+        self.allTaskButton.tintColor = .systemBlue
+        self.toDoTaskButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
+        self.completedTaskButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
+        seeAllStatus = true
+        onLoad()
+    }
+    
+    @IBAction func toDoTaskClick(_ sender: UIButton) {
+        subTitleLabel.text = "To do task"
+        self.toDoTaskButton.tintColor = .systemBlue
+        self.allTaskButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
+        self.completedTaskButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
+        seeAllStatus = false
+        seeDoneStatus = false
+        onLoad()
+    }
+    
+    @IBAction func completedTaskClick(_ sender: UIButton) {
+        subTitleLabel.text = "Completed task"
+        self.completedTaskButton.tintColor = .systemBlue
+        self.allTaskButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
+        self.toDoTaskButton.tintColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
+        seeAllStatus = false
+        seeDoneStatus = true
+        onLoad()
+    }
+    
 }
