@@ -35,7 +35,7 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
         globalStack.removeAllArrangedSubviews()
         let taskDAO = TaskDAO()
         if seeAllStatus{
-            taskDAO.getAllTasks()
+            taskDAO.getAllTasksFromToday()
         }
         else{
             if seeDoneStatus{
@@ -135,6 +135,7 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
             
             let tapGesture = TapTaskGesture(target: self, action: #selector(tapGesture(_:)))
             tapGesture.task = taskDetails
+            tapGesture.numberOfTapsRequired = 2
             tapGesture.delegate = self
             taskView.addGestureRecognizer(tapGesture)
             

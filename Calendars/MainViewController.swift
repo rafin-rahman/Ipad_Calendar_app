@@ -8,9 +8,11 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController{
     
+    @IBOutlet weak var searchText: UITextField!
     // nagivation buttons
     @IBOutlet weak var homeNavButton: UIButton!
     @IBOutlet weak var eventNavButton: UIButton!
@@ -51,6 +53,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var rightViewTrailingToSafeArea: NSLayoutConstraint!
     
     var addButtonStatus = false;
+    var timer : Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +63,65 @@ class MainViewController: UIViewController {
         let singleTapSelector = #selector(self.onSingleTap)
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: singleTapSelector)
         view.addGestureRecognizer(singleTap)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(notificationForEventsAndTasks), userInfo: nil, repeats: true)
+        
     }
     
+    @objc func notificationForEventsAndTasks(){
+        let eventDAO = EventDAO()
+        let taskDAO = TaskDAO()
+        eventDAO.getAllEventsForCurrentDay()
+        taskDAO.getAllTasksFromDays(startDate: Date().stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: Date().stripTime())!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+
+            for event in eventDAO.eventList{
+                let centre = UNUserNotificationCenter.current()
+                let content = UNMutableNotificationContent()
+
+                content.title = "Event"
+                content.subtitle = event.startDate.timeIntervalSince(event.reminder).stringFromTimeInterval() + " remaining"
+                content.body = event.eventName
+                content.sound = UNNotificationSound.default
+
+                let dateComponents = Calendar.current.dateComponents([.year , .month, .day, .hour, .minute, .second],from: event.reminder)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                
+
+                let request = UNNotificationRequest(identifier: event.id, content: content, trigger: trigger)
+
+                centre.add(request) {(error) in
+                    if error != nil{
+                        print(error!)
+                }}
+            }
+            
+            for task in taskDAO.taskList{
+                let centre = UNUserNotificationCenter.current()
+                let content = UNMutableNotificationContent()
+
+                content.title = "Task"
+                content.subtitle = task.taskDateAndTime.timeIntervalSince(task.reminder).stringFromTimeInterval() + " remaining"
+                content.body = task.taskName
+                content.sound = UNNotificationSound.default
+                
+                print("Reminder Task",task.reminder)
+
+                let dateComponents = Calendar.current.dateComponents([.year , .month, .day, .hour, .minute, .second],from: task.reminder)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: task.id, content: content, trigger: trigger)
+
+                centre.add(request) {(error) in
+                    if error != nil{
+                        print(error!)
+                }}
+            }
+        }
+    }
+    
+    
+    
+              
     @objc func onSingleTap(){
         view.endEditing(true)
     }
@@ -122,6 +182,12 @@ class MainViewController: UIViewController {
                 viewController.isTask = true
             }
         }
+        
+        if let viewController = segue.destination as? SearchPanelViewController{
+            if segue.identifier == "SearchSegue"{
+                viewController.keyword = searchText.text
+            }
+        }
     }
     
     
@@ -147,6 +213,7 @@ class MainViewController: UIViewController {
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             HomeView {
             addButton.isHidden = false
+            addButtonClosingAnimation()
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
@@ -172,6 +239,7 @@ class MainViewController: UIViewController {
         if let newRightView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             EventView {
             addButton.isHidden = false
+            addButtonClosingAnimation()
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }
@@ -195,6 +263,7 @@ class MainViewController: UIViewController {
         view.endEditing(true)
         if let newRightView = UINib(nibName: "TaskView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             TaskView {
+            addButtonClosingAnimation()
             addButton.isHidden = false
             setRightViewDetails(newRightView: newRightView)
             newRightView.onLoad()
@@ -219,6 +288,7 @@ class MainViewController: UIViewController {
         view.endEditing(true)
         if let newRightView = UINib(nibName: "BinView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             BinView {
+            addButtonClosingAnimation()
             addButton.isHidden = true
             setRightViewDetails(newRightView: newRightView)
             newRightView.onLoad()
@@ -244,6 +314,7 @@ class MainViewController: UIViewController {
         view.endEditing(true)
         if let newRightView = UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             ProfileView {
+            addButtonClosingAnimation()
             addButton.isHidden = true
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
@@ -359,8 +430,7 @@ class MainViewController: UIViewController {
             addButtonClosingAnimation()
         }
     }
-    
-    
+        
     @IBAction func menuClick(_ sender: UIButton) {
         if sidebarWidthConstraint.constant == 0 {
             sidebarWidthConstraint.constant = 150

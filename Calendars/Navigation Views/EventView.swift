@@ -31,7 +31,7 @@ class EventView: UIView, NavigationProtocol {
              self.listButton.tintColor = .systemBlue
         }
         let eventDAO = EventDAO()
-        eventDAO.getAllEvents()
+        eventDAO.getAllEventsForCurrentDay()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if self.orderByTime == true{
                 let listofEventsGroupedByDate = self.getEventsGroupedbyDate(eventList: eventDAO.eventList)
@@ -175,6 +175,7 @@ class EventView: UIView, NavigationProtocol {
     
     func setDetailsOfEvents(listOfEvent:Array<Events>, innerStackView:UIStackView, collapsable:InfoButton){
         for eventDetails in listOfEvent{
+                        
             let eventView = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             eventView.backgroundColor = SelectColor.getColor(color: eventDetails.profileColour)
             

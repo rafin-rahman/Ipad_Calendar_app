@@ -296,10 +296,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
         
         let selectedDate = taskDatePicker.date.toString(dateFormat: "dd-MM-yy")!
-        
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:mm"
-        let taskTime = timeFormatter.string(from: taskDatePicker.date)
+        let taskTime = taskTimePicker.date.toString(dateFormat: "HH:mm")!
         let startDate = (selectedDate + " " + taskTime).toDate(dateFormat: "dd-MM-yy HH:mm")
         
         let reminderTime = startDate!.timeIntervalSince1970 - taskReminderPicker.countDownDuration

@@ -9,15 +9,33 @@
 import UIKit
 import Firebase
 import CoreData
+import NotificationCenter
 
 @UIApplicationMain
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        let centre = UNUserNotificationCenter.current()
+        
+        let options: UNAuthorizationOptions = [.sound, .alert]
+        
+        centre.requestAuthorization(options: options){(granted, error) in
+            if error != nil {
+                print(error)
+            }
+        }
+        centre.delegate=self
+        
         return true
+        
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
     }
     
     // MARK: UISceneSession Lifecycle
@@ -193,5 +211,19 @@ extension UIStackView {
         
         // Remove the views from self
         removedSubviews.forEach({ $0.removeFromSuperview() })
+    }
+}
+
+extension TimeInterval{
+    
+    func stringFromTimeInterval() -> String {
+        
+        let time = NSInteger(self)
+        
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        return String(format: "%0.2d:%0.2d",hours,minutes)
+        
     }
 }

@@ -50,6 +50,9 @@
 		D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1C57E902449F74900C939D8 /* GoogleService-Info.plist */; };
 		D1C7D05A245E14280065CF0F /* BinRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C7D059245E14280065CF0F /* BinRowView.xib */; };
 		D1C7D05C245E14330065CF0F /* BinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C7D05B245E14330065CF0F /* BinRowView.swift */; };
+		D1D836682461DAAF00805911 /* EventAndTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D836672461DAAF00805911 /* EventAndTask.swift */; };
+		D1D8366A2462093800805911 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D836692462093800805911 /* SearchBarView.xib */; };
+		D1D8366C2462094700805911 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D8366B2462094700805911 /* SearchBarView.swift */; };
 		D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228E5245452330008DD92 /* SearchPanelViewController.swift */; };
 		D1F228E8245458990008DD92 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F228E7245458990008DD92 /* ProfileView.xib */; };
 		D1F228EE245459090008DD92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F228ED245459090008DD92 /* ProfileView.swift */; };
@@ -107,6 +110,9 @@
 		D1C57E902449F74900C939D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D1C7D059245E14280065CF0F /* BinRowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BinRowView.xib; sourceTree = "<group>"; };
 		D1C7D05B245E14330065CF0F /* BinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinRowView.swift; sourceTree = "<group>"; };
+		D1D836672461DAAF00805911 /* EventAndTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAndTask.swift; sourceTree = "<group>"; };
+		D1D836692462093800805911 /* SearchBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
+		D1D8366B2462094700805911 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		D1F228E5245452330008DD92 /* SearchPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelViewController.swift; sourceTree = "<group>"; };
 		D1F228E7245458990008DD92 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		D1F228ED245459090008DD92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -185,6 +191,8 @@
 				D1C7D05B245E14330065CF0F /* BinRowView.swift */,
 				D13AD93B245A1CB500C1637A /* MonthCellView.xib */,
 				D13AD93D245A1CCA00C1637A /* MonthCellView.swift */,
+				D1D836692462093800805911 /* SearchBarView.xib */,
+				D1D8366B2462094700805911 /* SearchBarView.swift */,
 			);
 			path = "Additional Views";
 			sourceTree = "<group>";
@@ -201,6 +209,7 @@
 				D13AD93F245A663D00C1637A /* PriorityColorSelector.swift */,
 				D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */,
 				D1B411292461D04D00C7F62C /* TapTaskGesture.swift */,
+				D1D836672461DAAF00805911 /* EventAndTask.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -344,6 +353,7 @@
 				D1F228E8245458990008DD92 /* ProfileView.xib in Resources */,
 				D1C57E912449F74900C939D8 /* GoogleService-Info.plist in Resources */,
 				D178474D2449713900D3472F /* BinView.xib in Resources */,
+				D1D8366A2462093800805911 /* SearchBarView.xib in Resources */,
 				D189C07824264A1F00FF7723 /* Assets.xcassets in Resources */,
 				D189C07324264A1E00FF7723 /* Main.storyboard in Resources */,
 				D14AED872443B0C50012469F /* WeekView.xib in Resources */,
@@ -430,6 +440,8 @@
 				D13AD940245A663D00C1637A /* PriorityColorSelector.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
 				D11D6EE0245F6839007FFD4D /* TaskDAO.swift in Sources */,
+				D1D836682461DAAF00805911 /* EventAndTask.swift in Sources */,
+				D1D8366C2462094700805911 /* SearchBarView.swift in Sources */,
 				D1C349C8245B99F800C6A9C7 /* TempConstraintView.swift in Sources */,
 				D189C07624264A1E00FF7723 /* Calendars.xcdatamodeld in Sources */,
 				D13AD93E245A1CCA00C1637A /* MonthCellView.swift in Sources */,

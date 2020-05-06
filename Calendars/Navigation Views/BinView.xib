@@ -39,14 +39,20 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FT3-Ch-uUP">
                             <rect key="frame" x="0.0" y="0.0" width="608" height="50"/>
-                            <state key="normal" title="Deleted events"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                            <state key="normal" title="DELETED EVENTS">
+                                <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="eventButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="fbV-4N-3JD"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grc-tY-Dvg">
                             <rect key="frame" x="608" y="0.0" width="608" height="50"/>
-                            <state key="normal" title="Deleted tasks"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                            <state key="normal" title="DELETED TASKS">
+                                <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="taskButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zaq-Dc-Con"/>
                             </connections>
@@ -78,7 +84,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eF-Fu-11u" userLabel="Scroll event">
                     <rect key="frame" x="0.0" y="178" width="1216" height="826"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-yE-I00">
+                        <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-yE-I00">
                             <rect key="frame" x="0.0" y="0.0" width="1216" height="0.0"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Rj-St-N0A">
@@ -101,17 +107,27 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="wrD-bB-ZID"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="h9n-s8-HeI"/>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0KX-rH-GOq">
+                    <rect key="frame" x="0.0" y="178" width="1216" height="2"/>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.94901960784313721" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="BDa-c3-b2W"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="0KX-rH-GOq" firstAttribute="top" secondItem="grc-tY-Dvg" secondAttribute="bottom" id="3XW-qG-z9i"/>
                 <constraint firstItem="QGd-lJ-sj1" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="90i-5z-lOr"/>
                 <constraint firstItem="QGd-lJ-sj1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="IoV-Zz-2Be"/>
                 <constraint firstItem="0eF-Fu-11u" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MBl-BJ-eOx"/>
+                <constraint firstItem="0KX-rH-GOq" firstAttribute="centerX" secondItem="QGd-lJ-sj1" secondAttribute="centerX" id="Rvl-QP-INd"/>
                 <constraint firstItem="sQM-dh-Ewz" firstAttribute="top" secondItem="QGd-lJ-sj1" secondAttribute="bottom" id="Vf3-87-s32"/>
                 <constraint firstItem="1Rj-St-N0A" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="XMR-78-dAg"/>
                 <constraint firstItem="QGd-lJ-sj1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhX-U8-uYh"/>
                 <constraint firstItem="0eF-Fu-11u" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="bottom" id="ZNY-W5-6Kq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sQM-dh-Ewz" secondAttribute="trailing" id="bgi-V0-Xa3"/>
+                <constraint firstItem="0KX-rH-GOq" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="fU6-oo-wAf"/>
                 <constraint firstItem="sQM-dh-Ewz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="gSE-ix-uxd"/>
                 <constraint firstItem="0eF-Fu-11u" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="mNo-0Y-AcM"/>
                 <constraint firstItem="1Rj-St-N0A" firstAttribute="top" secondItem="sQM-dh-Ewz" secondAttribute="bottom" id="v68-dW-sdn"/>

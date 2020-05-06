@@ -137,6 +137,7 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
         else{
             updateProfile.profileName = profileName!.capitalizingFirstLetter()
             updateProfile.profileColor = selectedProfileColor
+            EventAndTask.editEventAndTask(profile: updateProfile, profileName: updateProfile.profileName, profileColor: updateProfile.profileColor)
             ProfileDAO().editProfile(profile: updateProfile)
         }
         
@@ -307,12 +308,12 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     }
         
     @objc func deleteButtonClick(_ sender: InfoButton) {
-        popAnimation(sender)
         
         if let viewController = self.getOwningViewController() as? MainViewController {
             let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this profile?", preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                EventAndTask.editEventAndTask(profile: sender.profile!, profileName: "Default", profileColor: "Grey")
                 ProfileDAO().deleteProfile(profileId: sender.profile!.id)
                 self.onLoad()
             }))

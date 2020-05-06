@@ -23,6 +23,44 @@ class EventDAO{
     }
     
     func getAllEvents(){
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").whereField("DeleteStatus", isEqualTo: false)
+        eventReference.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for event in querySnapshot!.documents {
+                    
+                    let newEvent = Events()
+                    
+                    newEvent.id = (event.documentID)
+                    
+                    newEvent.eventName = event["Name"] as! String
+                    newEvent.allDay = event["All-Day"] as! Bool
+                    newEvent.priority = event["Priority"] as! String
+                    newEvent.profile = event["Profile"] as! String
+                    newEvent.profileColour = event["ProfileColour"] as! String
+                    
+                    if let convertedDate = event["StartTime"] as? Timestamp {
+                        newEvent.startDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["EndTime"] as? Timestamp {
+                        newEvent.endDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["ReminderTime"] as? Timestamp{
+                        newEvent.reminder = convertedDate.dateValue()
+                    }
+                    
+                    self.eventList.append(newEvent)
+                }
+            }
+        }
+    }
+    
+    func getAllEventsForCurrentDay(){
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
         let start = calendar.date(from: components)!
@@ -30,6 +68,48 @@ class EventDAO{
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         
         let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("DeleteStatus", isEqualTo: false)
+        eventStartingToday.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for event in querySnapshot!.documents {
+                    
+                    let newEvent = Events()
+                    
+                    newEvent.id = (event.documentID)
+                    
+                    newEvent.eventName = event["Name"] as! String
+                    newEvent.allDay = event["All-Day"] as! Bool
+                    newEvent.priority = event["Priority"] as! String
+                    newEvent.profile = event["Profile"] as! String
+                    newEvent.profileColour = event["ProfileColour"] as! String
+                    
+                    if let convertedDate = event["StartTime"] as? Timestamp {
+                        newEvent.startDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["EndTime"] as? Timestamp {
+                        newEvent.endDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["ReminderTime"] as? Timestamp{
+                        newEvent.reminder = convertedDate.dateValue()
+                    }
+                    
+                    self.eventList.append(newEvent)
+                }
+            }
+        }
+    }
+    
+    
+    
+    func getAllEventFromProfile(profileName:String){
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        
+        let eventStartingToday = eventReference.whereField("Profile", isEqualTo: profileName)
         eventStartingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {

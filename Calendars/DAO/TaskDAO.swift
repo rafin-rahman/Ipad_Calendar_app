@@ -18,7 +18,70 @@ class TaskDAO{
         newTask.setData(taskDic);
     }
     
-    func getAllTasks(){
+    func getAllTask(){
+        let taskReference = dbConnection.collection("User").document("Subin").collection("Task").whereField("DeleteStatus", isEqualTo: false)
+        taskReference.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for task in querySnapshot!.documents {
+                    
+                    let newTask = Task()
+                    
+                    newTask.id = (task.documentID)
+                    newTask.taskName = task["Name"] as! String
+                    newTask.priority = task["Priority"] as! String
+                    newTask.profile = task["Profile"] as! String
+                    newTask.profileColour = task["ProfileColour"] as! String
+                    newTask.completedStatus = task["CompletedStatus"] as! Bool
+                    if let convertedDate = task["DateAndTime"] as? Timestamp {
+                        newTask.taskDateAndTime = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = task["ReminderTime"] as? Timestamp{
+                        newTask.reminder = convertedDate.dateValue()
+                    }
+                    self.taskList.append(newTask)
+                }
+            }
+        }
+    }
+    
+    func getAllTasksFromDays(startDate:Date, endDate:Date){
+        let taskReference = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskStartingToday = taskReference.whereField("DateAndTime", isGreaterThanOrEqualTo: startDate).whereField("DateAndTime", isLessThan: endDate).whereField("DeleteStatus", isEqualTo: false)
+        taskStartingToday.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for task in querySnapshot!.documents {
+                    
+                    let newTask = Task()
+                    
+                    newTask.id = (task.documentID)
+                    newTask.taskName = task["Name"] as! String
+                    newTask.priority = task["Priority"] as! String
+                    newTask.profile = task["Profile"] as! String
+                    newTask.profileColour = task["ProfileColour"] as! String
+                    newTask.completedStatus = task["CompletedStatus"] as! Bool
+                    if let convertedDate = task["DateAndTime"] as? Timestamp {
+                        newTask.taskDateAndTime = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = task["ReminderTime"] as? Timestamp{
+                        newTask.reminder = convertedDate.dateValue()
+                    }
+                    self.taskList.append(newTask)
+                }
+            }
+        }
+    }
+    
+    func getAllTasksFromToday(){
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
         let start = calendar.date(from: components)!
@@ -55,6 +118,37 @@ class TaskDAO{
         }
     }
     
+    func getAllTasksFromProfile(profile:String){
+        let taskReference = dbConnection.collection("User").document("Subin").collection("Task").whereField("Profile", isEqualTo: profile)
+        taskReference.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for task in querySnapshot!.documents {
+                    
+                    let newTask = Task()
+                    
+                    newTask.id = (task.documentID)
+                    newTask.taskName = task["Name"] as! String
+                    newTask.priority = task["Priority"] as! String
+                    newTask.profile = task["Profile"] as! String
+                    newTask.profileColour = task["ProfileColour"] as! String
+                    newTask.completedStatus = task["CompletedStatus"] as! Bool
+                    if let convertedDate = task["DateAndTime"] as? Timestamp {
+                        newTask.taskDateAndTime = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = task["ReminderTime"] as? Timestamp{
+                        newTask.reminder = convertedDate.dateValue()
+                    }
+                    self.taskList.append(newTask)
+                }
+            }
+        }
+    }
+    
     func getAllTasks(completedStatus:Bool){
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
@@ -62,7 +156,7 @@ class TaskDAO{
         
         let taskReference = dbConnection.collection("User").document("Subin").collection("Task")
         print("Start Time",start)
-        let taskStartingToday = taskReference.whereField("DateAndTime", isGreaterThanOrEqualTo: start).whereField("DeleteStatus", isEqualTo: false).whereField("CompletedStatus", isEqualTo: completedStatus)
+        let taskStartingToday = taskReference.whereField("DeleteStatus", isEqualTo: false).whereField("CompletedStatus", isEqualTo: completedStatus)
         taskStartingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
