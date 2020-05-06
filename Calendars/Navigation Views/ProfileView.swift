@@ -135,9 +135,9 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             ProfileDAO().addProfile(profileDic: profileDic)
         }
         else{
+            self.editEventAndTask(profile: updateProfile, profileName: profileName!.capitalizingFirstLetter(), profileColor: selectedProfileColor)
             updateProfile.profileName = profileName!.capitalizingFirstLetter()
             updateProfile.profileColor = selectedProfileColor
-            EventAndTask.editEventAndTask(profile: updateProfile, profileName: updateProfile.profileName, profileColor: updateProfile.profileColor)
             ProfileDAO().editProfile(profile: updateProfile)
         }
         
@@ -313,7 +313,7 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this profile?", preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-                EventAndTask.editEventAndTask(profile: sender.profile!, profileName: "Default", profileColor: "Grey")
+                self.editEventAndTask(profile: sender.profile!, profileName: "Default", profileColor: "Grey")
                 ProfileDAO().deleteProfile(profileId: sender.profile!.id)
                 self.onLoad()
             }))
@@ -339,5 +339,27 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
                },
                               completion: nil
                )
+    }
+    
+    func editEventAndTask(profile:Profile, profileName: String, profileColor: String){
+        print("Checking",profileName)
+        let eventDAO = EventDAO()
+        let taskDAO = TaskDAO()
+        eventDAO.getAllEventFromProfile(profileName: profile.profileName)
+        taskDAO.getAllTasksFromProfile(profile: profile.profileName)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            for event in eventDAO.eventList{
+                event.profile = profileName
+                event.profileColour = profileColor
+                eventDAO.editEvent(updatedEvent: event)
+            }
+            
+            for task in taskDAO.taskList{
+                print(taskDAO.taskList.count)
+                task.profile = profileName
+                task.profileColour = profileColor
+                taskDAO.editTask(updatedTask: task)
+            }
+        }
     }
 }

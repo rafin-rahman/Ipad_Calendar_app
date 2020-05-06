@@ -215,6 +215,7 @@ class TaskDAO{
     }
     
     func editTask(updatedTask:Task){
+        print("Edit Task", updatedTask.profile)
         let taskRef = dbConnection.collection("User").document("Subin").collection("Task").document(updatedTask.id)
         taskRef.updateData([
             "Name" : updatedTask.taskName,
@@ -240,6 +241,39 @@ class TaskDAO{
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
+            }
+        }
+    }
+    
+    func getAllDeletedTask(deleteTime:Date){
+        let taskRef = dbConnection.collection("User").document("Subin").collection("Task")
+        
+        let deletedEvents = taskRef.whereField("DeleteStatus", isEqualTo: true).whereField("DeleteTime", isLessThan: deleteTime)
+        deletedEvents.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for task in querySnapshot!.documents {
+                    
+                    let newTask = Task()
+                    
+                    newTask.id = (task.documentID)
+                    newTask.taskName = task["Name"] as! String
+                    newTask.priority = task["Priority"] as! String
+                    newTask.profile = task["Profile"] as! String
+                    newTask.profileColour = task["ProfileColour"] as! String
+                    newTask.completedStatus = task["CompletedStatus"] as! Bool
+                    if let convertedDate = task["DateAndTime"] as? Timestamp {
+                        newTask.taskDateAndTime = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = task["ReminderTime"] as? Timestamp{
+                        newTask.reminder = convertedDate.dateValue()
+                    }
+                    self.taskList.append(newTask)
+                }
             }
         }
     }

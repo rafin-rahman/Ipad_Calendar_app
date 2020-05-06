@@ -298,6 +298,46 @@ class EventDAO{
         }
     }
     
+    func getAllDeletedEventsFromDate(date:Date){
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        
+        let deletedEvents = eventReference.whereField("DeleteStatus", isEqualTo: true).whereField("DeleteTime", isLessThan: date)
+        deletedEvents.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for event in querySnapshot!.documents {
+                    
+                    let newEvent = Events()
+                    
+                    newEvent.id = (event.documentID)
+                    
+                    newEvent.eventName = event["Name"] as! String
+                    newEvent.allDay = event["All-Day"] as! Bool
+                    newEvent.priority = event["Priority"] as! String
+                    newEvent.profile = event["Profile"] as! String
+                    newEvent.profileColour = event["ProfileColour"] as! String
+                    
+                    if let convertedDate = event["StartTime"] as? Timestamp {
+                        newEvent.startDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["EndTime"] as? Timestamp {
+                        newEvent.endDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["ReminderTime"] as? Timestamp{
+                        newEvent.reminder = convertedDate.dateValue()
+                    }
+                    
+                    self.eventList.append(newEvent)
+                }
+            }
+        }
+    }
+    
     func getAllDeletedEvents(){
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event").order(by: "DeleteTime", descending: true)
         

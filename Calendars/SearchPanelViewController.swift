@@ -14,6 +14,7 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var searchBarTrailing: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchField: UITextField!
     
     var keyword:String!
@@ -22,6 +23,11 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchView.layer.cornerRadius = 6.0
+        searchView.layer.masksToBounds = true
+        
+        
         searchField.text = keyword
         searchField.delegate = self
         getSearchBar()

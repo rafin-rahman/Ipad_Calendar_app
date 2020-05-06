@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
+class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var dayZero: UILabel!
     @IBOutlet weak var dayOneButton: UIButton!
@@ -38,6 +38,10 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
         let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: -7, to: date)!)
         
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+           return true;
     }
     
     @IBAction func nextWeek(_ sender: Any) {
@@ -224,14 +228,21 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
     func displayEvents(){
         eventView.removeAll()
         for todaysEvent in self.finalEventList{
-            
             let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
             
+            let tapGesture = TapEventGesture(target: self, action: #selector(displayDetail(_:)))
+            tapGesture.eventView = event
+            tapGesture.event = todaysEvent
+            tapGesture.delegate = self
+            event.addGestureRecognizer(tapGesture)
+            
             eventName.text = todaysEvent.eventName
             eventName.textColor = .white
             eventName.font = UIFont(name: "System", size: 17)
+            
+            let eventDuration = todaysEvent.endDate.timeIntervalSince(todaysEvent.startDate)
                         
             event.backgroundColor = SelectColor.getColor(color: todaysEvent.profileColour)
             event.translatesAutoresizingMaskIntoConstraints = false
@@ -259,14 +270,25 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
                 event.topAnchor.constraint(equalTo: self.rightScroll.topAnchor, constant: finalStartTime * 62).isActive = true
                 event.leadingAnchor.constraint(equalTo: self.rightScroll.leadingAnchor, constant: 0).isActive = true
                 event.widthAnchor.constraint(equalToConstant: self.rightScroll.layer.bounds.width/CGFloat(todaysEvent.numberOfCollision)).isActive = true
-                event.heightAnchor.constraint(equalToConstant: (finalEndTime - finalStartTime) * 62).isActive = true
+                                
+                if eventDuration < 1300{
+                    event.heightAnchor.constraint(equalToConstant:30).isActive = true
+                }
+                else{
+                    event.heightAnchor.constraint(equalToConstant: (finalEndTime - finalStartTime) * 62).isActive = true
+                }
             }
             else{
                 event.topAnchor.constraint(equalTo: self.rightScroll.topAnchor, constant: finalStartTime * 62).isActive = true
                 event.leadingAnchor.constraint(equalTo: self.rightScroll.leadingAnchor, constant: self.rightScroll.frame.width/2).isActive = true
                 event.trailingAnchor.constraint(equalTo: self.rightScroll.trailingAnchor, constant: 0).isActive = true
                 event.widthAnchor.constraint(equalToConstant: self.rightScroll.layer.bounds.width/CGFloat(todaysEvent.numberOfCollision)).isActive = true
-                event.heightAnchor.constraint(equalToConstant: (finalEndTime - finalStartTime) * 62).isActive = true
+                if eventDuration < 60{
+                    event.heightAnchor.constraint(equalToConstant:30).isActive = true
+                }
+                else{
+                    event.heightAnchor.constraint(equalToConstant: (finalEndTime - finalStartTime) * 62).isActive = true
+                }
             }
            
             event.addSubview(eventPriority)
@@ -302,6 +324,23 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate {
         }
         else if scrollView == leftScroll {
             self.synchronizeScrollView(rightScroll, toScrollView: leftScroll)
+        }
+    }
+    
+    @objc func displayDetail(_ sender:TapEventGesture){
+        
+        //parent view -> sender.eventView
+        if let detailsView = UINib(nibName: "DetailView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DetailView {
+            detailsView.translatesAutoresizingMaskIntoConstraints = false
+            sender.eventView.addSubview(detailsView)
+            
+            detailsView.widthAnchor.constraint(equalToConstant: 400).isActive = true
+            detailsView.heightAnchor.constraint(equalToConstant: 210).isActive = true
+            
+            detailsView.bottomAnchor.constraint(equalTo: sender.eventView.topAnchor, constant: 20).isActive = true
+            detailsView.centerXAnchor.constraint(equalTo: sender.eventView.centerXAnchor).isActive = true
+            
+            
         }
     }
     

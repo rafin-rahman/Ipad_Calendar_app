@@ -419,3 +419,4 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
     }
     
 }
+

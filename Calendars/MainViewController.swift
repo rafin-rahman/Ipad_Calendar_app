@@ -54,6 +54,7 @@ class MainViewController: UIViewController{
     
     var addButtonStatus = false;
     var timer : Timer!
+    var deleteTimer : Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,22 @@ class MainViewController: UIViewController{
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: singleTapSelector)
         view.addGestureRecognizer(singleTap)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(notificationForEventsAndTasks), userInfo: nil, repeats: true)
-        
+        deleteTimer = Timer.scheduledTimer(timeInterval: 360, target: self, selector: #selector(deleteFromBin), userInfo: nil, repeats: true)
+    }
+    
+    @objc func deleteFromBin(){
+        let eventDAO = EventDAO()
+        let taskDAO = TaskDAO()
+        eventDAO.getAllDeletedEventsFromDate(date: Calendar.current.date(byAdding: .day, value: -30, to: Date().stripTime())!)
+        taskDAO.getAllDeletedTask(deleteTime: Calendar.current.date(byAdding: .day, value: -30, to: Date().stripTime())!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            for event in eventDAO.eventList{
+                eventDAO.deleteEvent(eventId: event.id)
+            }
+            for task in taskDAO.taskList{
+                taskDAO.deleteTask(taskId: task.id)
+            }
+        }
     }
     
     @objc func notificationForEventsAndTasks(){
@@ -103,8 +119,6 @@ class MainViewController: UIViewController{
                 content.subtitle = task.taskDateAndTime.timeIntervalSince(task.reminder).stringFromTimeInterval() + " remaining"
                 content.body = task.taskName
                 content.sound = UNNotificationSound.default
-                
-                print("Reminder Task",task.reminder)
 
                 let dateComponents = Calendar.current.dateComponents([.year , .month, .day, .hour, .minute, .second],from: task.reminder)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)

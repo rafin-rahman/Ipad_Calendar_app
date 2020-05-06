@@ -196,7 +196,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         var newColor = UIColor.black
         switch sender.selectedSegmentIndex {
         case 0:
-            newColor = .white
+            newColor = HexToUIColor.hexStringToUIColor(hex: "#ecf0f1", alpha: 1)
         case 1:
             newColor = .yellow
         case 2:
@@ -575,6 +575,10 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             taskDatePicker.setDate(Date().nextMonth(.december), animated: true)
         }
         
+        if text.lowercased().range(of:"next month") != nil{
+            taskDatePicker.setDate(Calendar.current.date(byAdding: .month, value: 1, to: taskDatePicker.date)!, animated: true)
+        }
+        
         if text.lowercased().range(of:"next year") != nil{
             taskDatePicker.setDate(Calendar.current.date(byAdding: .year, value: 1, to: taskDatePicker.date)!, animated: true)
         }
@@ -584,6 +588,14 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         var hoursTiming:String!
         var minutesTiming:String!
+        
+        if text.lowercased().range(of:"an hour") != nil{
+            taskTimePicker.setDate(Calendar.current.date(byAdding: .hour, value: 1, to: taskDatePicker.date)!, animated: true)
+        }
+        
+        if text.lowercased().range(of:"half an hour") != nil{
+            taskTimePicker.setDate(Calendar.current.date(byAdding: .minute, value: 30, to: taskDatePicker.date)!, animated: true)
+        }
         
         if text.contains(":") && text.count > 4{
             let range: Range<String.Index> = text.range(of: ":")!
@@ -602,7 +614,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 }
                 
                 let hoursInt = Int(hoursTiming) ?? 00
-                if hoursInt > 23 || hoursInt == 00{
+                if hoursInt > 23 {
                     hoursTiming = "Wrong Time"
                 }
             }
@@ -611,16 +623,26 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 wholeStringAfter.remove(at: wholeStringAfter.startIndex)
                 minutesTiming = String(wholeStringAfter.prefix(2))
                 let minutesInt = Int(minutesTiming) ?? 00
-                if minutesInt > 59 || minutesInt == 00 {
+                if minutesInt > 59 {
                     minutesTiming = "Wrong Time"
                 }
             }
             
             if (hoursTiming != nil) && (minutesTiming != nil) && hoursTiming.count == 2 && minutesTiming.count == 2{
                 if (minutesTiming != "Wrong Time") && (minutesTiming != "Wrong Time"){
-                    taskTimePicker.date = String(hoursTiming+":"+minutesTiming).toDate(dateFormat: "HH:mm")
+                    
+                    let date = String(hoursTiming+":"+minutesTiming).toDate(dateFormat: "HH:mm")
+                    
+                    let currentDate = Date().stripDate()
+                    let selectedDate = date!.stripDate()
+                                                            
+                    if currentDate.timeIntervalSince(selectedDate) > 0{
+                        taskDatePicker.setDate(Calendar.current.date(byAdding: .day, value: 1, to: Date())!, animated: true)
+                    }
+                    taskTimePicker.date = date!
                 }
             }
         }
     }
 }
+ 

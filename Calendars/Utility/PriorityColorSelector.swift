@@ -11,7 +11,7 @@ public class PriorityColorSelector{
         case "Medium":
             newColor = HexToUIColor.hexStringToUIColor(hex: "fbc531", alpha: 1)
         case "Low":
-            newColor = HexToUIColor.hexStringToUIColor(hex: "ffffff", alpha: 1)//f7f1e3
+            newColor = HexToUIColor.hexStringToUIColor(hex: "#bdc3c7", alpha: 1)//f7f1e3
         default:
             print("Color doesnt match")
         }
