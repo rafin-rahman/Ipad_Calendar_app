@@ -232,7 +232,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
             
-            let tapGesture = TapEventGesture(target: self, action: #selector(displayDetail(_:)))
+            let tapGesture = EventGestureRecognizer(target: self, action: #selector(displayDetail(_:)))
             tapGesture.eventView = event
             tapGesture.event = todaysEvent
             tapGesture.delegate = self
@@ -327,35 +327,35 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         }
     }
     
-    @objc func displayDetail(_ sender:TapEventGesture){
+    @objc func displayDetail(_ sender:EventGestureRecognizer){
         
         //parent view -> sender.eventView
-        if let detailsView = UINib(nibName: "DetailView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DetailView {
-            detailsView.translatesAutoresizingMaskIntoConstraints = false
-            sender.eventView.addSubview(detailsView)
-            
-            detailsView.widthAnchor.constraint(equalToConstant: 400).isActive = true
-            detailsView.heightAnchor.constraint(equalToConstant: 210).isActive = true
-            
-            let startHour = CGFloat(Calendar.current.component(.hour, from: sender.event.startDate))
-            let endHour = CGFloat(Calendar.current.component(.hour, from: sender.event.endDate))
-            
-            let startMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.startDate)))/60
-            let endMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.endDate)))/60
-            
-            let finalStartTime = (startHour+startMinute) * 62
-            let finalEndTime = (endHour+endMinute) * 62
-            
-            print(finalStartTime)
-            if finalStartTime < detailsView.bounds.height {
-                detailsView.topAnchor.constraint(equalTo: sender.eventView.bottomAnchor, constant: 20).isActive = true
-            } else {
-                detailsView.bottomAnchor.constraint(equalTo: sender.eventView.topAnchor, constant: 20).isActive = true
-            }
-            detailsView.centerXAnchor.constraint(equalTo: sender.eventView.centerXAnchor).isActive = true
-            
-            rightScroll.scrollTo(event: sender.event, view: detailsView)
-        }
+//        if let detailsView = UINib(nibName: "DetailView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DetailView {
+//            detailsView.translatesAutoresizingMaskIntoConstraints = false
+//            sender.eventView.addSubview(detailsView)
+//            
+//            detailsView.widthAnchor.constraint(equalToConstant: 400).isActive = true
+//            detailsView.heightAnchor.constraint(equalToConstant: 210).isActive = true
+//            
+//            let startHour = CGFloat(Calendar.current.component(.hour, from: sender.event.startDate))
+//            let endHour = CGFloat(Calendar.current.component(.hour, from: sender.event.endDate))
+//            
+//            let startMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.startDate)))/60
+//            let endMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.endDate)))/60
+//            
+//            let finalStartTime = (startHour+startMinute) * 62
+//            let finalEndTime = (endHour+endMinute) * 62
+//            
+//            print(finalStartTime)
+//            if finalStartTime < detailsView.bounds.height {
+//                detailsView.topAnchor.constraint(equalTo: sender.eventView.bottomAnchor, constant: 20).isActive = true
+//            } else {
+//                detailsView.bottomAnchor.constraint(equalTo: sender.eventView.topAnchor, constant: 20).isActive = true
+//            }
+//            detailsView.centerXAnchor.constraint(equalTo: sender.eventView.centerXAnchor).isActive = true
+//            
+//             rightScroll.scrollTo(event: sender.event, view: detailsView)
+//        }
     }
     
     @IBAction func daySelectedButtonClick(_ sender: UIButton) {

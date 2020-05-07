@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TapEventGesture: UITapGestureRecognizer {
+class EventGestureRecognizer: UITapGestureRecognizer {
     var event:Events!
     var eventView:UIView!
 }

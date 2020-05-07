@@ -133,7 +133,7 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
             let taskView = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             taskView.backgroundColor = SelectColor.getColor(color: taskDetails.profileColour)
             
-            let tapGesture = TapTaskGesture(target: self, action: #selector(tapGesture(_:)))
+            let tapGesture = TaskGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
             tapGesture.task = taskDetails
             tapGesture.numberOfTapsRequired = 2
             tapGesture.delegate = self
@@ -146,6 +146,7 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
             
             let editView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             editView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "fd9644", alpha: 1)
+            
             let binView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             binView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#c0392b", alpha: 1)
             
@@ -362,7 +363,7 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc func tapGesture(_ sender:TapTaskGesture){
+    @objc func tapGesture(_ sender:TaskGestureRecognizer){
         TaskDAO().editTaskCompleted(taskId: sender.task.id, completed: !sender.task.completedStatus)
         onLoad()
     }

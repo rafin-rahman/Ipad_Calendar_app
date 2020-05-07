@@ -228,47 +228,47 @@ extension TimeInterval{
     }
 }
 
-enum ScrollDirection {
-    case Top
-    case Bottom
-    
-    func contentOffsetWith(scrollView: UIScrollView, event:Events) -> CGPoint {
-        var contentOffset = CGPoint.zero
-        switch self {
-            case .Top:
-                contentOffset = CGPoint(x: 0, y: -scrollView.contentInset.top)
-        
-            case .Bottom:
-                contentOffset = CGPoint(x: 0, y: scrollView.contentOffset.y + 100 ) //scrollView.contentSize.height - scrollView.bounds.size.height
-        }
-        return contentOffset
-    }
-}
-
-extension UIScrollView {
-    func scrollTo(event: Events, view: DetailView) {
-
-        
-        let startHour = CGFloat(Calendar.current.component(.hour, from: event.startDate))
-        let endHour = CGFloat(Calendar.current.component(.hour, from: event.endDate))
-        
-        let startMinute = (CGFloat(Calendar.current.component(.minute, from: event.startDate)))/60
-        let endMinute = (CGFloat(Calendar.current.component(.minute, from: event.endDate)))/60
-        
-        let finalStartTime = (startHour+startMinute) * 62
-        let finalEndTime = (endHour+endMinute) * 62
-                
-        let newPoint: CGPoint
-        if finalStartTime > view.frame.height  {
-            var newY = finalStartTime - view.frame.height
-            newPoint = CGPoint(x: 0, y: newY)
-        } else {
-            var newY = finalStartTime
-            if newY + self.frame.height > contentSize.height {
-                newY = contentSize.height - self.frame.height
-            }
-            newPoint = CGPoint(x: 0, y: newY)
-        }
-        self.setContentOffset(newPoint, animated: false)
-    }
-}
+//enum ScrollDirection {
+//    case Top
+//    case Bottom
+//
+//    func contentOffsetWith(scrollView: UIScrollView, event:Events) -> CGPoint {
+//        var contentOffset = CGPoint.zero
+//        switch self {
+//            case .Top:
+//                contentOffset = CGPoint(x: 0, y: -scrollView.contentInset.top)
+//
+//            case .Bottom:
+//                contentOffset = CGPoint(x: 0, y: scrollView.contentOffset.y + 100 ) //scrollView.contentSize.height - scrollView.bounds.size.height
+//        }
+//        return contentOffset
+//    }
+//}
+//
+//extension UIScrollView {
+//    func scrollTo(event: Events, view: DetailView) {
+//
+//
+//        let startHour = CGFloat(Calendar.current.component(.hour, from: event.startDate))
+//        let endHour = CGFloat(Calendar.current.component(.hour, from: event.endDate))
+//
+//        let startMinute = (CGFloat(Calendar.current.component(.minute, from: event.startDate)))/60
+//        let endMinute = (CGFloat(Calendar.current.component(.minute, from: event.endDate)))/60
+//
+//        let finalStartTime = (startHour+startMinute) * 62
+//        let finalEndTime = (endHour+endMinute) * 62
+//
+//        let newPoint: CGPoint
+//        if finalStartTime > view.frame.height  {
+//            let newY = finalStartTime - view.frame.height
+//            newPoint = CGPoint(x: 0, y: newY)
+//        } else {
+//            var newY = finalStartTime
+//            if newY + self.frame.height > contentSize.height {
+//                newY = contentSize.height - self.frame.height
+//            }
+//            newPoint = CGPoint(x: 0, y: newY)
+//        }
+//        self.setContentOffset(newPoint, animated: false)
+//    }
+//}

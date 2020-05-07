@@ -16,6 +16,14 @@ class SearchBarView: UIView {
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var optionView: UIView!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var optionViewTrailing: NSLayoutConstraint!
+    
+    var eventSelect:Bool!
+    var eventDetails:Events!
+    var taskDetails:Task!
     
     func setDataForEvents(event:Events){
         dateLabel.text = event.startDate.toString(dateFormat: "dd MMM YY")
@@ -33,6 +41,8 @@ class SearchBarView: UIView {
         profileLabel.text = event.profile
         label.text = "Event"
         backgroundView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#fffa65", alpha: 1)
+        eventDetails = event
+        eventSelect = true
     }
     
     func setDataForTasks(task:Task){
@@ -48,6 +58,8 @@ class SearchBarView: UIView {
         profileLabel.text = task.profile
         label.text = "Task"
         backgroundView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#7bed9f", alpha: 1)
+        taskDetails = task
+        eventSelect = false
     }
     
     func style(){
@@ -57,6 +69,20 @@ class SearchBarView: UIView {
         backgroundView.layer.shadowOpacity = 1
         backgroundView.layer.shadowRadius = 3
     }
-    
 
+    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
+        self.optionViewTrailing.constant = 0
+        UIView.animate(withDuration: 3, animations: {
+            self.optionView.layoutIfNeeded()
+        })
+        
+        
+    }
+    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
+        self.optionViewTrailing.constant = -120
+        UIView.animate(withDuration: 3, animations: {
+            
+            self.optionView.layoutIfNeeded()
+        })
+    }
 }

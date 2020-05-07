@@ -23,6 +23,8 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     @IBOutlet weak var profileNameText: UITextField!
     @IBOutlet weak var addProfileHeight: NSLayoutConstraint!
     
+    var activeProfileView: TempConstraintView!
+    
     var listOfProfile : Array<Profile> = Array()
     var updateProfile : Profile!
     
@@ -126,7 +128,7 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             }
         }
         
-               
+        
         if !editStatus{
             let profileDic: [String: Any] = [
                 "Name" : profileName!.capitalizingFirstLetter(),
@@ -209,13 +211,11 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     func displayDetailsOfProfile(profileList:Array<Profile>){
         let sortedProfileList = profileList.sorted(by: { $0.profileName < $1.profileName })
         
-        for subview in profileStackView.arrangedSubviews {
-            subview.removeFromSuperview()
-        }
+        profileStackView.removeAllArrangedSubviews()
         
         for profileDetail in sortedProfileList{
             
-            let profileView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
+            let profileView = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
             
             profileStackView.addArrangedSubview(profileView)
             
@@ -226,6 +226,16 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             profileNameLabel.font = UIFont.systemFont(ofSize: 20)
             profileNameLabel.numberOfLines = 0
             profileNameLabel.sizeToFit()
+            
+            let optionView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            optionView.backgroundColor = .purple
+            optionView.clipsToBounds = true
+            
+            let editView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            editView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "fd9644", alpha: 1)
+            
+            let binView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            binView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#c0392b", alpha: 1)
             
             let editButton: InfoButton = InfoButton(type: .custom)
             editButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
@@ -244,22 +254,68 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             binButton.addTarget(self, action: #selector(deleteButtonClick(_:)), for: .touchUpInside)
             
             profileView.addSubview(profileNameLabel)
-            profileView.addSubview(editButton)
-            profileView.addSubview(binButton)
+            profileView.addSubview(optionView)
+            optionView.addSubview(editView)
+            optionView.addSubview(binView)
+            editView.addSubview(editButton)
+            binView.addSubview(binButton)
+            
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
+            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+            profileView.addGestureRecognizer(swipeLeft)
+            
+            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
+            swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+            profileView.addGestureRecognizer(swipeRight)
+            
+            optionView.translatesAutoresizingMaskIntoConstraints = false
+            editView.translatesAutoresizingMaskIntoConstraints = false
+            binView.translatesAutoresizingMaskIntoConstraints = false
             
             profileNameLabel.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
             profileNameLabel.leadingAnchor.constraint(equalTo: profileView.leadingAnchor, constant: 60).isActive = true
             
-            editButton.leadingAnchor.constraint(equalTo: binButton.leadingAnchor, constant: -40).isActive = true
-            editButton.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
-            editButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-            editButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            optionView.centerYAnchor.constraint(equalTo: profileView.centerYAnchor).isActive = true
+            optionView.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: 0).isActive = true
+            optionView.heightAnchor.constraint(equalTo: profileView.heightAnchor, multiplier: 1).isActive = true
+            profileView.optionViewConstraint = optionView.widthAnchor.constraint(equalToConstant: 0)
+            profileView.optionViewConstraint.isActive = true
+            
+            editView.centerYAnchor.constraint(equalTo: optionView.centerYAnchor).isActive = true
+            editView.leadingAnchor.constraint(equalTo: optionView.leadingAnchor, constant: 0).isActive = true
+            editView.heightAnchor.constraint(equalTo: optionView.heightAnchor, multiplier: 1).isActive = true
+            editView.widthAnchor.constraint(equalTo: optionView.widthAnchor, multiplier: 0.5, constant: 0).isActive = true
+            
+            binView.centerYAnchor.constraint(equalTo: optionView.centerYAnchor).isActive = true
+            binView.trailingAnchor.constraint(equalTo: optionView.trailingAnchor, constant: 0).isActive = true
+            binView.heightAnchor.constraint(equalTo: optionView.heightAnchor, multiplier: 1).isActive = true
+            binView.widthAnchor.constraint(equalTo: optionView.widthAnchor, multiplier: 0.5, constant: 0).isActive = true
+            
+            editButton.centerYAnchor.constraint(equalTo: editView.centerYAnchor).isActive = true
+            editButton.centerXAnchor.constraint(equalTo: editView.centerXAnchor).isActive = true
+            editButton.heightAnchor.constraint(equalTo: editView.heightAnchor, multiplier: 1).isActive = true
+            editButton.widthAnchor.constraint(equalTo: editView.widthAnchor, multiplier: 1).isActive = true
+            editButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
             
             
-            binButton.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 20).isActive = true
-            binButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -55).isActive = true
-            binButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-            binButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            binButton.centerYAnchor.constraint(equalTo: binView.centerYAnchor).isActive = true
+            binButton.centerXAnchor.constraint(equalTo: binView.centerXAnchor).isActive = true
+            binButton.heightAnchor.constraint(equalTo: binView.heightAnchor, multiplier: 1).isActive = true
+            binButton.widthAnchor.constraint(equalTo: binView.widthAnchor, multiplier: 1).isActive = true
+            binButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            
+            editButton.centerYAnchor.constraint(equalTo: editView.centerYAnchor).isActive = true
+            editButton.centerXAnchor.constraint(equalTo: editView.centerXAnchor).isActive = true
+            editButton.heightAnchor.constraint(equalTo: editView.heightAnchor, multiplier: 1).isActive = true
+            editButton.widthAnchor.constraint(equalTo: editView.widthAnchor, multiplier: 1).isActive = true
+            editButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            
+            
+            binButton.centerYAnchor.constraint(equalTo: binView.centerYAnchor).isActive = true
+            binButton.centerXAnchor.constraint(equalTo: binView.centerXAnchor).isActive = true
+            binButton.heightAnchor.constraint(equalTo: binView.heightAnchor, multiplier: 1).isActive = true
+            binButton.widthAnchor.constraint(equalTo: binView.widthAnchor, multiplier: 1).isActive = true
+            binButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
             
             profileView.translatesAutoresizingMaskIntoConstraints = false
             profileView.backgroundColor = SelectColor.getColor(color: profileDetail.profileColor)
@@ -268,9 +324,40 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
         }
     }
     
+    @objc func swipeLeft(_ sender: UIGestureRecognizer) {
+        if let profileView = sender.view as? TempConstraintView {
+            if activeProfileView != nil && activeProfileView != profileView{
+                closeView(activeProfileView)
+            }
+            activeProfileView = profileView
+            openView(activeProfileView)
+        }
+    }
+    
+    @objc func swipeRight(_ sender: UIGestureRecognizer) {
+        if let profileView = sender.view as? TempConstraintView {
+            closeView(activeProfileView)
+            activeProfileView = nil
+        }
+    }
+    
+    func openView(_ profileView: TempConstraintView) {
+        profileView.optionViewConstraint.constant = 120
+        UIView.animate(withDuration: 0.2, animations: {
+            profileView.layoutIfNeeded()
+        })
+    }
+    
+    func closeView(_ profileView: TempConstraintView) {
+        profileView.optionViewConstraint.constant = 0
+        UIView.animate(withDuration: 0.2, animations: {
+            profileView.layoutIfNeeded()
+        })
+    }
+    
     @objc func editButtonClick(_ sender:InfoButton){
-       popAnimation(sender)
-        
+        popAnimation(sender)
+        closeView(activeProfileView)
         if !closeFormStatus {
             displayForm()
         }
@@ -306,9 +393,9 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
         }
         addProfileView.backgroundColor = SelectColor.getColor(color: selectedProfileColor)
     }
-        
+    
     @objc func deleteButtonClick(_ sender: InfoButton) {
-        
+        closeView(activeProfileView)
         if let viewController = self.getOwningViewController() as? MainViewController {
             let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this profile?", preferredStyle: UIAlertController.Style.alert)
             
@@ -328,17 +415,17 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     
     func popAnimation (_ sender: UIButton){
         sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-               
-               UIView.animate(withDuration: 2.0,
-                              delay: 0,
-                              usingSpringWithDamping: CGFloat(0.20),
-                              initialSpringVelocity: CGFloat(6.0),
-                              options: UIView.AnimationOptions.allowUserInteraction,
-                              animations: {
-                               sender.transform = CGAffineTransform.identity
-               },
-                              completion: nil
-               )
+        
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                        sender.transform = CGAffineTransform.identity
+        },
+                       completion: nil
+        )
     }
     
     func editEventAndTask(profile:Profile, profileName: String, profileColor: String){

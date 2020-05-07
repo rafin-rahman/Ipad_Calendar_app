@@ -22,7 +22,7 @@
 		D14AED852443B0BA0012469F /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14AED842443B0BA0012469F /* WeekView.swift */; };
 		D14AED872443B0C50012469F /* WeekView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14AED862443B0C50012469F /* WeekView.xib */; };
 		D151B98424636979008BD621 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D151B98324636979008BD621 /* DetailView.xib */; };
-		D151B98824636CA9008BD621 /* TapEventGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D151B98724636CA9008BD621 /* TapEventGesture.swift */; };
+		D151B98824636CA9008BD621 /* EventGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D151B98724636CA9008BD621 /* EventGestureRecognizer.swift */; };
 		D151B98A24636F7B008BD621 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D151B98924636F7B008BD621 /* DetailView.swift */; };
 		D16403052443D2560078E059 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16403042443D2560078E059 /* MonthView.swift */; };
 		D16403072443D28F0078E059 /* MonthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16403062443D28F0078E059 /* MonthView.xib */; };
@@ -45,7 +45,7 @@
 		D192628D2454E78300C11E17 /* SelectColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192628C2454E78300C11E17 /* SelectColour.swift */; };
 		D1A0CFF4244B9B0D008C4D7C /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Events.swift */; };
 		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
-		D1B4112A2461D04D00C7F62C /* TapTaskGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B411292461D04D00C7F62C /* TapTaskGesture.swift */; };
+		D1B4112A2461D04D00C7F62C /* TaskGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B411292461D04D00C7F62C /* TaskGestureRecognizer.swift */; };
 		D1B79167244888C900B4A350 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B79166244888C900B4A350 /* EventView.swift */; };
 		D1B79169244888DB00B4A350 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B79168244888DB00B4A350 /* EventView.xib */; };
 		D1C0AE2C244DED7C00BB517D /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */; };
@@ -82,7 +82,7 @@
 		D14AED842443B0BA0012469F /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		D14AED862443B0C50012469F /* WeekView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekView.xib; sourceTree = "<group>"; };
 		D151B98324636979008BD621 /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
-		D151B98724636CA9008BD621 /* TapEventGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapEventGesture.swift; sourceTree = "<group>"; };
+		D151B98724636CA9008BD621 /* EventGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGestureRecognizer.swift; sourceTree = "<group>"; };
 		D151B98924636F7B008BD621 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = SOURCE_ROOT; };
 		D16403042443D2560078E059 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		D16403062443D28F0078E059 /* MonthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthView.xib; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		D192628C2454E78300C11E17 /* SelectColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColour.swift; sourceTree = "<group>"; };
 		D1A0CFF3244B9B0D008C4D7C /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
-		D1B411292461D04D00C7F62C /* TapTaskGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskGesture.swift; sourceTree = "<group>"; };
+		D1B411292461D04D00C7F62C /* TaskGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGestureRecognizer.swift; sourceTree = "<group>"; };
 		D1B79166244888C900B4A350 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D1B79168244888DB00B4A350 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		D1C0AE2B244DED7C00BB517D /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 				D1F4C3082458D47C008946A0 /* InfoButton.swift */,
 				D13AD93F245A663D00C1637A /* PriorityColorSelector.swift */,
 				D1C349C7245B99F800C6A9C7 /* TempConstraintView.swift */,
-				D1B411292461D04D00C7F62C /* TapTaskGesture.swift */,
-				D151B98724636CA9008BD621 /* TapEventGesture.swift */,
+				D1B411292461D04D00C7F62C /* TaskGestureRecognizer.swift */,
+				D151B98724636CA9008BD621 /* EventGestureRecognizer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -432,7 +432,7 @@
 				D179B6502448BFE9002C00B9 /* YearView.swift in Sources */,
 				D10DAFED2451F45D00FC253E /* HexToUIColor.swift in Sources */,
 				D1F228F5245464450008DD92 /* ProfileDAO.swift in Sources */,
-				D1B4112A2461D04D00C7F62C /* TapTaskGesture.swift in Sources */,
+				D1B4112A2461D04D00C7F62C /* TaskGestureRecognizer.swift in Sources */,
 				D179B6542448C75B002C00B9 /* HomeView.swift in Sources */,
 				D10DAFEB2451E94F00FC253E /* Profile.swift in Sources */,
 				D189C06C24264A1E00FF7723 /* AppDelegate.swift in Sources */,
@@ -443,7 +443,7 @@
 				D1F228EE245459090008DD92 /* ProfileView.swift in Sources */,
 				D1F228F124545ADF0008DD92 /* NavigationProtocol.swift in Sources */,
 				D189C06E24264A1E00FF7723 /* SceneDelegate.swift in Sources */,
-				D151B98824636CA9008BD621 /* TapEventGesture.swift in Sources */,
+				D151B98824636CA9008BD621 /* EventGestureRecognizer.swift in Sources */,
 				D192628D2454E78300C11E17 /* SelectColour.swift in Sources */,
 				D151B98A24636F7B008BD621 /* DetailView.swift in Sources */,
 				D13AD940245A663D00C1637A /* PriorityColorSelector.swift in Sources */,
