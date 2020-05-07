@@ -337,10 +337,24 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             detailsView.widthAnchor.constraint(equalToConstant: 400).isActive = true
             detailsView.heightAnchor.constraint(equalToConstant: 210).isActive = true
             
-            detailsView.bottomAnchor.constraint(equalTo: sender.eventView.topAnchor, constant: 20).isActive = true
+            let startHour = CGFloat(Calendar.current.component(.hour, from: sender.event.startDate))
+            let endHour = CGFloat(Calendar.current.component(.hour, from: sender.event.endDate))
+            
+            let startMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.startDate)))/60
+            let endMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.endDate)))/60
+            
+            let finalStartTime = (startHour+startMinute) * 62
+            let finalEndTime = (endHour+endMinute) * 62
+            
+            print(finalStartTime)
+            if finalStartTime < detailsView.bounds.height {
+                detailsView.topAnchor.constraint(equalTo: sender.eventView.bottomAnchor, constant: 20).isActive = true
+            } else {
+                detailsView.bottomAnchor.constraint(equalTo: sender.eventView.topAnchor, constant: 20).isActive = true
+            }
             detailsView.centerXAnchor.constraint(equalTo: sender.eventView.centerXAnchor).isActive = true
             
-            
+            rightScroll.scrollTo(event: sender.event, view: detailsView)
         }
     }
     
