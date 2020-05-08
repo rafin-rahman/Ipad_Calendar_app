@@ -9,32 +9,40 @@
 import UIKit
 import Firebase
 
-class SearchPanelViewController: UIViewController, UITextFieldDelegate {
+class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var searchBarTrailing: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var leftView: UIView!
     
     var keyword:String!
     var searchedWord:String!
     var searchedEventList:Array<Events>!
+    var onDismiss : ((_ object: Any?) -> Void)?
+    
+    var eventDetailStatus = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
+        tap.delegate = self
+        self.backgroundView.addGestureRecognizer(tap)
+        
         searchView.layer.cornerRadius = 6.0
         searchView.layer.masksToBounds = true
-        
-        
         searchField.text = keyword
         searchField.delegate = self
-        getSearchBar()
-        getList()
+        if !eventDetailStatus{
+            getSearchBar()
+            getList()
+        }
+       
     }
-    
-    
+        
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         searchedWord = textField.text!
         getList()
@@ -52,10 +60,6 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate {
                 self.view.layoutIfNeeded()
             })
         })
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
-        self.backgroundView.addGestureRecognizer(tap)
-        
     }
     
     func getList(){
@@ -79,6 +83,23 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate {
                     self.getSearchViewForTask(taskDetails: task)
                 }
             }
+        }
+    }
+    
+    func getEventDetails(event:Events){
+        self.stackView.removeAllArrangedSubviews()
+        showEventDetails(event: event)
+    }
+    
+    func showEventDetails(event:Events){
+        if let detailsView = UINib(nibName: "DetailView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DetailView {
+            detailsView.style()
+            detailsView.translatesAutoresizingMaskIntoConstraints = false
+            leftView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "273C75", alpha: 1)
+            searchView.isHidden = true
+            detailsView.setDataForEvents(event: event)
+            stackView.addArrangedSubview(detailsView)
+            detailsView.heightAnchor.constraint(equalToConstant: 500).isActive = true
         }
     }
     
@@ -106,5 +127,32 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
 
+    public func clickEventOrTask(_ object: Any) {
+           if let vc = self.presentingViewController as? MainViewController {
+               dismiss(animated: true, completion: {
+                if let dayView = vc.rightView.dynamicView as? DayView {
+                    if let event = object as? Events{
+                        dayView.getDailyView(eventDate: event.startDate)
+                    }
+                    
+                    if let task = object as? Task{
+                        dayView.getDailyView(eventDate: task.taskDateAndTime)
+                    }
+                    
+                    
+                       }
+               })
+           }
+       }
+    
+    public func viewEditClick(_ object: Any) {
+        if let vc = self.presentingViewController as? MainViewController {
+            dismiss(animated: true, completion: {
+                    if let dayView = vc.rightView.dynamicView as? DayView {
+                        dayView.onSegDismiss(object)
+                    }
+            })
+        }
+    }
 
 }

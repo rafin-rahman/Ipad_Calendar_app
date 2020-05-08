@@ -317,7 +317,7 @@
         <!--Search Panel View Controller-->
         <scene sceneID="ch8-Pt-W5f">
             <objects>
-                <viewController id="Ks1-ds-XpM" customClass="SearchPanelViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchPanelViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ks1-ds-XpM" customClass="SearchPanelViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kJe-gm-ENq">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -427,6 +427,7 @@
                     <navigationItem key="navigationItem" id="kxi-rJ-abX"/>
                     <connections>
                         <outlet property="backgroundView" destination="ygm-hT-Fcy" id="hr3-9c-MBL"/>
+                        <outlet property="leftView" destination="8rq-EY-fd3" id="212-Et-YkD"/>
                         <outlet property="searchBarTrailing" destination="9VM-Hf-mzG" id="6uz-Yq-X4y"/>
                         <outlet property="searchField" destination="Oo5-Sa-m0N" id="rqs-cZ-M65"/>
                         <outlet property="searchView" destination="1Cq-m8-IPp" id="x2C-t1-ekL"/>

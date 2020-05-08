@@ -32,8 +32,8 @@ class SearchBarView: UIView {
             timeLabel.text = "All Day"
         }
         else{
-            let startTime = event.startDate.toString(dateFormat: "hh:mm")!
-            let endTime = event.endDate.toString(dateFormat: "hh:mm")!
+            let startTime = event.startDate.toString(dateFormat: "HH:mm")!
+            let endTime = event.endDate.toString(dateFormat: "HH:mm")!
             timeLabel.text = startTime + " - " + endTime
         }
         
@@ -47,7 +47,7 @@ class SearchBarView: UIView {
     
     func setDataForTasks(task:Task){
         dateLabel.text = task.taskDateAndTime.toString(dateFormat: "dd MMM YY")
-        timeLabel.text = task.taskDateAndTime.toString(dateFormat: "hh:mm")
+        timeLabel.text = task.taskDateAndTime.toString(dateFormat: "HH:mm")
         
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: task.taskName)
         if task.completedStatus{
@@ -72,17 +72,72 @@ class SearchBarView: UIView {
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
         self.optionViewTrailing.constant = 0
-        UIView.animate(withDuration: 3, animations: {
-            self.optionView.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.layoutIfNeeded()
         })
-        
-        
     }
+    
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         self.optionViewTrailing.constant = -120
-        UIView.animate(withDuration: 3, animations: {
-            
-            self.optionView.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.layoutIfNeeded()
         })
     }
+    
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
+        if let vc = getOwningViewController() as? SearchPanelViewController {
+            if eventSelect{
+                vc.clickEventOrTask(eventDetails as Any)
+            }
+            else{
+                vc.clickEventOrTask(taskDetails as Any)
+            }
+        }
+    }
+    
+    @IBAction func editButtonClick(_ sender: UIButton) {
+        if let vc = getOwningViewController() as? SearchPanelViewController {
+            if eventSelect{
+                vc.viewEditClick(eventDetails as Any)
+            }
+            else{
+                vc.viewEditClick(taskDetails as Any)
+            }
+        }
+    }
+    
+    
+    @IBAction func deleteButtonClick(_ sender: UIButton) {
+        if eventSelect{
+            if let viewController = self.getOwningViewController() as? SearchPanelViewController {
+                let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this event?", preferredStyle: UIAlertController.Style.alert)
+                
+                refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                    EventDAO().editDeleteStatus(id: self.eventDetails.id, deleteStatus:true)
+                    viewController.getList()
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                }))
+                
+                viewController.present(refreshAlert, animated: true, completion: nil)
+            }
+        }
+        else{
+            if let viewController = self.getOwningViewController() as? SearchPanelViewController {
+                let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
+                
+                refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                    TaskDAO().editDeleteStatus(id: self.taskDetails.id, deleteStatus: true)
+                    viewController.getList()
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                }))
+                
+                viewController.present(refreshAlert, animated: true, completion: nil)
+            }
+        }
+    }
+   
 }

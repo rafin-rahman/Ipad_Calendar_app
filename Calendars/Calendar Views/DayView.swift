@@ -34,6 +34,8 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
     var eventView : Array<UIView> = Array()
     var allDayListView : Array<UIView> = Array()
     
+    var activeSearchPanel : SearchPanelViewController!
+    
     @IBAction func prevWeek(_ sender: Any) {
         let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: -7, to: date)!)
@@ -59,7 +61,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         dayOneButton.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
         dayOneButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         
-        self.getDates(date: Date())
+        getDates(date: eventDate)
         
         eventDAO.getEvents(eventDate: eventDate, allDayStatus: false)
         eventDAOForAllDay.getEvents(eventDate: eventDate, allDayStatus: true)
@@ -328,35 +330,44 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
     }
     
     @objc func displayDetail(_ sender:EventGestureRecognizer){
-        
-        //parent view -> sender.eventView
-//        if let detailsView = UINib(nibName: "DetailView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DetailView {
-//            detailsView.translatesAutoresizingMaskIntoConstraints = false
-//            sender.eventView.addSubview(detailsView)
-//            
-//            detailsView.widthAnchor.constraint(equalToConstant: 400).isActive = true
-//            detailsView.heightAnchor.constraint(equalToConstant: 210).isActive = true
-//            
-//            let startHour = CGFloat(Calendar.current.component(.hour, from: sender.event.startDate))
-//            let endHour = CGFloat(Calendar.current.component(.hour, from: sender.event.endDate))
-//            
-//            let startMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.startDate)))/60
-//            let endMinute = (CGFloat(Calendar.current.component(.minute, from: sender.event.endDate)))/60
-//            
-//            let finalStartTime = (startHour+startMinute) * 62
-//            let finalEndTime = (endHour+endMinute) * 62
-//            
-//            print(finalStartTime)
-//            if finalStartTime < detailsView.bounds.height {
-//                detailsView.topAnchor.constraint(equalTo: sender.eventView.bottomAnchor, constant: 20).isActive = true
-//            } else {
-//                detailsView.bottomAnchor.constraint(equalTo: sender.eventView.topAnchor, constant: 20).isActive = true
-//            }
-//            detailsView.centerXAnchor.constraint(equalTo: sender.eventView.centerXAnchor).isActive = true
-//            
-//             rightScroll.scrollTo(event: sender.event, view: detailsView)
-//        }
+        if let viewController = getOwningViewController() as? MainViewController {
+            let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "SearchPanelViewController") as! SearchPanelViewController
+            popoverContent.modalPresentationStyle = .overCurrentContext
+            popoverContent.modalTransitionStyle = .crossDissolve
+            popoverContent.onDismiss = onSegDismiss
+            viewController.present(popoverContent, animated: true, completion: nil)
+            popoverContent.getEventDetails(event: sender.event)
+        }
     }
+    
+    func onSegDismiss(_ object: Any?) {
+        if let event = object as? Events {
+            if let viewController = getOwningViewController() as? MainViewController {
+                let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
+                popoverContent.modalPresentationStyle = .overCurrentContext
+                popoverContent.modalTransitionStyle = .crossDissolve
+                popoverContent.onDismiss = onViewDismiss
+                viewController.present(popoverContent, animated: true, completion: nil)
+                popoverContent.eventEditDetails(event: event)
+            }
+        } else if let task = object as? Task {
+            if let viewController = getOwningViewController() as? MainViewController {
+                            
+                let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
+                popoverContent.modalPresentationStyle = .overCurrentContext
+                popoverContent.modalTransitionStyle = .crossDissolve
+                viewController.present(popoverContent, animated: true, completion: nil)
+                popoverContent.taskEditDetails(task: task)
+                popoverContent.onDismiss = onViewDismiss
+            }
+        }
+    }
+    
+    func onViewDismiss() {
+        getDailyView(eventDate: activeDate)
+    }
+    
+    
     
     @IBAction func daySelectedButtonClick(_ sender: UIButton) {
         dayOneButton.backgroundColor = UIColor.white

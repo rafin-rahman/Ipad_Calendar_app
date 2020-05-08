@@ -287,6 +287,7 @@ class TaskView: UIView, NavigationProtocol, UIGestureRecognizerDelegate {
     
     @objc func editButtonClick(_ sender:InfoButton){
         if let viewController = getOwningViewController() as? MainViewController {
+                        
             let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
             popoverContent.modalPresentationStyle = .overCurrentContext
             popoverContent.modalTransitionStyle = .crossDissolve

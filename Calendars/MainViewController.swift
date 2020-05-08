@@ -178,11 +178,10 @@ class MainViewController: UIViewController{
         if let task = self.rightView as? TaskView{
            task.onLoad()
         }
-        //Add for OtherViews
     }
     
-    //Add Or Edit View
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let viewController = segue.destination as? AddEditViewController {
             viewController.onDismiss = onSegDismiss
             if segue.identifier == "AddEditSegueEvent" {
@@ -200,6 +199,7 @@ class MainViewController: UIViewController{
         if let viewController = segue.destination as? SearchPanelViewController{
             if segue.identifier == "SearchSegue"{
                 viewController.keyword = searchText.text
+                viewController.eventDetailStatus = false
             }
         }
     }
@@ -227,7 +227,7 @@ class MainViewController: UIViewController{
         if let newRightView = UINib(nibName: "HomeView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             HomeView {
             addButton.isHidden = false
-            addButtonClosingAnimation()
+            addButtonClosingAnimation() 
             newRightView.onLoad()
             setRightViewDetails(newRightView: newRightView)
         }

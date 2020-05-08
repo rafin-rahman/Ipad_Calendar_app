@@ -10,7 +10,6 @@ import UIKit
 
 class HomeView: UIView, NavigationProtocol {
     
-    @IBOutlet weak var currentDate: UILabel!
     var dynamicView: CalendarProtocol!
     @IBOutlet weak var headerView: UIView!
     
@@ -20,14 +19,12 @@ class HomeView: UIView, NavigationProtocol {
     @IBOutlet weak var barHeight: NSLayoutConstraint!
     @IBOutlet weak var barXCenter: NSLayoutConstraint!
     @IBOutlet weak var barWidth: NSLayoutConstraint!
-    
-    
+    @IBOutlet weak var todayButton: UIButton!
+        
     var open = false;
     
     func onLoad() {
-        let format = DateFormatter()
-        format.dateFormat = "E, dd MMMM YYYY"
-        self.currentDate.text = format.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
+        todayButton.setTitle(Date().toString(dateFormat: "E, dd MMMM YYYY"), for: .normal)
         onDayClick(dayButton)
     }
     
@@ -99,4 +96,17 @@ class HomeView: UIView, NavigationProtocol {
         dynamicView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
     }
+    
+    @IBAction func todayButtonClick(_ sender: UIButton) {
+//        setBarStyle(sender:dayButton)
+//
+//        if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+//            DayView{
+//            setDayView(newView : dayView)
+//            dayView.rightScroll.delegate = dayView
+//            dayView.leftScroll.delegate = dayView
+//            dayView.getDailyView(eventDate: Date())
+//        }
+    }
+    
 }
