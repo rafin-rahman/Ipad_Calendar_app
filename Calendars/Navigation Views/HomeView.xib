@@ -73,10 +73,10 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIo-Cy-yYl">
-                            <rect key="frame" x="32" y="34" width="350" height="51"/>
+                            <rect key="frame" x="32" y="34" width="250" height="51"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="51" id="AcW-2s-XUh"/>
-                                <constraint firstAttribute="width" constant="350" id="mf3-cK-v04"/>
+                                <constraint firstAttribute="width" constant="250" id="mf3-cK-v04"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                             <state key="normal" title="Today">

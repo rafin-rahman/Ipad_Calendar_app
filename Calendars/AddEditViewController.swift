@@ -70,7 +70,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         taskNameText.delegate = self
-        //eventDatePicker.date = activeDate
+        eventDatePicker.date = activeDate
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
         self.backgroundView.addGestureRecognizer(tap)
         

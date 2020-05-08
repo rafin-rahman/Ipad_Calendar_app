@@ -59,6 +59,9 @@
                                 <constraint firstAttribute="width" constant="30" id="d7r-if-hZ4"/>
                             </constraints>
                             <state key="normal" image="edit color"/>
+                            <connections>
+                                <action selector="editButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Tgi-EB-scW"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDn-6o-qkC">
                             <rect key="frame" x="330" y="30" width="30" height="30"/>
@@ -67,6 +70,9 @@
                                 <constraint firstAttribute="height" constant="30" id="xMi-EJ-DQp"/>
                             </constraints>
                             <state key="normal" image="bin color"/>
+                            <connections>
+                                <action selector="deleteButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="SCQ-GC-FrS"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hM3-fP-GLt">
                             <rect key="frame" x="60" y="459" width="60" height="18"/>
@@ -116,8 +122,8 @@
                                 <constraint firstAttribute="width" constant="20" id="mgG-b8-bkv"/>
                             </constraints>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="high" translatesAutoresizingMaskIntoConstraints="NO" id="wNl-SU-uDI">
-                            <rect key="frame" x="30" y="460" width="20" height="20"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="high" translatesAutoresizingMaskIntoConstraints="NO" id="wNl-SU-uDI">
+                            <rect key="frame" x="30" y="458" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="L69-WP-85O"/>
                                 <constraint firstAttribute="height" constant="20" id="opT-RU-GOG"/>

@@ -20,7 +20,7 @@ class HomeView: UIView, NavigationProtocol {
     @IBOutlet weak var barXCenter: NSLayoutConstraint!
     @IBOutlet weak var barWidth: NSLayoutConstraint!
     @IBOutlet weak var todayButton: UIButton!
-        
+    
     var open = false;
     
     func onLoad() {
@@ -98,15 +98,15 @@ class HomeView: UIView, NavigationProtocol {
     }
     
     @IBAction func todayButtonClick(_ sender: UIButton) {
-//        setBarStyle(sender:dayButton)
-//
-//        if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-//            DayView{
-//            setDayView(newView : dayView)
-//            dayView.rightScroll.delegate = dayView
-//            dayView.leftScroll.delegate = dayView
-//            dayView.getDailyView(eventDate: Date())
-//        }
+        setBarStyle(sender:dayButton)
+        
+        if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+            DayView{
+            setDayView(newView : dayView)
+            dayView.rightScroll.delegate = dayView
+            dayView.leftScroll.delegate = dayView
+            dayView.getDailyView(eventDate: Date())
+        }
     }
     
 }

@@ -37,6 +37,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String
@@ -81,6 +82,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String
@@ -123,6 +125,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String
@@ -168,6 +171,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String
@@ -203,6 +207,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String
@@ -315,6 +320,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String
@@ -355,6 +361,7 @@ class EventDAO{
                     newEvent.id = (event.documentID)
                     
                     newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
                     newEvent.allDay = event["All-Day"] as! Bool
                     newEvent.priority = event["Priority"] as! String
                     newEvent.profile = event["Profile"] as! String

@@ -133,9 +133,7 @@ class MainViewController: UIViewController{
         }
     }
     
-    
-    
-              
+                
     @objc func onSingleTap(){
         view.endEditing(true)
     }

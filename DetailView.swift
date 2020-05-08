@@ -20,6 +20,8 @@ class DetailView: UIView {
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var locationImg: UIImageView!
     
+    
+    
     var eventSelect:Bool!
     var eventDetails:Events!
     var taskDetails:Task!
@@ -58,5 +60,58 @@ class DetailView: UIView {
         backgroundView.layer.shadowOpacity = 1
         backgroundView.layer.shadowRadius = 3
     }
+    
+    @IBAction func editButtonClick(_ sender: UIButton) {
+        if let vc = getOwningViewController() as? SearchPanelViewController {
+            if eventSelect{
+                vc.viewEditClick(eventDetails as Any)
+            }
+            else{
+                vc.viewEditClick(taskDetails as Any)
+            }
+        }
+    }
+    
+    @IBAction func deleteButtonClick(_ sender: UIButton) {
+        if eventSelect{
+            if let viewController = self.getOwningViewController() as? SearchPanelViewController {
+                let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this event?", preferredStyle: UIAlertController.Style.alert)
+                
+                refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                    EventDAO().editDeleteStatus(id: self.eventDetails.id, deleteStatus:true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        if let mainController = viewController.presentingViewController as? MainViewController{
+                            viewController.dismiss(animated: true, completion: {
+                                if let dayView = mainController.rightView.dynamicView as? DayView{
+                                    dayView.getDailyViewForDate(eventDate: self.eventDetails.startDate)
+                                }
+                            })
+                        }
+                    }
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                }))
+                
+                viewController.present(refreshAlert, animated: true, completion: nil)
+            }
+        }
+        else{
+            if let viewController = self.getOwningViewController() as? SearchPanelViewController {
+                let refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
+                
+                refreshAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                    TaskDAO().editDeleteStatus(id: self.taskDetails.id, deleteStatus: true)
+                    viewController.getList()
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                }))
+                
+                viewController.present(refreshAlert, animated: true, completion: nil)
+            }
+        }
+    }
+    
     
 }
