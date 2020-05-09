@@ -210,7 +210,9 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         
         message.text = "No All Day Event"
         message.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
-        message.font = UIFont(name: "System", size: 17)
+        //message.font = UIFont(name: "System", size: 14)
+        message.font = UIFont.systemFont(ofSize: 13)
+        
         
         self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#EFF2F5", alpha: 1.0)
         self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
@@ -224,7 +226,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         message.trailingAnchor.constraint(equalTo: self.eventAllDayView.trailingAnchor, constant: -10).isActive = true
         message.bottomAnchor.constraint(equalTo: self.eventAllDayView.bottomAnchor, constant: -10).isActive = true
         message.numberOfLines = 0
-        message.sizeToFit()
+        //message.sizeToFit()
     }
     
     func displayEvents(){
