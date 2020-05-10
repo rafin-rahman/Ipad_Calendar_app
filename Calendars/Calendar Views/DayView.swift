@@ -25,6 +25,8 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
     @IBOutlet weak var rightScroll: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var eventAllDayView: UIView!
+    @IBOutlet weak var taskBarView: UIView!
+    
     
     var activeDate: Date = Date()
     
@@ -33,8 +35,17 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
     
     var eventView : Array<UIView> = Array()
     var allDayListView : Array<UIView> = Array()
+    var taskView:Array<UIView> = Array()
+    
+    var savedGestureEvent : EventGestureRecognizer!
+    var savedGestureTask : TaskGestureRecognizer!
     
     var activeSearchPanel : SearchPanelViewController!
+    
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true;
+    }
     
     @IBAction func prevWeek(_ sender: Any) {
         let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
@@ -42,61 +53,30 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-           return true;
-    }
-    
     @IBAction func nextWeek(_ sender: Any) {
         let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: 7, to: date)!)
     }
     
-    func getDailyView(eventDate:Date) {
-        let eventDAO = EventDAO()
-        let eventDAOForAllDay = EventDAO()
-        
-        self.clearAllDayEvent()
-        self.clearView()
-        
-        dayOneButton.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
-        dayOneButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        
-        getDates(date: eventDate)
-        
-        eventDAO.getEvents(eventDate: eventDate, allDayStatus: false)
-        eventDAOForAllDay.getEvents(eventDate: eventDate, allDayStatus: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.finalAllDayEventList = eventDAOForAllDay.getEventFromDays()
-            if(self.finalAllDayEventList.count > 0){
-                self.displayAllDayEvents()
-            }
-            else{
-                self.noAllDayEvent()
-            }
-                        
-            self.finalEventList = eventDAO.getEventFromDays()
-            if(self.finalEventList.count > 0)
-            {
-                EventCollision.collisionDetection(eventList: self.finalEventList)
-                self.displayEvents()
-            }
-        }
-    }
-        
     func loadData() {
-        getDailyViewForDate(eventDate: activeDate)
+        getDailyView(eventDate: activeDate)
     }
     
-    func getDailyViewForDate(eventDate:Date){
+    func getDailyView(eventDate:Date){
         let eventDAOForAllDay = EventDAO()
         let eventDAO = EventDAO()
-
+        let taskDAO = TaskDAO()
+        
+        print("Cheking: ", eventDate)
+        getDates(date: eventDate)
+        
         self.clearAllDayEvent()
         self.clearView()
+        self.clearAllTask()
         
         eventDAOForAllDay.getEvents(eventDate: eventDate, allDayStatus: true)
         eventDAO.getEvents(eventDate: eventDate, allDayStatus: false)
+        taskDAO.getAllTasksFromDays(startDate: eventDate.stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: eventDate.stripTime())!)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.finalAllDayEventList = eventDAOForAllDay.getEventFromDays()
@@ -106,6 +86,53 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             }
             else{
                 self.noAllDayEvent()
+            }
+            
+            if taskDAO.taskList.count > 0 {
+                
+                self.getListOfTask(tasks: taskDAO.taskList)
+            }
+            else{
+                self.noTask()
+            }
+            
+            self.finalEventList = eventDAO.getEventFromDays()
+            if(self.finalEventList.count > 0)
+            {
+                EventCollision.collisionDetection(eventList: self.finalEventList)
+                self.displayEvents()
+            }
+        }
+    }
+    
+    func getDailyViewForDate(eventDate:Date){
+        let eventDAOForAllDay = EventDAO()
+        let eventDAO = EventDAO()
+        let taskDAO = TaskDAO()
+        
+        self.clearAllDayEvent()
+        self.clearView()
+        self.clearAllTask()
+        
+        eventDAOForAllDay.getEvents(eventDate: eventDate, allDayStatus: true)
+        eventDAO.getEvents(eventDate: eventDate, allDayStatus: false)
+        taskDAO.getAllTasksFromDays(startDate: eventDate.stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: eventDate.stripTime())!)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.finalAllDayEventList = eventDAOForAllDay.getEventFromDays()
+            if(self.finalAllDayEventList.count > 0)
+            {
+                self.displayAllDayEvents()
+            }
+            else{
+                self.noAllDayEvent()
+            }
+            
+            if taskDAO.taskList.count > 0 {
+                self.getListOfTask(tasks: taskDAO.taskList)
+            }
+            else{
+                self.noTask()
             }
             
             self.finalEventList = eventDAO.getEventFromDays()
@@ -147,6 +174,12 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         daySevenButton.tag = 6
     }
     
+    func clearAllTask(){
+        for subview in self.taskView {
+            subview.removeFromSuperview()
+        }
+    }
+    
     func clearAllDayEvent(){
         for subview in self.allDayListView {
             subview.removeFromSuperview()
@@ -159,60 +192,167 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         }
     }
     
+    func noTask(){
+        if savedGestureTask != nil {
+            taskBarView.removeGestureRecognizer(savedGestureTask)
+        }
+        let message = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
+        
+        message.text = "No Task Scheduled"
+        
+        message.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
+        message.font = UIFont.systemFont(ofSize: 17)
+        
+        self.taskBarView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#EFF2F5", alpha: 1.0)
+        self.taskBarView.translatesAutoresizingMaskIntoConstraints = false
+        message.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.taskView.append(message)
+        self.taskBarView.addSubview(message)
+        
+        message.topAnchor.constraint(equalTo: self.taskBarView.topAnchor, constant: 10).isActive = true
+        message.leadingAnchor.constraint(equalTo: self.taskBarView.leadingAnchor, constant: 20).isActive = true
+        message.trailingAnchor.constraint(equalTo: self.taskBarView.trailingAnchor, constant: -10).isActive = true
+        message.bottomAnchor.constraint(equalTo: self.taskBarView.bottomAnchor, constant: -10).isActive = true
+        message.numberOfLines = 0
+    }
+    
+    func getListOfTask(tasks:Array<Task>){
+        if savedGestureTask != nil {
+            taskBarView.removeGestureRecognizer(savedGestureTask)
+        }
+        
+        
+        var counter = 0
+        for task in tasks{
+            if !task.completedStatus{
+                counter += 1
+            }
+        }
+        
+        let message = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
+        
+        message.text = String(counter)+" out of "+String(tasks.count)+" Task To-do"
+        message.textColor = .white
+        message.font = UIFont.systemFont(ofSize: 17)
+        
+        let tapGesture = TaskGestureRecognizer(target: self, action: #selector(displayTaskListOfDetail(_:)))
+        tapGesture.taskList = tasks
+        tapGesture.delegate = self
+        savedGestureTask = tapGesture
+        taskBarView.addGestureRecognizer(tapGesture)
+                        
+        self.taskBarView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#8395a7", alpha: 1.0)
+        self.taskBarView.translatesAutoresizingMaskIntoConstraints = false
+        message.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.taskView.append(message)
+        self.taskBarView.addSubview(message)
+                
+        message.topAnchor.constraint(equalTo: self.taskBarView.topAnchor, constant: 10).isActive = true
+        message.leadingAnchor.constraint(equalTo: self.taskBarView.leadingAnchor, constant: 20).isActive = true
+        message.trailingAnchor.constraint(equalTo: self.taskBarView.trailingAnchor, constant: -10).isActive = true
+        message.bottomAnchor.constraint(equalTo: self.taskBarView.bottomAnchor, constant: -10).isActive = true
+        message.numberOfLines = 0
+    }
+    
     //For all day event view
     func displayAllDayEvents(){
         if(self.finalAllDayEventList.count > 1)
         {
-            
+            displayListOfAllDayEvent()
         }
         else{
             onlyOneAllDayEvent()
         }
     }
     
+    func displayListOfAllDayEvent(){
+        if savedGestureEvent != nil {
+            eventAllDayView.removeGestureRecognizer(savedGestureEvent)
+        }
+        
+        let message = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
+        
+        message.text = String(finalAllDayEventList.count) + " All Day Event"
+        message.textColor = .white
+        message.font = UIFont.systemFont(ofSize: 17)
+        
+        let tapGesture = EventGestureRecognizer(target: self, action: #selector(displayAllDayListOfDetail(_:)))
+        tapGesture.delegate = self
+        tapGesture.listOfAllDayEvents = finalAllDayEventList
+        savedGestureEvent = tapGesture
+        eventAllDayView.addGestureRecognizer(tapGesture)
+        
+        self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#576574", alpha: 1.0)
+        self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
+        message.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.allDayListView.append(message)
+        self.eventAllDayView.addSubview(message)
+        
+        
+        message.topAnchor.constraint(equalTo: self.eventAllDayView.topAnchor, constant: 10).isActive = true
+        message.leadingAnchor.constraint(equalTo: self.eventAllDayView.leadingAnchor, constant: 20).isActive = true
+        message.trailingAnchor.constraint(equalTo: self.eventAllDayView.trailingAnchor, constant: -10).isActive = true
+        message.bottomAnchor.constraint(equalTo: self.eventAllDayView.bottomAnchor, constant: -10).isActive = true
+        message.numberOfLines = 0
+    }
+    
     func onlyOneAllDayEvent(){
+        if savedGestureEvent != nil {
+            eventAllDayView.removeGestureRecognizer(savedGestureEvent)
+        }
         let allDayEvent = self.finalAllDayEventList[0]
-            let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
-            let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
-            
-            eventName.text = allDayEvent.eventName
-            eventName.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
-            eventName.font = UIFont(name: "System", size: 17)
-            
-            self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: allDayEvent.profileColour, alpha: 1.0)
-            self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
-            eventName.translatesAutoresizingMaskIntoConstraints = false
-            eventPriority.translatesAutoresizingMaskIntoConstraints = false
-            
-            self.allDayListView.append(eventName)
-            self.allDayListView.append(eventPriority)
-            self.eventAllDayView.addSubview(eventPriority)
-            self.eventAllDayView.addSubview(eventName)
-            
-            eventPriority.topAnchor.constraint(equalTo: self.eventAllDayView.topAnchor, constant: 0).isActive = true
-            eventPriority.leadingAnchor.constraint(equalTo: self.eventAllDayView.leadingAnchor, constant: 0).isActive = true
-            eventPriority.heightAnchor.constraint(equalTo: self.eventAllDayView.heightAnchor, multiplier: 1).isActive = true
-            eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
-            
-            eventPriority.backgroundColor = PriorityColorSelector.getColor(priority: allDayEvent.priority)
-            
-            eventName.topAnchor.constraint(equalTo: self.eventAllDayView.topAnchor, constant: 10).isActive = true
-            eventName.leadingAnchor.constraint(equalTo: eventPriority.trailingAnchor, constant: 10).isActive = true
-            eventName.trailingAnchor.constraint(equalTo: self.eventAllDayView.trailingAnchor, constant: -10).isActive = true
-            eventName.bottomAnchor.constraint(equalTo: self.eventAllDayView.bottomAnchor, constant: -10).isActive = true
-            eventName.numberOfLines = 0
-            eventName.sizeToFit()
+        let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
+        let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
+        
+        eventName.text = allDayEvent.eventName
+        eventName.textColor = .white
+        eventName.font = UIFont(name: "System", size: 17)
+        
+        eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#576574", alpha: 1)
+        self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
+        eventName.translatesAutoresizingMaskIntoConstraints = false
+        eventPriority.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.allDayListView.append(eventName)
+        self.allDayListView.append(eventPriority)
+        self.eventAllDayView.addSubview(eventPriority)
+        self.eventAllDayView.addSubview(eventName)
+        
+        let tapGesture = EventGestureRecognizer(target: self, action: #selector(displayDetail(_:)))
+        tapGesture.event = allDayEvent
+        tapGesture.delegate = self
+         savedGestureEvent = tapGesture
+        eventAllDayView.addGestureRecognizer(tapGesture)
+                
+        eventPriority.topAnchor.constraint(equalTo: self.eventAllDayView.topAnchor, constant: 0).isActive = true
+        eventPriority.leadingAnchor.constraint(equalTo: self.eventAllDayView.leadingAnchor, constant: 0).isActive = true
+        eventPriority.heightAnchor.constraint(equalTo: self.eventAllDayView.heightAnchor, multiplier: 1).isActive = true
+        eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        
+        eventPriority.backgroundColor = PriorityColorSelector.getColor(priority: allDayEvent.priority)
+        
+        eventName.topAnchor.constraint(equalTo: self.eventAllDayView.topAnchor, constant: 10).isActive = true
+        eventName.leadingAnchor.constraint(equalTo: eventPriority.trailingAnchor, constant: 10).isActive = true
+        eventName.trailingAnchor.constraint(equalTo: self.eventAllDayView.trailingAnchor, constant: -10).isActive = true
+        eventName.bottomAnchor.constraint(equalTo: self.eventAllDayView.bottomAnchor, constant: -10).isActive = true
+        eventName.numberOfLines = 0
+        eventName.sizeToFit()
     }
     
     //for all day events if there are no events
     func noAllDayEvent(){
+        if savedGestureEvent != nil {
+            eventAllDayView.removeGestureRecognizer(savedGestureEvent)
+        }
         let message = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
         
-        message.text = "No All Day Event"
-        message.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
-        //message.font = UIFont(name: "System", size: 14)
-        message.font = UIFont.systemFont(ofSize: 13)
+        message.text = "No Event Scheduled"
         
+        message.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
+        message.font = UIFont.systemFont(ofSize: 17)
         
         self.eventAllDayView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#EFF2F5", alpha: 1.0)
         self.eventAllDayView.translatesAutoresizingMaskIntoConstraints = false
@@ -226,7 +366,6 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         message.trailingAnchor.constraint(equalTo: self.eventAllDayView.trailingAnchor, constant: -10).isActive = true
         message.bottomAnchor.constraint(equalTo: self.eventAllDayView.bottomAnchor, constant: -10).isActive = true
         message.numberOfLines = 0
-        //message.sizeToFit()
     }
     
     func displayEvents(){
@@ -234,6 +373,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         for todaysEvent in self.finalEventList{
             let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
+            let eventTime = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
             let eventPriority = UIView(frame: CGRect(x: 0, y:0, width:0, height: 0))
             
             let tapGesture = EventGestureRecognizer(target: self, action: #selector(displayDetail(_:)))
@@ -244,14 +384,19 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             
             eventName.text = todaysEvent.eventName
             eventName.textColor = .white
-            eventName.font = UIFont(name: "System", size: 17)
+            eventName.font = UIFont.systemFont(ofSize: 25)
+            
+            eventTime.text = todaysEvent.startDate.toString(dateFormat: "HH:mm")+" - "+todaysEvent.endDate.toString(dateFormat: "HH:mm")
+            eventTime.textColor = .white
+            eventTime.font = UIFont.systemFont(ofSize: 15)
             
             let eventDuration = todaysEvent.endDate.timeIntervalSince(todaysEvent.startDate)
-                        
+            
             event.backgroundColor = SelectColor.getColor(color: todaysEvent.profileColour)
             event.translatesAutoresizingMaskIntoConstraints = false
             eventName.translatesAutoresizingMaskIntoConstraints = false
             eventPriority.translatesAutoresizingMaskIntoConstraints = false
+            eventTime.translatesAutoresizingMaskIntoConstraints = false
             
             self.rightScroll.addSubview(event)
             self.eventView.append(event)
@@ -265,7 +410,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             let finalStartTime = startHour+startMinute
             let finalEndTime = endHour+endMinute
             
-                    
+            
             if(todaysEvent.numberOfCollision > 2){
                 todaysEvent.numberOfCollision = 2;
             }
@@ -274,7 +419,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
                 event.topAnchor.constraint(equalTo: self.rightScroll.topAnchor, constant: finalStartTime * 62).isActive = true
                 event.leadingAnchor.constraint(equalTo: self.rightScroll.leadingAnchor, constant: 0).isActive = true
                 event.widthAnchor.constraint(equalToConstant: self.rightScroll.layer.bounds.width/CGFloat(todaysEvent.numberOfCollision)).isActive = true
-                                
+                
                 if eventDuration < 1300{
                     event.heightAnchor.constraint(equalToConstant:30).isActive = true
                 }
@@ -294,26 +439,32 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
                     event.heightAnchor.constraint(equalToConstant: (finalEndTime - finalStartTime) * 62).isActive = true
                 }
             }
-           
+            
             event.addSubview(eventPriority)
             event.addSubview(eventName)
+            event.addSubview(eventTime)
             
             eventPriority.topAnchor.constraint(equalTo: event.topAnchor, constant: 0).isActive = true
             eventPriority.leadingAnchor.constraint(equalTo: event.leadingAnchor, constant: 0).isActive = true
             eventPriority.heightAnchor.constraint(equalTo: event.heightAnchor, multiplier: 1).isActive = true
             eventPriority.widthAnchor.constraint(equalToConstant: 10).isActive = true
             eventPriority.backgroundColor = PriorityColorSelector.getColor(priority: todaysEvent.priority)
-        
+            
+            eventTime.bottomAnchor.constraint(equalTo: event.bottomAnchor, constant: -10).isActive = true
+            eventTime.trailingAnchor.constraint(equalTo: event.trailingAnchor, constant: -10).isActive = true
+            
             eventName.topAnchor.constraint(equalTo: event.topAnchor, constant: 10).isActive = true
+            eventName.bottomAnchor.constraint(equalTo: eventTime.topAnchor, constant: 10).isActive = true
             eventName.leadingAnchor.constraint(equalTo: eventPriority.trailingAnchor, constant: 10).isActive = true
             eventName.trailingAnchor.constraint(equalTo: event.trailingAnchor, constant: -10).isActive = true
-            eventName.bottomAnchor.constraint(equalTo: event.bottomAnchor, constant: -10).isActive = true
-            eventName.numberOfLines = 0
-            eventName.sizeToFit()
+            
+            if todaysEvent.endDate.timeIntervalSince(todaysEvent.startDate) > 0 {
+                eventName.numberOfLines = Int((todaysEvent.endDate.timeIntervalSince(todaysEvent.startDate))/3600)
+            }
             
         }
     }
-        
+    
     // Syncronize scroll views position
     func synchronizeScrollView(_ scrollViewToScroll: UIScrollView, toScrollView scrolledView: UIScrollView) {
         var offset = scrollViewToScroll.contentOffset
@@ -342,6 +493,28 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         }
     }
     
+    @objc func displayAllDayListOfDetail(_ sender:EventGestureRecognizer){
+        if let viewController = getOwningViewController() as? MainViewController {
+            let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "SearchPanelViewController") as! SearchPanelViewController
+            popoverContent.modalPresentationStyle = .overCurrentContext
+            popoverContent.modalTransitionStyle = .crossDissolve
+            popoverContent.onDismiss = onSegDismiss
+            viewController.present(popoverContent, animated: true, completion: nil)
+            popoverContent.getEventDetails(events: sender.listOfAllDayEvents)
+        }
+    }
+    
+    @objc func displayTaskListOfDetail(_ sender:TaskGestureRecognizer){
+        if let viewController = getOwningViewController() as? MainViewController {
+            let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "SearchPanelViewController") as! SearchPanelViewController
+            popoverContent.modalPresentationStyle = .overCurrentContext
+            popoverContent.modalTransitionStyle = .crossDissolve
+            popoverContent.onDismiss = onSegDismiss
+            viewController.present(popoverContent, animated: true, completion: nil)
+            popoverContent.getTaskDetails(tasks: sender.taskList)
+        }
+    }
+    
     func onSegDismiss(_ object: Any?) {
         if let event = object as? Events {
             if let viewController = getOwningViewController() as? MainViewController {
@@ -354,7 +527,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             }
         } else if let task = object as? Task {
             if let viewController = getOwningViewController() as? MainViewController {
-                            
+                
                 let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
                 popoverContent.modalPresentationStyle = .overCurrentContext
                 popoverContent.modalTransitionStyle = .crossDissolve
@@ -366,9 +539,8 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
     }
     
     func onViewDismiss() {
-        getDailyView(eventDate: activeDate)
+        getDailyViewForDate(eventDate: activeDate)
     }
-    
     
     
     @IBAction func daySelectedButtonClick(_ sender: UIButton) {
@@ -390,7 +562,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         
         sender.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
         sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-
+        
         let newFormat = DateFormatter()
         newFormat.dateFormat = "dd-MM-yy"
         let date = newFormat.date(from: dayZero.text!)

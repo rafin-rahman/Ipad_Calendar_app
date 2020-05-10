@@ -24,7 +24,8 @@ class HomeView: UIView, NavigationProtocol {
     var open = false;
     
     func onLoad() {
-        todayButton.setTitle(Date().toString(dateFormat: "E, dd MMMM YYYY"), for: .normal)
+        todayButton.setTitle(Date().toString(dateFormat: "E, dd MMM YYYY"), for: .normal)
+        todayButton.titleLabel?.adjustsFontSizeToFitWidth = true
         onDayClick(dayButton)
     }
     
@@ -36,7 +37,7 @@ class HomeView: UIView, NavigationProtocol {
             setDayView(newView : dayView)
             dayView.rightScroll.delegate = dayView
             dayView.leftScroll.delegate = dayView
-            dayView.getDailyView(eventDate: Date())
+            dayView.loadData()
         }
     }
     
@@ -48,6 +49,7 @@ class HomeView: UIView, NavigationProtocol {
             setDayView(newView : weekView)
             weekView.rightScroll.delegate = weekView
             weekView.leftScroll.delegate = weekView
+            weekView.loadData()
         }
     }
     
@@ -99,13 +101,24 @@ class HomeView: UIView, NavigationProtocol {
     
     @IBAction func todayButtonClick(_ sender: UIButton) {
         setBarStyle(sender:dayButton)
-        
         if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             DayView{
             setDayView(newView : dayView)
             dayView.rightScroll.delegate = dayView
             dayView.leftScroll.delegate = dayView
             dayView.getDailyView(eventDate: Date())
+        }
+    }
+    
+    func getDayView(date:Date){
+        print("Cheking random studd",date)
+        setBarStyle(sender: dayButton)
+        if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+            DayView{
+            setDayView(newView : dayView)
+            dayView.rightScroll.delegate = dayView
+            dayView.leftScroll.delegate = dayView
+            dayView.getDailyView(eventDate: date)
         }
     }
     

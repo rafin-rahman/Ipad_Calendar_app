@@ -17,6 +17,9 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxW-T5-bgu">
                             <rect key="frame" x="922" y="40" width="35" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="0S4-dS-akC"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Day">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -27,6 +30,9 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUj-Pr-sQw">
                             <rect key="frame" x="989" y="40" width="50" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="GyK-83-s2N"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Week">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -37,6 +43,9 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-rI-n4P">
                             <rect key="frame" x="1147" y="40" width="39" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="39" id="iXr-Bb-Xjv"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Year">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -47,6 +56,9 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-SE-N57">
                             <rect key="frame" x="1067" y="40" width="57" height="43"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="57" id="2Kw-fS-UtY"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Month">
                                 <color key="titleColor" red="0.094117647058823528" green="0.47058823529411764" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -73,10 +85,9 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIo-Cy-yYl">
-                            <rect key="frame" x="32" y="34" width="250" height="51"/>
+                            <rect key="frame" x="32" y="34" width="860" height="51"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="51" id="AcW-2s-XUh"/>
-                                <constraint firstAttribute="width" constant="250" id="mf3-cK-v04"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                             <state key="normal" title="Today">
@@ -100,6 +111,7 @@
                         <constraint firstItem="ZUj-Pr-sQw" firstAttribute="leading" secondItem="OxW-T5-bgu" secondAttribute="trailing" constant="32" id="TlC-Z4-BFM"/>
                         <constraint firstItem="hR8-rI-n4P" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="YKB-Kr-MfS"/>
                         <constraint firstItem="p0L-SE-N57" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="40" id="ZAV-P4-x75"/>
+                        <constraint firstItem="OxW-T5-bgu" firstAttribute="leading" secondItem="FIo-Cy-yYl" secondAttribute="trailing" constant="30" id="bsj-9C-mXC"/>
                         <constraint firstAttribute="height" constant="85" id="c66-hG-b0A"/>
                         <constraint firstItem="UGJ-gx-Rkp" firstAttribute="top" secondItem="D1D-5m-dLP" secondAttribute="top" constant="19.5" id="cg3-Y4-7re"/>
                         <constraint firstItem="zYA-jp-RAe" firstAttribute="width" secondItem="OxW-T5-bgu" secondAttribute="width" id="cn1-fm-pFl"/>

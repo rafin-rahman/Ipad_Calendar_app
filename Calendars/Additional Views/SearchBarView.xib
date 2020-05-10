@@ -166,6 +166,7 @@
                 <outlet property="optionView" destination="6Lj-GG-8nR" id="fSz-p2-ggz"/>
                 <outlet property="optionViewTrailing" destination="1qw-fQ-uGl" id="AFN-WK-maQ"/>
                 <outlet property="profileLabel" destination="MKz-bg-dKk" id="K6K-wv-KGw"/>
+                <outlet property="singleTapGesture" destination="bKd-vr-AP2" id="YeD-fE-XNe"/>
                 <outlet property="timeLabel" destination="pUh-aQ-oIV" id="XMT-jl-tI0"/>
             </connections>
             <point key="canvasLocation" x="131.65829145728642" y="153.9568345323741"/>
@@ -183,6 +184,11 @@
         <tapGestureRecognizer id="bKd-vr-AP2">
             <connections>
                 <action selector="tapGesture:" destination="iN0-l3-epB" id="SNx-qy-p7t"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer numberOfTapsRequired="2" id="wcC-jy-Iaj" userLabel="Tap twice">
+            <connections>
+                <action selector="doubleTap:" destination="iN0-l3-epB" id="S58-of-gDo"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

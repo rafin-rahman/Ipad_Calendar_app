@@ -20,10 +20,12 @@ class SearchBarView: UIView {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var optionViewTrailing: NSLayoutConstraint!
+    @IBOutlet weak var singleTapGesture: UITapGestureRecognizer!
     
     var eventSelect:Bool!
     var eventDetails:Events!
     var taskDetails:Task!
+    var singleTapGestureTaskChange = false
     
     func setDataForEvents(event:Events){
         dateLabel.text = event.startDate.toString(dateFormat: "dd MMM YY")
@@ -62,6 +64,27 @@ class SearchBarView: UIView {
         eventSelect = false
     }
     
+    func setDataForTasksDifferentBackGround(task:Task){
+        singleTapGestureTaskChange = true
+        dateLabel.text = task.taskDateAndTime.toString(dateFormat: "dd MMM YY")
+        timeLabel.text = task.taskDateAndTime.toString(dateFormat: "HH:mm")
+        
+        if task.completedStatus{
+            backgroundView.backgroundColor = .green
+            label.text = "Completed"
+        }
+        else{
+            backgroundView.backgroundColor = .red
+            label.text = "To-do"
+        }
+              
+        nameLabel.text = task.taskName
+        profileLabel.text = task.profile
+               
+        taskDetails = task
+        eventSelect = false
+    }
+    
     func style(){
         backgroundView.layer.cornerRadius = 10
         backgroundView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
@@ -85,12 +108,24 @@ class SearchBarView: UIView {
     }
     
     @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
-        if let vc = getOwningViewController() as? SearchPanelViewController {
-            if eventSelect{
-                vc.clickEventOrTask(eventDetails as Any)
+        if singleTapGestureTaskChange{
+            if let viewController = self.getOwningViewController() as? SearchPanelViewController {
+                let taskDao = TaskDAO()
+                taskDao.editTaskCompleted(taskId: taskDetails.id, completed: !taskDetails.completedStatus)
+                taskDao.getAllTasksFromDays(startDate: taskDetails.taskDateAndTime.stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: taskDetails.taskDateAndTime.stripTime())!)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    viewController.getTaskDetails(tasks: taskDao.taskList)
+                }
             }
-            else{
-                vc.clickEventOrTask(taskDetails as Any)
+        }
+        else{
+            if let vc = getOwningViewController() as? SearchPanelViewController {
+                if eventSelect{
+                    vc.clickEventOrTask(eventDetails as Any)
+                }
+                else{
+                    vc.clickEventOrTask(taskDetails as Any)
+                }
             }
         }
     }
@@ -139,5 +174,6 @@ class SearchBarView: UIView {
             }
         }
     }
-   
+    
+    
 }

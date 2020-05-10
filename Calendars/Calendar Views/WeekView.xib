@@ -48,10 +48,10 @@
                     <rect key="frame" x="0.0" y="80" width="100" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVs-qt-bzx" userLabel="grey line">
-                            <rect key="frame" x="0.0" y="38" width="100" height="2"/>
+                            <rect key="frame" x="0.0" y="39" width="100" height="1"/>
                             <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="2" id="CGL-f3-vvX"/>
+                                <constraint firstAttribute="height" constant="1" id="CGL-f3-vvX"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All-day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCj-LA-feW">
@@ -80,41 +80,47 @@
                     <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxI-1D-NZ0">
-                            <rect key="frame" x="-5" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="-5" y="5" width="30" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="GXn-7f-g2f"/>
-                                <constraint firstAttribute="height" constant="40" id="sgk-rz-idz"/>
+                                <constraint firstAttribute="width" constant="30" id="GXn-7f-g2f"/>
+                                <constraint firstAttribute="height" constant="30" id="sgk-rz-idz"/>
                             </constraints>
                             <state key="normal" image="Previous Button"/>
+                            <connections>
+                                <action selector="previousButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mz9-ki-bP1"/>
+                            </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-Lk-f7A">
-                            <rect key="frame" x="29" y="11" width="43" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-Lk-f7A">
+                            <rect key="frame" x="23" y="7" width="55" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="43" id="FbH-MZ-qWb"/>
-                                <constraint firstAttribute="height" constant="21" id="dbh-Qh-R7t"/>
+                                <constraint firstAttribute="width" constant="55" id="FbH-MZ-qWb"/>
+                                <constraint firstAttribute="height" constant="30" id="dbh-Qh-R7t"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZ2-Il-VkA">
-                            <rect key="frame" x="67" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="76" y="5" width="30" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="fT0-JR-zhy"/>
-                                <constraint firstAttribute="height" constant="40" id="gQ2-V3-JfD"/>
+                                <constraint firstAttribute="width" constant="30" id="fT0-JR-zhy"/>
+                                <constraint firstAttribute="height" constant="30" id="gQ2-V3-JfD"/>
                             </constraints>
                             <state key="normal" image="Next Button"/>
+                            <connections>
+                                <action selector="nextButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="30F-Q4-6pq"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="qZ2-Il-VkA" firstAttribute="centerY" secondItem="4R6-ud-Bff" secondAttribute="centerY" id="1uU-5I-Rly"/>
-                        <constraint firstItem="LZ4-Lk-f7A" firstAttribute="leading" secondItem="AxI-1D-NZ0" secondAttribute="trailing" constant="-6" id="9lc-dV-9WK"/>
+                        <constraint firstItem="LZ4-Lk-f7A" firstAttribute="leading" secondItem="AxI-1D-NZ0" secondAttribute="trailing" constant="-2" id="9lc-dV-9WK"/>
                         <constraint firstAttribute="width" constant="100" id="CIB-Nl-cFw"/>
                         <constraint firstItem="AxI-1D-NZ0" firstAttribute="centerY" secondItem="4R6-ud-Bff" secondAttribute="centerY" id="D23-yK-l3B"/>
                         <constraint firstItem="AxI-1D-NZ0" firstAttribute="leading" secondItem="4R6-ud-Bff" secondAttribute="leading" constant="-5" id="VvP-bk-wxN"/>
-                        <constraint firstItem="qZ2-Il-VkA" firstAttribute="leading" secondItem="LZ4-Lk-f7A" secondAttribute="trailing" constant="-5" id="pOS-Ar-eah"/>
-                        <constraint firstItem="LZ4-Lk-f7A" firstAttribute="top" secondItem="4R6-ud-Bff" secondAttribute="top" constant="11" id="vYc-eP-1dS"/>
+                        <constraint firstItem="qZ2-Il-VkA" firstAttribute="leading" secondItem="LZ4-Lk-f7A" secondAttribute="trailing" constant="-2" id="pOS-Ar-eah"/>
+                        <constraint firstItem="LZ4-Lk-f7A" firstAttribute="top" secondItem="4R6-ud-Bff" secondAttribute="top" constant="7" id="vYc-eP-1dS"/>
                         <constraint firstAttribute="height" constant="40" id="w4y-Wp-0Yl"/>
                     </constraints>
                 </view>
@@ -134,7 +140,6 @@
                         <constraint firstAttribute="height" constant="40" id="Frx-sD-NFf"/>
                         <constraint firstItem="5qe-Nx-z31" firstAttribute="width" secondItem="ra3-B9-aXQ" secondAttribute="width" id="JJS-S0-1JQ"/>
                         <constraint firstItem="5qe-Nx-z31" firstAttribute="centerX" secondItem="ra3-B9-aXQ" secondAttribute="centerX" id="TJm-vf-hrN"/>
-                        <constraint firstAttribute="width" constant="1116" id="iUO-1J-Bp0"/>
                         <constraint firstAttribute="bottom" secondItem="5qe-Nx-z31" secondAttribute="bottom" id="vhm-cC-8Qf"/>
                     </constraints>
                 </view>
@@ -1451,6 +1456,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="WjV-Ts-FPI"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 Tue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9M-n2-YxJ" userLabel="zero">
                                     <rect key="frame" x="79.5" y="20" width="0.0" height="0.0"/>
@@ -1484,6 +1492,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="xPE-Ic-wSb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1504,6 +1515,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="r2A-UU-n6w"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1524,6 +1538,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Eea-FC-OKu"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1544,6 +1561,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mOA-In-zfE"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1564,6 +1584,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="6Aw-qc-S8L"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1584,6 +1607,9 @@
                                     <state key="normal" title="13 Mon">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="dayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="60c-ah-UJP"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1601,10 +1627,10 @@
                     <rect key="frame" x="100" y="80" width="1116" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UV7-W7-zgX" userLabel="Grey line">
-                            <rect key="frame" x="0.0" y="38" width="1116" height="2"/>
+                            <rect key="frame" x="0.0" y="39" width="1116" height="1"/>
                             <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="2" id="LNA-a3-8SA"/>
+                                <constraint firstAttribute="height" constant="1" id="LNA-a3-8SA"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -1619,6 +1645,7 @@
             </subviews>
             <color key="backgroundColor" red="0.15294117647058825" green="0.23529411764705882" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="ra3-B9-aXQ" firstAttribute="width" secondItem="FVy-WH-Fnh" secondAttribute="width" id="2wg-zQ-qIL"/>
                 <constraint firstItem="BaY-Wt-hdk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4AY-1l-fHK"/>
                 <constraint firstItem="2kS-ZJ-aEp" firstAttribute="top" secondItem="4R6-ud-Bff" secondAttribute="bottom" id="4Ok-ri-djU"/>
                 <constraint firstItem="Qzv-g5-iGi" firstAttribute="width" secondItem="ra3-B9-aXQ" secondAttribute="width" id="7cg-3C-Mna"/>
@@ -1655,6 +1682,8 @@
                 <outlet property="dayZero" destination="W9M-n2-YxJ" id="XB5-jO-hVW"/>
                 <outlet property="leftScroll" destination="EzU-4R-KWy" id="lzC-pD-sHK"/>
                 <outlet property="rightScroll" destination="PWf-yq-HbE" id="V58-QR-ZKE"/>
+                <outlet property="taskBarView" destination="ra3-B9-aXQ" id="b3Z-2D-zOg"/>
+                <outlet property="weekLabel" destination="LZ4-Lk-f7A" id="xqe-7g-aSw"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="152.34375"/>
         </view>

@@ -159,8 +159,8 @@
 		D16403082443DD730078E059 /* Calendar Views */ = {
 			isa = PBXGroup;
 			children = (
-				D14AED802443AC840012469F /* DayView.swift */,
 				D14AED822443AC990012469F /* DayView.xib */,
+				D14AED802443AC840012469F /* DayView.swift */,
 				D14AED842443B0BA0012469F /* WeekView.swift */,
 				D14AED862443B0C50012469F /* WeekView.xib */,
 				D16403042443D2560078E059 /* MonthView.swift */,

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
-
+    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var searchBarTrailing: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
@@ -24,6 +24,7 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
     var onDismiss : ((_ object: Any?) -> Void)?
     
     var eventDetailStatus = true
+    var activeDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +41,9 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
             getSearchBar()
             getList()
         }
-       
-    }
         
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         searchedWord = textField.text!
         getList()
@@ -91,6 +92,21 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
         showEventDetails(event: event)
     }
     
+    func getEventDetails(events:Array<Events>){
+        self.stackView.removeAllArrangedSubviews()
+        for event in events{
+            showEventDetails(event: event)
+        }
+    }
+    
+    func getTaskDetails(tasks:Array<Task>){
+        self.stackView.removeAllArrangedSubviews()
+        activeDate = tasks[0].taskDateAndTime.stripTime()
+        for task in tasks{
+            getSearchViewForTaskDifferentBackground(taskDetails: task)
+        }
+    }
+    
     func showEventDetails(event:Events){
         if let detailsView = UINib(nibName: "DetailView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DetailView {
             detailsView.style()
@@ -104,55 +120,70 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
     }
     
     func getSearchViewForEvent(eventDetails:Events){
-            if let searchBarView = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? SearchBarView {
-                searchBarView.style()
-                searchBarView.translatesAutoresizingMaskIntoConstraints = false
-                stackView.addArrangedSubview(searchBarView)
-                searchBarView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-                searchBarView.setDataForEvents(event: eventDetails)
-            }
+        if let searchBarView = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? SearchBarView {
+            searchBarView.style()
+            searchBarView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview(searchBarView)
+            searchBarView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            searchBarView.setDataForEvents(event: eventDetails)
+        }
     }
     
     func getSearchViewForTask(taskDetails:Task){
-            if let searchBarView = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? SearchBarView {
-                searchBarView.style()
-                searchBarView.translatesAutoresizingMaskIntoConstraints = false
-                stackView.addArrangedSubview(searchBarView)
-                searchBarView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-                searchBarView.setDataForTasks(task: taskDetails)
-            }
+        if let searchBarView = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? SearchBarView {
+            searchBarView.style()
+            searchBarView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview(searchBarView)
+            searchBarView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            searchBarView.setDataForTasks(task: taskDetails)
+        }
+    }
+    
+    func getSearchViewForTaskDifferentBackground(taskDetails:Task){
+        if let searchBarView = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? SearchBarView {
+            searchBarView.style()
+            searchBarView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview(searchBarView)
+            searchBarView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            searchBarView.setDataForTasksDifferentBackGround(task: taskDetails)
+        }
     }
     
     @objc func viewTapped(_ sender: UITapGestureRecognizer) {
-        dismiss(animated: true, completion: nil)
+        if let vc = self.presentingViewController as? MainViewController{
+            dismiss(animated: true, completion:{
+                if let dayView = vc.rightView.dynamicView as? DayView {
+                    dayView.getDailyViewForDate(eventDate: self.activeDate)
+                }
+            })
+        }
+        
     }
-
+    
     public func clickEventOrTask(_ object: Any) {
-           if let vc = self.presentingViewController as? MainViewController {
-               dismiss(animated: true, completion: {
+        if let vc = self.presentingViewController as? MainViewController {
+            dismiss(animated: true, completion: {
                 if let dayView = vc.rightView.dynamicView as? DayView {
                     if let event = object as? Events{
-                        dayView.getDailyView(eventDate: event.startDate)
+                        dayView.getDailyViewForDate(eventDate: event.startDate)
                     }
                     
                     if let task = object as? Task{
-                        dayView.getDailyView(eventDate: task.taskDateAndTime)
+                        dayView.getDailyViewForDate(eventDate: task.taskDateAndTime)
                     }
-                    
-                    
-                       }
-               })
-           }
-       }
+                }
+            })
+        }
+    }
     
     public func viewEditClick(_ object: Any) {
         if let vc = self.presentingViewController as? MainViewController {
             dismiss(animated: true, completion: {
-                    if let dayView = vc.rightView.dynamicView as? DayView {
-                        dayView.onSegDismiss(object)
-                    }
+                if let dayView = vc.rightView.dynamicView as? DayView {
+                    dayView.onSegDismiss(object)
+                }
             })
         }
     }
-
+    
 }
