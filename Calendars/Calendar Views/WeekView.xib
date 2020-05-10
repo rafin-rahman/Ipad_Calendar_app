@@ -134,12 +134,32 @@
                                 <constraint firstAttribute="height" constant="1" id="T08-ge-5RL"/>
                             </constraints>
                         </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-av-fKg">
+                            <rect key="frame" x="0.0" y="0.0" width="1116" height="40"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTE-he-M2s">
+                                    <rect key="frame" x="0.0" y="0.0" width="1116" height="40"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="FfO-Ac-dfw"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="LTE-he-M2s"/>
+                                </mask>
+                            </variation>
+                        </stackView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="BWP-av-fKg" firstAttribute="top" secondItem="ra3-B9-aXQ" secondAttribute="top" id="DC3-2c-d8J"/>
                         <constraint firstAttribute="height" constant="40" id="Frx-sD-NFf"/>
+                        <constraint firstAttribute="trailing" secondItem="BWP-av-fKg" secondAttribute="trailing" id="GgZ-tT-AHq"/>
                         <constraint firstItem="5qe-Nx-z31" firstAttribute="width" secondItem="ra3-B9-aXQ" secondAttribute="width" id="JJS-S0-1JQ"/>
                         <constraint firstItem="5qe-Nx-z31" firstAttribute="centerX" secondItem="ra3-B9-aXQ" secondAttribute="centerX" id="TJm-vf-hrN"/>
+                        <constraint firstItem="BWP-av-fKg" firstAttribute="width" secondItem="ra3-B9-aXQ" secondAttribute="width" id="VWx-Mz-v6Q"/>
                         <constraint firstAttribute="bottom" secondItem="5qe-Nx-z31" secondAttribute="bottom" id="vhm-cC-8Qf"/>
                     </constraints>
                 </view>
@@ -1683,6 +1703,7 @@
                 <outlet property="leftScroll" destination="EzU-4R-KWy" id="lzC-pD-sHK"/>
                 <outlet property="rightScroll" destination="PWf-yq-HbE" id="V58-QR-ZKE"/>
                 <outlet property="taskBarView" destination="ra3-B9-aXQ" id="b3Z-2D-zOg"/>
+                <outlet property="taskStackView" destination="BWP-av-fKg" id="WNA-GM-Rpt"/>
                 <outlet property="weekLabel" destination="LZ4-Lk-f7A" id="xqe-7g-aSw"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="152.34375"/>

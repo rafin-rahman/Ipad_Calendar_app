@@ -155,6 +155,7 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
                 if let dayView = vc.rightView.dynamicView as? DayView {
                     dayView.getDailyViewForDate(eventDate: self.activeDate)
                 }
+                
             })
         }
         

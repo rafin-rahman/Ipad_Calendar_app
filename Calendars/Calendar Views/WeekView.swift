@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
+class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var dayZero: UILabel!
     @IBOutlet weak var dayOneButton: UIButton!
@@ -26,6 +26,7 @@ class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
     @IBOutlet weak var rightScroll: UIScrollView!
     @IBOutlet weak var leftScroll: UIScrollView!
     @IBOutlet weak var taskBarView: UIView!
+    @IBOutlet weak var taskStackView: UIStackView!
     
     var activeDate: Date = Date()
     
@@ -36,13 +37,25 @@ class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
     var savedGestureEvent : EventGestureRecognizer!
     var savedGestureTask : TaskGestureRecognizer!
 
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true;
+    }
+    
     func loadData() {
         getWeeklyView(date: Date())
     }
     
     func getWeeklyView(date:Date){
         getDates(date: date)
-        noTask()
+        
+        clearAllTask()
+        
+        let taskDAO = TaskDAO()
+        
+        taskDAO.getAllTasksFromDays(startDate: date.stripTime(), endDate: (Calendar.current.date(byAdding: .day, value: 8, to: date)?.stripTime())!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.displayAllTaskForDays(taskDict: self.sortTaskAccordingToDate(tasks: taskDAO.taskList))
+        }
     }
     
     func clearAllTask(){
@@ -51,32 +64,94 @@ class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate {
         }
     }
     
-    func noTask(){
-        if savedGestureTask != nil {
-            taskBarView.removeGestureRecognizer(savedGestureTask)
+    func sortTaskAccordingToDate(tasks:Array<Task>) -> Dictionary<Date, Array<Task>>{
+        var taskDict : Dictionary <Date, Array<Task>> = Dictionary()
+        for task in tasks{
+            taskDict[task.taskDateAndTime.stripTime(), default: []].append(task)
         }
-        let message = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
-        
-        message.text = "No Task Scheduled"
-        
-        message.textColor = UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1)
-        message.font = UIFont.systemFont(ofSize: 17)
-        
-        self.taskBarView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#EFF2F5", alpha: 1.0)
-        self.taskBarView.translatesAutoresizingMaskIntoConstraints = false
-        message.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.taskView.append(message)
-        self.taskBarView.addSubview(message)
-        
-        message.topAnchor.constraint(equalTo: self.taskBarView.topAnchor, constant: 10).isActive = true
-        message.leadingAnchor.constraint(equalTo: self.taskBarView.leadingAnchor, constant: 20).isActive = true
-        message.trailingAnchor.constraint(equalTo: self.taskBarView.trailingAnchor, constant: -10).isActive = true
-        message.bottomAnchor.constraint(equalTo: self.taskBarView.bottomAnchor, constant: -10).isActive = true
-        message.numberOfLines = 0
+        return taskDict
     }
     
+    func displayAllTaskForDays(taskDict:Dictionary<Date,Array<Task>>){
+        let sortedDic = taskDict.sorted { (firstDic, secondDic) -> Bool in
+            return firstDic.key < secondDic.key
+        }
+        
+        for (date, listOfTask) in sortedDic{
+            if savedGestureTask != nil {
+                taskBarView.removeGestureRecognizer(savedGestureTask)
+            }
+            
+            let taskView = TempConstraintView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            taskView.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "#8395a7", alpha: 1.0)
+            
+            var counter = 0
+            for task in listOfTask{
+                if !task.completedStatus{
+                    counter += 1
+                }
+            }
+            
+            let tapGesture = TaskGestureRecognizer(target: self, action: #selector(displayTaskListOfDetail(_:)))
+            tapGesture.taskList = listOfTask
+            tapGesture.delegate = self
+            savedGestureTask = tapGesture
+            taskView.addGestureRecognizer(tapGesture)
+                     
+            let message = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))
+            message.text = String(counter) + " of " + String(listOfTask.count)
+            message.textColor = .white
+            message.font = UIFont.systemFont(ofSize: 17)
+            
+            taskStackView.addArrangedSubview(taskView)
+            taskView.addSubview(message)
+            
+            taskView.translatesAutoresizingMaskIntoConstraints = false
+            message.translatesAutoresizingMaskIntoConstraints = false
+            
+            taskView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            message.centerYAnchor.constraint(equalTo: taskView.centerYAnchor, constant: 0).isActive = true
+            message.centerXAnchor.constraint(equalTo: taskView.centerXAnchor, constant: 0).isActive = true
+        }
+    }
     
+    @objc func displayTaskListOfDetail(_ sender:TaskGestureRecognizer){
+        if let viewController = getOwningViewController() as? MainViewController {
+            let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "SearchPanelViewController") as! SearchPanelViewController
+            popoverContent.modalPresentationStyle = .overCurrentContext
+            popoverContent.modalTransitionStyle = .crossDissolve
+            popoverContent.onDismiss = onSegDismiss
+            viewController.present(popoverContent, animated: true, completion: nil)
+            popoverContent.getTaskDetails(tasks: sender.taskList)
+        }
+    }
+    
+    func onSegDismiss(_ object: Any?) {
+        if let event = object as? Events {
+            if let viewController = getOwningViewController() as? MainViewController {
+                let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
+                popoverContent.modalPresentationStyle = .overCurrentContext
+                popoverContent.modalTransitionStyle = .crossDissolve
+                popoverContent.onDismiss = onViewDismiss
+                viewController.present(popoverContent, animated: true, completion: nil)
+                popoverContent.eventEditDetails(event: event)
+            }
+        } else if let task = object as? Task {
+            if let viewController = getOwningViewController() as? MainViewController {
+                
+                let popoverContent = viewController.storyboard!.instantiateViewController(withIdentifier: "AddEditViewController") as! AddEditViewController
+                popoverContent.modalPresentationStyle = .overCurrentContext
+                popoverContent.modalTransitionStyle = .crossDissolve
+                viewController.present(popoverContent, animated: true, completion: nil)
+                popoverContent.taskEditDetails(task: task)
+                popoverContent.onDismiss = onViewDismiss
+            }
+        }
+    }
+    
+    func onViewDismiss() {
+        getWeeklyView(date: activeDate)
+    }
     
     // Syncronize scroll views position
     func synchronizeScrollViewY(_ scrollViewToScroll: UIScrollView, toScrollView scrolledView: UIScrollView){
