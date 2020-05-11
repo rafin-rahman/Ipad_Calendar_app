@@ -73,15 +73,17 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.stackView.removeAllArrangedSubviews()
-            for event in eventDAO.eventList{
-                if event.eventName.contains(self.keyword){
-                    self.getSearchViewForEvent(eventDetails: event)
+            if self.keyword != nil {
+                for event in eventDAO.eventList{
+                    if event.eventName.contains(self.keyword){
+                        self.getSearchViewForEvent(eventDetails: event)
+                    }
                 }
-            }
-            
-            for task in taskDAO.taskList{
-                if task.taskName.contains(self.keyword){
-                    self.getSearchViewForTask(taskDetails: task)
+                
+                for task in taskDAO.taskList{
+                    if task.taskName.contains(self.keyword){
+                        self.getSearchViewForTask(taskDetails: task)
+                    }
                 }
             }
         }
@@ -103,6 +105,15 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
         self.stackView.removeAllArrangedSubviews()
         activeDate = tasks[0].taskDateAndTime.stripTime()
         for task in tasks{
+            getSearchViewForTaskDifferentBackground(taskDetails: task)
+        }
+    }
+    
+    func getTaskDetails(tasks:Array<Task>, activeDate:Date){
+        self.stackView.removeAllArrangedSubviews()
+        self.activeDate = activeDate
+        for task in tasks{
+            task.activeDate = activeDate
             getSearchViewForTaskDifferentBackground(taskDetails: task)
         }
     }
@@ -155,6 +166,9 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
                 if let dayView = vc.rightView.dynamicView as? DayView {
                     dayView.getDailyViewForDate(eventDate: self.activeDate)
                 }
+                else if let weekView = vc.rightView.dynamicView as? WeekView{
+                    weekView.getWeeklyView(date: self.activeDate)
+                }
                 
             })
         }
@@ -173,6 +187,16 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
                         dayView.getDailyViewForDate(eventDate: task.taskDateAndTime)
                     }
                 }
+                if let weekView = vc.rightView.dynamicView as? WeekView {
+                    if let event = object as? Events{
+                        weekView.getWeeklyView(date: event.startDate)
+                    }
+                    
+                    if let task = object as? Task{
+                        weekView.getWeeklyView(date: task.taskDateAndTime)
+                    }
+                }
+                
             })
         }
     }
@@ -182,6 +206,9 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
             dismiss(animated: true, completion: {
                 if let dayView = vc.rightView.dynamicView as? DayView {
                     dayView.onSegDismiss(object)
+                }
+                if let weekView = vc.rightView.dynamicView as? WeekView {
+                    weekView.onSegDismiss(object)
                 }
             })
         }

@@ -47,13 +47,33 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         return true;
     }
     
+    func unselectButton(){
+        dayOneButton.backgroundColor = UIColor.white
+        dayTwoButton.backgroundColor = UIColor.white
+        dayThreeButton.backgroundColor = UIColor.white
+        dayFourButton.backgroundColor = UIColor.white
+        dayFiveButton.backgroundColor = UIColor.white
+        daySixButton.backgroundColor = UIColor.white
+        daySevenButton.backgroundColor = UIColor.white
+        
+        dayOneButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        dayTwoButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        dayThreeButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        dayFourButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        dayFiveButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        daySixButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        daySevenButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+    }
+    
     @IBAction func prevWeek(_ sender: Any) {
+        unselectButton()
         let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: -7, to: date)!)
         
     }
     
     @IBAction func nextWeek(_ sender: Any) {
+        unselectButton()
         let date = dayZero.text!.toDate(dateFormat: "dd-MM-yy")!
         getDates(date: Calendar.current.date(byAdding: .day, value: 7, to: date)!)
     }
@@ -432,7 +452,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
                 event.leadingAnchor.constraint(equalTo: self.rightScroll.leadingAnchor, constant: self.rightScroll.frame.width/2).isActive = true
                 event.trailingAnchor.constraint(equalTo: self.rightScroll.trailingAnchor, constant: 0).isActive = true
                 event.widthAnchor.constraint(equalToConstant: self.rightScroll.layer.bounds.width/CGFloat(todaysEvent.numberOfCollision)).isActive = true
-                if eventDuration < 60{
+                if eventDuration < 1300{
                     event.heightAnchor.constraint(equalToConstant:30).isActive = true
                 }
                 else{

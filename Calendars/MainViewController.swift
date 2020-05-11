@@ -139,16 +139,22 @@ class MainViewController: UIViewController{
     }
     
     @IBAction func showSidebar(_ sender: UIScreenEdgePanGestureRecognizer) {
-        view.endEditing(true)
-        if sidebarWidthConstraint.constant == 0 {
-            sidebarWidthConstraint.constant = 150
-        } else {
-            sidebarWidthConstraint.constant = 0
-        }
         
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.layoutIfNeeded()
-        })
+        if sender.state == .ended {
+            view.endEditing(true)
+            if sidebarWidthConstraint.constant == 0 {
+                sidebarWidthConstraint.constant = 150
+            } else {
+                sidebarWidthConstraint.constant = 0
+            }
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+            
+            reload()
+            
+        }
     }
        
     @IBAction func hideSidebar(_ sender: UISwipeGestureRecognizer) {
@@ -162,6 +168,36 @@ class MainViewController: UIViewController{
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
         })
+        
+        reload()
+    }
+    
+    func reload(){
+        if let homeView = rightView as? HomeView {
+            if let weekView = homeView.dynamicView as? WeekView {
+                weekView.loadData()
+            }
+            
+            if let dayView = homeView.dynamicView as? DayView{
+                dayView.loadData()
+            }
+        }
+        
+        if let eventView = rightView as? EventView{
+            eventView.onLoad()
+        }
+        
+        if let taskView = rightView as? TaskView{
+            taskView.onLoad()
+        }
+        
+        if let binView = rightView as? BinView{
+            binView.onLoad()
+        }
+        
+        if let profileView = rightView as? ProfileView{
+            profileView.onLoad()
+        }
     }
     
     func onSegDismiss() {
@@ -245,6 +281,10 @@ class MainViewController: UIViewController{
         )
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        reload()
+    }
     
     @IBAction func onEventClick(_ sender: UIButton) {
         view.endEditing(true)
@@ -456,6 +496,8 @@ class MainViewController: UIViewController{
             
             self.view.layoutIfNeeded()
         })
+        
+        reload()
     }
     
 }

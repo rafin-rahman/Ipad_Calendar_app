@@ -23,4 +23,5 @@ class Events{
     
     var numberOfCollision = 0
     var first = true
+    var activeDate = Date()
 }

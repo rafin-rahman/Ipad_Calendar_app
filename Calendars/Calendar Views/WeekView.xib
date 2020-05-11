@@ -124,6 +124,45 @@
                         <constraint firstAttribute="height" constant="40" id="w4y-Wp-0Yl"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qzv-g5-iGi" userLabel="Week Days bar">
+                    <rect key="frame" x="100" y="80" width="1116" height="40"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UV7-W7-zgX" userLabel="Grey line">
+                            <rect key="frame" x="0.0" y="39" width="1116" height="1"/>
+                            <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="LNA-a3-8SA"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yc8-yx-t4V">
+                            <rect key="frame" x="0.0" y="0.0" width="1116" height="40"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1M-T7-OGz">
+                                    <rect key="frame" x="0.0" y="0.0" width="1116" height="40"/>
+                                    <color key="backgroundColor" red="0.3411764705882353" green="0.396078431372549" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="N1c-No-LOL"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="L1M-T7-OGz"/>
+                                </mask>
+                            </variation>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.34901960784313724" green="0.38431372549019605" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="yc8-yx-t4V" firstAttribute="top" secondItem="Qzv-g5-iGi" secondAttribute="top" id="CaT-jO-EZT"/>
+                        <constraint firstAttribute="height" constant="40" id="GUp-1B-duq"/>
+                        <constraint firstItem="UV7-W7-zgX" firstAttribute="width" secondItem="Qzv-g5-iGi" secondAttribute="width" id="Lmj-or-P3O"/>
+                        <constraint firstItem="UV7-W7-zgX" firstAttribute="centerX" secondItem="Qzv-g5-iGi" secondAttribute="centerX" id="Zm4-9t-mP0"/>
+                        <constraint firstAttribute="trailing" secondItem="yc8-yx-t4V" secondAttribute="trailing" id="ehd-J8-Gfk"/>
+                        <constraint firstItem="yc8-yx-t4V" firstAttribute="width" secondItem="Qzv-g5-iGi" secondAttribute="width" id="v25-ed-cfj"/>
+                        <constraint firstAttribute="bottom" secondItem="UV7-W7-zgX" secondAttribute="bottom" id="zUx-Wj-KFV"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ra3-B9-aXQ" userLabel="Week Days bar">
                     <rect key="frame" x="100" y="40" width="1116" height="40"/>
                     <subviews>
@@ -134,7 +173,7 @@
                                 <constraint firstAttribute="height" constant="1" id="T08-ge-5RL"/>
                             </constraints>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-av-fKg">
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-av-fKg">
                             <rect key="frame" x="0.0" y="0.0" width="1116" height="40"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTE-he-M2s">
@@ -152,7 +191,7 @@
                             </variation>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.51372549020000002" green="0.58431372550000005" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="BWP-av-fKg" firstAttribute="top" secondItem="ra3-B9-aXQ" secondAttribute="top" id="DC3-2c-d8J"/>
                         <constraint firstAttribute="height" constant="40" id="Frx-sD-NFf"/>
@@ -532,7 +571,7 @@
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeO-QO-KEi">
                                             <rect key="frame" x="0.0" y="186" width="157.5" height="60"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNQ-7k-Rea">
                                             <rect key="frame" x="0.0" y="248" width="157.5" height="60"/>
@@ -1643,25 +1682,6 @@
                         <constraint firstAttribute="height" constant="40" id="Xxj-Y7-8Ae"/>
                     </constraints>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qzv-g5-iGi" userLabel="Week Days bar">
-                    <rect key="frame" x="100" y="80" width="1116" height="40"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UV7-W7-zgX" userLabel="Grey line">
-                            <rect key="frame" x="0.0" y="39" width="1116" height="1"/>
-                            <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="LNA-a3-8SA"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="GUp-1B-duq"/>
-                        <constraint firstItem="UV7-W7-zgX" firstAttribute="width" secondItem="Qzv-g5-iGi" secondAttribute="width" id="Lmj-or-P3O"/>
-                        <constraint firstItem="UV7-W7-zgX" firstAttribute="centerX" secondItem="Qzv-g5-iGi" secondAttribute="centerX" id="Zm4-9t-mP0"/>
-                        <constraint firstAttribute="bottom" secondItem="UV7-W7-zgX" secondAttribute="bottom" id="zUx-Wj-KFV"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.15294117647058825" green="0.23529411764705882" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -1692,6 +1712,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="allDayStackView" destination="yc8-yx-t4V" id="FU8-dN-vZG"/>
                 <outlet property="dayFiveButton" destination="M3g-tE-5pH" id="0DA-yJ-kWC"/>
                 <outlet property="dayFourButton" destination="CvJ-Jb-5do" id="lRb-H6-uIe"/>
                 <outlet property="dayOneButton" destination="s5E-S5-FgU" id="Dd9-bx-3TU"/>
@@ -1704,6 +1725,7 @@
                 <outlet property="rightScroll" destination="PWf-yq-HbE" id="V58-QR-ZKE"/>
                 <outlet property="taskBarView" destination="ra3-B9-aXQ" id="b3Z-2D-zOg"/>
                 <outlet property="taskStackView" destination="BWP-av-fKg" id="WNA-GM-Rpt"/>
+                <outlet property="tempStackView" destination="nh0-Gk-3hp" id="bQE-3R-WV9"/>
                 <outlet property="weekLabel" destination="LZ4-Lk-f7A" id="xqe-7g-aSw"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="152.34375"/>

@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWA-5r-XKa">
-                    <rect key="frame" x="40" y="18" width="54" height="24"/>
+                    <rect key="frame" x="40" y="18" width="392" height="24"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -32,13 +32,14 @@
                 <constraint firstAttribute="trailing" secondItem="j7p-MS-j50" secondAttribute="trailing" constant="40" id="Zmh-ES-VbF"/>
                 <constraint firstItem="QWA-5r-XKa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="aaO-aY-Z7j"/>
                 <constraint firstItem="QWA-5r-XKa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="c99-nG-aAA"/>
+                <constraint firstItem="QWA-5r-XKa" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.644737" id="miG-bP-uLR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="dateLabel" destination="j7p-MS-j50" id="TPH-dz-5sz"/>
                 <outlet property="nameLabel" destination="QWA-5r-XKa" id="bfq-aG-oMM"/>
             </connections>
-            <point key="canvasLocation" x="-2261" y="-133"/>
+            <point key="canvasLocation" x="-2262.3188405797105" y="-133.25892857142856"/>
         </view>
     </objects>
 </document>

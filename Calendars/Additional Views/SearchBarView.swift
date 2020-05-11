@@ -114,7 +114,7 @@ class SearchBarView: UIView {
                 taskDao.editTaskCompleted(taskId: taskDetails.id, completed: !taskDetails.completedStatus)
                 taskDao.getAllTasksFromDays(startDate: taskDetails.taskDateAndTime.stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: taskDetails.taskDateAndTime.stripTime())!)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    viewController.getTaskDetails(tasks: taskDao.taskList)
+                    viewController.getTaskDetails(tasks: taskDao.taskList, activeDate: self.taskDetails.activeDate)
                 }
             }
         }

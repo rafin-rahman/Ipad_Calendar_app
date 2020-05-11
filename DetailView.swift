@@ -85,6 +85,9 @@ class DetailView: UIView {
                                 if let dayView = mainController.rightView.dynamicView as? DayView{
                                     dayView.getDailyViewForDate(eventDate: self.eventDetails.startDate)
                                 }
+                                if let weekView = mainController.rightView.dynamicView as? WeekView{
+                                    weekView.getWeeklyView(date: self.eventDetails.activeDate)
+                                }
                             })
                         }
                     }
