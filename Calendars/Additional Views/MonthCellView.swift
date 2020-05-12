@@ -8,8 +8,6 @@
 
 import UIKit
 
-@IBDesignable
-
 class MonthCellView: UICollectionViewCell {
     
     @IBOutlet weak var eventLabel: UILabel!
