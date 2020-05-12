@@ -231,6 +231,83 @@ class EventDAO{
         }
     }
     
+    func getEvents(eventStartDate:Date, eventEndDate:Date){
+        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        
+        let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: eventStartDate).whereField("DeleteStatus", isEqualTo: false)
+        eventStartingToday.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for event in querySnapshot!.documents {
+                    
+                    let newEvent = Events()
+                    
+                    newEvent.id = (event.documentID)
+                    
+                    newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
+                    newEvent.allDay = event["All-Day"] as! Bool
+                    newEvent.priority = event["Priority"] as! String
+                    newEvent.profile = event["Profile"] as! String
+                    newEvent.profileColour = event["ProfileColour"] as! String
+                    
+                    if let convertedDate = event["StartTime"] as? Timestamp {
+                        newEvent.startDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["EndTime"] as? Timestamp {
+                        newEvent.endDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["ReminderTime"] as? Timestamp{
+                        newEvent.reminder = convertedDate.dateValue()
+                    }
+                    
+                    self.eventStartingList.append(newEvent)
+                }
+            }
+        }
+        
+        let eventEndingToday = eventReference.whereField("EndTime", isLessThan: eventEndDate).whereField("DeleteStatus", isEqualTo: false)
+        eventEndingToday.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for event in querySnapshot!.documents {
+                    let newEvent = Events()
+                        
+                    newEvent.id = (event.documentID)
+                    
+                    newEvent.eventName = event["Name"] as! String
+                    newEvent.location = event["Location"] as! String
+                    newEvent.allDay = event["All-Day"] as! Bool
+                    newEvent.priority = event["Priority"] as! String
+                    newEvent.profile = event["Profile"] as! String
+                    newEvent.profileColour = event["ProfileColour"] as! String
+                    
+                    if let convertedDate = event["StartTime"] as? Timestamp {
+                        newEvent.startDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["EndTime"] as? Timestamp {
+                        newEvent.endDate = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = event["ReminderTime"] as? Timestamp{
+                        newEvent.reminder = convertedDate.dateValue()
+                    }
+                    
+                    self.eventEndingList.append(newEvent)
+                }
+            }
+        }
+    }
+    
     func getEvents(eventStartDate:Date, eventEndDate:Date, allDayStatus:Bool){
         let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
         

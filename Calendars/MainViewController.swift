@@ -174,6 +174,12 @@ class MainViewController: UIViewController{
     
     func reload(){
         if let homeView = rightView as? HomeView {
+            if let monthView = homeView.dynamicView as? MonthView {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    monthView.loadData()
+                })
+            }
+            
             if let weekView = homeView.dynamicView as? WeekView {
                 weekView.loadData()
             }

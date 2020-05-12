@@ -139,6 +139,35 @@ public enum Month: Int {
 }
 
 extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var startOfMonth: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([.year, .month], from: self)
+        
+        return  calendar.date(from: components)!
+    }
+    
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
+    
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)!
+    }
+    
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
+    
     func toString(dateFormat:String) -> String! {
         let dateAndTimeFormat = DateFormatter()
         dateAndTimeFormat.dateFormat = dateFormat
