@@ -69,6 +69,7 @@ class HomeView: UIView, NavigationProtocol {
         if let yearView = UINib(nibName: "YearView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             YearView{
             setDayView(newView : yearView)
+            yearView.loadData()
         }
     }
     
@@ -111,7 +112,6 @@ class HomeView: UIView, NavigationProtocol {
     }
     
     func getDayView(date:Date){
-        print("Cheking random studd",date)
         setBarStyle(sender: dayButton)
         if let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
             DayView{

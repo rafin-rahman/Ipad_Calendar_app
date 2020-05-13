@@ -33,6 +33,7 @@ class MonthView: UIView, CalendarProtocol, UIGestureRecognizerDelegate {
     var counter : Int = 0
     
     func loadData() {
+        yearLabel.text = Calendar.current.date(byAdding: .year, value: 0, to: Date())?.toString(dateFormat: "yyyy")
         getDataForMonth(activeDate: Date())
     }
     

@@ -15,15 +15,13 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var eventView: UIView!
     @IBOutlet weak var taskView: UIView!
-    
-    
+        
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var allDaySwitch: UISwitch!
     //Form Details
     @IBOutlet weak var eventNameText: UITextField!
     @IBOutlet weak var eventLocationText: UITextField!
     @IBOutlet weak var reminderTimePicker: UIDatePicker!
-    @IBOutlet weak var recurrentSegment: UISegmentedControl!
     @IBOutlet weak var prioritySegment: UISegmentedControl!
     @IBOutlet weak var eventProfilePicker: UIPickerView!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
@@ -75,7 +73,6 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.backgroundView.addGestureRecognizer(tap)
         
         self.reminderTimePicker.isEnabled = false
-        self.recurrentSegment.isEnabled = false
         
         self.eventEndTimePicker.date = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
         self.taskReminderPicker.isEnabled = false
@@ -346,17 +343,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
     }
     
-    @IBAction func recurringButtonClick(_ sender: UIButton) {
-        if recurrentSegment.isEnabled == false{
-            recurrentSegment.isEnabled = true
-            enableButton(enabledButton: recurringButton)
-        }
-        else{
-            recurrentSegment.isEnabled = false
-            disabledButon(disabledButton: recurringButton)
-        }
-    }
-    
+   
     @IBAction func taskReminderButtonClick(_ sender: UIButton) {
         if(taskReminderPicker.isEnabled == false){
             taskReminderPicker.isEnabled = true

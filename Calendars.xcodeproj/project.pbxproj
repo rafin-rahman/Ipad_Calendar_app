@@ -14,6 +14,8 @@
 		D10DAFED2451F45D00FC253E /* HexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10DAFEC2451F45D00FC253E /* HexToUIColor.swift */; };
 		D11D6EE0245F6839007FFD4D /* TaskDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11D6EDF245F6839007FFD4D /* TaskDAO.swift */; };
 		D11D6EE2245F687D007FFD4D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11D6EE1245F687D007FFD4D /* Task.swift */; };
+		D13A2784246B95470029F523 /* YearDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13A2783246B95470029F523 /* YearDisplayView.swift */; };
+		D13A2786246B954F0029F523 /* YearDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13A2785246B954F0029F523 /* YearDisplayView.xib */; };
 		D13AD93C245A1CB500C1637A /* MonthCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13AD93B245A1CB500C1637A /* MonthCellView.xib */; };
 		D13AD93E245A1CCA00C1637A /* MonthCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13AD93D245A1CCA00C1637A /* MonthCellView.swift */; };
 		D13AD940245A663D00C1637A /* PriorityColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13AD93F245A663D00C1637A /* PriorityColorSelector.swift */; };
@@ -47,6 +49,9 @@
 		D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */; };
 		D192628D2454E78300C11E17 /* SelectColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192628C2454E78300C11E17 /* SelectColour.swift */; };
 		D1A0CFF4244B9B0D008C4D7C /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0CFF3244B9B0D008C4D7C /* Events.swift */; };
+		D1A839C9246C99D500784947 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A839C8246C99D500784947 /* RegisterViewController.swift */; };
+		D1A839CB246C9AD300784947 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A839CA246C9AD300784947 /* UserDAO.swift */; };
+		D1A839CD246C9B0F00784947 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A839CC246C9B0F00784947 /* UserDetails.swift */; };
 		D1AB8F8F246B7FF2009032E0 /* DayTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB8F8E246B7FF1009032E0 /* DayTapGesture.swift */; };
 		D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AC723624548364001FAE87 /* ButtonDesign.swift */; };
 		D1B4112A2461D04D00C7F62C /* TaskGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B411292461D04D00C7F62C /* TaskGestureRecognizer.swift */; };
@@ -78,6 +83,8 @@
 		D10DAFEC2451F45D00FC253E /* HexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToUIColor.swift; sourceTree = "<group>"; };
 		D11D6EDF245F6839007FFD4D /* TaskDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDAO.swift; sourceTree = "<group>"; };
 		D11D6EE1245F687D007FFD4D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		D13A2783246B95470029F523 /* YearDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearDisplayView.swift; sourceTree = "<group>"; };
+		D13A2785246B954F0029F523 /* YearDisplayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YearDisplayView.xib; sourceTree = "<group>"; };
 		D13AD93B245A1CB500C1637A /* MonthCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthCellView.xib; sourceTree = "<group>"; };
 		D13AD93D245A1CCA00C1637A /* MonthCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCellView.swift; sourceTree = "<group>"; };
 		D13AD93F245A663D00C1637A /* PriorityColorSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityColorSelector.swift; sourceTree = "<group>"; };
@@ -113,6 +120,9 @@
 		D189C07C24264A1F00FF7723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D192628C2454E78300C11E17 /* SelectColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColour.swift; sourceTree = "<group>"; };
 		D1A0CFF3244B9B0D008C4D7C /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		D1A839C8246C99D500784947 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D1A839CA246C9AD300784947 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
+		D1A839CC246C9B0F00784947 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		D1AB8F8E246B7FF1009032E0 /* DayTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTapGesture.swift; sourceTree = "<group>"; };
 		D1AC723624548364001FAE87 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		D1B411292461D04D00C7F62C /* TaskGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -160,6 +170,7 @@
 				D10DAFE62451C4DE00FC253E /* EventDAO.swift */,
 				D1F228F4245464450008DD92 /* ProfileDAO.swift */,
 				D11D6EDF245F6839007FFD4D /* TaskDAO.swift */,
+				D1A839CA246C9AD300784947 /* UserDAO.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -199,6 +210,8 @@
 		D1718D0F245E34CF00C467D5 /* Additional Views */ = {
 			isa = PBXGroup;
 			children = (
+				D13A2785246B954F0029F523 /* YearDisplayView.xib */,
+				D13A2783246B95470029F523 /* YearDisplayView.swift */,
 				D1C7D059245E14280065CF0F /* BinRowView.xib */,
 				D1C7D05B245E14330065CF0F /* BinRowView.swift */,
 				D13AD93B245A1CB500C1637A /* MonthCellView.xib */,
@@ -266,6 +279,7 @@
 				D189C06F24264A1E00FF7723 /* MainViewController.swift */,
 				D1F228E5245452330008DD92 /* SearchPanelViewController.swift */,
 				D16503FC2469D26C00C44D00 /* LoginViewController.swift */,
+				D1A839C8246C99D500784947 /* RegisterViewController.swift */,
 				D189C07124264A1E00FF7723 /* Main.storyboard */,
 				D189C07724264A1F00FF7723 /* Assets.xcassets */,
 				D189C07924264A1F00FF7723 /* LaunchScreen.storyboard */,
@@ -281,6 +295,7 @@
 				D1A0CFF3244B9B0D008C4D7C /* Events.swift */,
 				D10DAFEA2451E94F00FC253E /* Profile.swift */,
 				D11D6EE1245F687D007FFD4D /* Task.swift */,
+				D1A839CC246C9B0F00784947 /* UserDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -366,6 +381,7 @@
 				D1B79169244888DB00B4A350 /* EventView.xib in Resources */,
 				D1784748244970BE00D3472F /* TaskView.xib in Resources */,
 				D179B6522448BFF5002C00B9 /* YearView.xib in Resources */,
+				D13A2786246B954F0029F523 /* YearDisplayView.xib in Resources */,
 				D151B98424636979008BD621 /* DetailView.xib in Resources */,
 				D189C07B24264A1F00FF7723 /* LaunchScreen.storyboard in Resources */,
 				D14AED832443AC990012469F /* DayView.xib in Resources */,
@@ -442,6 +458,7 @@
 				D1F4C3092458D47C008946A0 /* InfoButton.swift in Sources */,
 				D16403052443D2560078E059 /* MonthView.swift in Sources */,
 				D14AED852443B0BA0012469F /* WeekView.swift in Sources */,
+				D1A839C9246C99D500784947 /* RegisterViewController.swift in Sources */,
 				D179B6502448BFE9002C00B9 /* YearView.swift in Sources */,
 				D10DAFED2451F45D00FC253E /* HexToUIColor.swift in Sources */,
 				D1F228F5245464450008DD92 /* ProfileDAO.swift in Sources */,
@@ -461,8 +478,10 @@
 				D16503FD2469D26C00C44D00 /* LoginViewController.swift in Sources */,
 				D151B98824636CA9008BD621 /* EventGestureRecognizer.swift in Sources */,
 				D192628D2454E78300C11E17 /* SelectColour.swift in Sources */,
+				D1A839CB246C9AD300784947 /* UserDAO.swift in Sources */,
 				D151B98A24636F7B008BD621 /* DetailView.swift in Sources */,
 				D13AD940245A663D00C1637A /* PriorityColorSelector.swift in Sources */,
+				D1A839CD246C9B0F00784947 /* UserDetails.swift in Sources */,
 				D1784746244970B600D3472F /* TaskView.swift in Sources */,
 				D11D6EE0245F6839007FFD4D /* TaskDAO.swift in Sources */,
 				D1D8366C2462094700805911 /* SearchBarView.swift in Sources */,
@@ -473,6 +492,7 @@
 				D10DAFE72451C4DE00FC253E /* EventDAO.swift in Sources */,
 				D1F228E6245452330008DD92 /* SearchPanelViewController.swift in Sources */,
 				D1AC723724548364001FAE87 /* ButtonDesign.swift in Sources */,
+				D13A2784246B95470029F523 /* YearDisplayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
