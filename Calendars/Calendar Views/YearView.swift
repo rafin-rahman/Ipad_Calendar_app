@@ -9,17 +9,22 @@
 import UIKit
 
 class YearView: UIView, CalendarProtocol {
+    
+    
+    @IBOutlet weak var yearLabel: UILabel!
+    
+    @IBOutlet weak var rowOne: UIStackView!
+    @IBOutlet weak var rowTwo: UIStackView!
+    @IBOutlet weak var rowThree: UIStackView!
+    @IBOutlet weak var rowFour: UIStackView!
+    
     func loadData() {
         
     }
     
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBAction func previousButton(_ sender: UIButton) {
     }
-    */
-
+    @IBAction func nextButton(_ sender: UIButton) {
+    }
 }

@@ -28,7 +28,21 @@ class MonthCellView: UICollectionViewCell {
     
     func populateData(dayNumber:Int, eventNumber:Int, taskNumber:Int){
         dayNumberLabel.text = String(dayNumber)
-        eventNumberLabel.text = String(eventNumber)
-        taskNumberLabel.text = String(taskNumber)
+        
+        if eventNumber == 0{
+            eventView.isHidden = true
+        }
+        else{
+            eventNumberLabel.text = String(eventNumber)
+        }
+        
+        
+        if taskNumber == 0{
+            taskView.isHidden = true
+        }
+        else{
+            taskNumberLabel.text = String(taskNumber)
+        }
+        
     }
 }

@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum StateOfCollectionView{
-    case before
-    case content
-    case after
-}
 
 class MonthView: UIView, CalendarProtocol, UIGestureRecognizerDelegate {
     
@@ -36,16 +31,9 @@ class MonthView: UIView, CalendarProtocol, UIGestureRecognizerDelegate {
     var numberOfDays : Int = 0
     
     var counter : Int = 0
-    var currentState: StateOfCollectionView = .before
-    var detailsDict: Dictionary<Date,Array<Int>> = Dictionary()
     
     func loadData() {
-        if let monthDisplay = UINib(nibName: "YearMonthView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
-            YearMonthView{
-            setMonthView(newView: monthDisplay)
-            getDataForMonth(activeDate: "10-06-2020".toDate(dateFormat: "dd-MM-yyyy"))
-        }
-        
+        getDataForMonth(activeDate: Date())
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -53,75 +41,15 @@ class MonthView: UIView, CalendarProtocol, UIGestureRecognizerDelegate {
     }
     
     func getDataForMonth(activeDate:Date){
-        
-        
-        let eventDAO = EventDAO()
-        let taskDAO = TaskDAO()
-                
         self.activeDate = activeDate
         
-        eventDAO.getEvents(eventStartDate: activeDate.startOfMonth, eventEndDate: activeDate.endOfMonth)
-        taskDAO.getAllTasksFromDays(startDate: activeDate.startOfMonth, endDate: activeDate.endOfMonth)
-        
-        numberOfDays = Int(activeDate.endOfMonth.timeIntervalSince(activeDate.startOfMonth)/86400 + 1)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let eventDic = self.sortEventAccordingToDate(events: eventDAO.getEventFromDays(), numberOfDays: self.numberOfDays)
-            let taskDic = self.sortTaskAccordingToDate(tasks: taskDAO.taskList, numberOfDays: self.numberOfDays)
-            self.getCountOfEventsAndTasks(eventDic: eventDic, taskDic: taskDic)
-        }
-        
-    }
-    
-    func getCountOfEventsAndTasks(eventDic:Dictionary<Date, Array<Events>>, taskDic:Dictionary<Date, Array<Task>>){
-        
-        detailsDict = Dictionary<Date, Array<Int>>()
-        let sortedDicEvent = eventDic.sorted { (firstDic, secondDic) -> Bool in
-            return firstDic.key < secondDic.key
-        }
-                
-        for (date,events) in sortedDicEvent{
-            detailsDict[date, default: []].append(events.count)
-        }
-        
-        let sortedDicTask = taskDic.sorted { (firstDic, secondDic) -> Bool in
-            return firstDic.key < secondDic.key
-        }
-        
-        for (date,tasks) in sortedDicTask{
-            detailsDict[date, default: []].append(tasks.count)
+        if let monthDisplay = UINib(nibName: "MonthDisplayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as?
+            MonthDisplayView{
+            self.setMonthView(newView: monthDisplay)
+            monthDisplay.onLoad(activeMonth: self.activeDate)
         }
     }
-        
-    func sortEventAccordingToDate(events:Array<Events>, numberOfDays:Int) -> Dictionary<Date, Array<Events>>{
-        var eventDic : Dictionary <Date, Array<Events>> = Dictionary()
-        var counter = 0
-        while(counter != numberOfDays){
-            eventDic[(Calendar.current.date(byAdding: .day, value: counter, to: activeDate.startOfMonth)?.stripTime())!] = Array<Events>()
-            counter += 1
-        }
-                
-        for event in events{
-            event.activeDate = activeDate
-            eventDic[event.startDate.stripTime(), default: []].append(event)
-        }
-        return eventDic
-    }
-    
-    func sortTaskAccordingToDate(tasks:Array<Task>, numberOfDays:Int) -> Dictionary<Date, Array<Task>>{
-        var taskDict : Dictionary <Date, Array<Task>> = Dictionary()
-        var counter = 0
-        while(counter != numberOfDays){
-            taskDict[(Calendar.current.date(byAdding: .day, value: counter, to: activeDate.startOfMonth)?.stripTime())!] = Array<Task>()
-            counter += 1
-        }
-        
-        for task in tasks{
-            taskDict[task.taskDateAndTime.stripTime(), default: []].append(task)
-        }
-        return taskDict
-    }
-    
+   
     
     @IBAction func nextButtonClick(_ sender: UIButton) {
         let currentYear = yearLabel.text!.toDate(dateFormat: "yyyy")!
@@ -177,88 +105,11 @@ class MonthView: UIView, CalendarProtocol, UIGestureRecognizerDelegate {
         monthView.translatesAutoresizingMaskIntoConstraints = false
         monthView.frame = CGRect(x: 0, y: 0, width: monthView.frame.width, height: monthView.frame.height)
         self.addSubview(monthView)
-        monthView.topAnchor.constraint(equalTo: janButton.bottomAnchor).isActive = true
-        monthView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        monthView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        monthView.bottomAnchor.constraint(equalTo: ).isActive = true
+        
+                monthView.topAnchor.constraint(equalTo: janButton.bottomAnchor, constant: 0).isActive = true
+        monthView.leadingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        monthView.trailingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        monthView.bottomAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         
     }
-    
-//    func registerData() {
-//
-//           let layout = UICollectionViewFlowLayout()
-//           layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-//           layout.minimumLineSpacing = spacing
-//           layout.minimumInteritemSpacing = spacing
-//           self.collectionView.collectionViewLayout = layout
-//
-//           let nib = UINib(nibName: "MonthCellView", bundle: nil)
-//           collectionView.register(nib, forCellWithReuseIdentifier: "MonthCellView")
-//           collectionView.dataSource = self
-//           collectionView.delegate = self
-//       }
-//
-//    let spacing:CGFloat = 1
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        counter =  activeDate.startOfMonth.dayNumberOfWeek()! - 1
-//        return (activeDate.startOfMonth.dayNumberOfWeek()! - 1) + numberOfDays + (7 - activeDate.endOfMonth.dayNumberOfWeek()!)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MonthCellView", for: indexPath) as? MonthCellView else {
-//            fatalError("can't dequeue CustomCell")
-//        }
-//
-//        switch currentState {
-//        case .before:
-//            cell.clearDate()
-//            counter -= 1
-//            if counter == 0 {
-//                currentState = .content
-//            }
-//        case .content:
-//            let date = Calendar.current.date(byAdding: .day, value: counter, to: activeDate.startOfMonth)
-//            let eventNumber = detailsDict[date!]!
-//            cell.populateData(dayNumber: counter + 1, eventNumber: eventNumber[0], taskNumber: eventNumber[1])
-//
-//            let gesture = UITapGestureRecognizer(target: self, action: #selector(onCellClick(_:)))
-//            gesture.delegate = self
-//            cell.addGestureRecognizer(gesture)
-//            counter += 1
-//            if counter == numberOfDays {
-//                currentState = .after
-//                counter = 7 - activeDate.endOfMonth.dayNumberOfWeek()!
-//            }
-//        case .after:
-//            cell.clearDate()
-//            counter -= 1
-//        }
-//
-//        cell.isHidden = false
-//
-//        cell.layer.cornerRadius = 0
-//        cell.layer.borderWidth = 0
-//        cell.layer.borderColor = HexToUIColor.hexStringToUIColor(hex: "273C75", alpha: 1).cgColor
-//        return cell
-//    }
-//
-//    @objc func onCellClick(_ sender:UITapGestureRecognizer){
-//        print("Click")
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let numberOfItemsPerRow:CGFloat = 7.1
-//        let numberOfRows:CGFloat = 5.2
-//
-//        if let collection = self.collectionView{
-//            let width = collection.bounds.width/numberOfItemsPerRow
-//            let height = collection.bounds.height/numberOfRows
-//            return CGSize(width: width, height: height)
-//        }else{
-//            return CGSize(width: 0, height: 0)
-//        }
-//    }
-
-    
 }
