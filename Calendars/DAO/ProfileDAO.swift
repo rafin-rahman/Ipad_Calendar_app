@@ -14,7 +14,7 @@ class ProfileDAO{
     }
     
     func getProfileList(){
-        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
+        let profileReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Profile")
         
         profileReference.getDocuments(){
             (querySnapshot, err) in
@@ -37,13 +37,13 @@ class ProfileDAO{
     }
     
     func addProfile(profileDic:Dictionary<String, Any>){
-        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
+        let profileReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Profile")
         let newProfile = profileReference.document()
         newProfile.setData(profileDic);
     }
     
     func editProfile(profile:Profile){
-        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile").document(profile.id)
+        let profileReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Profile").document(profile.id)
         profileReference.updateData([
             "Name" : profile.profileName,
             "Color" : profile.profileColor
@@ -59,7 +59,7 @@ class ProfileDAO{
     }
     
     func deleteProfile(profileId:String){
-        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
+        let profileReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Profile")
         
         profileReference.document(profileId).delete(){ err in
             if let err = err {

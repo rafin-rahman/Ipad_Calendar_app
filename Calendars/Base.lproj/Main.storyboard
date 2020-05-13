@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZNK-m1-HMQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OSC-vN-Nt1">
     <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -10,7 +10,7 @@
         <!--Main View Controller-->
         <scene sceneID="DZx-wR-tNN">
             <objects>
-                <viewController id="Ona-b3-j2U" customClass="MainViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="Ona-b3-j2U" customClass="MainViewController" customModule="Calendars" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mae-o0-IAk">
                         <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1052,7 +1052,7 @@
                                                 </constraints>
                                                 <state key="normal" image="Enter"/>
                                                 <connections>
-                                                    <segue destination="Ona-b3-j2U" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="y6p-rL-qg1"/>
+                                                    <action selector="loginButtonClick:" destination="OSC-vN-Nt1" eventType="touchUpInside" id="JJw-fD-983"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-ru-hn4">
@@ -1113,7 +1113,9 @@
                         <viewLayoutGuide key="safeArea" id="dnS-RO-3sn"/>
                     </view>
                     <connections>
+                        <outlet property="emailField" destination="62m-bi-lKP" id="if7-fu-X6R"/>
                         <outlet property="logoImage" destination="b0Z-RG-hQB" id="dyH-1W-tww"/>
+                        <outlet property="passwordField" destination="hWK-UU-99m" id="bm7-2O-K0s"/>
                         <outlet property="topSpace" destination="yww-tj-GFu" id="DOS-IV-TOp"/>
                         <outlet property="welcomelabel" destination="KPR-Ba-67d" id="G3a-li-RIU"/>
                     </connections>

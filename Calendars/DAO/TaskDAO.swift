@@ -13,13 +13,13 @@ class TaskDAO{
     }
     
     func addNewTask(taskDic:Dictionary<String, Any>){
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
         let newTask = taskReference.document()
         newTask.setData(taskDic);
     }
     
     func getAllTask(){
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task").whereField("DeleteStatus", isEqualTo: false)
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task").whereField("DeleteStatus", isEqualTo: false)
         taskReference.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -50,7 +50,7 @@ class TaskDAO{
     }
     
     func getAllTasksFromDays(startDate:Date, endDate:Date){
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
         let taskStartingToday = taskReference.whereField("DateAndTime", isGreaterThanOrEqualTo: startDate).whereField("DateAndTime", isLessThan: endDate).whereField("DeleteStatus", isEqualTo: false)
         taskStartingToday.getDocuments(){
             (querySnapshot, err) in
@@ -86,7 +86,7 @@ class TaskDAO{
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
         let start = calendar.date(from: components)!
         
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
         print("Start Time",start)
         let taskStartingToday = taskReference.whereField("DateAndTime", isGreaterThanOrEqualTo: start).whereField("DeleteStatus", isEqualTo: false)
         taskStartingToday.getDocuments(){
@@ -119,7 +119,7 @@ class TaskDAO{
     }
     
     func getAllTasksFromProfile(profile:String){
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task").whereField("Profile", isEqualTo: profile)
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task").whereField("Profile", isEqualTo: profile)
         taskReference.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -154,7 +154,7 @@ class TaskDAO{
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
         let start = calendar.date(from: components)!
         
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
         print("Start Time",start)
         let taskStartingToday = taskReference.whereField("DeleteStatus", isEqualTo: false).whereField("CompletedStatus", isEqualTo: completedStatus)
         taskStartingToday.getDocuments(){
@@ -187,7 +187,7 @@ class TaskDAO{
     }
     
     func editDeleteStatus(id:String, deleteStatus:Bool){
-        let taskReference = dbConnection.collection("User").document("Subin").collection("Task").document(id)
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task").document(id)
         
         taskReference.updateData([
             "DeleteStatus": deleteStatus,
@@ -202,7 +202,7 @@ class TaskDAO{
     }
     
     func editTaskCompleted(taskId:String, completed:Bool){
-        let taskRef = dbConnection.collection("User").document("Subin").collection("Task").document(taskId)
+        let taskRef = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task").document(taskId)
         taskRef.updateData([
             "CompletedStatus":completed
         ]) { err in
@@ -216,7 +216,7 @@ class TaskDAO{
     
     func editTask(updatedTask:Task){
         print("Edit Task", updatedTask.profile)
-        let taskRef = dbConnection.collection("User").document("Subin").collection("Task").document(updatedTask.id)
+        let taskRef = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task").document(updatedTask.id)
         taskRef.updateData([
             "Name" : updatedTask.taskName,
             "DateAndTime" : updatedTask.taskDateAndTime,
@@ -234,7 +234,7 @@ class TaskDAO{
     }
     
     func deleteTask(taskId:String){
-        let taskRef = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskRef = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
         
         taskRef.document(taskId).delete(){ err in
             if let err = err {
@@ -246,7 +246,7 @@ class TaskDAO{
     }
     
     func getAllDeletedTask(deleteTime:Date){
-        let taskRef = dbConnection.collection("User").document("Subin").collection("Task")
+        let taskRef = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
         
         let deletedEvents = taskRef.whereField("DeleteStatus", isEqualTo: true).whereField("DeleteTime", isLessThan: deleteTime)
         deletedEvents.getDocuments(){
@@ -279,7 +279,7 @@ class TaskDAO{
     }
     
     func getAllDeletedTask(){
-        let taskRef = dbConnection.collection("User").document("Subin").collection("Task").order(by: "DeleteTime", descending: true)
+        let taskRef = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task").order(by: "DeleteTime", descending: true)
         
         let deletedEvents = taskRef.whereField("DeleteStatus", isEqualTo: true)
         deletedEvents.getDocuments(){

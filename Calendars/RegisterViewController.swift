@@ -30,11 +30,11 @@ class RegisterViewController: UIViewController {
             return
         }
         
-        if isValidEmailAddress(emailAddressString: email!){
+        if email?.isValidEmail ?? false == false{
             TextfieldAnimation.errorAnimation(textField: emailField)
             return
         }
-        
+
         let password = passwordOneField.text
         if password == ""{
             TextfieldAnimation.errorAnimation(textField: passwordOneField)
@@ -53,32 +53,22 @@ class RegisterViewController: UIViewController {
             return
         }
         
-        
-        
-    }
-    
-     func isValidEmailAddress(emailAddressString: String) -> Bool {
-        
-        var returnValue = true
-        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
-        
-        do {
-            let regex = try NSRegularExpression(pattern: emailRegEx)
-            let nsString = emailAddressString as NSString
-            let results = regex.matches(in: emailAddressString, range: NSRange(location: 0, length: nsString.length))
-            
-            if results.count == 0
-            {
-                returnValue = false
+        let userDAO = UserDAO()
+        userDAO.getAllUser(email: email!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if userDAO.user == nil{
+                let userDict: [String: Any] = [
+                    "Email" : email!,
+                    "Password" : confirmPassword!
+                ]
+                userDAO.addNewUser(userDict: userDict)
             }
-            
-        } catch let error as NSError {
-            print("invalid regex: \(error.localizedDescription)")
-            returnValue = false
+            else{
+                //Email already taken
+            }
         }
         
-        return  returnValue
     }
-    
+       
 
 }

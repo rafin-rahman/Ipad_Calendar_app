@@ -13,12 +13,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var welcomelabel: UILabel!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
     
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
     var  number = CGFloat(0)
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        formStyle()
+        formStyle()    
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -45,6 +47,45 @@ class LoginViewController: UIViewController {
     }
     
     
+    @IBAction func loginButtonClick(_ sender: UIButton) {
+        TextfieldAnimation.convertToNormal(textField: emailField)
+        TextfieldAnimation.convertToNormal(textField: passwordField)
+                
+        let email = emailField.text
+        // text validation
+        if email == "" {
+            TextfieldAnimation.errorAnimation(textField: emailField)
+            return
+        }
+
+        let password = passwordField.text
+        if password == ""{
+            TextfieldAnimation.errorAnimation(textField: passwordField)
+            return
+        }
+        
+        let userDAO = UserDAO()
+        userDAO.validateUser(email: email!, password: password!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if userDAO.user != nil{
+                UserSession.userDetails = userDAO.user
+            
+                let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                
+                guard let viewController = 	mainStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else{
+                    print("Couldn't load")
+                    return
+                }
+                
+                viewController.modalPresentationStyle = .fullScreen
+                viewController.modalTransitionStyle = .crossDissolve
+                self.present(viewController, animated: true, completion: nil)
+                
+            }
+        }
+        
+    }
+    
     
 
-}
+}	

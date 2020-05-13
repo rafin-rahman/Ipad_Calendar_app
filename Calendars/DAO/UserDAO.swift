@@ -24,12 +24,35 @@ class UserDAO{
             (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
-            }
+            } 
             else {
                 for checkingUser in querySnapshot!.documents {
                     self.user.id = (checkingUser.documentID)
                     self.user.email = checkingUser["Email"] as! String
                     self.user.password = checkingUser["Password"] as! String
+                }
+            }
+        }
+    }
+    
+    func validateUser(email:String, password: String){
+        let userReference = dbConnection.collection("User").whereField("Email", isEqualTo: email).whereField("Password", isEqualTo: password)
+        userReference.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for checkingUser in querySnapshot!.documents {
+                    print("Checking stuff",checkingUser)
+                    
+                    let userDetails = UserDetails()
+                    
+                    userDetails.id = (checkingUser.documentID)
+                    userDetails.email = checkingUser["Email"] as! String
+                    userDetails.password = checkingUser["Password"] as! String
+                    
+                    self.user = userDetails
                 }
             }
         }

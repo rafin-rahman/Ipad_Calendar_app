@@ -23,7 +23,7 @@ class EventDAO{
     }
     
     func getAllEvents(){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").whereField("DeleteStatus", isEqualTo: false)
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event").whereField("DeleteStatus", isEqualTo: false)
         eventReference.getDocuments(){
             (querySnapshot, err) in
             if let err = err {
@@ -66,7 +66,7 @@ class EventDAO{
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
         let start = calendar.date(from: components)!
         
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("DeleteStatus", isEqualTo: false)
         eventStartingToday.getDocuments(){
@@ -109,7 +109,7 @@ class EventDAO{
     
     
     func getAllEventFromProfile(profileName:String){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         let eventStartingToday = eventReference.whereField("Profile", isEqualTo: profileName)
         eventStartingToday.getDocuments(){
@@ -155,7 +155,7 @@ class EventDAO{
         let start = calendar.date(from: components)!
         let end = calendar.date(byAdding: .day, value: 1, to: start)!
         
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: start).whereField("All-Day", isEqualTo: allDayStatus).whereField("DeleteStatus", isEqualTo: false)
         eventStartingToday.getDocuments(){
@@ -232,7 +232,7 @@ class EventDAO{
     }
     
     func getEvents(eventStartDate:Date, eventEndDate:Date){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: eventStartDate).whereField("DeleteStatus", isEqualTo: false)
         eventStartingToday.getDocuments(){
@@ -309,7 +309,7 @@ class EventDAO{
     }
     
     func getEvents(eventStartDate:Date, eventEndDate:Date, allDayStatus:Bool){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         let eventStartingToday = eventReference.whereField("StartTime", isGreaterThanOrEqualTo: eventStartDate).whereField("All-Day", isEqualTo: allDayStatus).whereField("DeleteStatus", isEqualTo: false)
         eventStartingToday.getDocuments(){
@@ -399,13 +399,13 @@ class EventDAO{
     }
     
     func addNewEvent(eventDict:Dictionary<String, Any>){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         let newEvent = eventReference.document()
         newEvent.setData(eventDict);
     }
     
     func editDeleteStatus(id:String, deleteStatus:Bool){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").document(id)
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event").document(id)
         
         eventReference.updateData([
             "DeleteStatus": deleteStatus,
@@ -421,7 +421,7 @@ class EventDAO{
     
     func editEvent(updatedEvent:Events){
         print(updatedEvent.id)
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").document(updatedEvent.id)
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event").document(updatedEvent.id)
         eventReference.updateData([
             "Name" : updatedEvent.eventName,
             "Location" : updatedEvent.location,
@@ -446,7 +446,7 @@ class EventDAO{
     }
     
     func deleteEvent(eventId:String){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         eventReference.document(eventId).delete(){ err in
             if let err = err {
@@ -458,7 +458,7 @@ class EventDAO{
     }
     
     func getAllDeletedEventsFromDate(date:Date){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event")
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event")
         
         let deletedEvents = eventReference.whereField("DeleteStatus", isEqualTo: true).whereField("DeleteTime", isLessThan: date)
         deletedEvents.getDocuments(){
@@ -499,7 +499,7 @@ class EventDAO{
     }
     
     func getAllDeletedEvents(){
-        let eventReference = dbConnection.collection("User").document("Subin").collection("Event").order(by: "DeleteTime", descending: true)
+        let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event").order(by: "DeleteTime", descending: true)
         
         let deletedEvents = eventReference.whereField("DeleteStatus", isEqualTo: true)
         deletedEvents.getDocuments(){
