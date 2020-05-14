@@ -16,10 +16,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    @IBOutlet weak var emailEmptyLabel: UILabel!
+    @IBOutlet weak var passwordEmptyLabel: UILabel!
+    
     var  number = CGFloat(0)
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        emailEmptyLabel.isHidden = true
+        passwordEmptyLabel.isHidden = true
         formStyle()    
     }
     
@@ -48,19 +52,22 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginButtonClick(_ sender: UIButton) {
+        emailEmptyLabel.isHidden = true
+        passwordEmptyLabel.isHidden = true
         TextfieldAnimation.convertToNormal(textField: emailField)
         TextfieldAnimation.convertToNormal(textField: passwordField)
                 
         let email = emailField.text
-        // text validation
         if email == "" {
             TextfieldAnimation.errorAnimation(textField: emailField)
+            emailEmptyLabel.isHidden = false
             return
         }
 
         let password = passwordField.text
         if password == ""{
             TextfieldAnimation.errorAnimation(textField: passwordField)
+            passwordEmptyLabel.isHidden = false
             return
         }
         
@@ -81,6 +88,13 @@ class LoginViewController: UIViewController {
                 viewController.modalTransitionStyle = .crossDissolve
                 self.present(viewController, animated: true, completion: nil)
                 
+            }
+            else{
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.welcomelabel.text = "Incorrect Username/Password"
+                    self.welcomelabel.textColor = .red
+                    self.view.layoutIfNeeded()
+                })
             }
         }
         

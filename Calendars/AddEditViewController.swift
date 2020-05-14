@@ -35,10 +35,12 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var taskTimePicker: UIDatePicker!
     @IBOutlet weak var taskPrioritySegment: UISegmentedControl!
     
+    @IBOutlet weak var eventEmptyLabel: UILabel!
+    @IBOutlet weak var eventTimeMessageLabel: UILabel!
+    @IBOutlet weak var taskEmptyLabel: UILabel!
     
     // Event Buttons
     @IBOutlet weak var reminderButton: UIButton!
-    @IBOutlet weak var recurringButton: UIButton!
     @IBOutlet weak var eventButton: UIButton!
     @IBOutlet weak var taskButton: UIButton!
     @IBOutlet weak var eventSaveButton: UIButton!
@@ -48,6 +50,8 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var taskSaveButton: UIButton!
     @IBOutlet weak var taskCancelButton: UIButton!
     @IBOutlet weak var taskReminderButton: UIButton!
+    
+    
     
     var onDismiss : (() -> Void)?
     var activeDate: Date = Date()
@@ -67,7 +71,13 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        eventEmptyLabel.isHidden = true
+        eventTimeMessageLabel.isHidden = true
+        taskEmptyLabel.isHidden = true
+        
         taskNameText.delegate = self
+        eventNameText.delegate = self
+        
         eventDatePicker.date = activeDate
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
         self.backgroundView.addGestureRecognizer(tap)
@@ -103,6 +113,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let singleTapSelector = #selector(self.onSingleTap)
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: singleTapSelector)
         view.addGestureRecognizer(singleTap)
+        
     }
     
     @objc func onSingleTap(){
@@ -125,7 +136,6 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         allDaySwitch.backgroundColor = .darkGray
         
         ButtonDesign.roundedCorner(button: reminderButton)
-        ButtonDesign.roundedCorner(button: recurringButton)
         ButtonDesign.roundedCorner(button: eventSaveButton)
         ButtonDesign.roundedCorner(button: eventCancelButton)
         
@@ -161,7 +171,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.profileColours.append("Grey")
         
         let dbConnection = Firestore.firestore()
-        let profileReference = dbConnection.collection("User").document("Subin").collection("Profile")
+        let profileReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Profile")
         profileReference.getDocuments() {
             (querySnapshot, err) in
             if let err = err {
@@ -218,18 +228,23 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBAction func eventSaveClick(_ sender: UIButton) {
         TextfieldAnimation.convertToNormal(textField: eventNameText)
+        eventEmptyLabel.isHidden = true
+        eventTimeMessageLabel.isHidden = true
+        
         let eventName = eventNameText.text
         // text validation
         if eventName == "" {
             TextfieldAnimation.errorAnimation(textField: eventNameText)
+            eventEmptyLabel.isHidden = false
             return
         }
+        
         
         let selectedDate = eventDatePicker.date.toString(dateFormat: "dd-MM-yy")!
         
         if(eventStartTimePicker.date > eventEndTimePicker.date)
         {
-            //TO:DO A message to show start time should not be grater than end time
+            eventTimeMessageLabel.isHidden = false
             return
         }
         
@@ -285,10 +300,13 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBAction func taskSaveButtonClick(_ sender: UIButton) {
         TextfieldAnimation.convertToNormal(textField: taskNameText)
+        taskEmptyLabel.isHidden = true
+        
         let taskName = taskNameText.text
         // text validation
         if taskName == "" {
             TextfieldAnimation.errorAnimation(textField: taskNameText)
+            taskEmptyLabel.isHidden = false
             return
         }
         
@@ -461,12 +479,20 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool
     {
-        let text = textField.text!
-        
-        checkDate(text: text)
-        checkTime(text: text)
-        
-        return true
+        var maxLength = 0
+        if textField.tag == 2 {
+            maxLength = 50
+            let text = textField.text!
+            checkDate(text: text)
+            checkTime(text: text)
+        }
+        else{
+            maxLength = 80
+        }
+                
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
     }
     
     func checkDate(text:String){
