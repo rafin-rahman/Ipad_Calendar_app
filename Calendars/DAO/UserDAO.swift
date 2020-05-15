@@ -44,8 +44,6 @@ class UserDAO{
             }
             else {
                 for checkingUser in querySnapshot!.documents {
-                    print("Checking stuff",checkingUser)
-                    
                     let userDetails = UserDetails()
                     
                     userDetails.id = (checkingUser.documentID)

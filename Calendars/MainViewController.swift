@@ -177,8 +177,8 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate{
         content.categoryIdentifier = Notification.Category.taskSuggestion
         content.sound = UNNotificationSound.default
         
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute],from: suggestedTask.taskDateAndTime.stripDate())
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         centre.add(request) {(error) in

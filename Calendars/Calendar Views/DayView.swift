@@ -86,9 +86,9 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         let eventDAOForAllDay = EventDAO()
         let eventDAO = EventDAO()
         let taskDAO = TaskDAO()
-        
-        print("Cheking: ", eventDate)
+                
         getDates(date: eventDate)
+        getHighlightedDate(selectedDate:eventDate)
         
         self.clearAllDayEvent()
         self.clearView()
@@ -133,6 +133,8 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         self.clearAllDayEvent()
         self.clearView()
         self.clearAllTask()
+        
+        getHighlightedDate(selectedDate:eventDate)
         
         eventDAOForAllDay.getEvents(eventDate: eventDate, allDayStatus: true)
         eventDAO.getEvents(eventDate: eventDate, allDayStatus: false)
@@ -590,6 +592,39 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         activeDate = newFormat.date(from: selectedDate)!
         
         self.getDailyViewForDate(eventDate:newFormat.date(from: selectedDate)!)
+    }
+    
+    func getHighlightedDate(selectedDate : Date){
+        dayOneButton.backgroundColor = UIColor.white
+        dayTwoButton.backgroundColor = UIColor.white
+        dayThreeButton.backgroundColor = UIColor.white
+        dayFourButton.backgroundColor = UIColor.white
+        dayFiveButton.backgroundColor = UIColor.white
+        daySixButton.backgroundColor = UIColor.white
+        daySevenButton.backgroundColor = UIColor.white
         
+        var arrayOfButton = Array<UIButton>()
+        
+        dayOneButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(dayOneButton)
+        dayTwoButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(dayTwoButton)
+        dayThreeButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(dayThreeButton)
+        dayFourButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(dayFourButton)
+        dayFiveButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(dayFiveButton)
+        daySixButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(daySixButton)
+        daySevenButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        arrayOfButton.append(daySevenButton)
+        
+        for actionButton in arrayOfButton{
+            if actionButton.titleLabel?.text == selectedDate.toString(dateFormat:"d E"){
+                actionButton.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
+                actionButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            }
+        }
     }
 }

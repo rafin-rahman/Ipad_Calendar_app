@@ -32,7 +32,16 @@ class EventCollision{
                         checkEvent.first = false
                         
                     }
+                    
                 }
+                
+                else if defaultEvent.startDate < checkEvent.startDate && defaultEvent.endDate > checkEvent.endDate{
+                    defaultEvent.numberOfCollision += 1
+                    if(defaultEvent.first){
+                        checkEvent.first = false
+                    }
+                }
+                    
                 else if(defaultEvent.startDate == checkEvent.startDate) && (defaultEvent.endDate == checkEvent.endDate){
                     defaultEvent.numberOfCollision += 1
                 }

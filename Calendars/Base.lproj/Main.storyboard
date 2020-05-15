@@ -567,9 +567,13 @@
                         <viewLayoutGuide key="safeArea" id="43Z-Yy-WFM"/>
                     </view>
                     <connections>
+                        <outlet property="createAccountLabel" destination="VpH-qb-Jm0" id="65T-2j-8N0"/>
                         <outlet property="emailField" destination="MtP-ZN-T00" id="RmD-Fd-mAb"/>
+                        <outlet property="emailWarningLabel" destination="djI-Dz-NQv" id="olQ-4l-5YJ"/>
                         <outlet property="passwordOneField" destination="mRR-iC-3nI" id="6Pr-Tx-jt0"/>
+                        <outlet property="passwordOneWarningLabel" destination="uhf-Xh-K93" id="sVM-LO-sJY"/>
                         <outlet property="passwordTwoField" destination="XbO-8E-ej1" id="OeJ-sJ-tdm"/>
+                        <outlet property="passwordTwoWarningLabel" destination="WeC-12-1bp" id="EiB-m4-VnH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOp-pM-t80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1364,7 +1368,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xPP-wG-Y16"/>
         <segue reference="Bm7-fP-SWq"/>
     </inferredMetricsTieBreakers>
     <resources>

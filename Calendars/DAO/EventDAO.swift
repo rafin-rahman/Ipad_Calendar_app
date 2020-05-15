@@ -420,7 +420,6 @@ class EventDAO{
     }
     
     func editEvent(updatedEvent:Events){
-        print(updatedEvent.id)
         let eventReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Event").document(updatedEvent.id)
         eventReference.updateData([
             "Name" : updatedEvent.eventName,

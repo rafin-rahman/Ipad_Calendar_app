@@ -242,9 +242,7 @@ class WeekView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogni
         
         var counter = 0
         
-        for(date, listOfEvents) in sortedDic{
-            
-                    
+        for(_, listOfEvents) in sortedDic{
             for todaysEvent in listOfEvents{
                 let event = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 let eventName = UILabel(frame: CGRect(x: 0, y:0, width: 0, height: 0))

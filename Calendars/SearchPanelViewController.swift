@@ -127,6 +127,7 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
             detailsView.setDataForEvents(event: event)
             stackView.addArrangedSubview(detailsView)
             detailsView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+            self.activeDate = event.startDate
         }
     }
     
@@ -182,7 +183,6 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
                     if let event = object as? Events{
                         dayView.getDailyViewForDate(eventDate: event.startDate)
                     }
-                    
                     if let task = object as? Task{
                         dayView.getDailyViewForDate(eventDate: task.taskDateAndTime)
                     }

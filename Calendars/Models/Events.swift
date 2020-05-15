@@ -24,4 +24,18 @@ class Events{
     var numberOfCollision = 0
     var first = true
     var activeDate = Date()
+    
+    func equals (compareTo:Events) -> Bool {
+         return
+            self.id == compareTo.id &&
+            self.eventName == compareTo.eventName &&
+            self.startDate == compareTo.startDate &&
+            self.endDate == compareTo.endDate &&
+            self.location == compareTo.location &&
+            self.reminder == compareTo.reminder &&
+            self.priority == compareTo.priority &&
+            self.profile == compareTo.profile &&
+            self.profileColour == compareTo.profileColour &&
+            self.allDay == compareTo.allDay
+     }
 }

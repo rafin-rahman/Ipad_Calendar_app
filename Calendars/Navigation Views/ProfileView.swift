@@ -118,7 +118,6 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
         if !editStatus || updateProfile.profileName != profileName
         {
             for profile in listOfProfile{
-                print("Name", profile.profileName)
                 if profileName! == profile.profileName{
                     TextfieldAnimation.errorAnimation(textField: profileNameText)
                     errorLabel.text = "Profile with this name Already Created"
@@ -429,7 +428,6 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
     }
     
     func editEventAndTask(profile:Profile, profileName: String, profileColor: String){
-        print("Checking",profileName)
         let eventDAO = EventDAO()
         let taskDAO = TaskDAO()
         eventDAO.getAllEventFromProfile(profileName: profile.profileName)
@@ -442,7 +440,6 @@ class ProfileView: UIView, NavigationProtocol, UITextFieldDelegate {
             }
             
             for task in taskDAO.taskList{
-                print(taskDAO.taskList.count)
                 task.profile = profileName
                 task.profileColour = profileColor
                 taskDAO.editTask(updatedTask: task)
