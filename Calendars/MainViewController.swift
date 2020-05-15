@@ -10,7 +10,17 @@ import UIKit
 import Firebase
 import UserNotifications
 
-class MainViewController: UIViewController{
+struct Notification {
+    struct Category {
+        static let taskSuggestion = "taskSuggestion"
+    }
+    
+    struct Action {
+        static let addTask = "addTask"
+    }
+}
+
+class MainViewController: UIViewController, UNUserNotificationCenterDelegate{
     
     @IBOutlet weak var searchText: UITextField!
     // nagivation buttons
@@ -55,6 +65,7 @@ class MainViewController: UIViewController{
     var addButtonStatus = false;
     var timer : Timer!
     var deleteTimer : Timer!
+    var suggestionTimer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +76,8 @@ class MainViewController: UIViewController{
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: singleTapSelector)
         view.addGestureRecognizer(singleTap)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(notificationForEventsAndTasks), userInfo: nil, repeats: true)
-        deleteTimer = Timer.scheduledTimer(timeInterval: 360, target: self, selector: #selector(deleteFromBin), userInfo: nil, repeats: true)
+        deleteTimer = Timer.scheduledTimer(timeInterval: 3600, target: self, selector: #selector(deleteFromBin), userInfo: nil, repeats: true)
+        suggestionTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(showSuggestedTask), userInfo: nil, repeats: true)
     }
     
     @objc func deleteFromBin(){
@@ -83,57 +95,175 @@ class MainViewController: UIViewController{
         }
     }
     
+    @objc func showSuggestedTask(){
+        var taskSuggestionList = Array<Task>()
+        let taskDaoForPreviousTask = TaskDAO()
+        let taskDaoForCurrentTask = TaskDAO()
+        
+        taskDaoForPreviousTask.getAllTasksBeforeToday()
+        taskDaoForCurrentTask.getAllTasksFromDays(startDate: Date().stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: Date().stripTime())!)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            for taskFirst in taskDaoForPreviousTask.taskList{
+                var counter = 0
+                for task in taskDaoForPreviousTask.taskList{
+                    if taskFirst.taskName == task.taskName && taskFirst.taskDateAndTime.toString(dateFormat: "hh:mm") == task.taskDateAndTime.toString(dateFormat: "hh:mm"){
+                        counter += 1
+                        if counter == 5 {
+                            if taskSuggestionList.count > 0{
+                                for taskAdd in taskSuggestionList{
+                                    if taskAdd.taskName != task.taskName{
+                                        taskSuggestionList.append(task)
+                                    }
+                                }
+                            }
+                            else{
+                                taskSuggestionList.append(task)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            for suggestedTask in taskSuggestionList{
+                var status = false
+                for task in taskDaoForCurrentTask.taskList{
+                    if task.taskName != suggestedTask.taskName{
+                        status = true
+                    }
+                }
+                
+                if status || taskDaoForCurrentTask.taskList.count == 0{
+                    self.showNotification(suggestedTask: suggestedTask)
+                }
+            }
+        }
+    }
+    
+    func showOptionForNotification(){
+        let centre = UNUserNotificationCenter.current()
+        centre.delegate = self
+        
+        let actionAddTask = UNNotificationAction(identifier: Notification.Action.addTask, title: "Add Task", options: [])
+        
+        let category = UNNotificationCategory(identifier: Notification.Category.taskSuggestion, actions: [actionAddTask], intentIdentifiers: [], options: [])
+        centre.setNotificationCategories([category])
+    }
+    
+    func showNotification(suggestedTask:Task){
+        showOptionForNotification()
+        
+        let centre = UNUserNotificationCenter.current()
+        centre.removeAllPendingNotificationRequests()
+        let content = UNMutableNotificationContent()
+        
+        content.title = "Task"
+        content.subtitle = "Suggested Task"
+        content.body = suggestedTask.taskName + " at " + suggestedTask.taskDateAndTime.toString(dateFormat: "HH:mm")
+        
+        let date = Date().toString(dateFormat: "dd-MM-yyyy") + " " + suggestedTask.taskDateAndTime.toString(dateFormat: "HH:mm")
+        
+        content.userInfo = [
+            "Name" : suggestedTask.taskName,
+            "DateAndTime" : date.toDate(dateFormat: "dd-MM-yyyy HH:mm")!,
+            "ReminderTime" : suggestedTask.reminder,
+            "Priority" : suggestedTask.priority,
+            "Profile" : suggestedTask.profile,
+            "ProfileColour" : suggestedTask.profileColour,
+            "CompletedStatus": false,
+            "DeleteStatus" : false,
+            "DeleteTime" : Date()
+        ]
+        content.categoryIdentifier = Notification.Category.taskSuggestion
+        content.sound = UNNotificationSound.default
+        
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        centre.add(request) {(error) in
+            if error != nil{
+                print(error!)
+            }}
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let taskDetails = response.notification.request.content.userInfo
+        
+        switch response.actionIdentifier {
+        case UNNotificationDefaultActionIdentifier:
+            print("Default Action")
+        case Notification.Action.addTask:
+            print("Checking")
+            let taskDic : Dictionary<String, Any> = [
+                "Name" : taskDetails["Name"] as! String,
+                "DateAndTime" : taskDetails["DateAndTime"] as! Date,
+                "ReminderTime" : taskDetails["ReminderTime"] as! Date,
+                "Priority" : taskDetails["Priority"] as! String,
+                "Profile" : taskDetails["Profile"] as! String,
+                "ProfileColour" : taskDetails["ProfileColour"] as! String,
+                "CompletedStatus": false,
+                "DeleteStatus" : false,
+                "DeleteTime" : Date()
+            ]
+            TaskDAO().addNewTask(taskDic: taskDic)
+        default:
+            print("Error")
+        }
+        
+        completionHandler()
+    }
+    
     @objc func notificationForEventsAndTasks(){
         let eventDAO = EventDAO()
         let taskDAO = TaskDAO()
         eventDAO.getAllEventsForCurrentDay()
         taskDAO.getAllTasksFromDays(startDate: Date().stripTime(), endDate: Calendar.current.date(byAdding: .day, value: 1, to: Date().stripTime())!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-
+            
             for event in eventDAO.eventList{
                 let centre = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
-
+                
                 content.title = "Event"
                 content.subtitle = event.startDate.timeIntervalSince(event.reminder).stringFromTimeInterval() + " remaining"
                 content.body = event.eventName
                 content.sound = UNNotificationSound.default
-
+                
                 let dateComponents = Calendar.current.dateComponents([.year , .month, .day, .hour, .minute, .second],from: event.reminder)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
-
                 let request = UNNotificationRequest(identifier: event.id, content: content, trigger: trigger)
-
+                
                 centre.add(request) {(error) in
                     if error != nil{
                         print(error!)
-                }}
+                    }}
             }
             
             for task in taskDAO.taskList{
                 let centre = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
-
+                
                 content.title = "Task"
                 content.subtitle = task.taskDateAndTime.timeIntervalSince(task.reminder).stringFromTimeInterval() + " remaining"
                 content.body = task.taskName
                 content.sound = UNNotificationSound.default
-
+                
                 let dateComponents = Calendar.current.dateComponents([.year , .month, .day, .hour, .minute, .second],from: task.reminder)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: task.id, content: content, trigger: trigger)
-
+                
                 centre.add(request) {(error) in
                     if error != nil{
                         print(error!)
-                }}
+                    }}
             }
         }
     }
     
-                
+    
     @objc func onSingleTap(){
         view.endEditing(true)
     }
@@ -156,7 +286,7 @@ class MainViewController: UIViewController{
             
         }
     }
-       
+    
     @IBAction func hideSidebar(_ sender: UISwipeGestureRecognizer) {
         view.endEditing(true)
         if sidebarWidthConstraint.constant == 0 {
@@ -212,11 +342,11 @@ class MainViewController: UIViewController{
         }
         
         if let event = self.rightView as? EventView{
-           event.onLoad()
+            event.onLoad()
         }
         
         if let task = self.rightView as? TaskView{
-           task.onLoad()
+            task.onLoad()
         }
     }
     
@@ -225,12 +355,12 @@ class MainViewController: UIViewController{
         if let viewController = segue.destination as? AddEditViewController {
             viewController.onDismiss = onSegDismiss
             if segue.identifier == "AddEditSegueEvent" {
-                    viewController.isTask = false
-                    if let home = self.rightView as? HomeView {
-                        if let day = home.dynamicView as? DayView {
-                            viewController.activeDate = day.activeDate
-                        }
+                viewController.isTask = false
+                if let home = self.rightView as? HomeView {
+                    if let day = home.dynamicView as? DayView {
+                        viewController.activeDate = day.activeDate
                     }
+                }
             } else if segue.identifier == "AddEditSegueTask" {
                 viewController.isTask = true
             }
@@ -281,7 +411,7 @@ class MainViewController: UIViewController{
                        initialSpringVelocity: CGFloat(6.0),
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
-                         self.homeNavButton.transform = CGAffineTransform.identity
+                        self.homeNavButton.transform = CGAffineTransform.identity
         },
                        completion: nil
         )
@@ -311,7 +441,7 @@ class MainViewController: UIViewController{
                        initialSpringVelocity: CGFloat(6.0),
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
-                         sender.transform = CGAffineTransform.identity
+                        sender.transform = CGAffineTransform.identity
         },
                        completion: nil
         )
@@ -336,7 +466,7 @@ class MainViewController: UIViewController{
                        initialSpringVelocity: CGFloat(6.0),
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
-                         sender.transform = CGAffineTransform.identity
+                        sender.transform = CGAffineTransform.identity
         },
                        completion: nil
         )
@@ -362,7 +492,7 @@ class MainViewController: UIViewController{
                        initialSpringVelocity: CGFloat(6.0),
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
-                         sender.transform = CGAffineTransform.identity
+                        sender.transform = CGAffineTransform.identity
         },
                        completion: nil
         )
@@ -387,7 +517,7 @@ class MainViewController: UIViewController{
                        initialSpringVelocity: CGFloat(6.0),
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
-                         sender.transform = CGAffineTransform.identity
+                        sender.transform = CGAffineTransform.identity
         },
                        completion: nil
         )
@@ -488,7 +618,7 @@ class MainViewController: UIViewController{
             addButtonClosingAnimation()
         }
     }
-        
+    
     @IBAction func menuClick(_ sender: UIButton) {
         if sidebarWidthConstraint.constant == 0 {
             sidebarWidthConstraint.constant = 150

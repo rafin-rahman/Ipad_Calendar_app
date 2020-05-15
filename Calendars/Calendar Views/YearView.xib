@@ -72,7 +72,7 @@
                         <constraint firstItem="6VJ-LR-NWy" firstAttribute="leading" secondItem="oV8-S7-XPm" secondAttribute="leading" id="zHe-zB-kLh"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBE-iI-4af">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBE-iI-4af">
                     <rect key="frame" x="0.0" y="40" width="1216" height="755"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="GxW-wf-Inp" userLabel="Outer stack">

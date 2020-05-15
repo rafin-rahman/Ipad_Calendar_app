@@ -102,11 +102,12 @@ class YearDisplayView: UIView, UIGestureRecognizerDelegate{
                                
                 numberLabel.text = String(element)
                 numberLabel.textColor = HexToUIColor.hexStringToUIColor(hex: "747474", alpha: 1)
-                numberLabel.font = UIFont.systemFont(ofSize: 8)
+                numberLabel.font = UIFont.systemFont(ofSize: 10)
                 numberLabel.translatesAutoresizingMaskIntoConstraints = false
                 
                 if String(element) == Date().toString(dateFormat: "dd") && status{
                     numberLabel.textColor = .red
+                    numberLabel.font = UIFont.boldSystemFont(ofSize: 12)
                     status = false
                 }
                 
@@ -121,6 +122,9 @@ class YearDisplayView: UIView, UIGestureRecognizerDelegate{
                 
                 numberLabel.centerYAnchor.constraint(equalTo: numberView.centerYAnchor).isActive = true
                 numberLabel.centerXAnchor.constraint(equalTo: numberView.centerXAnchor).isActive = true
+            }
+            else{
+                self.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "EFF2F5", alpha: 1.0)
             }
                  
             if rowOne.subviews.count < 7{
@@ -147,9 +151,10 @@ class YearDisplayView: UIView, UIGestureRecognizerDelegate{
     }
     
     @objc func onTapDay(_ sender: DayTapGesture){
-         if let homeView = self.superview?.superview as? HomeView{
+        if let homeView = self.superview?.superview?.superview?.superview?.superview as? HomeView {
             homeView.getDayView(date: sender.date)
         }
+
     }
         
     func clearAllStack(){

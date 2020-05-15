@@ -87,8 +87,43 @@ class TaskDAO{
         let start = calendar.date(from: components)!
         
         let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
-        print("Start Time",start)
         let taskStartingToday = taskReference.whereField("DateAndTime", isGreaterThanOrEqualTo: start).whereField("DeleteStatus", isEqualTo: false)
+        taskStartingToday.getDocuments(){
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                for task in querySnapshot!.documents {
+                    
+                    let newTask = Task()
+                    
+                    newTask.id = (task.documentID)
+                    newTask.taskName = task["Name"] as! String
+                    newTask.priority = task["Priority"] as! String
+                    newTask.profile = task["Profile"] as! String
+                    newTask.profileColour = task["ProfileColour"] as! String
+                    newTask.completedStatus = task["CompletedStatus"] as! Bool
+                    if let convertedDate = task["DateAndTime"] as? Timestamp {
+                        newTask.taskDateAndTime = convertedDate.dateValue()
+                    }
+                    
+                    if let convertedDate = task["ReminderTime"] as? Timestamp{
+                        newTask.reminder = convertedDate.dateValue()
+                    }
+                    self.taskList.append(newTask)
+                }
+            }
+        }
+    }
+    
+    func getAllTasksBeforeToday(){
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        let start = calendar.date(from: components)!
+        
+        let taskReference = dbConnection.collection("User").document(UserSession.userDetails.id).collection("Task")
+        let taskStartingToday = taskReference.whereField("DateAndTime", isLessThan: start)
         taskStartingToday.getDocuments(){
             (querySnapshot, err) in
             if let err = err {

@@ -23,6 +23,7 @@ class MonthCellView: UICollectionViewCell {
         eventView.isHidden = true
         taskView.isHidden = true
         dayNumberLabel.isHidden = true
+        self.backgroundColor = HexToUIColor.hexStringToUIColor(hex: "EFF2F5", alpha: 1.0)
     }
     
     
@@ -43,6 +44,7 @@ class MonthCellView: UICollectionViewCell {
         else{
             taskNumberLabel.text = String(taskNumber)
         }
+        
         
     }
 }
