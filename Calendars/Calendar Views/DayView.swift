@@ -56,13 +56,15 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         daySixButton.backgroundColor = UIColor.white
         daySevenButton.backgroundColor = UIColor.white
         
-        dayOneButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
-        dayTwoButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
-        dayThreeButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
-        dayFourButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
-        dayFiveButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
-        daySixButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
-        daySevenButton.titleLabel?.font = UIFont.init(name: "System", size: 20)
+        dayOneButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        dayTwoButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        dayThreeButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        dayFourButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        dayFiveButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        daySixButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        daySevenButton.titleLabel?.font = UIFont.init(name: "System", size: 5)
+        
+        
     }
     
     @IBAction func prevWeek(_ sender: Any) {

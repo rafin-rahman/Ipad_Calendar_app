@@ -86,7 +86,14 @@ class MonthDisplayView: UIView, UIGestureRecognizerDelegate{
         for element in arrayOfMonth{
             let monthCellView = UINib(nibName: "MonthCellView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? MonthCellView
             monthCellView!.translatesAutoresizingMaskIntoConstraints = false
-            monthCellView!.heightAnchor.constraint(equalToConstant: 120).isActive = true
+            
+            if arrayOfMonth.count > 35{
+                monthCellView!.heightAnchor.constraint(equalToConstant: superview!.frame.height / 6 ).isActive = true
+            }
+            else{
+                 monthCellView!.heightAnchor.constraint(equalToConstant: superview!.frame.height / 5 ).isActive = true
+            }
+           
             
             if element == 0{
                 monthCellView?.clearDate()

@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var emailFieldView: UIView!
+    @IBOutlet weak var passwordFieldView: UIView!
+    
     @IBOutlet weak var passwordField: UITextField!
     
     @IBOutlet weak var emailEmptyLabel: UILabel!
@@ -54,19 +57,19 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonClick(_ sender: UIButton) {
         emailEmptyLabel.isHidden = true
         passwordEmptyLabel.isHidden = true
-        TextfieldAnimation.convertToNormal(textField: emailField)
-        TextfieldAnimation.convertToNormal(textField: passwordField)
+        TextfieldAnimation.convertToNormal(view: emailFieldView)
+        TextfieldAnimation.convertToNormal(view: passwordFieldView)
                 
         let email = emailField.text
         if email == "" {
-            TextfieldAnimation.errorAnimation(textField: emailField)
+            TextfieldAnimation.errorAnimation(view: emailFieldView)
             emailEmptyLabel.isHidden = false
             return
         }
 
         let password = passwordField.text
         if password == ""{
-            TextfieldAnimation.errorAnimation(textField: passwordField)
+            TextfieldAnimation.errorAnimation(view: passwordFieldView)
             passwordEmptyLabel.isHidden = false
             return
         }

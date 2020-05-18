@@ -47,10 +47,18 @@ class TextfieldAnimation
         textField.layer.cornerRadius = 5
     }
     
+    static func errorAnimation(view:UIView){
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.red.cgColor
+    }
     /*
         method to convert the textfield to normal
      */
     static func convertToNormal(textField:UITextField){
         textField.layer.borderWidth = 0
     }
+    
+    static func convertToNormal(view:UIView){
+           view.layer.borderWidth = 0
+       }
 }

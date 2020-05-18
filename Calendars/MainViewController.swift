@@ -304,11 +304,11 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate{
     
     func reload(){
         if let homeView = rightView as? HomeView {
-            if let monthView = homeView.dynamicView as? MonthView {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                    monthView.loadData()
-                })
-            }
+//            if let monthView = homeView.dynamicView as? MonthView {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+//                    monthView.loadData()
+//                })
+//            }
             
             if let weekView = homeView.dynamicView as? WeekView {
                 weekView.loadData()
@@ -316,6 +316,14 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate{
             
             if let dayView = homeView.dynamicView as? DayView{
                 dayView.loadData()
+            }
+            
+            if let monthView = homeView.dynamicView as? MonthView{
+                monthView.loadData()
+            }
+            
+            if let yearView = homeView.dynamicView as? YearView{
+                yearView.loadData()
             }
         }
         

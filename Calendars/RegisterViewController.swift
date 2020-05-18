@@ -11,8 +11,11 @@ import UIKit
 class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var emailFieldView: UIView!
     @IBOutlet weak var passwordOneField: UITextField!
+    @IBOutlet weak var passwordFieldView: UIView!
     @IBOutlet weak var passwordTwoField: UITextField!
+    @IBOutlet weak var passwordTwoFieldView: UIView!
     
     
     @IBOutlet weak var emailWarningLabel: UILabel!
@@ -21,6 +24,12 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var createAccountLabel: UILabel!
     
+    @IBOutlet weak var textOne: UILabel!
+    @IBOutlet weak var textTwo: UILabel!
+    @IBOutlet weak var textThree: UILabel!
+    @IBOutlet weak var textFour: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +37,17 @@ class RegisterViewController: UIViewController {
         emailWarningLabel.isHidden = true
         passwordOneWarningLabel.isHidden = true
         passwordTwoWarningLabel.isHidden = true
+        
+        textOne.adjustsFontSizeToFitWidth = true
+        textTwo.adjustsFontSizeToFitWidth = true
+        textThree.adjustsFontSizeToFitWidth = true
+        textFour.adjustsFontSizeToFitWidth = true
     }
     
     @IBAction func registerButtonClick(_ sender: UIButton) {
-        TextfieldAnimation.convertToNormal(textField: emailField)
-        TextfieldAnimation.convertToNormal(textField: passwordOneField)
-        TextfieldAnimation.convertToNormal(textField: passwordTwoField)
+        TextfieldAnimation.convertToNormal(view: emailFieldView)
+        TextfieldAnimation.convertToNormal(view: passwordFieldView)
+        TextfieldAnimation.convertToNormal(view: passwordTwoFieldView)
         
         emailWarningLabel.isHidden = true
         passwordOneWarningLabel.isHidden = true
@@ -44,14 +58,14 @@ class RegisterViewController: UIViewController {
         if email == "" {
             emailWarningLabel.text = "Email cannot be empty"
             emailWarningLabel.isHidden = false
-            TextfieldAnimation.errorAnimation(textField: emailField)
+            TextfieldAnimation.errorAnimation(view: emailFieldView)
             return
         }
         
         if email?.isValidEmail ?? false == false{
             emailWarningLabel.text = "Not a valid Email Address"
             emailWarningLabel.isHidden = false
-            TextfieldAnimation.errorAnimation(textField: emailField)
+            TextfieldAnimation.errorAnimation(view: emailFieldView)
             return
         }
 
@@ -59,7 +73,7 @@ class RegisterViewController: UIViewController {
         if password == ""{
             passwordOneWarningLabel.text = "Password cannot be empty"
             passwordOneWarningLabel.isHidden = false
-            TextfieldAnimation.errorAnimation(textField: passwordOneField)
+            TextfieldAnimation.errorAnimation(view: passwordFieldView)
             return
         }
         
@@ -67,15 +81,15 @@ class RegisterViewController: UIViewController {
         if confirmPassword == ""{
             passwordTwoWarningLabel.text = "Password cannot be empty"
             passwordTwoWarningLabel.isHidden = false
-            TextfieldAnimation.errorAnimation(textField: passwordTwoField)
+            TextfieldAnimation.errorAnimation(view: passwordTwoFieldView)
             return
         }
         
         if password != confirmPassword{
             passwordTwoWarningLabel.text = "Password do not match with each other"
             passwordTwoWarningLabel.isHidden = false
-            TextfieldAnimation.errorAnimation(textField: passwordOneField)
-            TextfieldAnimation.errorAnimation(textField: passwordTwoField)
+            TextfieldAnimation.errorAnimation(view: passwordFieldView)
+            TextfieldAnimation.errorAnimation(view: passwordTwoFieldView)
             return
         }
         

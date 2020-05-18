@@ -145,8 +145,8 @@ class YearDisplayView: UIView, UIGestureRecognizerDelegate{
             else {
                 rowSix.addArrangedSubview(numberView)
             }
-            
-            numberView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            //todo
+            numberView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
     }
     

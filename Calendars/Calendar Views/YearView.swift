@@ -29,7 +29,7 @@ class YearView: UIView, CalendarProtocol {
             let yearDisplay = UINib(nibName: "YearDisplayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? YearDisplayView
             yearDisplay?.onLoad(monthNumber: i, year: yearLabel.text!)
             
-            yearDisplay?.heightAnchor.constraint(equalToConstant: 232).isActive = true
+            yearDisplay?.heightAnchor.constraint(equalToConstant: ((superview!.frame.height - 40) / 4) - superview!.safeAreaInsets.bottom).isActive = true
             
             if rowOne.subviews.count < 3{
                 rowOne.addArrangedSubview(yearDisplay!)
