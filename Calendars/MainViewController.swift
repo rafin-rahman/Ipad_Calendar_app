@@ -371,6 +371,11 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate{
                 }
             } else if segue.identifier == "AddEditSegueTask" {
                 viewController.isTask = true
+                if let home = self.rightView as? HomeView {
+                    if let day = home.dynamicView as? DayView {
+                        viewController.activeDate = day.activeDate
+                    }
+                }
             }
         }
         

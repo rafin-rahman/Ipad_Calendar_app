@@ -583,8 +583,19 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         daySixButton.titleLabel?.font = UIFont.init(name: "System", size: 18)
         daySevenButton.titleLabel?.font = UIFont.init(name: "System", size: 18)
         
+        dayOneButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayTwoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayThreeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayFourButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayFiveButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        daySixButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        daySevenButton.titleLabel?.adjustsFontSizeToFitWidth = true
+              
+        
+        
         sender.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
         sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        sender.titleLabel?.adjustsFontSizeToFitWidth = true
         
         let newFormat = DateFormatter()
         newFormat.dateFormat = "dd-MM-yy"
@@ -621,10 +632,20 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         daySevenButton.titleLabel?.font = UIFont.init(name: "System", size: 18)
         arrayOfButton.append(daySevenButton)
         
+        dayOneButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayTwoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayThreeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayFourButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dayFiveButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        daySixButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        daySevenButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
         for actionButton in arrayOfButton{
             if actionButton.titleLabel?.text == selectedDate.toString(dateFormat:"d E"){
                 actionButton.backgroundColor = UIColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 1.00)
                 actionButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+                actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
             }
         }
     }

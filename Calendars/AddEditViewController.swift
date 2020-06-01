@@ -79,6 +79,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         eventNameText.delegate = self
         
         eventDatePicker.date = activeDate
+        taskDatePicker.date = activeDate
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
         self.backgroundView.addGestureRecognizer(tap)
         
@@ -504,37 +505,37 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             taskDatePicker.setDate(Calendar.current.date(byAdding: .day, value: 1, to: Date())!, animated: true)
         }
         
-        if text.lowercased().range(of:"monday") != nil {
+        if text.lowercased().range(of:"monday") != nil || text.lowercased().range(of:" mon") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.monday), animated: true)
             
         }
         
-        if text.lowercased().range(of:"tuesday") != nil {
+        if text.lowercased().range(of:"tuesday") != nil || text.lowercased().range(of:" tue") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.tuesday), animated: true)
             
         }
         
-        if text.lowercased().range(of:"wednesday") != nil {
+        if text.lowercased().range(of:"wednesday") != nil || text.lowercased().range(of:" wed") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.wednesday), animated: true)
             
         }
         
-        if text.lowercased().range(of:"thursday") != nil {
+        if text.lowercased().range(of:"thursday") != nil || text.lowercased().range(of:" thu") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.thursday), animated: true)
             
         }
         
-        if text.lowercased().range(of:"friday") != nil {
+        if text.lowercased().range(of:"friday") != nil || text.lowercased().range(of:" fri") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.friday), animated: true)
             
         }
         
-        if text.lowercased().range(of:"saturday") != nil {
+        if text.lowercased().range(of:"saturday") != nil || text.lowercased().range(of:" sat") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.saturday), animated: true)
             
         }
         
-        if text.lowercased().range(of:"sunday") != nil {
+        if text.lowercased().range(of:"sunday") != nil || text.lowercased().range(of:" sun") != nil{
             taskDatePicker.setDate(Date().nextWeekDay(.sunday), animated: true)
             
         }
@@ -589,11 +590,11 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
         
         if text.lowercased().range(of:"next month") != nil{
-            taskDatePicker.setDate(Calendar.current.date(byAdding: .month, value: 1, to: taskDatePicker.date)!, animated: true)
+            taskDatePicker.setDate(Calendar.current.date(byAdding: .month, value: 1, to: Date())!, animated: true)
         }
         
         if text.lowercased().range(of:"next year") != nil{
-            taskDatePicker.setDate(Calendar.current.date(byAdding: .year, value: 1, to: taskDatePicker.date)!, animated: true)
+            taskDatePicker.setDate(Calendar.current.date(byAdding: .year, value: 1, to: Date())!, animated: true)
         }
     }
     
