@@ -245,8 +245,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
         if savedGestureTask != nil {
             taskBarView.removeGestureRecognizer(savedGestureTask)
         }
-        
-        
+                
         var counter = 0
         for task in tasks{
             if !task.completedStatus{
@@ -535,7 +534,7 @@ class DayView: UIView, CalendarProtocol, UIScrollViewDelegate, UIGestureRecogniz
             popoverContent.modalTransitionStyle = .crossDissolve
             popoverContent.onDismiss = onSegDismiss
             viewController.present(popoverContent, animated: true, completion: nil)
-            popoverContent.getTaskDetails(tasks: sender.taskList)
+            popoverContent.getTaskDetails(tasks: sender.taskList, activeDate: activeDate)
         }
     }
     

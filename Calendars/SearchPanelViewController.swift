@@ -103,7 +103,8 @@ class SearchPanelViewController: UIViewController, UITextFieldDelegate, UIGestur
     
     func getTaskDetails(tasks:Array<Task>){
         self.stackView.removeAllArrangedSubviews()
-        activeDate = tasks[0].taskDateAndTime.stripTime()
+        self.activeDate = tasks[0].taskDateAndTime.stripTime()
+        print("Checking Date: ",activeDate)
         for task in tasks{
             getSearchViewForTaskDifferentBackground(taskDetails: task)
         }
